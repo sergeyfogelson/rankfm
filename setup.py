@@ -4,25 +4,29 @@ import glob
 from setuptools import Extension, setup
 
 NAME = 'rankfm'
-VERSION = '0.2.5'
+VERSION = '0.3.0'
 
 # define the extension packages to include
 # ----------------------------------------
 
-# prefer the generated C extensions when building
-if glob.glob('rankfm/_rankfm.c'):
-    print("building extensions with pre-generated C source...")
-    use_cython = False
-    ext = 'c'
-else:
-    print("re-generating C source with cythonize...")
+# prefer cythonizing .pyx source when Cython is available; fall back to pre-generated C source otherwise
+try:
     from Cython.Build import cythonize
+    print("re-generating C source with cythonize...")
     use_cython = True
     ext = 'pyx'
+except ImportError:
+    if glob.glob('rankfm/_rankfm.c'):
+        print("building extensions with pre-generated C source...")
+        use_cython = False
+        ext = 'c'
+    else:
+        raise RuntimeError("Cython is required to build rankfm from .pyx source")
+
 
 # add compiler arguments to optimize machine code and ignore warnings
 disabled_warnings = ['-Wno-unused-function', '-Wno-uninitialized']
-compile_args = ['-O2', '-ffast-math'] + disabled_warnings
+compile_args = ['-O3', '-ffast-math', '-funroll-loops'] + disabled_warnings
 
 # define the _rankfm extension including the wrapped MT module
 extensions = [

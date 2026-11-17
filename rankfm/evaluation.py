@@ -2,176 +2,276 @@
 rankfm model tuning and evaluation functions
 """
 
+from collections import defaultdict
 import numpy as np
 import pandas as pd
 from rankfm.utils import get_data
 
-def hit_rate(model, test_interactions, k=10, filter_previous=False):
-    """evaluate hit-rate (any match) wrt out-of-sample observed interactions
 
-    :param model: trained RankFM model instance
-    :param test_interactions: pandas dataframe of out-of-sample observed user/item interactions
-    :param k: number of recommendations to generate for each user
-    :param filter_previous: remove observed training items from generated recommendations
-    :return: the hit rate or proportion of test users with any matching items
-    """
+def _extract_test_user_items(test_interactions):
+    """fast construction of {user_id: set(item_ids)} without slow pandas groupby.apply(set)"""
 
-    # ensure that the model has been fit before attempting to generate predictions
+    if isinstance(test_interactions, pd.DataFrame):
+        u_list = test_interactions.iloc[:, 0].tolist()
+        i_list = test_interactions.iloc[:, 1].tolist()
+    else:
+        arr = get_data(test_interactions)
+        u_list = arr[:, 0].tolist()
+        i_list = arr[:, 1].tolist()
+
+    user_items = defaultdict(set)
+    for u, i in zip(u_list, i_list):
+        user_items[u].add(i)
+    return user_items
+
+
+def _get_eval_recs(
+    model,
+    test_users,
+    k,
+    filter_previous,
+    user_features=None,
+    interactions=None,
+    sample_weight=None,
+    fold_in_epochs=5,
+    cold_start='drop'
+):
+    """generate top-K evaluation recommendations supporting both seen and unseen test users"""
+
+    return model.recommend(
+        users=test_users,
+        n_items=k,
+        filter_previous=filter_previous,
+        cold_start=cold_start,
+        user_features=user_features,
+        interactions=interactions,
+        sample_weight=sample_weight,
+        fold_in_epochs=fold_in_epochs
+    )
+
+
+def hit_rate(
+    model,
+    test_interactions,
+    k=10,
+    filter_previous=False,
+    user_features=None,
+    interactions=None,
+    sample_weight=None,
+    fold_in_epochs=5,
+    cold_start='drop'
+):
+    """evaluate hit-rate (any match) wrt out-of-sample observed interactions"""
+
     assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
 
-    # transform interactions into a user -> items dictionary
-    test_user_items = pd.DataFrame(get_data(test_interactions), columns=['user_id', 'item_id'])
-    test_user_items = test_user_items.groupby('user_id')['item_id'].apply(set).to_dict()
+    test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
 
-    # generate topK recommendations for all test users also present in the training data
-    test_recs = model.recommend(users=test_users, n_items=k, filter_previous=filter_previous, cold_start='drop')
-    comm_user = test_recs.index.values
+    test_recs = _get_eval_recs(
+        model, test_users, k, filter_previous,
+        user_features=user_features, interactions=interactions,
+        sample_weight=sample_weight, fold_in_epochs=fold_in_epochs, cold_start=cold_start
+    )
+    comm_users = test_recs.index.tolist()
+    if not comm_users:
+        return np.nan
 
-    # calculate the hit rate (percentage of users with any relevant recommendation) wrt common users
-    hit_rate = np.mean([int(len(set(test_recs.loc[u]) & test_user_items[u]) > 0) for u in comm_user])
-    return hit_rate
+    rec_rows = test_recs.to_numpy().tolist()
+    hits = 0
+    for u, row in zip(comm_users, rec_rows):
+        targets = test_user_items[u]
+        for item in row:
+            if item in targets:
+                hits += 1
+                break
+    return hits / len(comm_users)
 
 
-def reciprocal_rank(model, test_interactions, k=10, filter_previous=False):
-    """evaluate reciprocal rank wrt out-of-sample observed interactions
+def reciprocal_rank(
+    model,
+    test_interactions,
+    k=10,
+    filter_previous=False,
+    user_features=None,
+    interactions=None,
+    sample_weight=None,
+    fold_in_epochs=5,
+    cold_start='drop'
+):
+    """evaluate reciprocal rank wrt out-of-sample observed interactions"""
 
-    :param model: trained RankFM model instance
-    :param test_interactions: pandas dataframe of out-of-sample observed user/item interactions
-    :param k: number of recommendations to generate for each user
-    :param filter_previous: remove observed training items from generated recommendations
-    :return: mean reciprocal rank wrt the test users
-    """
-
-    # ensure that the model has been fit before attempting to generate predictions
     assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
 
-    # transform interactions into a user -> items dictionary
-    test_user_items = pd.DataFrame(get_data(test_interactions), columns=['user_id', 'item_id'])
-    test_user_items = test_user_items.groupby('user_id')['item_id'].apply(set).to_dict()
+    test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
 
-    # generate topK recommendations for all test users also present in the training data
-    test_recs = model.recommend(users=test_users, n_items=k, filter_previous=filter_previous, cold_start='drop')
-    comm_user = test_recs.index.values
+    test_recs = _get_eval_recs(
+        model, test_users, k, filter_previous,
+        user_features=user_features, interactions=interactions,
+        sample_weight=sample_weight, fold_in_epochs=fold_in_epochs, cold_start=cold_start
+    )
+    comm_users = test_recs.index.tolist()
+    if not comm_users:
+        return np.nan
 
-    # calculate the reciprocal rank (inverse rank of the first relevant recommended item) wrt common users
-    match_indexes = [np.where(test_recs.loc[u].isin(set(test_recs.loc[u]) & test_user_items[u]))[0] for u in comm_user]
-    reciprocal_rank = np.mean([1 / (np.min(index) + 1) if len(index) > 0 else 0 for index in match_indexes])
-    return reciprocal_rank
+    rec_rows = test_recs.to_numpy().tolist()
+    rr_sum = 0.0
+    for u, row in zip(comm_users, rec_rows):
+        targets = test_user_items[u]
+        for rank_idx, item in enumerate(row):
+            if item in targets:
+                rr_sum += 1.0 / (rank_idx + 1)
+                break
+    return rr_sum / len(comm_users)
 
 
-def discounted_cumulative_gain(model, test_interactions, k=10, filter_previous=False):
-    """evaluate discounted cumulative gain wrt out-of-sample observed interactions
+def discounted_cumulative_gain(
+    model,
+    test_interactions,
+    k=10,
+    filter_previous=False,
+    user_features=None,
+    interactions=None,
+    sample_weight=None,
+    fold_in_epochs=5,
+    cold_start='drop'
+):
+    """evaluate discounted cumulative gain wrt out-of-sample observed interactions"""
 
-    :param model: trained RankFM model instance
-    :param test_interactions: pandas dataframe of out-of-sample observed user/item interactions
-    :param k: number of recommendations to generate for each user
-    :param filter_previous: remove observed training items from generated recommendations
-    :return: mean discounted cumulative gain wrt the test users
-    """
-
-    # ensure that the model has been fit before attempting to generate predictions
     assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
 
-    # transform interactions into a user -> items dictionary
-    test_user_items = pd.DataFrame(get_data(test_interactions), columns=['user_id', 'item_id'])
-    test_user_items = test_user_items.groupby('user_id')['item_id'].apply(set).to_dict()
+    test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
 
-    # generate topK recommendations for all test users also present in the training data
-    test_recs = model.recommend(users=test_users, n_items=k, filter_previous=filter_previous, cold_start='drop')
-    comm_user = test_recs.index.values
+    test_recs = _get_eval_recs(
+        model, test_users, k, filter_previous,
+        user_features=user_features, interactions=interactions,
+        sample_weight=sample_weight, fold_in_epochs=fold_in_epochs, cold_start=cold_start
+    )
+    comm_users = test_recs.index.tolist()
+    if not comm_users:
+        return np.nan
 
-    # calculate the discounted cumulative gain (sum of inverse log scaled ranks of relevant items) wrt common users
-    match_indexes = [np.where(test_recs.loc[u].isin(set(test_recs.loc[u]) & test_user_items[u]))[0] for u in comm_user]
-    discounted_cumulative_gain = np.mean([np.sum(1 / np.log2(index + 2)) if len(index) > 0 else 0 for index in match_indexes])
-    return discounted_cumulative_gain
+    discounts = (1.0 / np.log2(np.arange(test_recs.shape[1]) + 2.0)).tolist()
+    rec_rows = test_recs.to_numpy().tolist()
+    dcg_sum = 0.0
+    for u, row in zip(comm_users, rec_rows):
+        targets = test_user_items[u]
+        for rank_idx, item in enumerate(row):
+            if item in targets:
+                dcg_sum += discounts[rank_idx]
+    return dcg_sum / len(comm_users)
 
 
-def precision(model, test_interactions, k=10, filter_previous=False):
-    """evaluate precision wrt out-of-sample observed interactions
+def precision(
+    model,
+    test_interactions,
+    k=10,
+    filter_previous=False,
+    user_features=None,
+    interactions=None,
+    sample_weight=None,
+    fold_in_epochs=5,
+    cold_start='drop'
+):
+    """evaluate precision wrt out-of-sample observed interactions"""
 
-    :param model: trained RankFM model instance
-    :param test_interactions: pandas dataframe of out-of-sample observed user/item interactions
-    :param k: number of recommendations to generate for each user
-    :param filter_previous: remove observed training items from generated recommendations
-    :return: mean precision wrt the test users
-    """
-
-    # ensure that the model has been fit before attempting to generate predictions
     assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
 
-    # transform interactions into a user -> items dictionary
-    test_user_items = pd.DataFrame(get_data(test_interactions), columns=['user_id', 'item_id'])
-    test_user_items = test_user_items.groupby('user_id')['item_id'].apply(set).to_dict()
+    test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
 
-    # generate topK recommendations for all test users also present in the training data
-    test_recs = model.recommend(users=test_users, n_items=k, filter_previous=filter_previous, cold_start='drop')
-    comm_user = test_recs.index.values
+    test_recs = _get_eval_recs(
+        model, test_users, k, filter_previous,
+        user_features=user_features, interactions=interactions,
+        sample_weight=sample_weight, fold_in_epochs=fold_in_epochs, cold_start=cold_start
+    )
+    comm_users = test_recs.index.tolist()
+    if not comm_users:
+        return np.nan
 
-    # calculate average precision wrt common users
-    precision = np.mean([len(set(test_recs.loc[u]) & test_user_items[u]) / len(test_recs.loc[u]) for u in comm_user])
-    return precision
+    n_cols = test_recs.shape[1]
+    rec_rows = test_recs.to_numpy().tolist()
+    prec_sum = 0.0
+    for u, row in zip(comm_users, rec_rows):
+        targets = test_user_items[u]
+        matched = sum(1 for item in row if item in targets)
+        prec_sum += matched / n_cols
+    return prec_sum / len(comm_users)
 
 
-def recall(model, test_interactions, k=10, filter_previous=False):
-    """evaluate recall wrt out-of-sample observed interactions
+def recall(
+    model,
+    test_interactions,
+    k=10,
+    filter_previous=False,
+    user_features=None,
+    interactions=None,
+    sample_weight=None,
+    fold_in_epochs=5,
+    cold_start='drop'
+):
+    """evaluate recall wrt out-of-sample observed interactions"""
 
-    :param model: trained RankFM model instance
-    :param test_interactions: pandas dataframe of out-of-sample observed user/item interactions
-    :param k: number of recommendations to generate for each user
-    :param filter_previous: remove observed training items from generated recommendations
-    :return: mean recall wrt the test users
-    """
-
-    # ensure that the model has been fit before attempting to generate predictions
     assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
 
-    # transform interactions into a user -> items dictionary
-    test_user_items = pd.DataFrame(get_data(test_interactions), columns=['user_id', 'item_id'])
-    test_user_items = test_user_items.groupby('user_id')['item_id'].apply(set).to_dict()
+    test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
 
-    # generate topK recommendations for all test users also present in the training data
-    test_recs = model.recommend(users=test_users, n_items=k, filter_previous=filter_previous, cold_start='drop')
-    comm_user = test_recs.index.values
+    test_recs = _get_eval_recs(
+        model, test_users, k, filter_previous,
+        user_features=user_features, interactions=interactions,
+        sample_weight=sample_weight, fold_in_epochs=fold_in_epochs, cold_start=cold_start
+    )
+    comm_users = test_recs.index.tolist()
+    if not comm_users:
+        return np.nan
 
-    # calculate average recall across wrt common users
-    recall = np.mean([len(set(test_recs.loc[u]) & test_user_items[u]) / len(test_user_items[u]) for u in comm_user])
-    return recall
+    rec_rows = test_recs.to_numpy().tolist()
+    rec_sum = 0.0
+    for u, row in zip(comm_users, rec_rows):
+        targets = test_user_items[u]
+        matched = sum(1 for item in row if item in targets)
+        rec_sum += matched / len(targets)
+    return rec_sum / len(comm_users)
 
 
-def diversity(model, test_interactions, k=10, filter_previous=False):
-    """evaluate the diversity of the model recommendations
+def diversity(
+    model,
+    test_interactions,
+    k=10,
+    filter_previous=False,
+    user_features=None,
+    interactions=None,
+    sample_weight=None,
+    fold_in_epochs=5,
+    cold_start='drop'
+):
+    """evaluate the diversity of the model recommendations"""
 
-    :param model: trained RankFM model instance
-    :param test_interactions: pandas dataframe of out-of-sample observed user/item interactions
-    :param k: number of recommendations to generate for each user
-    :param filter_previous: remove observed training items from generated recommendations
-    :return: dataframe of cnt/pct of users recommended for each item
-    """
-
-    # ensure that the model has been fit before attempting to generate predictions
     assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
 
-    # get the unique set of test users
-    test_user_items = pd.DataFrame(get_data(test_interactions), columns=['user_id', 'item_id'])
-    test_users = test_user_items['user_id'].unique()
+    if isinstance(test_interactions, pd.DataFrame):
+        test_users = pd.unique(test_interactions.iloc[:, 0].to_numpy())
+    else:
+        test_users = pd.unique(get_data(test_interactions)[:, 0])
 
-    # generate topK recommendations for all test users also present in the training data
-    test_recs = model.recommend(users=test_users, n_items=k, filter_previous=filter_previous, cold_start='drop')
-    comm_user = test_recs.index.values
+    test_recs = _get_eval_recs(
+        model, test_users, k, filter_previous,
+        user_features=user_features, interactions=interactions,
+        sample_weight=sample_weight, fold_in_epochs=fold_in_epochs, cold_start=cold_start
+    )
+    n_comm = len(test_recs)
 
-    # stack the recommendations long-format for aggregation
-    test_recs = test_recs.stack().reset_index().drop('level_1', axis=1)
-    test_recs.columns = ['user_id', 'item_id']
+    flat_items = test_recs.to_numpy().ravel()
+    item_idx = model.item_to_index.index.get_indexer(flat_items)
+    counts = np.bincount(item_idx[item_idx >= 0], minlength=len(model.item_id))
 
-    # calculate the number and percentage of users getting recommended each unique item
-    user_counts = test_recs.groupby('item_id')['user_id'].count().to_frame('cnt_users')
-    user_counts = user_counts.reindex(model.item_id.values, fill_value=0).sort_values('cnt_users', ascending=False).reset_index()
-    user_counts['pct_users'] = user_counts['cnt_users'] / len(comm_user)
+    order = np.argsort(-counts, kind='mergesort')
+    user_counts = pd.DataFrame({
+        'index': model.item_id.values[order],
+        'cnt_users': counts[order],
+        'pct_users': counts[order] / n_comm if n_comm > 0 else 0.0
+    })
     return user_counts
-
-

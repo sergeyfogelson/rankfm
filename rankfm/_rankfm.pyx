@@ -6,6 +6,7 @@
 # -----------------------
 
 from libc.stdlib cimport malloc, free
+from libc.string cimport memcpy
 from libc.math cimport log, exp, pow
 
 cimport cython
@@ -17,7 +18,7 @@ import numpy as np
 # [C] helper functions
 # --------------------
 
-cdef int lsearch(int item, int *items, int n) nogil:
+cdef inline int lsearch(int item, const int *items, int n) noexcept nogil:
     """linear search for a given item in a sorted array of items"""
 
     cdef int i
@@ -27,7 +28,7 @@ cdef int lsearch(int item, int *items, int n) nogil:
     return 0
 
 
-cdef int bsearch(int item, int *items, int n) nogil:
+cdef inline int bsearch(int item, const int *items, int n) noexcept nogil:
     """binary search for a given item in a sorted array of items"""
 
     cdef int lo = 0
@@ -35,62 +36,203 @@ cdef int bsearch(int item, int *items, int n) nogil:
     cdef int md
 
     while lo <= hi:
-        md = int(lo + (hi - lo) / 2)
+        md = lo + ((hi - lo) >> 1)
         if items[md] == item:
             return 1
-        elif (items[md] < item):
+        elif items[md] < item:
             lo = md + 1
         else:
             hi = md - 1
     return 0
 
 
-cdef float compute_ui_utility(
-    int F,
-    int P,
-    int Q,
-    float[::1] x_uf,
-    float[::1] x_if,
-    float w_i,
-    float[::1] w_if,
-    float[::1] v_u,
-    float[::1] v_i,
-    float[:, ::1] v_uf,
-    float[:, ::1] v_if,
-    int x_uf_any,
-    int x_if_any
-) nogil:
+cdef inline int item_observed(int item, const int *items, int n) noexcept nogil:
+    """check if item is in sorted array using linear search for small n and binary search otherwise"""
 
-    cdef int f, p, q
-    cdef float res = w_i
+    if n <= 16:
+        return lsearch(item, items, n)
+    return bsearch(item, items, n)
+
+
+cdef inline void shuffle_int_array(int *arr, int n) noexcept nogil:
+    """in-place Fisher-Yates shuffle using Mersenne Twister RNG without holding the GIL"""
+
+    cdef int i, j, tmp
+    for i in range(n - 1, 0, -1):
+        j = <int>(mt.genrand_int32() % <unsigned long>(i + 1))
+        tmp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = tmp
+
+
+cdef inline float safe_sigmoid_neg(float x) noexcept nogil:
+    """numerically stable 1 / (1 + exp(x))"""
+
+    if x > 20.0:
+        return exp(-x)
+    elif x < -20.0:
+        return 1.0
+    return 1.0 / (exp(x) + 1.0)
+
+
+cdef inline float safe_log_sigmoid(float x) noexcept nogil:
+    """numerically stable log(1 / (1 + exp(-x)))"""
+
+    if x > 20.0:
+        return -exp(-x)
+    elif x < -20.0:
+        return x
+    return -log(1.0 + exp(-x))
+
+
+cdef inline float dot_product(int F, const float *a, const float *b) noexcept nogil:
+    """compute inner product between two F-dimensional contiguous vectors"""
+
+    cdef int f
+    cdef float res = 0.0
+    for f in range(F):
+        res += a[f] * b[f]
+    return res
+
+
+cdef inline void compute_user_embedding_csr(
+    int F,
+    int u,
+    const float *v_u_ptr,
+    const float *v_uf_ptr,
+    const int *uf_indptr,
+    const int *uf_indices,
+    const float *uf_data,
+    int use_v_u,
+    int u_has_uf,
+    float *out_u_emb
+) noexcept nogil:
+    """compute effective user embedding using CSR sparse user features and contiguous SIMD-friendly loops"""
+
+    cdef int f, idx, p
+    cdef float val
+    cdef const float *v_u_row = &v_u_ptr[u * F]
+    cdef const float *v_uf_row
+
+    if use_v_u:
+        for f in range(F):
+            out_u_emb[f] = v_u_row[f]
+    else:
+        for f in range(F):
+            out_u_emb[f] = 0.0
+
+    if u_has_uf:
+        for idx in range(uf_indptr[u], uf_indptr[u + 1]):
+            p = uf_indices[idx]
+            val = uf_data[idx]
+            v_uf_row = &v_uf_ptr[p * F]
+            for f in range(F):
+                out_u_emb[f] += val * v_uf_row[f]
+
+
+cdef inline float compute_item_embedding_and_bias_csr(
+    int F,
+    int item,
+    const float *w_i_ptr,
+    const float *w_if_ptr,
+    const float *v_i_ptr,
+    const float *v_if_ptr,
+    const int *if_indptr,
+    const int *if_indices,
+    const float *if_data,
+    int x_if_any,
+    float *out_i_emb
+) noexcept nogil:
+    """compute item scalar bias and effective item embedding using CSR sparse item features"""
+
+    cdef int f, idx, q
+    cdef float val
+    cdef float bias = w_i_ptr[item]
+    cdef const float *v_i_row = &v_i_ptr[item * F]
+    cdef const float *v_if_row
 
     for f in range(F):
-        # user * item: np.dot(v_u[u], v_i[i])
-        res += v_u[f] * v_i[f]
-
-    if x_uf_any:
-        for p in range(P):
-            if x_uf[p] == 0.0:
-                continue
-            for f in range(F):
-                # user-features * item: np.dot(x_uf[u], np.dot(v_uf, v_i[i]))
-                res += x_uf[p] * (v_uf[p, f] * v_i[f])
+        out_i_emb[f] = v_i_row[f]
 
     if x_if_any:
-        for q in range(Q):
-            if x_if[q] == 0.0:
-                continue
-            # item-features: np.dot(x_if[i], w_if)
-            res += x_if[q] * w_if[q]
+        for idx in range(if_indptr[item], if_indptr[item + 1]):
+            q = if_indices[idx]
+            val = if_data[idx]
+            bias += val * w_if_ptr[q]
+            v_if_row = &v_if_ptr[q * F]
             for f in range(F):
-                # item-features * user: np.dot(x_if[i], np.dot(v_if, v_u[u]))
-                res += x_if[q] * (v_if[q, f] * v_u[f])
+                out_i_emb[f] += val * v_if_row[f]
 
-    return res
+    return bias
+
+
+cdef inline void heap_sift_down(float *hs, int *hi, int size, int pos) noexcept nogil:
+    """sift-down on a min-heap of (score, item_idx) pairs"""
+
+    cdef int child, right
+    cdef float s_val = hs[pos]
+    cdef int i_val = hi[pos]
+
+    while True:
+        child = (pos << 1) + 1
+        if child >= size:
+            break
+        right = child + 1
+        if right < size and hs[right] < hs[child]:
+            child = right
+        if s_val <= hs[child]:
+            break
+        hs[pos] = hs[child]
+        hi[pos] = hi[child]
+        pos = child
+
+    hs[pos] = s_val
+    hi[pos] = i_val
+
+
+cdef inline void heap_sift_up(float *hs, int *hi, int pos) noexcept nogil:
+    """sift-up on a min-heap of (score, item_idx) pairs"""
+
+    cdef int parent
+    cdef float s_val = hs[pos]
+    cdef int i_val = hi[pos]
+
+    while pos > 0:
+        parent = (pos - 1) >> 1
+        if hs[parent] <= s_val:
+            break
+        hs[pos] = hs[parent]
+        hi[pos] = hi[parent]
+        pos = parent
+
+    hs[pos] = s_val
+    hi[pos] = i_val
+
 
 # -------------------------
 # [Python] helper functions
 # -------------------------
+
+def dense_to_csr(float[:, ::1] mat):
+    """convert a 2D float32 feature matrix into (indptr, indices, data) CSR arrays"""
+
+    arr = np.asarray(mat)
+    n_rows = arr.shape[0]
+    nz_rows, nz_cols = np.nonzero(arr)
+    if len(nz_rows) == 0:
+        indptr = np.zeros(n_rows + 1, dtype=np.int32)
+        indices = np.zeros(1, dtype=np.int32)
+        data = np.zeros(1, dtype=np.float32)
+        return indptr, indices, data, 0
+
+    counts = np.bincount(nz_rows, minlength=n_rows)
+    indptr = np.empty(n_rows + 1, dtype=np.int32)
+    indptr[0] = 0
+    np.cumsum(counts, dtype=np.int32, out=indptr[1:])
+    indices = np.ascontiguousarray(nz_cols, dtype=np.int32)
+    data = np.ascontiguousarray(arr[nz_rows, nz_cols], dtype=np.float32)
+    return indptr, indices, data, 1
+
 
 def assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if):
     """assert all model weights are finite"""
@@ -115,6 +257,7 @@ def reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if):
     penalty += np.sum(beta * np.square(v_if))
     return penalty
 
+
 # --------------------------------
 # [RankFM] core modeling functions
 # --------------------------------
@@ -122,7 +265,8 @@ def reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if):
 def _fit(
     int[:, ::1] interactions,
     float[::1] sample_weight,
-    dict user_items,
+    int[::1] ui_indptr,
+    int[::1] ui_indices,
     float[:, ::1] x_uf,
     float[:, ::1] x_if,
     float[::1] w_i,
@@ -138,324 +282,475 @@ def _fit(
     float learning_exponent,
     int max_samples,
     int epochs,
-    bint verbose
+    bint verbose,
+    float user_dropout=0.0,
+    int seed=1492
 ):
+    """learn model weights via nogil BPR/WARP SGD with CSR sparse feature traversal and contiguous SIMD updates"""
 
-    #############################
-    ### VARIABLE DECLARATIONS ###
-    #############################
-
-    # constants
     cdef float MARGIN = 1.0
+    cdef int N = interactions.shape[0]
+    cdef int I = v_i.shape[0]
+    cdef int F = v_u.shape[1]
 
-    # matrix shapes/indicators
-    cdef int N, U, I, F, P, Q
-    cdef int x_uf_any, x_if_any
+    if N == 0 or I <= 1:
+        return
 
-    # loop iterators/indices
-    cdef int r, u, i, j, f, p, q
-    cdef int epoch, row, sampled
+    cdef int schedule_mode
+    if learning_schedule == 'constant':
+        schedule_mode = 0
+    elif learning_schedule == 'invscaling':
+        schedule_mode = 1
+    else:
+        raise ValueError('unknown [learning_schedule]')
 
-    # epoch-specific learning rate and log-likelihood
-    cdef float eta, log_likelihood
+    # Pre-extract sparse CSR structures for x_uf and x_if once prior to training
+    uf_indptr_np, uf_indices_np, uf_data_np, x_uf_any_py = dense_to_csr(x_uf)
+    if_indptr_np, if_indices_np, if_data_np, x_if_any_py = dense_to_csr(x_if)
 
-    # sample weights and (ui, uj) utility scores
-    cdef float sw, ut_ui, ut_uj
+    cdef int[::1] uf_indptr = uf_indptr_np
+    cdef int[::1] uf_indices = uf_indices_np
+    cdef float[::1] uf_data = uf_data_np
+    cdef int[::1] if_indptr = if_indptr_np
+    cdef int[::1] if_indices = if_indices_np
+    cdef float[::1] if_data = if_data_np
+    cdef int x_uf_any = x_uf_any_py
+    cdef int x_if_any = x_if_any_py
 
-    # WARP sampling variables
-    cdef int min_index
-    cdef float pairwise_utility, min_pairwise_utility, multiplier
+    shuffle_index = np.arange(N, dtype=np.int32)
+    cdef int[::1] shuffle_index_mv = shuffle_index
 
-    # loss function derivatives wrt model weights
-    cdef float d_outer
+    # Raw C pointers for zero-overhead nogil access
+    cdef const int *intx_ptr = &interactions[0, 0]
+    cdef const float *sw_ptr = &sample_weight[0]
+    cdef const int *ui_indptr_ptr = &ui_indptr[0]
+    cdef const int *ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL
+
+    cdef const int *uf_indptr_ptr = &uf_indptr[0]
+    cdef const int *uf_indices_ptr = &uf_indices[0]
+    cdef const float *uf_data_ptr = &uf_data[0]
+
+    cdef const int *if_indptr_ptr = &if_indptr[0]
+    cdef const int *if_indices_ptr = &if_indices[0]
+    cdef const float *if_data_ptr = &if_data[0]
+
+    cdef float *w_i_ptr = &w_i[0]
+    cdef float *w_if_ptr = &w_if[0]
+    cdef float *v_u_ptr = &v_u[0, 0]
+    cdef float *v_i_ptr = &v_i[0, 0]
+    cdef float *v_uf_ptr = &v_uf[0, 0]
+    cdef float *v_if_ptr = &v_if[0, 0]
+    cdef int *shuf_ptr = &shuffle_index_mv[0]
+
+    cdef float *u_emb = <float*>malloc(F * sizeof(float))
+    cdef float *i_emb = <float*>malloc(F * sizeof(float))
+    cdef float *cand_emb = <float*>malloc(F * sizeof(float))
+    cdef float *j_emb = <float*>malloc(F * sizeof(float))
+    cdef float *diff_ij = <float*>malloc(F * sizeof(float))
+
+    cdef int epoch, r, row, u, i, j, f, p, q, sampled, min_index, n_seen_u, u_has_uf, use_v_u
+    cdef int idx, idx_i, end_i, idx_j, end_j
+    cdef float eta, log_likelihood, sw, ut_ui, ut_uj, bias_i, bias_cand
+    cdef float pairwise_utility, min_pairwise_utility, multiplier, d_outer
+    cdef float denom_log_I = log(I)
     cdef float d_reg_a = 2.0 * alpha
     cdef float d_reg_b = 2.0 * beta
-    cdef float d_w_i = 1.0
-    cdef float d_w_j = -1.0
-    cdef float d_w_if, d_v_i, d_v_j, d_v_u, d_v_uf, d_v_if
+    cdef float scale_step, reg_a_keep, reg_b_keep, step_uf, step_if, diff_x_if, u_f
+    cdef float *v_u_row
+    cdef float *v_i_row
+    cdef float *v_j_row
+    cdef float *v_uf_row
+    cdef float *v_if_row
+    cdef const int *u_seen_ptr
 
-    #######################################
-    ### PYTHON SET-UP PRIOR TO TRAINING ###
-    #######################################
+    mt.init_genrand(seed)
 
-    # initialize MT random state
-    mt.init_genrand(1492)
+    try:
+        for epoch in range(epochs):
+            if schedule_mode == 0:
+                eta = learning_rate
+            else:
+                eta = learning_rate / pow(epoch + 1, learning_exponent)
 
-    # calculate matrix shapes
-    N = interactions.shape[0]
-    U = v_u.shape[0]
-    I = v_i.shape[0]
-    P = v_uf.shape[0]
-    Q = v_if.shape[0]
-    F = v_u.shape[1]
+            reg_a_keep = 1.0 - eta * d_reg_a
+            reg_b_keep = 1.0 - eta * d_reg_b
+            log_likelihood = 0.0
 
-    # determine whether any user-features/item-features were supplied
-    x_uf_any = int(np.asarray(x_uf).any())
-    x_if_any = int(np.asarray(x_if).any())
+            with nogil:
+                shuffle_int_array(shuf_ptr, N)
 
-    # create a shuffle index to diversify each training epoch and register as a memoryview to use in NOGIL
+                for r in range(N):
+                    row = shuf_ptr[r]
+                    u = intx_ptr[row * 2]
+                    i = intx_ptr[row * 2 + 1]
+                    sw = sw_ptr[row]
+
+                    n_seen_u = ui_indptr_ptr[u + 1] - ui_indptr_ptr[u]
+                    if n_seen_u >= I:
+                        continue
+                    u_seen_ptr = &ui_indices_ptr[ui_indptr_ptr[u]] if ui_indices_ptr != NULL else NULL
+
+                    u_has_uf = 1 if (x_uf_any and uf_indptr_ptr[u + 1] > uf_indptr_ptr[u]) else 0
+                    if u_has_uf and user_dropout > 0.0 and mt.genrand_real2() < user_dropout:
+                        use_v_u = 0
+                    else:
+                        use_v_u = 1
+
+                    compute_user_embedding_csr(
+                        F, u, v_u_ptr, v_uf_ptr,
+                        uf_indptr_ptr, uf_indices_ptr, uf_data_ptr,
+                        use_v_u, u_has_uf, u_emb
+                    )
+                    bias_i = compute_item_embedding_and_bias_csr(
+                        F, i, w_i_ptr, w_if_ptr, v_i_ptr, v_if_ptr,
+                        if_indptr_ptr, if_indices_ptr, if_data_ptr,
+                        x_if_any, i_emb
+                    )
+                    ut_ui = bias_i + dot_product(F, u_emb, i_emb)
+
+                    min_index = -1
+                    min_pairwise_utility = 1e6
+
+                    for sampled in range(1, max_samples + 1):
+                        while True:
+                            j = <int>(mt.genrand_int32() % <unsigned long>I)
+                            if u_seen_ptr == NULL or not item_observed(j, u_seen_ptr, n_seen_u):
+                                break
+
+                        bias_cand = compute_item_embedding_and_bias_csr(
+                            F, j, w_i_ptr, w_if_ptr, v_i_ptr, v_if_ptr,
+                            if_indptr_ptr, if_indices_ptr, if_data_ptr,
+                            x_if_any, cand_emb
+                        )
+                        ut_uj = bias_cand + dot_product(F, u_emb, cand_emb)
+                        pairwise_utility = ut_ui - ut_uj
+
+                        if min_index == -1 or pairwise_utility < min_pairwise_utility:
+                            min_index = j
+                            min_pairwise_utility = pairwise_utility
+                            memcpy(j_emb, cand_emb, F * sizeof(float))
+
+                        if pairwise_utility < MARGIN:
+                            break
+
+                    j = min_index
+                    pairwise_utility = min_pairwise_utility
+                    multiplier = log((I - 1) / sampled) / denom_log_I
+                    if verbose:
+                        log_likelihood += safe_log_sigmoid(pairwise_utility)
+
+                    d_outer = safe_sigmoid_neg(pairwise_utility)
+                    scale_step = eta * sw * multiplier * d_outer
+
+                    # Update item scalar biases
+                    w_i_ptr[i] = w_i_ptr[i] * reg_a_keep + scale_step
+                    w_i_ptr[j] = w_i_ptr[j] * reg_a_keep - scale_step
+
+                    # Contiguous SIMD-friendly factor updates
+                    for f in range(F):
+                        diff_ij[f] = i_emb[f] - j_emb[f]
+
+                    if use_v_u:
+                        v_u_row = &v_u_ptr[u * F]
+                        for f in range(F):
+                            v_u_row[f] = v_u_row[f] * reg_a_keep + scale_step * diff_ij[f]
+
+                    v_i_row = &v_i_ptr[i * F]
+                    v_j_row = &v_i_ptr[j * F]
+                    for f in range(F):
+                        u_f = u_emb[f]
+                        v_i_row[f] = v_i_row[f] * reg_a_keep + scale_step * u_f
+                        v_j_row[f] = v_j_row[f] * reg_a_keep - scale_step * u_f
+
+                    # Sparse CSR user-feature factor updates (outer loop over non-zero p, inner loop contiguous over f)
+                    if u_has_uf:
+                        for idx in range(uf_indptr_ptr[u], uf_indptr_ptr[u + 1]):
+                            p = uf_indices_ptr[idx]
+                            step_uf = scale_step * uf_data_ptr[idx]
+                            v_uf_row = &v_uf_ptr[p * F]
+                            for f in range(F):
+                                v_uf_row[f] = v_uf_row[f] * reg_b_keep + step_uf * diff_ij[f]
+
+                    # Sparse 2-pointer merge over non-zero item features of (i, j) for w_if and v_if updates
+                    if x_if_any:
+                        idx_i = if_indptr_ptr[i]
+                        end_i = if_indptr_ptr[i + 1]
+                        idx_j = if_indptr_ptr[j]
+                        end_j = if_indptr_ptr[j + 1]
+
+                        while idx_i < end_i or idx_j < end_j:
+                            if idx_j >= end_j or (idx_i < end_i and if_indices_ptr[idx_i] < if_indices_ptr[idx_j]):
+                                q = if_indices_ptr[idx_i]
+                                diff_x_if = if_data_ptr[idx_i]
+                                idx_i += 1
+                            elif idx_i >= end_i or if_indices_ptr[idx_j] < if_indices_ptr[idx_i]:
+                                q = if_indices_ptr[idx_j]
+                                diff_x_if = -if_data_ptr[idx_j]
+                                idx_j += 1
+                            else:
+                                q = if_indices_ptr[idx_i]
+                                diff_x_if = if_data_ptr[idx_i] - if_data_ptr[idx_j]
+                                idx_i += 1
+                                idx_j += 1
+
+                            if diff_x_if != 0.0:
+                                step_if = scale_step * diff_x_if
+                                w_if_ptr[q] = w_if_ptr[q] * reg_b_keep + step_if
+                                v_if_row = &v_if_ptr[q * F]
+                                for f in range(F):
+                                    v_if_row[f] = v_if_row[f] * reg_b_keep + step_if * u_emb[f]
+
+            assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if)
+
+            if verbose:
+                penalty = reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if)
+                log_likelihood = round(log_likelihood - penalty, 2)
+                print("\ntraining epoch:", epoch)
+                print("log likelihood:", log_likelihood)
+
+    finally:
+        free(u_emb)
+        free(i_emb)
+        free(cand_emb)
+        free(j_emb)
+        free(diff_ij)
+
+
+def _fold_in(
+    int[:, ::1] interactions,
+    float[::1] sample_weight,
+    int[::1] ui_indptr,
+    int[::1] ui_indices,
+    float[:, ::1] u_feat_emb,
+    float[::1] item_bias,
+    float[:, ::1] v_i_eff,
+    float[:, ::1] v_u,
+    float alpha,
+    float learning_rate,
+    str learning_schedule,
+    float learning_exponent,
+    int max_samples,
+    int epochs,
+    int seed=1492
+):
+    """learn or refine user latent factors [v_u] in nogil C while holding all item and feature weights fixed"""
+
+    cdef float MARGIN = 1.0
+    cdef int N = interactions.shape[0]
+    cdef int I = v_i_eff.shape[0]
+    cdef int F = v_u.shape[1]
+
+    if N == 0 or I <= 1 or epochs <= 0:
+        return
+
+    cdef int schedule_mode
+    if learning_schedule == 'constant':
+        schedule_mode = 0
+    elif learning_schedule == 'invscaling':
+        schedule_mode = 1
+    else:
+        raise ValueError('unknown [learning_schedule]')
+
     shuffle_index = np.arange(N, dtype=np.int32)
-    cdef int[:] shuffle_index_mv = shuffle_index
+    cdef int[::1] shuffle_index_mv = shuffle_index
 
-    # count the total number of items for each user
-    items_user = {user: len(items) for user, items in user_items.items()}
+    cdef const int *intx_ptr = &interactions[0, 0]
+    cdef const float *sw_ptr = &sample_weight[0]
+    cdef const int *ui_indptr_ptr = &ui_indptr[0]
+    cdef const int *ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL
+    cdef const float *u_feat_ptr = &u_feat_emb[0, 0]
+    cdef const float *item_bias_ptr = &item_bias[0]
+    cdef const float *v_i_eff_ptr = &v_i_eff[0, 0]
+    cdef float *v_u_ptr = &v_u[0, 0]
+    cdef int *shuf_ptr = &shuffle_index_mv[0]
 
-    # create c-arrays: number of items and sorted array of items for each user
-    cdef int *c_items_user = <int*>malloc(U * sizeof(int))
-    cdef int **c_user_items = <int**>malloc(U * sizeof(int*))
+    cdef float *u_emb = <float*>malloc(F * sizeof(float))
 
-    # fill the c-arrays from the P-arrays to use later in NOGIL blocks
-    for u in range(U):
-        c_items_user[u] = items_user[u]
-        c_user_items[u] = <int*>malloc(c_items_user[u] * sizeof(int))
-        for i in range(c_items_user[u]):
-            c_user_items[u][i] = user_items[u][i]
+    cdef int epoch, r, row, u, i, j, f, sampled, min_index, n_seen_u
+    cdef float eta, reg_a_keep, scale_step, sw, ut_ui, ut_uj, pairwise_utility, min_pairwise_utility, multiplier, d_outer
+    cdef float denom_log_I = log(I)
+    cdef float d_reg_a = 2.0 * alpha
+    cdef float *v_u_row
+    cdef const float *u_feat_row
+    cdef const float *v_i_row
+    cdef const float *v_j_row
+    cdef const int *u_seen_ptr
 
-    ################################
-    ### MAIN TRAINING EPOCH LOOP ###
-    ################################
+    mt.init_genrand(seed)
 
-    for epoch in range(epochs):
+    try:
+        with nogil:
+            for epoch in range(epochs):
+                if schedule_mode == 0:
+                    eta = learning_rate
+                else:
+                    eta = learning_rate / pow(epoch + 1, learning_exponent)
 
-        if learning_schedule == 'constant':
-            eta = learning_rate
-        elif learning_schedule == 'invscaling':
-            eta = learning_rate / pow(epoch + 1, learning_exponent)
-        else:
-            raise ValueError('unknown [learning_schedule]')
+                reg_a_keep = 1.0 - eta * d_reg_a
+                shuffle_int_array(shuf_ptr, N)
 
-        np.random.shuffle(shuffle_index)
-        log_likelihood = 0.0
+                for r in range(N):
+                    row = shuf_ptr[r]
+                    u = intx_ptr[row * 2]
+                    i = intx_ptr[row * 2 + 1]
+                    sw = sw_ptr[row]
 
-        for r in range(N):
+                    n_seen_u = ui_indptr_ptr[u + 1] - ui_indptr_ptr[u]
+                    if n_seen_u >= I:
+                        continue
+                    u_seen_ptr = &ui_indices_ptr[ui_indptr_ptr[u]] if ui_indices_ptr != NULL else NULL
 
-            # locate the observed (user, item, sample-weight)
-            row = shuffle_index_mv[r]
-            u = interactions[row, 0]
-            i = interactions[row, 1]
-            sw = sample_weight[row]
+                    v_u_row = &v_u_ptr[u * F]
+                    u_feat_row = &u_feat_ptr[u * F]
+                    for f in range(F):
+                        u_emb[f] = v_u_row[f] + u_feat_row[f]
 
-            # compute the utility score of the observed (u, i) pair
-            ut_ui = compute_ui_utility(F, P, Q, x_uf[u], x_if[i], w_i[i], w_if, v_u[u], v_i[i], v_uf, v_if, x_uf_any, x_if_any)
+                    v_i_row = &v_i_eff_ptr[i * F]
+                    ut_ui = item_bias_ptr[i] + dot_product(F, u_emb, v_i_row)
 
-            # WARP sampling loop for the (u, i) pair
-            # --------------------------------------
+                    min_index = -1
+                    min_pairwise_utility = 1e6
 
-            min_index = -1
-            min_pairwise_utility = 1e6
+                    for sampled in range(1, max_samples + 1):
+                        while True:
+                            j = <int>(mt.genrand_int32() % <unsigned long>I)
+                            if u_seen_ptr == NULL or not item_observed(j, u_seen_ptr, n_seen_u):
+                                break
 
-            for sampled in range(1, max_samples + 1):
+                        ut_uj = item_bias_ptr[j] + dot_product(F, u_emb, &v_i_eff_ptr[j * F])
+                        pairwise_utility = ut_ui - ut_uj
 
-                # randomly sample an unobserved item (j) for the user
-                while True:
-                    j = mt.genrand_int32() % I
-                    if not lsearch(j, c_user_items[u], c_items_user[u]):
-                        break
+                        if min_index == -1 or pairwise_utility < min_pairwise_utility:
+                            min_index = j
+                            min_pairwise_utility = pairwise_utility
 
-                # compute the utility score of the unobserved (u, j) pair and the subsequent pairwise utility
-                ut_uj = compute_ui_utility(F, P, Q, x_uf[u], x_if[j], w_i[j], w_if, v_u[u], v_i[j], v_uf, v_if, x_uf_any, x_if_any)
-                pairwise_utility = ut_ui - ut_uj
+                        if pairwise_utility < MARGIN:
+                            break
 
-                if pairwise_utility < min_pairwise_utility:
-                    min_index = j
-                    min_pairwise_utility = pairwise_utility
+                    j = min_index
+                    pairwise_utility = min_pairwise_utility
+                    multiplier = log((I - 1) / sampled) / denom_log_I
+                    d_outer = safe_sigmoid_neg(pairwise_utility)
+                    scale_step = eta * sw * multiplier * d_outer
+                    v_j_row = &v_i_eff_ptr[j * F]
 
-                if pairwise_utility < MARGIN:
-                    break
-
-            # set the final sampled negative item index and calculate the WARP multiplier
-            j = min_index
-            pairwise_utility = min_pairwise_utility
-            multiplier = log((I - 1) / sampled) / log(I)
-            log_likelihood += log(1 / (1 + exp(-pairwise_utility)))
-
-            # gradient step model weight updates
-            # ----------------------------------
-
-            # calculate the outer derivative [d_LL / d_g(pu)]
-            d_outer = 1.0 / (exp(pairwise_utility) + 1.0)
-
-            # update the [item] weights
-            w_i[i] += eta * (sw * multiplier * (d_outer * d_w_i) - (d_reg_a * w_i[i]))
-            w_i[j] += eta * (sw * multiplier * (d_outer * d_w_j) - (d_reg_a * w_i[j]))
-
-            # update the [item-feature] weights
-            if x_if_any:
-                for q in range(Q):
-                    d_w_if = x_if[i, q] - x_if[j, q]
-                    w_if[q] += eta * (sw * multiplier * (d_outer * d_w_if) - (d_reg_b * w_if[q]))
-
-            # update all [factor] weights
-            for f in range(F):
-
-                # [user-factor] and [item-factor] derivatives wrt [user-factors] and [item-factors]
-                d_v_u = v_i[i, f] - v_i[j, f]
-                d_v_i = v_u[u, f]
-                d_v_j = -v_u[u, f]
-
-                # add [user-features] to [item-factor] derivatives if supplied
-                if x_uf_any:
-                    for p in range(P):
-                        d_v_i += v_uf[p, f] * x_uf[u, p]
-                        d_v_j -= v_uf[p, f] * x_uf[u, p]
-
-                # add [item-features] in [user-factor] derivatives if supplied
-                if x_if_any:
-                    for q in range(Q):
-                        d_v_u += v_if[q, f] * (x_if[i, q] - x_if[j, q])
-
-                # update the [user-factor] and [item-factor] weights with the final gradient values
-                v_u[u, f] += eta * (sw * multiplier * (d_outer * d_v_u) - (d_reg_a * v_u[u, f]))
-                v_i[i, f] += eta * (sw * multiplier * (d_outer * d_v_i) - (d_reg_a * v_i[i, f]))
-                v_i[j, f] += eta * (sw * multiplier * (d_outer * d_v_j) - (d_reg_a * v_i[j, f]))
-
-                # update the [user-feature-factor] weights if user features were supplied
-                if x_uf_any:
-                    for p in range(P):
-                        if x_uf[u, p] == 0.0:
-                            continue
-                        d_v_uf = x_uf[u, p] * (v_i[i, f] - v_i[j, f])
-                        v_uf[p, f] += eta * (sw * multiplier * (d_outer * d_v_uf) - (d_reg_b * v_uf[p, f]))
-
-                # update the [item-feature-factor] weights if item features were supplied
-                if x_if_any:
-                    for q in range(Q):
-                        if x_if[i, q] - x_if[j, q] == 0.0:
-                            continue
-                        d_v_if = (x_if[i, q] - x_if[j, q]) * v_u[u, f]
-                        v_if[q, f] += eta * (sw * multiplier * (d_outer * d_v_if) - (d_reg_b * v_if[q, f]))
-
-        # [end epoch]: assert all model weights are finite
-        assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if)
-
-        # report the penalized log-likelihood for this training epoch
-        if verbose:
-            penalty = reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if)
-            log_likelihood = round(log_likelihood - penalty, 2)
-            print("\ntraining epoch:", epoch)
-            print("log likelihood:", log_likelihood)
-
-    # [end training]: free memory of c-arrays before exiting function
-    for u in range(U):
-        free(c_user_items[u])
-    free(c_items_user)
-    free(c_user_items)
+                    for f in range(F):
+                        v_u_row[f] = v_u_row[f] * reg_a_keep + scale_step * (v_i_row[f] - v_j_row[f])
+    finally:
+        free(u_emb)
 
 
 def _predict(
-    float[:, ::1] pairs,
-    float[:, ::1] x_uf,
-    float[:, ::1] x_if,
-    float[::1] w_i,
-    float[::1] w_if,
-    float[:, ::1] v_u,
-    float[:, ::1] v_i,
-    float[:, ::1] v_uf,
-    float[:, ::1] v_if,
+    int[::1] u_idx,
+    int[::1] i_idx,
+    float[:, ::1] u_emb,
+    float[::1] item_bias,
+    float[:, ::1] v_i_eff
 ):
+    """score (user, item) pairs in nogil C using integer indices (-1 indicates missing)"""
 
-    # declare variables
-    cdef int N, P, Q, F
-    cdef int x_uf_any, x_if_any
+    cdef int N = u_idx.shape[0]
+    cdef int F = u_emb.shape[1]
     cdef int row, u, i
-    cdef float u_flt, i_flt
 
-    # calculate matrix shapes
-    N = pairs.shape[0]
-    P = v_uf.shape[0]
-    Q = v_if.shape[0]
-    F = v_u.shape[1]
+    scores = np.full(N, np.nan, dtype=np.float32)
+    if N == 0 or u_emb.shape[0] == 0 or item_bias.shape[0] == 0:
+        return scores
 
-    # determine whether any user-features/item-features were supplied
-    x_uf_any = int(np.asarray(x_uf).any())
-    x_if_any = int(np.asarray(x_if).any())
+    cdef float[::1] scores_mv = scores
+    cdef const int *u_ptr = &u_idx[0]
+    cdef const int *i_ptr = &i_idx[0]
+    cdef const float *u_emb_ptr = &u_emb[0, 0]
+    cdef const float *item_bias_ptr = &item_bias[0]
+    cdef const float *v_i_eff_ptr = &v_i_eff[0, 0]
+    cdef float *scores_ptr = &scores_mv[0]
 
-    # initialize the output scores vector
-    scores = np.empty(N, dtype=np.float32)
-
-    for row in range(N):
-
-        # locate the user/item to score
-        u_flt = pairs[row, 0]
-        i_flt = pairs[row, 1]
-
-        # set the score to nan if the user or item not found
-        if np.isnan(u_flt) or np.isnan(i_flt):
-            scores[row] = np.nan
-        else:
-            # calculate the pointwise utility score for the (u, i) pair
-            u, i = int(u_flt), int(i_flt)
-            scores[row] = compute_ui_utility(F, P, Q, x_uf[u], x_if[i], w_i[i], w_if, v_u[u], v_i[i], v_uf, v_if, x_uf_any, x_if_any)
+    with nogil:
+        for row in range(N):
+            u = u_ptr[row]
+            i = i_ptr[row]
+            if u >= 0 and i >= 0:
+                scores_ptr[row] = item_bias_ptr[i] + dot_product(F, &u_emb_ptr[u * F], &v_i_eff_ptr[i * F])
 
     return scores
 
 
-def _recommend(
-    float[::1] users,
-    dict user_items,
+def _select_topk_chunk(
+    float[:, ::1] scores_chunk,
+    float[::1] item_bias,
+    int[::1] chunk_u_idx,
+    int[::1] ui_indptr,
+    int[::1] ui_indices,
     int n_items,
     bint filter_previous,
-    float[:, ::1] x_uf,
-    float[:, ::1] x_if,
-    float[::1] w_i,
-    float[::1] w_if,
-    float[:, ::1] v_u,
-    float[:, ::1] v_i,
-    float[:, ::1] v_uf,
-    float[:, ::1] v_if
+    int[:, ::1] out_items
 ):
+    """select sorted top-K item indices per row from a BLAS score chunk using a nogil size-K min-heap"""
 
-    # declare variables
-    cdef int U, I, P, Q, F
-    cdef int x_uf_any, x_if_any
-    cdef int row, u, i, s
-    cdef float u_flt
+    cdef int B = scores_chunk.shape[0]
+    cdef int I = scores_chunk.shape[1]
+    cdef int K = n_items
+    if B == 0 or K <= 0:
+        return
 
-    # calculate matrix shapes
-    U = users.shape[0]
-    I = w_i.shape[0]
-    P = v_uf.shape[0]
-    Q = v_if.shape[0]
-    F = v_u.shape[1]
+    cdef const float *scores_ptr = &scores_chunk[0, 0]
+    cdef const float *bias_ptr = &item_bias[0]
+    cdef const int *u_ptr = &chunk_u_idx[0]
+    cdef const int *indptr_ptr = &ui_indptr[0] if filter_previous else NULL
+    cdef const int *indices_ptr = &ui_indices[0] if (filter_previous and ui_indices.shape[0] > 0) else NULL
+    cdef int *out_ptr = &out_items[0, 0]
 
-    # determine whether any user-features/item-features were supplied
-    x_uf_any = int(np.asarray(x_uf).any())
-    x_if_any = int(np.asarray(x_if).any())
+    cdef float *heap_s = <float*>malloc(K * sizeof(float))
+    cdef int *heap_i = <int*>malloc(K * sizeof(int))
+    cdef int *seen_tag = <int*>malloc(I * sizeof(int)) if filter_previous else NULL
 
-    # initialize the [UxR] recommendations matrix
-    rec_items = np.empty((U, n_items), dtype=np.float32)
+    cdef int b, u, i, idx, h_size, k_idx
+    cdef float s
+    cdef const float *row_scores
+    cdef int *row_out
 
-    # initialize a temporary buffer to store all item scores for a given user
-    item_scores = np.empty(I, dtype=np.float32)
-    cdef float[::1] item_scores_mv = item_scores
+    try:
+        with nogil:
+            if filter_previous:
+                for i in range(I):
+                    seen_tag[i] = -1
 
-    for row in range(U):
-        u_flt = users[row]
-        if np.isnan(u_flt):
-            # set the rec item vector to nan if the user not found
-            rec_items[row] = np.full(n_items, np.nan, dtype=np.float32)
-        else:
-            # calculate the scores for all items wrt the current user
-            u = int(u_flt)
-            for i in range(I):
-                item_scores_mv[i] = compute_ui_utility(F, P, Q, x_uf[u], x_if[i], w_i[i], w_if, v_u[u], v_i[i], v_uf, v_if, x_uf_any, x_if_any)
+            for b in range(B):
+                u = u_ptr[b]
+                row_scores = &scores_ptr[<Py_ssize_t>b * I]
+                row_out = &out_ptr[<Py_ssize_t>b * K]
 
-            # get a ranked list of item index positions for the user
-            ranked_items = np.argsort(item_scores)[::-1]
-            selected_items = np.empty(n_items, dtype=np.float32)
+                if filter_previous and indices_ptr != NULL:
+                    for idx in range(indptr_ptr[u], indptr_ptr[u + 1]):
+                        seen_tag[indices_ptr[idx]] = b
 
-            # select the topN items for each user, optionally skipping previously observed items
-            s = 0
-            for i in range(I):
-                if filter_previous and ranked_items[i] in user_items[u]:
-                    continue
-                else:
-                    selected_items[s] = ranked_items[i]
-                    s += 1
-                if s == n_items:
-                    break
+                h_size = 0
+                for i in range(I):
+                    if filter_previous and seen_tag[i] == b:
+                        continue
+                    s = row_scores[i] + bias_ptr[i]
+                    if h_size < K:
+                        heap_s[h_size] = s
+                        heap_i[h_size] = i
+                        heap_sift_up(heap_s, heap_i, h_size)
+                        h_size += 1
+                    elif s > heap_s[0]:
+                        heap_s[0] = s
+                        heap_i[0] = i
+                        heap_sift_down(heap_s, heap_i, K, 0)
 
-            rec_items[row] = selected_items
+                for k_idx in range(h_size, K):
+                    row_out[k_idx] = -1
 
-    return rec_items
-
+                for k_idx in range(h_size - 1, -1, -1):
+                    row_out[k_idx] = heap_i[0]
+                    h_size -= 1
+                    if h_size > 0:
+                        heap_s[0] = heap_s[h_size]
+                        heap_i[0] = heap_i[h_size]
+                        heap_sift_down(heap_s, heap_i, h_size, 0)
+    finally:
+        free(heap_s)
+        free(heap_i)
+        if seen_tag != NULL:
+            free(seen_tag)

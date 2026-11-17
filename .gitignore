@@ -14,6 +14,8 @@ examples/ignore/
 *.pyc
 *.ipynb_checkpoints
 __pycache__/
+.pytest_cache/
+.venv/
 
 # distribution / packaging
 .Python
