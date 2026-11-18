@@ -4,7 +4,7 @@ import glob
 from setuptools import Extension, setup
 
 NAME = 'rankfm'
-VERSION = '0.3.0'
+VERSION = '0.4.0'
 
 # define the extension packages to include
 # ----------------------------------------
@@ -24,16 +24,26 @@ except ImportError:
         raise RuntimeError("Cython is required to build rankfm from .pyx source")
 
 
-# add compiler arguments to optimize machine code and ignore warnings
-disabled_warnings = ['-Wno-unused-function', '-Wno-uninitialized']
-compile_args = ['-O3', '-ffast-math', '-funroll-loops'] + disabled_warnings
+# add compiler arguments to optimize machine code and enable POSIX threads
+if sys.platform == 'win32':
+    compile_args = ['/O2']
+    link_args = []
+else:
+    disabled_warnings = ['-Wno-unused-function', '-Wno-uninitialized']
+    compile_args = ['-O3', '-ffast-math', '-fno-finite-math-only', '-funroll-loops', '-pthread'] + disabled_warnings
+    if os.environ.get('RANKFM_ARCH_NATIVE', '') == '1':
+        compile_args.append('-march=native')
+    link_args = ['-pthread']
 
-# define the _rankfm extension including the wrapped MT module
+# define the _rankfm extension using fast_ops.h
 extensions = [
     Extension(
         name='rankfm._rankfm',
-        sources=['rankfm/_rankfm.{ext}'.format(ext=ext), 'rankfm/mt19937ar/mt19937ar.c'],
-        extra_compile_args=compile_args
+        sources=['rankfm/_rankfm.{ext}'.format(ext=ext)],
+        include_dirs=['rankfm'],
+        depends=['rankfm/fast_ops.h'],
+        extra_compile_args=compile_args,
+        extra_link_args=link_args
     )
 ]
 

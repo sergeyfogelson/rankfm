@@ -20,6 +20,7 @@ __pycache__/
 # distribution / packaging
 .Python
 build/
+dist/
 eggs/
 .eggs/
 lib/
