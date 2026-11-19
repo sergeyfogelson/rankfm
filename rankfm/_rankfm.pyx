@@ -10,6 +10,8 @@ from libc.stdint cimport int32_t, int64_t, uint32_t, uint64_t
 from libc.stdlib cimport calloc, free, malloc
 from libc.string cimport memcpy, memset
 
+import warnings
+
 import numpy as np
 
 cdef extern from "fast_ops.h":
@@ -972,14 +974,21 @@ def _csr_matvec(
 
 
 def assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if):
-    """assert all model weights are finite"""
+    """raise AssertionError unless all model weights are finite
 
-    assert np.isfinite(np.sum(w_i, dtype=np.float64)), "item weights [w_i] are not finite - try decreasing feature/sample_weight magnitudes"
-    assert np.isfinite(np.sum(w_if, dtype=np.float64)), "item feature weights [w_if] are not finite - try decreasing feature/sample_weight magnitudes"
-    assert np.isfinite(np.sum(v_u, dtype=np.float64)), "user factors [v_u] are not finite - try decreasing feature/sample_weight magnitudes"
-    assert np.isfinite(np.sum(v_i, dtype=np.float64)), "item factors [v_i] are not finite - try decreasing feature/sample_weight magnitudes"
-    assert np.isfinite(np.sum(v_uf, dtype=np.float64)), "user-feature factors [v_uf] are not finite - try decreasing feature/sample_weight magnitudes"
-    assert np.isfinite(np.sum(v_if, dtype=np.float64)), "item-feature factors [v_if] are not finite - try decreasing feature/sample_weight magnitudes"
+    raised explicitly rather than with [assert] statements, which `python -O` removes: a diverged model must never be returned silently
+    """
+
+    for label, weights in (
+        ("item weights [w_i]", w_i),
+        ("item feature weights [w_if]", w_if),
+        ("user factors [v_u]", v_u),
+        ("item factors [v_i]", v_i),
+        ("user-feature factors [v_uf]", v_uf),
+        ("item-feature factors [v_if]", v_if),
+    ):
+        if not np.isfinite(np.sum(weights, dtype=np.float64)):
+            raise AssertionError("{} are not finite - try decreasing feature/sample_weight magnitudes".format(label))
 
 
 def reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if):
@@ -1041,6 +1050,13 @@ def _fit_csr(
 
     if N == 0 or I <= 1 or epochs <= 0:
         return
+
+    # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
+    # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
+    if N > 2147483647:
+        raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+    if max_samples > I - 1:
+        max_samples = I - 1
 
     cdef int schedule_mode
     if learning_schedule == 'constant':
@@ -1163,6 +1179,12 @@ def _fit_csr(
     ctx.x_if_any = x_if_any
     ctx.verbose = 1 if verbose else 0
     ctx.uniform_reg = 1 if (uniform_feature_reg and eff_threads == 1) else 0
+    if uniform_feature_reg and eff_threads > 1:
+        warnings.warn(
+            "feature_reg='uniform' relies on per-feature step counters that are only valid single-threaded; "
+            "training on {} threads uses 'stochastic' feature regularization instead (set n_jobs=1 to keep 'uniform')".format(eff_threads),
+            RuntimeWarning
+        )
     ctx.user_dropout = user_dropout
     ctx.base_seed = <uint64_t>(<uint32_t>seed)
 
@@ -1218,7 +1240,8 @@ def _fit_csr(
                     ctx.block_end = b_end
                     ctx.cursor = b_start
                     ctx.grain = max(<int64_t>64, min(<int64_t>256, (b_end - b_start) // max(<int64_t>1, <int64_t>(eff_threads * 4))))
-                    ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 1ULL
+                    # one RNG stream per (epoch, chunk start): the epoch sits above bit 40 so epochs can never share a stream
+                    ctx.stream_epoch_base = (<uint64_t>(epoch + 1)) << 40
                     rfm_pool_run(pool, _fit_block_worker, &ctx)
 
                     b_start = b_end
@@ -1352,6 +1375,13 @@ def _fold_in(
     if N == 0 or I <= 1 or epochs <= 0:
         return
 
+    # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
+    # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
+    if N > 2147483647:
+        raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+    if max_samples > I - 1:
+        max_samples = I - 1
+
     cdef int schedule_mode
     if learning_schedule == 'constant':
         schedule_mode = 0
@@ -1423,7 +1453,7 @@ def _fold_in(
                 ctx.eta = eta
                 ctx.reg_a_keep = 1.0 - eta * d_reg_a
                 ctx.cursor = 0
-                ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 17ULL
+                ctx.stream_epoch_base = ((<uint64_t>(epoch + 1)) << 40) | (1ULL << 39)
 
                 rfm_shuffle_int32(&shuffle_index_mv[0], N, &shuf_rng)
                 rfm_pool_run(pool, _fold_in_worker, &ctx)

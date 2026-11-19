@@ -2,7 +2,10 @@
 rankfm main modeling class
 """
 
+import math
 import os
+from collections import namedtuple
+
 import numpy as np
 import pandas as pd
 
@@ -16,6 +19,45 @@ from rankfm._rankfm import (
     dense_to_csr,
 )
 from rankfm.utils import get_data
+
+
+# pre-extracted feature CSR passed between internal calls so repeated inference batches skip re-extraction
+_FeatureCSR = namedtuple('_FeatureCSR', ['ids', 'indptr', 'indices', 'data', 'n_cols', 'columns'])
+
+
+def _available_cpus():
+    """count the CPUs this process may actually use
+
+    os.cpu_count() reports every core on the host. inside a container (GKE, Cloud Run, Vertex AI) the process is
+    usually restricted to fewer by CPU affinity or a cgroup CPU quota, and starting one thread per host core then
+    oversubscribes the quota and gets throttled by the kernel scheduler.
+    """
+
+    if hasattr(os, 'sched_getaffinity'):
+        cpus = len(os.sched_getaffinity(0))
+    else:
+        cpus = os.cpu_count() or 1
+
+    quota = None
+    try:
+        with open('/sys/fs/cgroup/cpu.max') as f:  # cgroup v2
+            max_us, period_us = f.read().split()
+        if max_us != 'max':
+            quota = int(max_us) / int(period_us)
+    except (OSError, ValueError):
+        try:
+            with open('/sys/fs/cgroup/cpu/cpu.cfs_quota_us') as f:  # cgroup v1
+                max_us = int(f.read())
+            with open('/sys/fs/cgroup/cpu/cpu.cfs_period_us') as f:
+                period_us = int(f.read())
+            if max_us > 0 and period_us > 0:
+                quota = max_us / period_us
+        except (OSError, ValueError):
+            pass
+
+    if quota is not None:
+        cpus = min(cpus, math.ceil(quota))
+    return max(1, cpus)
 
 
 def _is_scipy_sparse(obj):
@@ -266,8 +308,7 @@ class RankFM():
         nj = self.n_jobs if n_jobs is None else int(n_jobs)
         assert nj != 0, "[n_jobs] must be non-zero"
         if nj < 0:
-            cpus = os.cpu_count() or 1
-            return max(1, cpus + 1 + nj)
+            return max(1, _available_cpus() + 1 + nj)
         return nj
 
 
@@ -472,21 +513,26 @@ class RankFM():
     def _pairs_to_csr(u_arr, i_arr, n_users, n_items):
         """convert (user_idx, item_idx) integer arrays into sorted, deduplicated CSR (indptr, indices) arrays"""
 
+        # indptr is always int64: that is what the C kernels read, so they never need a converted copy
         if n_users == 0:
-            return np.zeros(1, dtype=np.int32), np.zeros(0, dtype=np.int32)
+            return np.zeros(1, dtype=np.int64), np.zeros(0, dtype=np.int32)
         if len(u_arr) == 0 or n_items == 0:
-            return np.zeros(n_users + 1, dtype=np.int32), np.zeros(0, dtype=np.int32)
+            return np.zeros(n_users + 1, dtype=np.int64), np.zeros(0, dtype=np.int32)
 
+        # in-place sort + adjacent compare: several times faster than np.unique, which hashes on NumPy >= 2.3
         codes = u_arr.astype(np.int64) * np.int64(n_items) + i_arr.astype(np.int64)
-        uniq_codes = np.unique(codes)
+        codes.sort()
+        is_first = np.empty(len(codes), dtype=bool)
+        is_first[0] = True
+        np.not_equal(codes[1:], codes[:-1], out=is_first[1:])
+        uniq_codes = codes[is_first]
         uniq_u = (uniq_codes // np.int64(n_items)).astype(np.int32)
         uniq_i = np.ascontiguousarray(uniq_codes % np.int64(n_items), dtype=np.int32)
 
         counts = np.bincount(uniq_u, minlength=n_users)
-        ptr_dtype = np.int64 if len(uniq_i) >= 2_147_483_647 else np.int32
-        indptr = np.empty(n_users + 1, dtype=ptr_dtype)
+        indptr = np.empty(n_users + 1, dtype=np.int64)
         indptr[0] = 0
-        np.cumsum(counts, dtype=ptr_dtype, out=indptr[1:])
+        np.cumsum(counts, dtype=np.int64, out=indptr[1:])
         return indptr, uniq_i
 
 
@@ -529,6 +575,9 @@ class RankFM():
           3. scipy.sparse matrix of shape (len(default_index), P) aligned directly to default_index
           4. (ids, matrix) tuple where [ids] is a 1D array/Series/Index and [matrix] is scipy.sparse or 2D float ndarray
         """
+
+        if isinstance(features, _FeatureCSR):
+            return tuple(features)
 
         cols_out = None
 
@@ -623,7 +672,7 @@ class RankFM():
         return interactions[:, 0], interactions[:, 1]
 
 
-    def _init_all(self, interactions, user_features=None, item_features=None, sample_weight=None, n_threads=1):
+    def _init_all(self, interactions, user_features=None, item_features=None, sample_weight=None, n_threads=1, seed=1492):
         """index the interaction data and user/item features and initialize model weights"""
 
         if _is_scipy_sparse(interactions):
@@ -670,10 +719,10 @@ class RankFM():
             self.interactions = np.ascontiguousarray(np.column_stack([u_mapped, i_mapped]), dtype=np.int32)
 
         self._init_features(user_features, item_features, n_threads=n_threads)
-        self._init_weights(user_features, item_features)
+        self._init_weights(user_features, item_features, seed=seed)
 
 
-    def _expand_users_for_partial(self, u_col, i_col, freeze_items=False):
+    def _expand_users_for_partial(self, u_col, i_col, freeze_items=False, seed=1492):
         """append any previously unseen users in interactions to the model's user index and state arrays"""
 
         valid_item_mask = _fast_get_indexer(self._item_index, i_col) >= 0
@@ -692,7 +741,8 @@ class RankFM():
         if self.has_uf or freeze_items:
             new_v_u = np.zeros((n_new, self.factors), dtype=np.float32)
         else:
-            new_v_u = np.random.normal(loc=0, scale=self.sigma, size=(n_new, self.factors)).astype(np.float32)
+            rng = np.random.default_rng(seed)
+            new_v_u = rng.normal(loc=0, scale=self.sigma, size=(n_new, self.factors)).astype(np.float32)
 
         self.v_u = np.ascontiguousarray(np.vstack([self.v_u, new_v_u]), dtype=np.float32)
 
@@ -703,7 +753,7 @@ class RankFM():
         self._dense_x_uf_cache = None
 
 
-    def _init_interactions(self, interactions, sample_weight, freeze_items=False):
+    def _init_interactions(self, interactions, sample_weight, freeze_items=False, seed=1492):
         """map incremental interaction data to internal user/item indexes and update CSR user_items"""
 
         if _is_scipy_sparse(interactions):
@@ -721,7 +771,7 @@ class RankFM():
             assert len(sample_weight) == len(u_col), "[sample_weight] must have the same length as [interactions]"
 
         if self.is_fit:
-            self._expand_users_for_partial(u_col, i_col, freeze_items=freeze_items)
+            self._expand_users_for_partial(u_col, i_col, freeze_items=freeze_items, seed=seed)
 
         u_mapped = _fast_get_indexer(self._user_index, u_col)
         i_mapped = _fast_get_indexer(self._item_index, i_col)
@@ -863,24 +913,29 @@ class RankFM():
                     self._dense_x_if_cache = None
 
 
-    def _init_weights(self, user_features=None, item_features=None):
-        """initialize model weights given user/item and user-feature/item-feature shapes"""
+    def _init_weights(self, user_features=None, item_features=None, seed=1492):
+        """initialize model weights given user/item and user-feature/item-feature shapes
+
+        weights are drawn from a generator seeded with [seed], so fit(seed=...) fixes the starting point as well as the sampling
+        """
+
+        rng = np.random.default_rng(seed)
 
         self.w_i = np.zeros(len(self.item_idx), dtype=np.float32)
         self.w_if = np.zeros(self._n_if, dtype=np.float32)
 
-        self.v_u = np.random.normal(loc=0, scale=self.sigma, size=(len(self.user_idx), self.factors)).astype(np.float32)
-        self.v_i = np.random.normal(loc=0, scale=self.sigma, size=(len(self.item_idx), self.factors)).astype(np.float32)
+        self.v_u = rng.normal(loc=0, scale=self.sigma, size=(len(self.user_idx), self.factors)).astype(np.float32)
+        self.v_i = rng.normal(loc=0, scale=self.sigma, size=(len(self.item_idx), self.factors)).astype(np.float32)
 
         if user_features is not None:
             scale = (self.alpha / self.beta) * self.sigma
-            self.v_uf = np.random.normal(loc=0, scale=scale, size=(self._n_uf, self.factors)).astype(np.float32)
+            self.v_uf = rng.normal(loc=0, scale=scale, size=(self._n_uf, self.factors)).astype(np.float32)
         else:
             self.v_uf = np.zeros((self._n_uf, self.factors), dtype=np.float32)
 
         if item_features is not None:
             scale = (self.alpha / self.beta) * self.sigma
-            self.v_if = np.random.normal(loc=0, scale=scale, size=(self._n_if, self.factors)).astype(np.float32)
+            self.v_if = rng.normal(loc=0, scale=scale, size=(self._n_if, self.factors)).astype(np.float32)
         else:
             self.v_if = np.zeros((self._n_if, self.factors), dtype=np.float32)
 
@@ -1162,10 +1217,10 @@ class RankFM():
         self._invalidate_caches()
 
         if self.is_fit:
-            self._init_interactions(interactions, sample_weight, freeze_items=freeze_items)
+            self._init_interactions(interactions, sample_weight, freeze_items=freeze_items, seed=int(seed))
             self._init_features(user_features, item_features, n_threads=eff_threads)
         else:
-            self._init_all(interactions, user_features, item_features, sample_weight, n_threads=eff_threads)
+            self._init_all(interactions, user_features, item_features, sample_weight, n_threads=eff_threads, seed=int(seed))
 
         max_samples = self._max_samples_for_loss()
 
@@ -1481,16 +1536,59 @@ class RankFM():
         users_arr = np.asarray(list(users) if not isinstance(users, (np.ndarray, pd.Series, pd.Index, list)) else users)
         total = len(users_arr)
 
+        # Index the side inputs once up front. Handing the raw inputs to recommend() per batch would re-scan
+        # all of them for every batch, which costs O(n_batches * total input size) across the whole stream.
+        if user_features is not None:
+            if not self.has_uf:
+                raise ValueError("model was not fit with [user_features]; cannot use [user_features] at inference")
+            user_features = _FeatureCSR(*self._extract_feature_csr(
+                user_features,
+                expected_columns=self.uf_columns,
+                expected_width=self._n_uf,
+                default_index=pd.Index(pd.unique(users_arr)),
+                n_threads=self._resolve_n_jobs(n_jobs),
+                name='user_features',
+            ))
+
+        intx_u = intx_i = intx_sw = intx_users = intx_indptr = intx_order = None
+        if interactions is not None:
+            if _is_scipy_sparse(interactions):
+                coo = interactions.tocoo(copy=False)
+                intx_u, intx_i = coo.row, coo.col
+                intx_sw = coo.data if sample_weight is None else get_data(sample_weight)
+            else:
+                intx_u, intx_i = self._extract_interaction_columns(interactions)
+                intx_sw = None if sample_weight is None else get_data(sample_weight)
+            if intx_sw is not None:
+                assert len(intx_sw) == len(intx_u), "[sample_weight] must have the same length as [interactions]"
+                intx_sw = np.asarray(intx_sw, dtype=np.float32)
+
+            # group interaction rows by user: [intx_order] lists row positions user by user, [intx_indptr] bounds each user
+            intx_users = pd.Index(pd.unique(intx_u))
+            user_codes = intx_users.get_indexer(intx_u)
+            intx_order = np.argsort(user_codes, kind='stable')
+            intx_indptr = np.zeros(len(intx_users) + 1, dtype=np.int64)
+            np.cumsum(np.bincount(user_codes, minlength=len(intx_users)), out=intx_indptr[1:])
+
         for start in range(0, total, batch_size):
             batch_u = users_arr[start:start + batch_size]
+            batch_intx = None
+            batch_sw = None
+            if interactions is not None:
+                groups = intx_users.get_indexer(pd.unique(batch_u))
+                _, rows = self._gather_csr_rows(intx_indptr, intx_order, groups[groups >= 0])
+                rows = np.sort(rows)
+                batch_intx = pd.DataFrame({'user': intx_u[rows], 'item': intx_i[rows]})
+                batch_sw = None if intx_sw is None else intx_sw[rows]
+
             df_batch = self.recommend(
                 batch_u,
                 n_items=n_items,
                 filter_previous=filter_previous,
                 cold_start=cold_start,
                 user_features=user_features,
-                interactions=interactions,
-                sample_weight=sample_weight,
+                interactions=batch_intx,
+                sample_weight=batch_sw,
                 fold_in_epochs=fold_in_epochs,
                 n_jobs=n_jobs,
             )

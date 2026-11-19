@@ -1777,7 +1777,7 @@ struct __pyx_t_6rankfm_7_rankfm_FoldInCtx;
 struct __pyx_t_6rankfm_7_rankfm_PredictCtx;
 struct __pyx_t_6rankfm_7_rankfm_TopKChunkCtx;
 
-/* "rankfm/_rankfm.pyx":188
+/* "rankfm/_rankfm.pyx":190
  * # -------------------------------------------
  * 
  * cdef struct DenseCsrCtx:             # <<<<<<<<<<<<<<
@@ -1793,7 +1793,7 @@ struct __pyx_t_6rankfm_7_rankfm_DenseCsrCtx {
   int64_t n_cols;
 };
 
-/* "rankfm/_rankfm.pyx":232
+/* "rankfm/_rankfm.pyx":234
  * 
  * 
  * cdef struct CsrSpMMCtx:             # <<<<<<<<<<<<<<
@@ -1811,7 +1811,7 @@ struct __pyx_t_6rankfm_7_rankfm_CsrSpMMCtx {
   int F;
 };
 
-/* "rankfm/_rankfm.pyx":265
+/* "rankfm/_rankfm.pyx":267
  * 
  * 
  * cdef struct CsrSpMVCtx:             # <<<<<<<<<<<<<<
@@ -1828,7 +1828,7 @@ struct __pyx_t_6rankfm_7_rankfm_CsrSpMVCtx {
   int64_t n_rows;
 };
 
-/* "rankfm/_rankfm.pyx":289
+/* "rankfm/_rankfm.pyx":291
  * 
  * 
  * cdef struct RefreshEffItemsCtx:             # <<<<<<<<<<<<<<
@@ -1849,7 +1849,7 @@ struct __pyx_t_6rankfm_7_rankfm_RefreshEffItemsCtx {
   int F;
 };
 
-/* "rankfm/_rankfm.pyx":325
+/* "rankfm/_rankfm.pyx":327
  * 
  * 
  * cdef struct FitBlockCtx:             # <<<<<<<<<<<<<<
@@ -1903,7 +1903,7 @@ struct __pyx_t_6rankfm_7_rankfm_FitBlockCtx {
   uint64_t stream_epoch_base;
 };
 
-/* "rankfm/_rankfm.pyx":582
+/* "rankfm/_rankfm.pyx":584
  * 
  * 
  * cdef struct FoldInCtx:             # <<<<<<<<<<<<<<
@@ -1935,7 +1935,7 @@ struct __pyx_t_6rankfm_7_rankfm_FoldInCtx {
   uint64_t stream_epoch_base;
 };
 
-/* "rankfm/_rankfm.pyx":699
+/* "rankfm/_rankfm.pyx":701
  * 
  * 
  * cdef struct PredictCtx:             # <<<<<<<<<<<<<<
@@ -1953,7 +1953,7 @@ struct __pyx_t_6rankfm_7_rankfm_PredictCtx {
   int F;
 };
 
-/* "rankfm/_rankfm.pyx":729
+/* "rankfm/_rankfm.pyx":731
  * 
  * 
  * cdef struct TopKChunkCtx:             # <<<<<<<<<<<<<<
@@ -3135,6 +3135,9 @@ static double __Pyx__PyObject_AsDouble(PyObject* obj);
      (value) == (error_value) :\
      (value) != (value))
 
+/* PyRuntimeWarning_Check.proto */
+#define __Pyx_PyExc_RuntimeWarning_Check(obj)  __Pyx_TypeCheck(obj, PyExc_RuntimeWarning)
+
 /* PyNumberBinop.proto */
 #if CYTHON_COMPILING_IN_PYPY || CYTHON_COMPILING_IN_GRAAL || CYTHON_COMPILING_IN_LIMITED_API
 #define __Pyx_PyNumber_Subtract_float_object(op1, op2)  PyNumber_Subtract(op1, op2)
@@ -3970,7 +3973,7 @@ namespace {
     PyObject *__pyx_slice[1];
     PyObject *__pyx_tuple[3];
     PyObject *__pyx_codeobj_tab[10];
-    PyObject *__pyx_string_tab[262];
+    PyObject *__pyx_string_tab[269];
     PyObject *__pyx_number_tab[5];
 /* #### Code section: module_state_contents ### */
 /* PyFrozenDict.module_state_decls */
@@ -4037,251 +4040,258 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_kp_u_Invalid_mode_expected_c_or_fortr __pyx_string_tab[14]
 #define __pyx_kp_u_Invalid_shape_in_axis __pyx_string_tab[15]
 #define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[16]
-#define __pyx_kp_u_add_note __pyx_string_tab[17]
-#define __pyx_kp_u_collections_abc __pyx_string_tab[18]
-#define __pyx_kp_u_disable __pyx_string_tab[19]
-#define __pyx_kp_u_enable __pyx_string_tab[20]
-#define __pyx_kp_u_failed_to_allocate_RankFM_effect __pyx_string_tab[21]
-#define __pyx_kp_u_failed_to_allocate_RankFM_fold_i __pyx_string_tab[22]
-#define __pyx_kp_u_failed_to_allocate_RankFM_traini __pyx_string_tab[23]
-#define __pyx_kp_u_gc __pyx_string_tab[24]
-#define __pyx_kp_u_i_i __pyx_string_tab[25]
-#define __pyx_kp_u_ij_ij __pyx_string_tab[26]
-#define __pyx_kp_u_isenabled __pyx_string_tab[27]
-#define __pyx_kp_u_item_factors_v_i_are_not_finite __pyx_string_tab[28]
-#define __pyx_kp_u_item_feature_weights_w_if_are_no __pyx_string_tab[29]
-#define __pyx_kp_u_item_weights_w_i_are_not_finite __pyx_string_tab[30]
-#define __pyx_kp_u_item_feature_factors_v_if_are_no __pyx_string_tab[31]
-#define __pyx_kp_u_log_likelihood __pyx_string_tab[32]
-#define __pyx_kp_u_no_default___reduce___due_to_non __pyx_string_tab[33]
-#define __pyx_kp_u_rankfm__rankfm_pyx __pyx_string_tab[34]
-#define __pyx_kp_u_unable_to_allocate_array_data __pyx_string_tab[35]
-#define __pyx_kp_u_unable_to_allocate_shape_and_str __pyx_string_tab[36]
-#define __pyx_kp_u_unknown_learning_schedule __pyx_string_tab[37]
-#define __pyx_kp_u_user_factors_v_u_are_not_finite __pyx_string_tab[38]
-#define __pyx_kp_u_user_feature_factors_v_uf_are_no __pyx_string_tab[39]
-#define __pyx_n_u_ASCII __pyx_string_tab[40]
-#define __pyx_n_u_B __pyx_string_tab[41]
-#define __pyx_n_u_Ellipsis __pyx_string_tab[42]
-#define __pyx_n_u_F __pyx_string_tab[43]
-#define __pyx_n_u_I __pyx_string_tab[44]
-#define __pyx_n_u_K __pyx_string_tab[45]
-#define __pyx_n_u_N __pyx_string_tab[46]
-#define __pyx_n_u_P_if __pyx_string_tab[47]
-#define __pyx_n_u_P_uf __pyx_string_tab[48]
-#define __pyx_n_u_Sequence __pyx_string_tab[49]
-#define __pyx_n_u_View_MemoryView __pyx_string_tab[50]
-#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[51]
-#define __pyx_n_u_annotate __pyx_string_tab[52]
-#define __pyx_n_u_class __pyx_string_tab[53]
-#define __pyx_n_u_class_getitem __pyx_string_tab[54]
-#define __pyx_n_u_dict __pyx_string_tab[55]
-#define __pyx_n_u_func __pyx_string_tab[56]
-#define __pyx_n_u_getstate __pyx_string_tab[57]
-#define __pyx_n_u_import __pyx_string_tab[58]
-#define __pyx_n_u_main __pyx_string_tab[59]
-#define __pyx_n_u_module __pyx_string_tab[60]
-#define __pyx_n_u_name_2 __pyx_string_tab[61]
-#define __pyx_n_u_new __pyx_string_tab[62]
-#define __pyx_n_u_pyx_checksum __pyx_string_tab[63]
-#define __pyx_n_u_pyx_state __pyx_string_tab[64]
-#define __pyx_n_u_pyx_type __pyx_string_tab[65]
-#define __pyx_n_u_pyx_unpickle_Enum __pyx_string_tab[66]
-#define __pyx_n_u_pyx_vtable __pyx_string_tab[67]
-#define __pyx_n_u_qualname __pyx_string_tab[68]
-#define __pyx_n_u_reduce __pyx_string_tab[69]
-#define __pyx_n_u_reduce_cython __pyx_string_tab[70]
-#define __pyx_n_u_reduce_ex __pyx_string_tab[71]
-#define __pyx_n_u_set_name __pyx_string_tab[72]
-#define __pyx_n_u_setstate __pyx_string_tab[73]
-#define __pyx_n_u_setstate_cython __pyx_string_tab[74]
-#define __pyx_n_u_test __pyx_string_tab[75]
-#define __pyx_n_u_csr_dense_matmul __pyx_string_tab[76]
-#define __pyx_n_u_csr_matvec __pyx_string_tab[77]
-#define __pyx_n_u_fit __pyx_string_tab[78]
-#define __pyx_n_u_fit_csr __pyx_string_tab[79]
-#define __pyx_n_u_fold_in __pyx_string_tab[80]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[81]
-#define __pyx_n_u_predict __pyx_string_tab[82]
-#define __pyx_n_u_select_topk_chunk __pyx_string_tab[83]
-#define __pyx_n_u_abc __pyx_string_tab[84]
-#define __pyx_n_u_allocate_buffer __pyx_string_tab[85]
-#define __pyx_n_u_alpha __pyx_string_tab[86]
-#define __pyx_n_u_arange __pyx_string_tab[87]
-#define __pyx_n_u_ascontiguousarray __pyx_string_tab[88]
-#define __pyx_n_u_assert_finite __pyx_string_tab[89]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[90]
-#define __pyx_n_u_b_eff_alloc __pyx_string_tab[91]
-#define __pyx_n_u_b_end __pyx_string_tab[92]
-#define __pyx_n_u_b_start __pyx_string_tab[93]
-#define __pyx_n_u_base __pyx_string_tab[94]
-#define __pyx_n_u_base_mv __pyx_string_tab[95]
-#define __pyx_n_u_beta __pyx_string_tab[96]
-#define __pyx_n_u_c __pyx_string_tab[97]
-#define __pyx_n_u_chunk_u_idx __pyx_string_tab[98]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[99]
-#define __pyx_n_u_constant __pyx_string_tab[100]
-#define __pyx_n_u_count __pyx_string_tab[101]
-#define __pyx_n_u_ctx __pyx_string_tab[102]
-#define __pyx_n_u_d_reg_a __pyx_string_tab[103]
-#define __pyx_n_u_d_reg_b __pyx_string_tab[104]
-#define __pyx_n_u_data __pyx_string_tab[105]
-#define __pyx_n_u_data_mv __pyx_string_tab[106]
-#define __pyx_n_u_denom_log_I __pyx_string_tab[107]
-#define __pyx_n_u_dense_to_csr __pyx_string_tab[108]
-#define __pyx_n_u_dtype __pyx_string_tab[109]
-#define __pyx_n_u_dtype_is_object __pyx_string_tab[110]
-#define __pyx_n_u_eff_threads __pyx_string_tab[111]
-#define __pyx_n_u_einsum __pyx_string_tab[112]
-#define __pyx_n_u_empty __pyx_string_tab[113]
-#define __pyx_n_u_encode __pyx_string_tab[114]
-#define __pyx_n_u_enumerate __pyx_string_tab[115]
-#define __pyx_n_u_epoch __pyx_string_tab[116]
-#define __pyx_n_u_epochs __pyx_string_tab[117]
-#define __pyx_n_u_error __pyx_string_tab[118]
-#define __pyx_n_u_eta __pyx_string_tab[119]
-#define __pyx_n_u_filter_previous __pyx_string_tab[120]
-#define __pyx_n_u_flags __pyx_string_tab[121]
-#define __pyx_n_u_float32 __pyx_string_tab[122]
-#define __pyx_n_u_float64 __pyx_string_tab[123]
-#define __pyx_n_u_format __pyx_string_tab[124]
-#define __pyx_n_u_fortran __pyx_string_tab[125]
-#define __pyx_n_u_full __pyx_string_tab[126]
-#define __pyx_n_u_has_base __pyx_string_tab[127]
-#define __pyx_n_u_i_idx __pyx_string_tab[128]
-#define __pyx_n_u_id __pyx_string_tab[129]
-#define __pyx_n_u_if_data __pyx_string_tab[130]
-#define __pyx_n_u_if_density __pyx_string_tab[131]
-#define __pyx_n_u_if_indices __pyx_string_tab[132]
-#define __pyx_n_u_if_indptr __pyx_string_tab[133]
-#define __pyx_n_u_if_indptr_arr __pyx_string_tab[134]
-#define __pyx_n_u_if_indptr_i64 __pyx_string_tab[135]
-#define __pyx_n_u_index __pyx_string_tab[136]
-#define __pyx_n_u_indices __pyx_string_tab[137]
-#define __pyx_n_u_indices_mv __pyx_string_tab[138]
-#define __pyx_n_u_indptr __pyx_string_tab[139]
-#define __pyx_n_u_indptr_arr __pyx_string_tab[140]
-#define __pyx_n_u_indptr_i64 __pyx_string_tab[141]
-#define __pyx_n_u_indptr_mv __pyx_string_tab[142]
-#define __pyx_n_u_int32 __pyx_string_tab[143]
-#define __pyx_n_u_int64 __pyx_string_tab[144]
-#define __pyx_n_u_interactions __pyx_string_tab[145]
-#define __pyx_n_u_invscaling __pyx_string_tab[146]
-#define __pyx_n_u_isfinite __pyx_string_tab[147]
-#define __pyx_n_u_item_bias __pyx_string_tab[148]
-#define __pyx_n_u_items __pyx_string_tab[149]
-#define __pyx_n_u_itemsize __pyx_string_tab[150]
-#define __pyx_n_u_last_step_if __pyx_string_tab[151]
-#define __pyx_n_u_last_step_uf __pyx_string_tab[152]
-#define __pyx_n_u_lazy_tail __pyx_string_tab[153]
-#define __pyx_n_u_learning_exponent __pyx_string_tab[154]
-#define __pyx_n_u_learning_rate __pyx_string_tab[155]
-#define __pyx_n_u_learning_schedule __pyx_string_tab[156]
-#define __pyx_n_u_ll_slots __pyx_string_tab[157]
-#define __pyx_n_u_log_likelihood_2 __pyx_string_tab[158]
-#define __pyx_n_u_mat __pyx_string_tab[159]
-#define __pyx_n_u_max_samples __pyx_string_tab[160]
-#define __pyx_n_u_memview __pyx_string_tab[161]
-#define __pyx_n_u_mode __pyx_string_tab[162]
-#define __pyx_n_u_mult_lut __pyx_string_tab[163]
-#define __pyx_n_u_n_cols __pyx_string_tab[164]
-#define __pyx_n_u_n_items __pyx_string_tab[165]
-#define __pyx_n_u_n_rows __pyx_string_tab[166]
-#define __pyx_n_u_n_threads __pyx_string_tab[167]
-#define __pyx_n_u_n_u_rows __pyx_string_tab[168]
-#define __pyx_n_u_name __pyx_string_tab[169]
-#define __pyx_n_u_nan __pyx_string_tab[170]
-#define __pyx_n_u_ndim __pyx_string_tab[171]
-#define __pyx_n_u_nnz __pyx_string_tab[172]
-#define __pyx_n_u_np __pyx_string_tab[173]
-#define __pyx_n_u_numpy __pyx_string_tab[174]
-#define __pyx_n_u_obj __pyx_string_tab[175]
-#define __pyx_n_u_out __pyx_string_tab[176]
-#define __pyx_n_u_out_items __pyx_string_tab[177]
-#define __pyx_n_u_out_mv __pyx_string_tab[178]
-#define __pyx_n_u_p_idx __pyx_string_tab[179]
-#define __pyx_n_u_pack __pyx_string_tab[180]
-#define __pyx_n_u_penalty __pyx_string_tab[181]
-#define __pyx_n_u_pool __pyx_string_tab[182]
-#define __pyx_n_u_pop __pyx_string_tab[183]
-#define __pyx_n_u_print __pyx_string_tab[184]
-#define __pyx_n_u_q_idx __pyx_string_tab[185]
-#define __pyx_n_u_r __pyx_string_tab[186]
-#define __pyx_n_u_rankfm__rankfm __pyx_string_tab[187]
-#define __pyx_n_u_raw_floats __pyx_string_tab[188]
-#define __pyx_n_u_ref_ctx __pyx_string_tab[189]
-#define __pyx_n_u_reg_penalty __pyx_string_tab[190]
-#define __pyx_n_u_register __pyx_string_tab[191]
-#define __pyx_n_u_rem_steps __pyx_string_tab[192]
-#define __pyx_n_u_rhs __pyx_string_tab[193]
-#define __pyx_n_u_round __pyx_string_tab[194]
-#define __pyx_n_u_s_idx __pyx_string_tab[195]
-#define __pyx_n_u_sample_weight __pyx_string_tab[196]
-#define __pyx_n_u_schedule_mode __pyx_string_tab[197]
-#define __pyx_n_u_scores __pyx_string_tab[198]
-#define __pyx_n_u_scores_chunk __pyx_string_tab[199]
-#define __pyx_n_u_scores_mv __pyx_string_tab[200]
-#define __pyx_n_u_scratch_base __pyx_string_tab[201]
-#define __pyx_n_u_scratch_stride __pyx_string_tab[202]
-#define __pyx_n_u_seed __pyx_string_tab[203]
-#define __pyx_n_u_setdefault __pyx_string_tab[204]
-#define __pyx_n_u_shape __pyx_string_tab[205]
-#define __pyx_n_u_shuf_rng __pyx_string_tab[206]
-#define __pyx_n_u_shuffle_index __pyx_string_tab[207]
-#define __pyx_n_u_shuffle_index_mv __pyx_string_tab[208]
-#define __pyx_n_u_size __pyx_string_tab[209]
-#define __pyx_n_u_start __pyx_string_tab[210]
-#define __pyx_n_u_step __pyx_string_tab[211]
-#define __pyx_n_u_stop __pyx_string_tab[212]
-#define __pyx_n_u_struct __pyx_string_tab[213]
-#define __pyx_n_u_sum __pyx_string_tab[214]
-#define __pyx_n_u_sync_interval __pyx_string_tab[215]
-#define __pyx_n_u_t_i __pyx_string_tab[216]
-#define __pyx_n_u_u_emb __pyx_string_tab[217]
-#define __pyx_n_u_u_feat_emb __pyx_string_tab[218]
-#define __pyx_n_u_u_idx __pyx_string_tab[219]
-#define __pyx_n_u_uf_data __pyx_string_tab[220]
-#define __pyx_n_u_uf_density __pyx_string_tab[221]
-#define __pyx_n_u_uf_indices __pyx_string_tab[222]
-#define __pyx_n_u_uf_indptr __pyx_string_tab[223]
-#define __pyx_n_u_uf_indptr_arr __pyx_string_tab[224]
-#define __pyx_n_u_uf_indptr_i64 __pyx_string_tab[225]
-#define __pyx_n_u_ui_indices __pyx_string_tab[226]
-#define __pyx_n_u_ui_indptr __pyx_string_tab[227]
-#define __pyx_n_u_ui_indptr_arr __pyx_string_tab[228]
-#define __pyx_n_u_ui_indptr_i64 __pyx_string_tab[229]
-#define __pyx_n_u_uniform_feature_reg __pyx_string_tab[230]
-#define __pyx_n_u_unpack __pyx_string_tab[231]
-#define __pyx_n_u_update __pyx_string_tab[232]
-#define __pyx_n_u_user_dropout __pyx_string_tab[233]
-#define __pyx_n_u_v_eff_alloc __pyx_string_tab[234]
-#define __pyx_n_u_v_i __pyx_string_tab[235]
-#define __pyx_n_u_v_i_eff __pyx_string_tab[236]
-#define __pyx_n_u_v_if __pyx_string_tab[237]
-#define __pyx_n_u_v_u __pyx_string_tab[238]
-#define __pyx_n_u_v_uf __pyx_string_tab[239]
-#define __pyx_n_u_values __pyx_string_tab[240]
-#define __pyx_n_u_vec __pyx_string_tab[241]
-#define __pyx_n_u_verbose __pyx_string_tab[242]
-#define __pyx_n_u_w_i __pyx_string_tab[243]
-#define __pyx_n_u_w_if __pyx_string_tab[244]
-#define __pyx_n_u_x __pyx_string_tab[245]
-#define __pyx_n_u_x_if __pyx_string_tab[246]
-#define __pyx_n_u_x_if_any __pyx_string_tab[247]
-#define __pyx_n_u_x_uf __pyx_string_tab[248]
-#define __pyx_n_u_x_uf_any __pyx_string_tab[249]
-#define __pyx_n_u_zeros __pyx_string_tab[250]
-#define __pyx_n_b_O __pyx_string_tab[251]
-#define __pyx_kp_b_iso88591_2Yar_Qe6_q_2Yar_QfF_L_2Yar_Qe6 __pyx_string_tab[252]
-#define __pyx_kp_b_iso88591_a_uAWBe1BgQiuE_r_uAWBe1BgQk_e6 __pyx_string_tab[253]
-#define __pyx_kp_b_iso88591_Ql_6_Rq_F_1_F_HD_b_wc_3b_1_q_WA __pyx_string_tab[254]
-#define __pyx_kp_b_iso88591_Ql_6_Rq_F_86_1_wc_q_Q_WA_q_avV2 __pyx_string_tab[255]
-#define __pyx_kp_b_iso88591_U_e6_RuAS_b_r_Bc_fAS_2S_q_3a_q __pyx_string_tab[256]
-#define __pyx_kp_b_iso88591_q_Yl_Ya_r_Bc_3a_q_A_F_A_A_2Rt2S __pyx_string_tab[257]
-#define __pyx_kp_b_iso88591_q_YgV1A_c_q_r_Bc_3b_7_Q_A_3a_j __pyx_string_tab[258]
-#define __pyx_kp_b_iso88591_9K_1F_9K_1F_A __pyx_string_tab[259]
-#define __pyx_kp_b_iso88591_6_q_Yc_q_c_q_F_1_F_1_r_Bc_3b_7 __pyx_string_tab[260]
-#define __pyx_kp_b_iso88591_A_V1A_V1A_RvQgRs_wc_3gS_xr_q_6 __pyx_string_tab[261]
+#define __pyx_kp_u_RankFM_supports_at_most_2_147_48 __pyx_string_tab[17]
+#define __pyx_kp_u_add_note __pyx_string_tab[18]
+#define __pyx_kp_u_collections_abc __pyx_string_tab[19]
+#define __pyx_kp_u_disable __pyx_string_tab[20]
+#define __pyx_kp_u_enable __pyx_string_tab[21]
+#define __pyx_kp_u_failed_to_allocate_RankFM_effect __pyx_string_tab[22]
+#define __pyx_kp_u_failed_to_allocate_RankFM_fold_i __pyx_string_tab[23]
+#define __pyx_kp_u_failed_to_allocate_RankFM_traini __pyx_string_tab[24]
+#define __pyx_kp_u_feature_reg_uniform_relies_on_pe __pyx_string_tab[25]
+#define __pyx_kp_u_gc __pyx_string_tab[26]
+#define __pyx_kp_u_i_i __pyx_string_tab[27]
+#define __pyx_kp_u_ij_ij __pyx_string_tab[28]
+#define __pyx_kp_u_isenabled __pyx_string_tab[29]
+#define __pyx_kp_u_item_factors_v_i __pyx_string_tab[30]
+#define __pyx_kp_u_item_feature_weights_w_if __pyx_string_tab[31]
+#define __pyx_kp_u_item_weights_w_i __pyx_string_tab[32]
+#define __pyx_kp_u_item_feature_factors_v_if __pyx_string_tab[33]
+#define __pyx_kp_u_log_likelihood __pyx_string_tab[34]
+#define __pyx_kp_u_no_default___reduce___due_to_non __pyx_string_tab[35]
+#define __pyx_kp_u_rankfm__rankfm_pyx __pyx_string_tab[36]
+#define __pyx_kp_u_unable_to_allocate_array_data __pyx_string_tab[37]
+#define __pyx_kp_u_unable_to_allocate_shape_and_str __pyx_string_tab[38]
+#define __pyx_kp_u_unknown_learning_schedule __pyx_string_tab[39]
+#define __pyx_kp_u_user_factors_v_u __pyx_string_tab[40]
+#define __pyx_kp_u_user_feature_factors_v_uf __pyx_string_tab[41]
+#define __pyx_kp_u_are_not_finite_try_decreasing_f __pyx_string_tab[42]
+#define __pyx_n_u_ASCII __pyx_string_tab[43]
+#define __pyx_n_u_B __pyx_string_tab[44]
+#define __pyx_n_u_Ellipsis __pyx_string_tab[45]
+#define __pyx_n_u_F __pyx_string_tab[46]
+#define __pyx_n_u_I __pyx_string_tab[47]
+#define __pyx_n_u_K __pyx_string_tab[48]
+#define __pyx_n_u_N __pyx_string_tab[49]
+#define __pyx_n_u_P_if __pyx_string_tab[50]
+#define __pyx_n_u_P_uf __pyx_string_tab[51]
+#define __pyx_n_u_Sequence __pyx_string_tab[52]
+#define __pyx_n_u_View_MemoryView __pyx_string_tab[53]
+#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[54]
+#define __pyx_n_u_annotate __pyx_string_tab[55]
+#define __pyx_n_u_class __pyx_string_tab[56]
+#define __pyx_n_u_class_getitem __pyx_string_tab[57]
+#define __pyx_n_u_dict __pyx_string_tab[58]
+#define __pyx_n_u_func __pyx_string_tab[59]
+#define __pyx_n_u_getstate __pyx_string_tab[60]
+#define __pyx_n_u_import __pyx_string_tab[61]
+#define __pyx_n_u_main __pyx_string_tab[62]
+#define __pyx_n_u_module __pyx_string_tab[63]
+#define __pyx_n_u_name_2 __pyx_string_tab[64]
+#define __pyx_n_u_new __pyx_string_tab[65]
+#define __pyx_n_u_pyx_checksum __pyx_string_tab[66]
+#define __pyx_n_u_pyx_state __pyx_string_tab[67]
+#define __pyx_n_u_pyx_type __pyx_string_tab[68]
+#define __pyx_n_u_pyx_unpickle_Enum __pyx_string_tab[69]
+#define __pyx_n_u_pyx_vtable __pyx_string_tab[70]
+#define __pyx_n_u_qualname __pyx_string_tab[71]
+#define __pyx_n_u_reduce __pyx_string_tab[72]
+#define __pyx_n_u_reduce_cython __pyx_string_tab[73]
+#define __pyx_n_u_reduce_ex __pyx_string_tab[74]
+#define __pyx_n_u_set_name __pyx_string_tab[75]
+#define __pyx_n_u_setstate __pyx_string_tab[76]
+#define __pyx_n_u_setstate_cython __pyx_string_tab[77]
+#define __pyx_n_u_test __pyx_string_tab[78]
+#define __pyx_n_u_csr_dense_matmul __pyx_string_tab[79]
+#define __pyx_n_u_csr_matvec __pyx_string_tab[80]
+#define __pyx_n_u_fit __pyx_string_tab[81]
+#define __pyx_n_u_fit_csr __pyx_string_tab[82]
+#define __pyx_n_u_fold_in __pyx_string_tab[83]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[84]
+#define __pyx_n_u_predict __pyx_string_tab[85]
+#define __pyx_n_u_select_topk_chunk __pyx_string_tab[86]
+#define __pyx_n_u_abc __pyx_string_tab[87]
+#define __pyx_n_u_allocate_buffer __pyx_string_tab[88]
+#define __pyx_n_u_alpha __pyx_string_tab[89]
+#define __pyx_n_u_arange __pyx_string_tab[90]
+#define __pyx_n_u_ascontiguousarray __pyx_string_tab[91]
+#define __pyx_n_u_assert_finite __pyx_string_tab[92]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[93]
+#define __pyx_n_u_b_eff_alloc __pyx_string_tab[94]
+#define __pyx_n_u_b_end __pyx_string_tab[95]
+#define __pyx_n_u_b_start __pyx_string_tab[96]
+#define __pyx_n_u_base __pyx_string_tab[97]
+#define __pyx_n_u_base_mv __pyx_string_tab[98]
+#define __pyx_n_u_beta __pyx_string_tab[99]
+#define __pyx_n_u_c __pyx_string_tab[100]
+#define __pyx_n_u_chunk_u_idx __pyx_string_tab[101]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[102]
+#define __pyx_n_u_constant __pyx_string_tab[103]
+#define __pyx_n_u_count __pyx_string_tab[104]
+#define __pyx_n_u_ctx __pyx_string_tab[105]
+#define __pyx_n_u_d_reg_a __pyx_string_tab[106]
+#define __pyx_n_u_d_reg_b __pyx_string_tab[107]
+#define __pyx_n_u_data __pyx_string_tab[108]
+#define __pyx_n_u_data_mv __pyx_string_tab[109]
+#define __pyx_n_u_denom_log_I __pyx_string_tab[110]
+#define __pyx_n_u_dense_to_csr __pyx_string_tab[111]
+#define __pyx_n_u_dtype __pyx_string_tab[112]
+#define __pyx_n_u_dtype_is_object __pyx_string_tab[113]
+#define __pyx_n_u_eff_threads __pyx_string_tab[114]
+#define __pyx_n_u_einsum __pyx_string_tab[115]
+#define __pyx_n_u_empty __pyx_string_tab[116]
+#define __pyx_n_u_encode __pyx_string_tab[117]
+#define __pyx_n_u_enumerate __pyx_string_tab[118]
+#define __pyx_n_u_epoch __pyx_string_tab[119]
+#define __pyx_n_u_epochs __pyx_string_tab[120]
+#define __pyx_n_u_error __pyx_string_tab[121]
+#define __pyx_n_u_eta __pyx_string_tab[122]
+#define __pyx_n_u_filter_previous __pyx_string_tab[123]
+#define __pyx_n_u_flags __pyx_string_tab[124]
+#define __pyx_n_u_float32 __pyx_string_tab[125]
+#define __pyx_n_u_float64 __pyx_string_tab[126]
+#define __pyx_n_u_format __pyx_string_tab[127]
+#define __pyx_n_u_fortran __pyx_string_tab[128]
+#define __pyx_n_u_full __pyx_string_tab[129]
+#define __pyx_n_u_has_base __pyx_string_tab[130]
+#define __pyx_n_u_i_idx __pyx_string_tab[131]
+#define __pyx_n_u_id __pyx_string_tab[132]
+#define __pyx_n_u_if_data __pyx_string_tab[133]
+#define __pyx_n_u_if_density __pyx_string_tab[134]
+#define __pyx_n_u_if_indices __pyx_string_tab[135]
+#define __pyx_n_u_if_indptr __pyx_string_tab[136]
+#define __pyx_n_u_if_indptr_arr __pyx_string_tab[137]
+#define __pyx_n_u_if_indptr_i64 __pyx_string_tab[138]
+#define __pyx_n_u_index __pyx_string_tab[139]
+#define __pyx_n_u_indices __pyx_string_tab[140]
+#define __pyx_n_u_indices_mv __pyx_string_tab[141]
+#define __pyx_n_u_indptr __pyx_string_tab[142]
+#define __pyx_n_u_indptr_arr __pyx_string_tab[143]
+#define __pyx_n_u_indptr_i64 __pyx_string_tab[144]
+#define __pyx_n_u_indptr_mv __pyx_string_tab[145]
+#define __pyx_n_u_int32 __pyx_string_tab[146]
+#define __pyx_n_u_int64 __pyx_string_tab[147]
+#define __pyx_n_u_interactions __pyx_string_tab[148]
+#define __pyx_n_u_invscaling __pyx_string_tab[149]
+#define __pyx_n_u_isfinite __pyx_string_tab[150]
+#define __pyx_n_u_item_bias __pyx_string_tab[151]
+#define __pyx_n_u_items __pyx_string_tab[152]
+#define __pyx_n_u_itemsize __pyx_string_tab[153]
+#define __pyx_n_u_label __pyx_string_tab[154]
+#define __pyx_n_u_last_step_if __pyx_string_tab[155]
+#define __pyx_n_u_last_step_uf __pyx_string_tab[156]
+#define __pyx_n_u_lazy_tail __pyx_string_tab[157]
+#define __pyx_n_u_learning_exponent __pyx_string_tab[158]
+#define __pyx_n_u_learning_rate __pyx_string_tab[159]
+#define __pyx_n_u_learning_schedule __pyx_string_tab[160]
+#define __pyx_n_u_ll_slots __pyx_string_tab[161]
+#define __pyx_n_u_log_likelihood_2 __pyx_string_tab[162]
+#define __pyx_n_u_mat __pyx_string_tab[163]
+#define __pyx_n_u_max_samples __pyx_string_tab[164]
+#define __pyx_n_u_memview __pyx_string_tab[165]
+#define __pyx_n_u_mode __pyx_string_tab[166]
+#define __pyx_n_u_mult_lut __pyx_string_tab[167]
+#define __pyx_n_u_n_cols __pyx_string_tab[168]
+#define __pyx_n_u_n_items __pyx_string_tab[169]
+#define __pyx_n_u_n_rows __pyx_string_tab[170]
+#define __pyx_n_u_n_threads __pyx_string_tab[171]
+#define __pyx_n_u_n_u_rows __pyx_string_tab[172]
+#define __pyx_n_u_name __pyx_string_tab[173]
+#define __pyx_n_u_nan __pyx_string_tab[174]
+#define __pyx_n_u_ndim __pyx_string_tab[175]
+#define __pyx_n_u_nnz __pyx_string_tab[176]
+#define __pyx_n_u_np __pyx_string_tab[177]
+#define __pyx_n_u_numpy __pyx_string_tab[178]
+#define __pyx_n_u_obj __pyx_string_tab[179]
+#define __pyx_n_u_out __pyx_string_tab[180]
+#define __pyx_n_u_out_items __pyx_string_tab[181]
+#define __pyx_n_u_out_mv __pyx_string_tab[182]
+#define __pyx_n_u_p_idx __pyx_string_tab[183]
+#define __pyx_n_u_pack __pyx_string_tab[184]
+#define __pyx_n_u_penalty __pyx_string_tab[185]
+#define __pyx_n_u_pool __pyx_string_tab[186]
+#define __pyx_n_u_pop __pyx_string_tab[187]
+#define __pyx_n_u_print __pyx_string_tab[188]
+#define __pyx_n_u_q_idx __pyx_string_tab[189]
+#define __pyx_n_u_r __pyx_string_tab[190]
+#define __pyx_n_u_rankfm__rankfm __pyx_string_tab[191]
+#define __pyx_n_u_raw_floats __pyx_string_tab[192]
+#define __pyx_n_u_ref_ctx __pyx_string_tab[193]
+#define __pyx_n_u_reg_penalty __pyx_string_tab[194]
+#define __pyx_n_u_register __pyx_string_tab[195]
+#define __pyx_n_u_rem_steps __pyx_string_tab[196]
+#define __pyx_n_u_rhs __pyx_string_tab[197]
+#define __pyx_n_u_round __pyx_string_tab[198]
+#define __pyx_n_u_s_idx __pyx_string_tab[199]
+#define __pyx_n_u_sample_weight __pyx_string_tab[200]
+#define __pyx_n_u_schedule_mode __pyx_string_tab[201]
+#define __pyx_n_u_scores __pyx_string_tab[202]
+#define __pyx_n_u_scores_chunk __pyx_string_tab[203]
+#define __pyx_n_u_scores_mv __pyx_string_tab[204]
+#define __pyx_n_u_scratch_base __pyx_string_tab[205]
+#define __pyx_n_u_scratch_stride __pyx_string_tab[206]
+#define __pyx_n_u_seed __pyx_string_tab[207]
+#define __pyx_n_u_setdefault __pyx_string_tab[208]
+#define __pyx_n_u_shape __pyx_string_tab[209]
+#define __pyx_n_u_shuf_rng __pyx_string_tab[210]
+#define __pyx_n_u_shuffle_index __pyx_string_tab[211]
+#define __pyx_n_u_shuffle_index_mv __pyx_string_tab[212]
+#define __pyx_n_u_size __pyx_string_tab[213]
+#define __pyx_n_u_start __pyx_string_tab[214]
+#define __pyx_n_u_step __pyx_string_tab[215]
+#define __pyx_n_u_stop __pyx_string_tab[216]
+#define __pyx_n_u_struct __pyx_string_tab[217]
+#define __pyx_n_u_sum __pyx_string_tab[218]
+#define __pyx_n_u_sync_interval __pyx_string_tab[219]
+#define __pyx_n_u_t_i __pyx_string_tab[220]
+#define __pyx_n_u_u_emb __pyx_string_tab[221]
+#define __pyx_n_u_u_feat_emb __pyx_string_tab[222]
+#define __pyx_n_u_u_idx __pyx_string_tab[223]
+#define __pyx_n_u_uf_data __pyx_string_tab[224]
+#define __pyx_n_u_uf_density __pyx_string_tab[225]
+#define __pyx_n_u_uf_indices __pyx_string_tab[226]
+#define __pyx_n_u_uf_indptr __pyx_string_tab[227]
+#define __pyx_n_u_uf_indptr_arr __pyx_string_tab[228]
+#define __pyx_n_u_uf_indptr_i64 __pyx_string_tab[229]
+#define __pyx_n_u_ui_indices __pyx_string_tab[230]
+#define __pyx_n_u_ui_indptr __pyx_string_tab[231]
+#define __pyx_n_u_ui_indptr_arr __pyx_string_tab[232]
+#define __pyx_n_u_ui_indptr_i64 __pyx_string_tab[233]
+#define __pyx_n_u_uniform_feature_reg __pyx_string_tab[234]
+#define __pyx_n_u_unpack __pyx_string_tab[235]
+#define __pyx_n_u_update __pyx_string_tab[236]
+#define __pyx_n_u_user_dropout __pyx_string_tab[237]
+#define __pyx_n_u_v_eff_alloc __pyx_string_tab[238]
+#define __pyx_n_u_v_i __pyx_string_tab[239]
+#define __pyx_n_u_v_i_eff __pyx_string_tab[240]
+#define __pyx_n_u_v_if __pyx_string_tab[241]
+#define __pyx_n_u_v_u __pyx_string_tab[242]
+#define __pyx_n_u_v_uf __pyx_string_tab[243]
+#define __pyx_n_u_values __pyx_string_tab[244]
+#define __pyx_n_u_vec __pyx_string_tab[245]
+#define __pyx_n_u_verbose __pyx_string_tab[246]
+#define __pyx_n_u_w_i __pyx_string_tab[247]
+#define __pyx_n_u_w_if __pyx_string_tab[248]
+#define __pyx_n_u_warn __pyx_string_tab[249]
+#define __pyx_n_u_warnings __pyx_string_tab[250]
+#define __pyx_n_u_weights __pyx_string_tab[251]
+#define __pyx_n_u_x __pyx_string_tab[252]
+#define __pyx_n_u_x_if __pyx_string_tab[253]
+#define __pyx_n_u_x_if_any __pyx_string_tab[254]
+#define __pyx_n_u_x_uf __pyx_string_tab[255]
+#define __pyx_n_u_x_uf_any __pyx_string_tab[256]
+#define __pyx_n_u_zeros __pyx_string_tab[257]
+#define __pyx_n_b_O __pyx_string_tab[258]
+#define __pyx_kp_b_iso88591_a_uAWBe1BgQiuE_r_uAWBe1BgQk_e6 __pyx_string_tab[259]
+#define __pyx_kp_b_iso88591_Ql_6_Rq_F_1_F_HD_b_wc_3b_1_q_WA __pyx_string_tab[260]
+#define __pyx_kp_b_iso88591_Ql_6_Rq_F_86_1_wc_q_Q_WA_q_avV2 __pyx_string_tab[261]
+#define __pyx_kp_b_iso88591_U_e6_RuAS_b_r_Bc_fAS_2S_q_3a_q __pyx_string_tab[262]
+#define __pyx_kp_b_iso88591_q_q_q_4r_2T_6_1_ffmmnno __pyx_string_tab[263]
+#define __pyx_kp_b_iso88591_q_Yl_Ya_r_Bc_3a_q_A_F_A_A_2Rt2S __pyx_string_tab[264]
+#define __pyx_kp_b_iso88591_q_YgV1A_c_q_r_Bc_3b_7_Q_r_1_j_2 __pyx_string_tab[265]
+#define __pyx_kp_b_iso88591_9K_1F_9K_1F_A __pyx_string_tab[266]
+#define __pyx_kp_b_iso88591_6_q_Yc_q_c_q_F_1_F_1_r_Bc_3b_7 __pyx_string_tab[267]
+#define __pyx_kp_b_iso88591_A_V1A_V1A_RvQgRs_wc_3gS_xr_q_6 __pyx_string_tab[268]
 #define __pyx_int_0 __pyx_number_tab[0]
 #define __pyx_int_neg_1 __pyx_number_tab[1]
 #define __pyx_int_1 __pyx_number_tab[2]
@@ -4315,7 +4325,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_slice[i]); }
   for (int i=0; i<3; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
   for (int i=0; i<10; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<262; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<269; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<5; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
@@ -4353,7 +4363,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_slice[i]); }
   for (int i=0; i<3; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
   for (int i=0; i<10; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<262; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<269; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<5; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
@@ -18540,7 +18550,7 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":54
+/* "rankfm/_rankfm.pyx":56
  * # --------------------
  * 
  * cdef inline int lsearch(int32_t item, const int32_t *items, int64_t n) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -18556,7 +18566,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_lsearch(int32_t __pyx_v_item, 
   int64_t __pyx_t_3;
   int __pyx_t_4;
 
-  /* "rankfm/_rankfm.pyx":58
+  /* "rankfm/_rankfm.pyx":60
  * 
  *     cdef int64_t i
  *     for i in range(n):             # <<<<<<<<<<<<<<
@@ -18570,7 +18580,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_lsearch(int32_t __pyx_v_item, 
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "rankfm/_rankfm.pyx":59
+    /* "rankfm/_rankfm.pyx":61
  *     cdef int64_t i
  *     for i in range(n):
  *         if item == items[i]:             # <<<<<<<<<<<<<<
@@ -18582,7 +18592,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_lsearch(int32_t __pyx_v_item, 
     if (__pyx_t_4) {
 
 
-      /* "rankfm/_rankfm.pyx":60
+      /* "rankfm/_rankfm.pyx":62
  *     for i in range(n):
  *         if item == items[i]:
  *             return 1             # <<<<<<<<<<<<<<
@@ -18595,7 +18605,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_lsearch(int32_t __pyx_v_item, 
       }
       goto __pyx_L0;
 
-      /* "rankfm/_rankfm.pyx":59
+      /* "rankfm/_rankfm.pyx":61
  *     cdef int64_t i
  *     for i in range(n):
  *         if item == items[i]:             # <<<<<<<<<<<<<<
@@ -18606,7 +18616,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_lsearch(int32_t __pyx_v_item, 
   }
 
 
-  /* "rankfm/_rankfm.pyx":61
+  /* "rankfm/_rankfm.pyx":63
  *         if item == items[i]:
  *             return 1
  *     return 0             # <<<<<<<<<<<<<<
@@ -18619,7 +18629,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_lsearch(int32_t __pyx_v_item, 
   }
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":54
+  /* "rankfm/_rankfm.pyx":56
  * # --------------------
  * 
  * cdef inline int lsearch(int32_t item, const int32_t *items, int64_t n) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -18633,7 +18643,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_lsearch(int32_t __pyx_v_item, 
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":64
+/* "rankfm/_rankfm.pyx":66
  * 
  * 
  * cdef inline int bsearch(int32_t item, const int32_t *items, int64_t n) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -18648,7 +18658,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
   int __pyx_r;
   int __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":67
+  /* "rankfm/_rankfm.pyx":69
  *     """binary search for a given item in a sorted array of items"""
  * 
  *     cdef int64_t lo = 0             # <<<<<<<<<<<<<<
@@ -18657,7 +18667,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
 */
   __pyx_v_lo = 0;
 
-  /* "rankfm/_rankfm.pyx":68
+  /* "rankfm/_rankfm.pyx":70
  * 
  *     cdef int64_t lo = 0
  *     cdef int64_t hi = n - 1             # <<<<<<<<<<<<<<
@@ -18666,7 +18676,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
 */
   __pyx_v_hi = (__pyx_v_n - 1);
 
-  /* "rankfm/_rankfm.pyx":71
+  /* "rankfm/_rankfm.pyx":73
  *     cdef int64_t md
  * 
  *     while lo <= hi:             # <<<<<<<<<<<<<<
@@ -18679,7 +18689,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
 
     if (!__pyx_t_1) break;
 
-    /* "rankfm/_rankfm.pyx":72
+    /* "rankfm/_rankfm.pyx":74
  * 
  *     while lo <= hi:
  *         md = lo + ((hi - lo) >> 1)             # <<<<<<<<<<<<<<
@@ -18688,7 +18698,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
 */
     __pyx_v_md = (__pyx_v_lo + ((__pyx_v_hi - __pyx_v_lo) >> 1));
 
-    /* "rankfm/_rankfm.pyx":73
+    /* "rankfm/_rankfm.pyx":75
  *     while lo <= hi:
  *         md = lo + ((hi - lo) >> 1)
  *         if items[md] == item:             # <<<<<<<<<<<<<<
@@ -18700,7 +18710,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
     if (__pyx_t_1) {
 
 
-      /* "rankfm/_rankfm.pyx":74
+      /* "rankfm/_rankfm.pyx":76
  *         md = lo + ((hi - lo) >> 1)
  *         if items[md] == item:
  *             return 1             # <<<<<<<<<<<<<<
@@ -18713,7 +18723,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
       }
       goto __pyx_L0;
 
-      /* "rankfm/_rankfm.pyx":73
+      /* "rankfm/_rankfm.pyx":75
  *     while lo <= hi:
  *         md = lo + ((hi - lo) >> 1)
  *         if items[md] == item:             # <<<<<<<<<<<<<<
@@ -18722,7 +18732,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
 */
     }
 
-    /* "rankfm/_rankfm.pyx":75
+    /* "rankfm/_rankfm.pyx":77
  *         if items[md] == item:
  *             return 1
  *         elif items[md] < item:             # <<<<<<<<<<<<<<
@@ -18734,7 +18744,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
     if (__pyx_t_1) {
 
 
-      /* "rankfm/_rankfm.pyx":76
+      /* "rankfm/_rankfm.pyx":78
  *             return 1
  *         elif items[md] < item:
  *             lo = md + 1             # <<<<<<<<<<<<<<
@@ -18743,7 +18753,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
 */
       __pyx_v_lo = (__pyx_v_md + 1);
 
-      /* "rankfm/_rankfm.pyx":75
+      /* "rankfm/_rankfm.pyx":77
  *         if items[md] == item:
  *             return 1
  *         elif items[md] < item:             # <<<<<<<<<<<<<<
@@ -18753,7 +18763,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
       goto __pyx_L5;
     }
 
-    /* "rankfm/_rankfm.pyx":78
+    /* "rankfm/_rankfm.pyx":80
  *             lo = md + 1
  *         else:
  *             hi = md - 1             # <<<<<<<<<<<<<<
@@ -18766,7 +18776,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
     __pyx_L5:;
   }
 
-  /* "rankfm/_rankfm.pyx":79
+  /* "rankfm/_rankfm.pyx":81
  *         else:
  *             hi = md - 1
  *     return 0             # <<<<<<<<<<<<<<
@@ -18779,7 +18789,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
   }
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":64
+  /* "rankfm/_rankfm.pyx":66
  * 
  * 
  * cdef inline int bsearch(int32_t item, const int32_t *items, int64_t n) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -18795,7 +18805,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_bsearch(int32_t __pyx_v_item, 
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":82
+/* "rankfm/_rankfm.pyx":84
  * 
  * 
  * cdef inline int item_observed(int32_t item, const int32_t *items, int64_t n) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -18807,7 +18817,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_item_observed(int32_t __pyx_v_
   int __pyx_r;
   int __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":85
+  /* "rankfm/_rankfm.pyx":87
  *     """check if item is in sorted array using linear search for small n and binary search otherwise"""
  * 
  *     if n <= 16:             # <<<<<<<<<<<<<<
@@ -18819,7 +18829,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_item_observed(int32_t __pyx_v_
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":86
+    /* "rankfm/_rankfm.pyx":88
  * 
  *     if n <= 16:
  *         return lsearch(item, items, n)             # <<<<<<<<<<<<<<
@@ -18832,7 +18842,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_item_observed(int32_t __pyx_v_
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":85
+    /* "rankfm/_rankfm.pyx":87
  *     """check if item is in sorted array using linear search for small n and binary search otherwise"""
  * 
  *     if n <= 16:             # <<<<<<<<<<<<<<
@@ -18841,7 +18851,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_item_observed(int32_t __pyx_v_
 */
   }
 
-  /* "rankfm/_rankfm.pyx":87
+  /* "rankfm/_rankfm.pyx":89
  *     if n <= 16:
  *         return lsearch(item, items, n)
  *     return bsearch(item, items, n)             # <<<<<<<<<<<<<<
@@ -18854,7 +18864,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_item_observed(int32_t __pyx_v_
   }
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":82
+  /* "rankfm/_rankfm.pyx":84
  * 
  * 
  * cdef inline int item_observed(int32_t item, const int32_t *items, int64_t n) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -18867,7 +18877,7 @@ static CYTHON_INLINE int __pyx_f_6rankfm_7_rankfm_item_observed(int32_t __pyx_v_
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":90
+/* "rankfm/_rankfm.pyx":92
  * 
  * 
  * cdef inline float safe_sigmoid_neg(float x) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -18879,7 +18889,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(float __pyx
   float __pyx_r;
   int __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":93
+  /* "rankfm/_rankfm.pyx":95
  *     """numerically stable 1 / (1 + exp(x))"""
  * 
  *     if x > 20.0:             # <<<<<<<<<<<<<<
@@ -18891,7 +18901,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(float __pyx
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":94
+    /* "rankfm/_rankfm.pyx":96
  * 
  *     if x > 20.0:
  *         return exp(-x)             # <<<<<<<<<<<<<<
@@ -18904,7 +18914,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(float __pyx
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":93
+    /* "rankfm/_rankfm.pyx":95
  *     """numerically stable 1 / (1 + exp(x))"""
  * 
  *     if x > 20.0:             # <<<<<<<<<<<<<<
@@ -18913,7 +18923,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(float __pyx
 */
   }
 
-  /* "rankfm/_rankfm.pyx":95
+  /* "rankfm/_rankfm.pyx":97
  *     if x > 20.0:
  *         return exp(-x)
  *     elif x < -20.0:             # <<<<<<<<<<<<<<
@@ -18925,7 +18935,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(float __pyx
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":96
+    /* "rankfm/_rankfm.pyx":98
  *         return exp(-x)
  *     elif x < -20.0:
  *         return 1.0             # <<<<<<<<<<<<<<
@@ -18938,7 +18948,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(float __pyx
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":95
+    /* "rankfm/_rankfm.pyx":97
  *     if x > 20.0:
  *         return exp(-x)
  *     elif x < -20.0:             # <<<<<<<<<<<<<<
@@ -18947,7 +18957,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(float __pyx
 */
   }
 
-  /* "rankfm/_rankfm.pyx":97
+  /* "rankfm/_rankfm.pyx":99
  *     elif x < -20.0:
  *         return 1.0
  *     return 1.0 / (exp(x) + 1.0)             # <<<<<<<<<<<<<<
@@ -18960,7 +18970,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(float __pyx
   }
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":90
+  /* "rankfm/_rankfm.pyx":92
  * 
  * 
  * cdef inline float safe_sigmoid_neg(float x) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -18973,7 +18983,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(float __pyx
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":100
+/* "rankfm/_rankfm.pyx":102
  * 
  * 
  * cdef inline float safe_log_sigmoid(float x) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -18985,7 +18995,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(float __pyx
   float __pyx_r;
   int __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":103
+  /* "rankfm/_rankfm.pyx":105
  *     """numerically stable log(1 / (1 + exp(-x)))"""
  * 
  *     if x > 20.0:             # <<<<<<<<<<<<<<
@@ -18997,7 +19007,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(float __pyx
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":104
+    /* "rankfm/_rankfm.pyx":106
  * 
  *     if x > 20.0:
  *         return -exp(-x)             # <<<<<<<<<<<<<<
@@ -19010,7 +19020,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(float __pyx
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":103
+    /* "rankfm/_rankfm.pyx":105
  *     """numerically stable log(1 / (1 + exp(-x)))"""
  * 
  *     if x > 20.0:             # <<<<<<<<<<<<<<
@@ -19019,7 +19029,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(float __pyx
 */
   }
 
-  /* "rankfm/_rankfm.pyx":105
+  /* "rankfm/_rankfm.pyx":107
  *     if x > 20.0:
  *         return -exp(-x)
  *     elif x < -20.0:             # <<<<<<<<<<<<<<
@@ -19031,7 +19041,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(float __pyx
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":106
+    /* "rankfm/_rankfm.pyx":108
  *         return -exp(-x)
  *     elif x < -20.0:
  *         return x             # <<<<<<<<<<<<<<
@@ -19044,7 +19054,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(float __pyx
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":105
+    /* "rankfm/_rankfm.pyx":107
  *     if x > 20.0:
  *         return -exp(-x)
  *     elif x < -20.0:             # <<<<<<<<<<<<<<
@@ -19053,7 +19063,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(float __pyx
 */
   }
 
-  /* "rankfm/_rankfm.pyx":107
+  /* "rankfm/_rankfm.pyx":109
  *     elif x < -20.0:
  *         return x
  *     return -log(1.0 + exp(-x))             # <<<<<<<<<<<<<<
@@ -19066,7 +19076,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(float __pyx
   }
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":100
+  /* "rankfm/_rankfm.pyx":102
  * 
  * 
  * cdef inline float safe_log_sigmoid(float x) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19079,7 +19089,7 @@ static CYTHON_INLINE float __pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(float __pyx
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":110
+/* "rankfm/_rankfm.pyx":112
  * 
  * 
  * cdef inline void compute_user_embedding_csr(             # <<<<<<<<<<<<<<
@@ -19097,7 +19107,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
   int64_t __pyx_t_3;
   int64_t __pyx_t_4;
 
-  /* "rankfm/_rankfm.pyx":127
+  /* "rankfm/_rankfm.pyx":129
  *     cdef int32_t p
  *     cdef float val
  *     cdef const float *v_u_row = &v_u_ptr[<int64_t>u * <int64_t>F]             # <<<<<<<<<<<<<<
@@ -19106,7 +19116,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
 */
   __pyx_v_v_u_row = (&(__pyx_v_v_u_ptr[(((int64_t)__pyx_v_u) * ((int64_t)__pyx_v_F))]));
 
-  /* "rankfm/_rankfm.pyx":129
+  /* "rankfm/_rankfm.pyx":131
  *     cdef const float *v_u_row = &v_u_ptr[<int64_t>u * <int64_t>F]
  * 
  *     if use_v_u:             # <<<<<<<<<<<<<<
@@ -19118,7 +19128,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":130
+    /* "rankfm/_rankfm.pyx":132
  * 
  *     if use_v_u:
  *         rfm_vec_copy(F, v_u_row, out_u_emb)             # <<<<<<<<<<<<<<
@@ -19127,7 +19137,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
 */
     rfm_vec_copy(__pyx_v_F, __pyx_v_v_u_row, __pyx_v_out_u_emb);
 
-    /* "rankfm/_rankfm.pyx":129
+    /* "rankfm/_rankfm.pyx":131
  *     cdef const float *v_u_row = &v_u_ptr[<int64_t>u * <int64_t>F]
  * 
  *     if use_v_u:             # <<<<<<<<<<<<<<
@@ -19137,7 +19147,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
     goto __pyx_L3;
   }
 
-  /* "rankfm/_rankfm.pyx":132
+  /* "rankfm/_rankfm.pyx":134
  *         rfm_vec_copy(F, v_u_row, out_u_emb)
  *     else:
  *         rfm_vec_zero(F, out_u_emb)             # <<<<<<<<<<<<<<
@@ -19149,7 +19159,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
   }
   __pyx_L3:;
 
-  /* "rankfm/_rankfm.pyx":134
+  /* "rankfm/_rankfm.pyx":136
  *         rfm_vec_zero(F, out_u_emb)
  * 
  *     if u_has_uf:             # <<<<<<<<<<<<<<
@@ -19161,7 +19171,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":135
+    /* "rankfm/_rankfm.pyx":137
  * 
  *     if u_has_uf:
  *         for idx in range(uf_indptr[u], uf_indptr[u + 1]):             # <<<<<<<<<<<<<<
@@ -19175,7 +19185,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
     for (__pyx_t_4 = (__pyx_v_uf_indptr[__pyx_v_u]); __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_idx = __pyx_t_4;
 
-      /* "rankfm/_rankfm.pyx":136
+      /* "rankfm/_rankfm.pyx":138
  *     if u_has_uf:
  *         for idx in range(uf_indptr[u], uf_indptr[u + 1]):
  *             p = uf_indices[idx]             # <<<<<<<<<<<<<<
@@ -19184,7 +19194,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
 */
       __pyx_v_p = (__pyx_v_uf_indices[__pyx_v_idx]);
 
-      /* "rankfm/_rankfm.pyx":137
+      /* "rankfm/_rankfm.pyx":139
  *         for idx in range(uf_indptr[u], uf_indptr[u + 1]):
  *             p = uf_indices[idx]
  *             val = uf_data[idx]             # <<<<<<<<<<<<<<
@@ -19193,7 +19203,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
 */
       __pyx_v_val = (__pyx_v_uf_data[__pyx_v_idx]);
 
-      /* "rankfm/_rankfm.pyx":138
+      /* "rankfm/_rankfm.pyx":140
  *             p = uf_indices[idx]
  *             val = uf_data[idx]
  *             rfm_vec_axpy(F, val, &v_uf_ptr[<int64_t>p * <int64_t>F], out_u_emb)             # <<<<<<<<<<<<<<
@@ -19204,7 +19214,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
     }
 
 
-    /* "rankfm/_rankfm.pyx":134
+    /* "rankfm/_rankfm.pyx":136
  *         rfm_vec_zero(F, out_u_emb)
  * 
  *     if u_has_uf:             # <<<<<<<<<<<<<<
@@ -19213,7 +19223,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
 */
   }
 
-  /* "rankfm/_rankfm.pyx":110
+  /* "rankfm/_rankfm.pyx":112
  * 
  * 
  * cdef inline void compute_user_embedding_csr(             # <<<<<<<<<<<<<<
@@ -19228,7 +19238,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(in
 
 }
 
-/* "rankfm/_rankfm.pyx":141
+/* "rankfm/_rankfm.pyx":143
  * 
  * 
  * cdef inline void heap_sift_down(float *hs, int32_t *hi, int size, int pos) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19245,7 +19255,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
   int __pyx_t_2;
 
 
-  /* "rankfm/_rankfm.pyx":145
+  /* "rankfm/_rankfm.pyx":147
  * 
  *     cdef int child, right
  *     cdef float s_val = hs[pos]             # <<<<<<<<<<<<<<
@@ -19254,7 +19264,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
   __pyx_v_s_val = (__pyx_v_hs[__pyx_v_pos]);
 
-  /* "rankfm/_rankfm.pyx":146
+  /* "rankfm/_rankfm.pyx":148
  *     cdef int child, right
  *     cdef float s_val = hs[pos]
  *     cdef int32_t i_val = hi[pos]             # <<<<<<<<<<<<<<
@@ -19263,7 +19273,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
   __pyx_v_i_val = (__pyx_v_hi[__pyx_v_pos]);
 
-  /* "rankfm/_rankfm.pyx":148
+  /* "rankfm/_rankfm.pyx":150
  *     cdef int32_t i_val = hi[pos]
  * 
  *     while True:             # <<<<<<<<<<<<<<
@@ -19272,7 +19282,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
   while (1) {
 
-    /* "rankfm/_rankfm.pyx":149
+    /* "rankfm/_rankfm.pyx":151
  * 
  *     while True:
  *         child = (pos << 1) + 1             # <<<<<<<<<<<<<<
@@ -19281,7 +19291,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
     __pyx_v_child = ((__pyx_v_pos << 1) + 1);
 
-    /* "rankfm/_rankfm.pyx":150
+    /* "rankfm/_rankfm.pyx":152
  *     while True:
  *         child = (pos << 1) + 1
  *         if child >= size:             # <<<<<<<<<<<<<<
@@ -19293,7 +19303,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
     if (__pyx_t_1) {
 
 
-      /* "rankfm/_rankfm.pyx":151
+      /* "rankfm/_rankfm.pyx":153
  *         child = (pos << 1) + 1
  *         if child >= size:
  *             break             # <<<<<<<<<<<<<<
@@ -19302,7 +19312,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
       goto __pyx_L4_break;
 
-      /* "rankfm/_rankfm.pyx":150
+      /* "rankfm/_rankfm.pyx":152
  *     while True:
  *         child = (pos << 1) + 1
  *         if child >= size:             # <<<<<<<<<<<<<<
@@ -19311,7 +19321,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
     }
 
-    /* "rankfm/_rankfm.pyx":152
+    /* "rankfm/_rankfm.pyx":154
  *         if child >= size:
  *             break
  *         right = child + 1             # <<<<<<<<<<<<<<
@@ -19320,7 +19330,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
     __pyx_v_right = (__pyx_v_child + 1);
 
-    /* "rankfm/_rankfm.pyx":153
+    /* "rankfm/_rankfm.pyx":155
  *             break
  *         right = child + 1
  *         if right < size and hs[right] < hs[child]:             # <<<<<<<<<<<<<<
@@ -19346,7 +19356,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
     if (__pyx_t_1) {
 
 
-      /* "rankfm/_rankfm.pyx":154
+      /* "rankfm/_rankfm.pyx":156
  *         right = child + 1
  *         if right < size and hs[right] < hs[child]:
  *             child = right             # <<<<<<<<<<<<<<
@@ -19355,7 +19365,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
       __pyx_v_child = __pyx_v_right;
 
-      /* "rankfm/_rankfm.pyx":153
+      /* "rankfm/_rankfm.pyx":155
  *             break
  *         right = child + 1
  *         if right < size and hs[right] < hs[child]:             # <<<<<<<<<<<<<<
@@ -19364,7 +19374,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
     }
 
-    /* "rankfm/_rankfm.pyx":155
+    /* "rankfm/_rankfm.pyx":157
  *         if right < size and hs[right] < hs[child]:
  *             child = right
  *         if s_val <= hs[child]:             # <<<<<<<<<<<<<<
@@ -19376,7 +19386,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
     if (__pyx_t_1) {
 
 
-      /* "rankfm/_rankfm.pyx":156
+      /* "rankfm/_rankfm.pyx":158
  *             child = right
  *         if s_val <= hs[child]:
  *             break             # <<<<<<<<<<<<<<
@@ -19385,7 +19395,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
       goto __pyx_L4_break;
 
-      /* "rankfm/_rankfm.pyx":155
+      /* "rankfm/_rankfm.pyx":157
  *         if right < size and hs[right] < hs[child]:
  *             child = right
  *         if s_val <= hs[child]:             # <<<<<<<<<<<<<<
@@ -19394,7 +19404,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
     }
 
-    /* "rankfm/_rankfm.pyx":157
+    /* "rankfm/_rankfm.pyx":159
  *         if s_val <= hs[child]:
  *             break
  *         hs[pos] = hs[child]             # <<<<<<<<<<<<<<
@@ -19403,7 +19413,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
     (__pyx_v_hs[__pyx_v_pos]) = (__pyx_v_hs[__pyx_v_child]);
 
-    /* "rankfm/_rankfm.pyx":158
+    /* "rankfm/_rankfm.pyx":160
  *             break
  *         hs[pos] = hs[child]
  *         hi[pos] = hi[child]             # <<<<<<<<<<<<<<
@@ -19412,7 +19422,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
     (__pyx_v_hi[__pyx_v_pos]) = (__pyx_v_hi[__pyx_v_child]);
 
-    /* "rankfm/_rankfm.pyx":159
+    /* "rankfm/_rankfm.pyx":161
  *         hs[pos] = hs[child]
  *         hi[pos] = hi[child]
  *         pos = child             # <<<<<<<<<<<<<<
@@ -19423,7 +19433,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
   }
   __pyx_L4_break:;
 
-  /* "rankfm/_rankfm.pyx":161
+  /* "rankfm/_rankfm.pyx":163
  *         pos = child
  * 
  *     hs[pos] = s_val             # <<<<<<<<<<<<<<
@@ -19432,7 +19442,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
   (__pyx_v_hs[__pyx_v_pos]) = __pyx_v_s_val;
 
-  /* "rankfm/_rankfm.pyx":162
+  /* "rankfm/_rankfm.pyx":164
  * 
  *     hs[pos] = s_val
  *     hi[pos] = i_val             # <<<<<<<<<<<<<<
@@ -19441,7 +19451,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 */
   (__pyx_v_hi[__pyx_v_pos]) = __pyx_v_i_val;
 
-  /* "rankfm/_rankfm.pyx":141
+  /* "rankfm/_rankfm.pyx":143
  * 
  * 
  * cdef inline void heap_sift_down(float *hs, int32_t *hi, int size, int pos) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19457,7 +19467,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_down(float *__pyx_v
 
 }
 
-/* "rankfm/_rankfm.pyx":165
+/* "rankfm/_rankfm.pyx":167
  * 
  * 
  * cdef inline void heap_sift_up(float *hs, int32_t *hi, int pos) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19472,7 +19482,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
   int __pyx_t_1;
 
 
-  /* "rankfm/_rankfm.pyx":169
+  /* "rankfm/_rankfm.pyx":171
  * 
  *     cdef int parent
  *     cdef float s_val = hs[pos]             # <<<<<<<<<<<<<<
@@ -19481,7 +19491,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 */
   __pyx_v_s_val = (__pyx_v_hs[__pyx_v_pos]);
 
-  /* "rankfm/_rankfm.pyx":170
+  /* "rankfm/_rankfm.pyx":172
  *     cdef int parent
  *     cdef float s_val = hs[pos]
  *     cdef int32_t i_val = hi[pos]             # <<<<<<<<<<<<<<
@@ -19490,7 +19500,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 */
   __pyx_v_i_val = (__pyx_v_hi[__pyx_v_pos]);
 
-  /* "rankfm/_rankfm.pyx":172
+  /* "rankfm/_rankfm.pyx":174
  *     cdef int32_t i_val = hi[pos]
  * 
  *     while pos > 0:             # <<<<<<<<<<<<<<
@@ -19503,7 +19513,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 
     if (!__pyx_t_1) break;
 
-    /* "rankfm/_rankfm.pyx":173
+    /* "rankfm/_rankfm.pyx":175
  * 
  *     while pos > 0:
  *         parent = (pos - 1) >> 1             # <<<<<<<<<<<<<<
@@ -19512,7 +19522,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 */
     __pyx_v_parent = ((__pyx_v_pos - 1) >> 1);
 
-    /* "rankfm/_rankfm.pyx":174
+    /* "rankfm/_rankfm.pyx":176
  *     while pos > 0:
  *         parent = (pos - 1) >> 1
  *         if hs[parent] <= s_val:             # <<<<<<<<<<<<<<
@@ -19524,7 +19534,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
     if (__pyx_t_1) {
 
 
-      /* "rankfm/_rankfm.pyx":175
+      /* "rankfm/_rankfm.pyx":177
  *         parent = (pos - 1) >> 1
  *         if hs[parent] <= s_val:
  *             break             # <<<<<<<<<<<<<<
@@ -19533,7 +19543,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 */
       goto __pyx_L4_break;
 
-      /* "rankfm/_rankfm.pyx":174
+      /* "rankfm/_rankfm.pyx":176
  *     while pos > 0:
  *         parent = (pos - 1) >> 1
  *         if hs[parent] <= s_val:             # <<<<<<<<<<<<<<
@@ -19542,7 +19552,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 */
     }
 
-    /* "rankfm/_rankfm.pyx":176
+    /* "rankfm/_rankfm.pyx":178
  *         if hs[parent] <= s_val:
  *             break
  *         hs[pos] = hs[parent]             # <<<<<<<<<<<<<<
@@ -19551,7 +19561,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 */
     (__pyx_v_hs[__pyx_v_pos]) = (__pyx_v_hs[__pyx_v_parent]);
 
-    /* "rankfm/_rankfm.pyx":177
+    /* "rankfm/_rankfm.pyx":179
  *             break
  *         hs[pos] = hs[parent]
  *         hi[pos] = hi[parent]             # <<<<<<<<<<<<<<
@@ -19560,7 +19570,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 */
     (__pyx_v_hi[__pyx_v_pos]) = (__pyx_v_hi[__pyx_v_parent]);
 
-    /* "rankfm/_rankfm.pyx":178
+    /* "rankfm/_rankfm.pyx":180
  *         hs[pos] = hs[parent]
  *         hi[pos] = hi[parent]
  *         pos = parent             # <<<<<<<<<<<<<<
@@ -19571,7 +19581,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
   }
   __pyx_L4_break:;
 
-  /* "rankfm/_rankfm.pyx":180
+  /* "rankfm/_rankfm.pyx":182
  *         pos = parent
  * 
  *     hs[pos] = s_val             # <<<<<<<<<<<<<<
@@ -19580,7 +19590,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 */
   (__pyx_v_hs[__pyx_v_pos]) = __pyx_v_s_val;
 
-  /* "rankfm/_rankfm.pyx":181
+  /* "rankfm/_rankfm.pyx":183
  * 
  *     hs[pos] = s_val
  *     hi[pos] = i_val             # <<<<<<<<<<<<<<
@@ -19589,7 +19599,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 */
   (__pyx_v_hi[__pyx_v_pos]) = __pyx_v_i_val;
 
-  /* "rankfm/_rankfm.pyx":165
+  /* "rankfm/_rankfm.pyx":167
  * 
  * 
  * cdef inline void heap_sift_up(float *hs, int32_t *hi, int pos) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19604,7 +19614,7 @@ static CYTHON_INLINE void __pyx_f_6rankfm_7_rankfm_heap_sift_up(float *__pyx_v_h
 
 }
 
-/* "rankfm/_rankfm.pyx":197
+/* "rankfm/_rankfm.pyx":199
  * 
  * 
  * cdef void _dense_count_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19628,7 +19638,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
   int64_t __pyx_t_6;
   int __pyx_t_7;
 
-  /* "rankfm/_rankfm.pyx":198
+  /* "rankfm/_rankfm.pyx":200
  * 
  * cdef void _dense_count_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef DenseCsrCtx *ctx = <DenseCsrCtx *>raw_ctx             # <<<<<<<<<<<<<<
@@ -19637,7 +19647,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
 */
   __pyx_v_ctx = ((struct __pyx_t_6rankfm_7_rankfm_DenseCsrCtx *)__pyx_v_raw_ctx);
 
-  /* "rankfm/_rankfm.pyx":199
+  /* "rankfm/_rankfm.pyx":201
  * cdef void _dense_count_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef DenseCsrCtx *ctx = <DenseCsrCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.n_rows * tid) // n_threads             # <<<<<<<<<<<<<<
@@ -19646,7 +19656,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
 */
   __pyx_v_r_start = ((__pyx_v_ctx->n_rows * __pyx_v_tid) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":200
+  /* "rankfm/_rankfm.pyx":202
  *     cdef DenseCsrCtx *ctx = <DenseCsrCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.n_rows * tid) // n_threads
  *     cdef int64_t r_end = (ctx.n_rows * (tid + 1)) // n_threads             # <<<<<<<<<<<<<<
@@ -19655,7 +19665,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
 */
   __pyx_v_r_end = ((__pyx_v_ctx->n_rows * (__pyx_v_tid + 1)) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":204
+  /* "rankfm/_rankfm.pyx":206
  *     cdef const float *row_ptr
  * 
  *     for r in range(r_start, r_end):             # <<<<<<<<<<<<<<
@@ -19669,7 +19679,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
   for (__pyx_t_3 = __pyx_v_r_start; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_r = __pyx_t_3;
 
-    /* "rankfm/_rankfm.pyx":205
+    /* "rankfm/_rankfm.pyx":207
  * 
  *     for r in range(r_start, r_end):
  *         row_ptr = &ctx.mat_ptr[r * ctx.n_cols]             # <<<<<<<<<<<<<<
@@ -19678,7 +19688,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
 */
     __pyx_v_row_ptr = (&(__pyx_v_ctx->mat_ptr[(__pyx_v_r * __pyx_v_ctx->n_cols)]));
 
-    /* "rankfm/_rankfm.pyx":206
+    /* "rankfm/_rankfm.pyx":208
  *     for r in range(r_start, r_end):
  *         row_ptr = &ctx.mat_ptr[r * ctx.n_cols]
  *         cnt = 0             # <<<<<<<<<<<<<<
@@ -19687,7 +19697,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
 */
     __pyx_v_cnt = 0;
 
-    /* "rankfm/_rankfm.pyx":207
+    /* "rankfm/_rankfm.pyx":209
  *         row_ptr = &ctx.mat_ptr[r * ctx.n_cols]
  *         cnt = 0
  *         for c in range(ctx.n_cols):             # <<<<<<<<<<<<<<
@@ -19701,7 +19711,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_c = __pyx_t_6;
 
-      /* "rankfm/_rankfm.pyx":208
+      /* "rankfm/_rankfm.pyx":210
  *         cnt = 0
  *         for c in range(ctx.n_cols):
  *             if row_ptr[c] != 0.0:             # <<<<<<<<<<<<<<
@@ -19713,7 +19723,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
       if (__pyx_t_7) {
 
 
-        /* "rankfm/_rankfm.pyx":209
+        /* "rankfm/_rankfm.pyx":211
  *         for c in range(ctx.n_cols):
  *             if row_ptr[c] != 0.0:
  *                 cnt += 1             # <<<<<<<<<<<<<<
@@ -19722,7 +19732,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
 */
         __pyx_v_cnt = (__pyx_v_cnt + 1);
 
-        /* "rankfm/_rankfm.pyx":208
+        /* "rankfm/_rankfm.pyx":210
  *         cnt = 0
  *         for c in range(ctx.n_cols):
  *             if row_ptr[c] != 0.0:             # <<<<<<<<<<<<<<
@@ -19733,7 +19743,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
     }
 
 
-    /* "rankfm/_rankfm.pyx":210
+    /* "rankfm/_rankfm.pyx":212
  *             if row_ptr[c] != 0.0:
  *                 cnt += 1
  *         ctx.indptr_ptr[r + 1] = cnt             # <<<<<<<<<<<<<<
@@ -19744,7 +19754,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
   }
 
 
-  /* "rankfm/_rankfm.pyx":197
+  /* "rankfm/_rankfm.pyx":199
  * 
  * 
  * cdef void _dense_count_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19762,7 +19772,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_count_worker(int __pyx_v_tid, int __
 
 }
 
-/* "rankfm/_rankfm.pyx":213
+/* "rankfm/_rankfm.pyx":215
  * 
  * 
  * cdef void _dense_fill_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19787,7 +19797,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
   int64_t __pyx_t_6;
   int __pyx_t_7;
 
-  /* "rankfm/_rankfm.pyx":214
+  /* "rankfm/_rankfm.pyx":216
  * 
  * cdef void _dense_fill_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef DenseCsrCtx *ctx = <DenseCsrCtx *>raw_ctx             # <<<<<<<<<<<<<<
@@ -19796,7 +19806,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 */
   __pyx_v_ctx = ((struct __pyx_t_6rankfm_7_rankfm_DenseCsrCtx *)__pyx_v_raw_ctx);
 
-  /* "rankfm/_rankfm.pyx":215
+  /* "rankfm/_rankfm.pyx":217
  * cdef void _dense_fill_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef DenseCsrCtx *ctx = <DenseCsrCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.n_rows * tid) // n_threads             # <<<<<<<<<<<<<<
@@ -19805,7 +19815,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 */
   __pyx_v_r_start = ((__pyx_v_ctx->n_rows * __pyx_v_tid) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":216
+  /* "rankfm/_rankfm.pyx":218
  *     cdef DenseCsrCtx *ctx = <DenseCsrCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.n_rows * tid) // n_threads
  *     cdef int64_t r_end = (ctx.n_rows * (tid + 1)) // n_threads             # <<<<<<<<<<<<<<
@@ -19814,7 +19824,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 */
   __pyx_v_r_end = ((__pyx_v_ctx->n_rows * (__pyx_v_tid + 1)) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":221
+  /* "rankfm/_rankfm.pyx":223
  *     cdef const float *row_ptr
  * 
  *     for r in range(r_start, r_end):             # <<<<<<<<<<<<<<
@@ -19828,7 +19838,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
   for (__pyx_t_3 = __pyx_v_r_start; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_r = __pyx_t_3;
 
-    /* "rankfm/_rankfm.pyx":222
+    /* "rankfm/_rankfm.pyx":224
  * 
  *     for r in range(r_start, r_end):
  *         row_ptr = &ctx.mat_ptr[r * ctx.n_cols]             # <<<<<<<<<<<<<<
@@ -19837,7 +19847,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 */
     __pyx_v_row_ptr = (&(__pyx_v_ctx->mat_ptr[(__pyx_v_r * __pyx_v_ctx->n_cols)]));
 
-    /* "rankfm/_rankfm.pyx":223
+    /* "rankfm/_rankfm.pyx":225
  *     for r in range(r_start, r_end):
  *         row_ptr = &ctx.mat_ptr[r * ctx.n_cols]
  *         pos = ctx.indptr_ptr[r]             # <<<<<<<<<<<<<<
@@ -19846,7 +19856,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 */
     __pyx_v_pos = (__pyx_v_ctx->indptr_ptr[__pyx_v_r]);
 
-    /* "rankfm/_rankfm.pyx":224
+    /* "rankfm/_rankfm.pyx":226
  *         row_ptr = &ctx.mat_ptr[r * ctx.n_cols]
  *         pos = ctx.indptr_ptr[r]
  *         for c in range(ctx.n_cols):             # <<<<<<<<<<<<<<
@@ -19860,7 +19870,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_c = __pyx_t_6;
 
-      /* "rankfm/_rankfm.pyx":225
+      /* "rankfm/_rankfm.pyx":227
  *         pos = ctx.indptr_ptr[r]
  *         for c in range(ctx.n_cols):
  *             val = row_ptr[c]             # <<<<<<<<<<<<<<
@@ -19869,7 +19879,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 */
       __pyx_v_val = (__pyx_v_row_ptr[__pyx_v_c]);
 
-      /* "rankfm/_rankfm.pyx":226
+      /* "rankfm/_rankfm.pyx":228
  *         for c in range(ctx.n_cols):
  *             val = row_ptr[c]
  *             if val != 0.0:             # <<<<<<<<<<<<<<
@@ -19881,7 +19891,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
       if (__pyx_t_7) {
 
 
-        /* "rankfm/_rankfm.pyx":227
+        /* "rankfm/_rankfm.pyx":229
  *             val = row_ptr[c]
  *             if val != 0.0:
  *                 ctx.indices_ptr[pos] = <int32_t>c             # <<<<<<<<<<<<<<
@@ -19890,7 +19900,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 */
         (__pyx_v_ctx->indices_ptr[__pyx_v_pos]) = ((int32_t)__pyx_v_c);
 
-        /* "rankfm/_rankfm.pyx":228
+        /* "rankfm/_rankfm.pyx":230
  *             if val != 0.0:
  *                 ctx.indices_ptr[pos] = <int32_t>c
  *                 ctx.data_ptr[pos] = val             # <<<<<<<<<<<<<<
@@ -19899,7 +19909,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 */
         (__pyx_v_ctx->data_ptr[__pyx_v_pos]) = __pyx_v_val;
 
-        /* "rankfm/_rankfm.pyx":229
+        /* "rankfm/_rankfm.pyx":231
  *                 ctx.indices_ptr[pos] = <int32_t>c
  *                 ctx.data_ptr[pos] = val
  *                 pos += 1             # <<<<<<<<<<<<<<
@@ -19908,7 +19918,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 */
         __pyx_v_pos = (__pyx_v_pos + 1);
 
-        /* "rankfm/_rankfm.pyx":226
+        /* "rankfm/_rankfm.pyx":228
  *         for c in range(ctx.n_cols):
  *             val = row_ptr[c]
  *             if val != 0.0:             # <<<<<<<<<<<<<<
@@ -19921,7 +19931,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
   }
 
 
-  /* "rankfm/_rankfm.pyx":213
+  /* "rankfm/_rankfm.pyx":215
  * 
  * 
  * cdef void _dense_fill_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19940,7 +19950,7 @@ static void __pyx_f_6rankfm_7_rankfm__dense_fill_worker(int __pyx_v_tid, int __p
 
 }
 
-/* "rankfm/_rankfm.pyx":243
+/* "rankfm/_rankfm.pyx":245
  * 
  * 
  * cdef void _csr_spmm_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -19967,7 +19977,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
   int64_t __pyx_t_7;
   int64_t __pyx_t_8;
 
-  /* "rankfm/_rankfm.pyx":244
+  /* "rankfm/_rankfm.pyx":246
  * 
  * cdef void _csr_spmm_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef CsrSpMMCtx *ctx = <CsrSpMMCtx *>raw_ctx             # <<<<<<<<<<<<<<
@@ -19976,7 +19986,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
 */
   __pyx_v_ctx = ((struct __pyx_t_6rankfm_7_rankfm_CsrSpMMCtx *)__pyx_v_raw_ctx);
 
-  /* "rankfm/_rankfm.pyx":245
+  /* "rankfm/_rankfm.pyx":247
  * cdef void _csr_spmm_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef CsrSpMMCtx *ctx = <CsrSpMMCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.n_rows * tid) // n_threads             # <<<<<<<<<<<<<<
@@ -19985,7 +19995,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
 */
   __pyx_v_r_start = ((__pyx_v_ctx->n_rows * __pyx_v_tid) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":246
+  /* "rankfm/_rankfm.pyx":248
  *     cdef CsrSpMMCtx *ctx = <CsrSpMMCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.n_rows * tid) // n_threads
  *     cdef int64_t r_end = (ctx.n_rows * (tid + 1)) // n_threads             # <<<<<<<<<<<<<<
@@ -19994,7 +20004,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
 */
   __pyx_v_r_end = ((__pyx_v_ctx->n_rows * (__pyx_v_tid + 1)) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":247
+  /* "rankfm/_rankfm.pyx":249
  *     cdef int64_t r_start = (ctx.n_rows * tid) // n_threads
  *     cdef int64_t r_end = (ctx.n_rows * (tid + 1)) // n_threads
  *     cdef int F = ctx.F             # <<<<<<<<<<<<<<
@@ -20005,7 +20015,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
 
   __pyx_v_F = __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":253
+  /* "rankfm/_rankfm.pyx":255
  *     cdef float *out_row
  * 
  *     for r in range(r_start, r_end):             # <<<<<<<<<<<<<<
@@ -20019,7 +20029,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
   for (__pyx_t_4 = __pyx_v_r_start; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_r = __pyx_t_4;
 
-    /* "rankfm/_rankfm.pyx":254
+    /* "rankfm/_rankfm.pyx":256
  * 
  *     for r in range(r_start, r_end):
  *         out_row = &ctx.out_ptr[r * <int64_t>F]             # <<<<<<<<<<<<<<
@@ -20028,7 +20038,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
 */
     __pyx_v_out_row = (&(__pyx_v_ctx->out_ptr[(__pyx_v_r * ((int64_t)__pyx_v_F))]));
 
-    /* "rankfm/_rankfm.pyx":255
+    /* "rankfm/_rankfm.pyx":257
  *     for r in range(r_start, r_end):
  *         out_row = &ctx.out_ptr[r * <int64_t>F]
  *         if ctx.base_ptr != NULL:             # <<<<<<<<<<<<<<
@@ -20040,7 +20050,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
     if (__pyx_t_5) {
 
 
-      /* "rankfm/_rankfm.pyx":256
+      /* "rankfm/_rankfm.pyx":258
  *         out_row = &ctx.out_ptr[r * <int64_t>F]
  *         if ctx.base_ptr != NULL:
  *             rfm_vec_copy(F, &ctx.base_ptr[r * <int64_t>F], out_row)             # <<<<<<<<<<<<<<
@@ -20049,7 +20059,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
 */
       rfm_vec_copy(__pyx_v_F, (&(__pyx_v_ctx->base_ptr[(__pyx_v_r * ((int64_t)__pyx_v_F))])), __pyx_v_out_row);
 
-      /* "rankfm/_rankfm.pyx":255
+      /* "rankfm/_rankfm.pyx":257
  *     for r in range(r_start, r_end):
  *         out_row = &ctx.out_ptr[r * <int64_t>F]
  *         if ctx.base_ptr != NULL:             # <<<<<<<<<<<<<<
@@ -20059,7 +20069,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
       goto __pyx_L5;
     }
 
-    /* "rankfm/_rankfm.pyx":258
+    /* "rankfm/_rankfm.pyx":260
  *             rfm_vec_copy(F, &ctx.base_ptr[r * <int64_t>F], out_row)
  *         else:
  *             rfm_vec_zero(F, out_row)             # <<<<<<<<<<<<<<
@@ -20071,7 +20081,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
     }
     __pyx_L5:;
 
-    /* "rankfm/_rankfm.pyx":259
+    /* "rankfm/_rankfm.pyx":261
  *         else:
  *             rfm_vec_zero(F, out_row)
  *         for idx in range(ctx.indptr_ptr[r], ctx.indptr_ptr[r + 1]):             # <<<<<<<<<<<<<<
@@ -20085,7 +20095,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
     for (__pyx_t_8 = (__pyx_v_ctx->indptr_ptr[__pyx_v_r]); __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
       __pyx_v_idx = __pyx_t_8;
 
-      /* "rankfm/_rankfm.pyx":260
+      /* "rankfm/_rankfm.pyx":262
  *             rfm_vec_zero(F, out_row)
  *         for idx in range(ctx.indptr_ptr[r], ctx.indptr_ptr[r + 1]):
  *             col = ctx.indices_ptr[idx]             # <<<<<<<<<<<<<<
@@ -20094,7 +20104,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
 */
       __pyx_v_col = (__pyx_v_ctx->indices_ptr[__pyx_v_idx]);
 
-      /* "rankfm/_rankfm.pyx":261
+      /* "rankfm/_rankfm.pyx":263
  *         for idx in range(ctx.indptr_ptr[r], ctx.indptr_ptr[r + 1]):
  *             col = ctx.indices_ptr[idx]
  *             val = ctx.data_ptr[idx]             # <<<<<<<<<<<<<<
@@ -20103,7 +20113,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
 */
       __pyx_v_val = (__pyx_v_ctx->data_ptr[__pyx_v_idx]);
 
-      /* "rankfm/_rankfm.pyx":262
+      /* "rankfm/_rankfm.pyx":264
  *             col = ctx.indices_ptr[idx]
  *             val = ctx.data_ptr[idx]
  *             rfm_vec_axpy(F, val, &ctx.rhs_ptr[<int64_t>col * <int64_t>F], out_row)             # <<<<<<<<<<<<<<
@@ -20116,7 +20126,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
   }
 
 
-  /* "rankfm/_rankfm.pyx":243
+  /* "rankfm/_rankfm.pyx":245
  * 
  * 
  * cdef void _csr_spmm_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -20136,7 +20146,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmm_worker(int __pyx_v_tid, int __pyx
 
 }
 
-/* "rankfm/_rankfm.pyx":275
+/* "rankfm/_rankfm.pyx":277
  * 
  * 
  * cdef void _csr_spmv_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -20160,7 +20170,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
   int64_t __pyx_t_7;
   int64_t __pyx_t_8;
 
-  /* "rankfm/_rankfm.pyx":276
+  /* "rankfm/_rankfm.pyx":278
  * 
  * cdef void _csr_spmv_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef CsrSpMVCtx *ctx = <CsrSpMVCtx *>raw_ctx             # <<<<<<<<<<<<<<
@@ -20169,7 +20179,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
 */
   __pyx_v_ctx = ((struct __pyx_t_6rankfm_7_rankfm_CsrSpMVCtx *)__pyx_v_raw_ctx);
 
-  /* "rankfm/_rankfm.pyx":277
+  /* "rankfm/_rankfm.pyx":279
  * cdef void _csr_spmv_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef CsrSpMVCtx *ctx = <CsrSpMVCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.n_rows * tid) // n_threads             # <<<<<<<<<<<<<<
@@ -20178,7 +20188,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
 */
   __pyx_v_r_start = ((__pyx_v_ctx->n_rows * __pyx_v_tid) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":278
+  /* "rankfm/_rankfm.pyx":280
  *     cdef CsrSpMVCtx *ctx = <CsrSpMVCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.n_rows * tid) // n_threads
  *     cdef int64_t r_end = (ctx.n_rows * (tid + 1)) // n_threads             # <<<<<<<<<<<<<<
@@ -20187,7 +20197,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
 */
   __pyx_v_r_end = ((__pyx_v_ctx->n_rows * (__pyx_v_tid + 1)) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":282
+  /* "rankfm/_rankfm.pyx":284
  *     cdef float acc
  * 
  *     for r in range(r_start, r_end):             # <<<<<<<<<<<<<<
@@ -20201,7 +20211,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
   for (__pyx_t_3 = __pyx_v_r_start; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_r = __pyx_t_3;
 
-    /* "rankfm/_rankfm.pyx":283
+    /* "rankfm/_rankfm.pyx":285
  * 
  *     for r in range(r_start, r_end):
  *         acc = ctx.base_ptr[r] if ctx.base_ptr != NULL else 0.0             # <<<<<<<<<<<<<<
@@ -20220,7 +20230,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
 
     __pyx_v_acc = __pyx_t_4;
 
-    /* "rankfm/_rankfm.pyx":284
+    /* "rankfm/_rankfm.pyx":286
  *     for r in range(r_start, r_end):
  *         acc = ctx.base_ptr[r] if ctx.base_ptr != NULL else 0.0
  *         for idx in range(ctx.indptr_ptr[r], ctx.indptr_ptr[r + 1]):             # <<<<<<<<<<<<<<
@@ -20234,7 +20244,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
     for (__pyx_t_8 = (__pyx_v_ctx->indptr_ptr[__pyx_v_r]); __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
       __pyx_v_idx = __pyx_t_8;
 
-      /* "rankfm/_rankfm.pyx":285
+      /* "rankfm/_rankfm.pyx":287
  *         acc = ctx.base_ptr[r] if ctx.base_ptr != NULL else 0.0
  *         for idx in range(ctx.indptr_ptr[r], ctx.indptr_ptr[r + 1]):
  *             acc += ctx.data_ptr[idx] * ctx.vec_ptr[ctx.indices_ptr[idx]]             # <<<<<<<<<<<<<<
@@ -20245,7 +20255,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
     }
 
 
-    /* "rankfm/_rankfm.pyx":286
+    /* "rankfm/_rankfm.pyx":288
  *         for idx in range(ctx.indptr_ptr[r], ctx.indptr_ptr[r + 1]):
  *             acc += ctx.data_ptr[idx] * ctx.vec_ptr[ctx.indices_ptr[idx]]
  *         ctx.out_ptr[r] = acc             # <<<<<<<<<<<<<<
@@ -20256,7 +20266,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
   }
 
 
-  /* "rankfm/_rankfm.pyx":275
+  /* "rankfm/_rankfm.pyx":277
  * 
  * 
  * cdef void _csr_spmv_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -20273,7 +20283,7 @@ static void __pyx_f_6rankfm_7_rankfm__csr_spmv_worker(int __pyx_v_tid, int __pyx
 
 }
 
-/* "rankfm/_rankfm.pyx":303
+/* "rankfm/_rankfm.pyx":305
  * 
  * 
  * cdef void _refresh_eff_items_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -20300,7 +20310,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
   int64_t __pyx_t_6;
   int64_t __pyx_t_7;
 
-  /* "rankfm/_rankfm.pyx":304
+  /* "rankfm/_rankfm.pyx":306
  * 
  * cdef void _refresh_eff_items_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef RefreshEffItemsCtx *ctx = <RefreshEffItemsCtx *>raw_ctx             # <<<<<<<<<<<<<<
@@ -20309,7 +20319,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 */
   __pyx_v_ctx = ((struct __pyx_t_6rankfm_7_rankfm_RefreshEffItemsCtx *)__pyx_v_raw_ctx);
 
-  /* "rankfm/_rankfm.pyx":305
+  /* "rankfm/_rankfm.pyx":307
  * cdef void _refresh_eff_items_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef RefreshEffItemsCtx *ctx = <RefreshEffItemsCtx *>raw_ctx
  *     cdef int32_t m_start = <int32_t>((<int64_t>ctx.I * tid) // n_threads)             # <<<<<<<<<<<<<<
@@ -20318,7 +20328,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 */
   __pyx_v_m_start = ((int32_t)((((int64_t)__pyx_v_ctx->I) * __pyx_v_tid) / __pyx_v_n_threads));
 
-  /* "rankfm/_rankfm.pyx":306
+  /* "rankfm/_rankfm.pyx":308
  *     cdef RefreshEffItemsCtx *ctx = <RefreshEffItemsCtx *>raw_ctx
  *     cdef int32_t m_start = <int32_t>((<int64_t>ctx.I * tid) // n_threads)
  *     cdef int32_t m_end = <int32_t>((<int64_t>ctx.I * (tid + 1)) // n_threads)             # <<<<<<<<<<<<<<
@@ -20327,7 +20337,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 */
   __pyx_v_m_end = ((int32_t)((((int64_t)__pyx_v_ctx->I) * (__pyx_v_tid + 1)) / __pyx_v_n_threads));
 
-  /* "rankfm/_rankfm.pyx":307
+  /* "rankfm/_rankfm.pyx":309
  *     cdef int32_t m_start = <int32_t>((<int64_t>ctx.I * tid) // n_threads)
  *     cdef int32_t m_end = <int32_t>((<int64_t>ctx.I * (tid + 1)) // n_threads)
  *     cdef int F = ctx.F             # <<<<<<<<<<<<<<
@@ -20338,7 +20348,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 
   __pyx_v_F = __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":313
+  /* "rankfm/_rankfm.pyx":315
  *     cdef float *v_eff_row
  * 
  *     for m in range(m_start, m_end):             # <<<<<<<<<<<<<<
@@ -20352,7 +20362,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
   for (__pyx_t_4 = __pyx_v_m_start; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_m = __pyx_t_4;
 
-    /* "rankfm/_rankfm.pyx":314
+    /* "rankfm/_rankfm.pyx":316
  * 
  *     for m in range(m_start, m_end):
  *         bias = ctx.w_i_ptr[m]             # <<<<<<<<<<<<<<
@@ -20361,7 +20371,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 */
     __pyx_v_bias = (__pyx_v_ctx->w_i_ptr[__pyx_v_m]);
 
-    /* "rankfm/_rankfm.pyx":315
+    /* "rankfm/_rankfm.pyx":317
  *     for m in range(m_start, m_end):
  *         bias = ctx.w_i_ptr[m]
  *         v_eff_row = &ctx.v_eff_ptr[<int64_t>m * <int64_t>F]             # <<<<<<<<<<<<<<
@@ -20370,7 +20380,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 */
     __pyx_v_v_eff_row = (&(__pyx_v_ctx->v_eff_ptr[(((int64_t)__pyx_v_m) * ((int64_t)__pyx_v_F))]));
 
-    /* "rankfm/_rankfm.pyx":316
+    /* "rankfm/_rankfm.pyx":318
  *         bias = ctx.w_i_ptr[m]
  *         v_eff_row = &ctx.v_eff_ptr[<int64_t>m * <int64_t>F]
  *         rfm_vec_copy(F, &ctx.v_i_ptr[<int64_t>m * <int64_t>F], v_eff_row)             # <<<<<<<<<<<<<<
@@ -20379,7 +20389,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 */
     rfm_vec_copy(__pyx_v_F, (&(__pyx_v_ctx->v_i_ptr[(((int64_t)__pyx_v_m) * ((int64_t)__pyx_v_F))])), __pyx_v_v_eff_row);
 
-    /* "rankfm/_rankfm.pyx":317
+    /* "rankfm/_rankfm.pyx":319
  *         v_eff_row = &ctx.v_eff_ptr[<int64_t>m * <int64_t>F]
  *         rfm_vec_copy(F, &ctx.v_i_ptr[<int64_t>m * <int64_t>F], v_eff_row)
  *         for idx in range(ctx.if_indptr_ptr[m], ctx.if_indptr_ptr[m + 1]):             # <<<<<<<<<<<<<<
@@ -20393,7 +20403,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
     for (__pyx_t_7 = (__pyx_v_ctx->if_indptr_ptr[__pyx_v_m]); __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_idx = __pyx_t_7;
 
-      /* "rankfm/_rankfm.pyx":318
+      /* "rankfm/_rankfm.pyx":320
  *         rfm_vec_copy(F, &ctx.v_i_ptr[<int64_t>m * <int64_t>F], v_eff_row)
  *         for idx in range(ctx.if_indptr_ptr[m], ctx.if_indptr_ptr[m + 1]):
  *             q = ctx.if_indices_ptr[idx]             # <<<<<<<<<<<<<<
@@ -20402,7 +20412,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 */
       __pyx_v_q = (__pyx_v_ctx->if_indices_ptr[__pyx_v_idx]);
 
-      /* "rankfm/_rankfm.pyx":319
+      /* "rankfm/_rankfm.pyx":321
  *         for idx in range(ctx.if_indptr_ptr[m], ctx.if_indptr_ptr[m + 1]):
  *             q = ctx.if_indices_ptr[idx]
  *             val = ctx.if_data_ptr[idx]             # <<<<<<<<<<<<<<
@@ -20411,7 +20421,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 */
       __pyx_v_val = (__pyx_v_ctx->if_data_ptr[__pyx_v_idx]);
 
-      /* "rankfm/_rankfm.pyx":320
+      /* "rankfm/_rankfm.pyx":322
  *             q = ctx.if_indices_ptr[idx]
  *             val = ctx.if_data_ptr[idx]
  *             bias += val * ctx.w_if_ptr[q]             # <<<<<<<<<<<<<<
@@ -20420,7 +20430,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 */
       __pyx_v_bias = (__pyx_v_bias + (__pyx_v_val * (__pyx_v_ctx->w_if_ptr[__pyx_v_q])));
 
-      /* "rankfm/_rankfm.pyx":321
+      /* "rankfm/_rankfm.pyx":323
  *             val = ctx.if_data_ptr[idx]
  *             bias += val * ctx.w_if_ptr[q]
  *             rfm_vec_axpy(F, val, &ctx.v_if_ptr[<int64_t>q * <int64_t>F], v_eff_row)             # <<<<<<<<<<<<<<
@@ -20431,7 +20441,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
     }
 
 
-    /* "rankfm/_rankfm.pyx":322
+    /* "rankfm/_rankfm.pyx":324
  *             bias += val * ctx.w_if_ptr[q]
  *             rfm_vec_axpy(F, val, &ctx.v_if_ptr[<int64_t>q * <int64_t>F], v_eff_row)
  *         ctx.b_eff_ptr[m] = bias             # <<<<<<<<<<<<<<
@@ -20442,7 +20452,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
   }
 
 
-  /* "rankfm/_rankfm.pyx":303
+  /* "rankfm/_rankfm.pyx":305
  * 
  * 
  * cdef void _refresh_eff_items_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -20463,7 +20473,7 @@ static void __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker(int __pyx_v_tid, 
 
 }
 
-/* "rankfm/_rankfm.pyx":372
+/* "rankfm/_rankfm.pyx":374
  * 
  * 
  * cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -20545,7 +20555,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
   long __pyx_t_13;
   long __pyx_t_14;
 
-  /* "rankfm/_rankfm.pyx":373
+  /* "rankfm/_rankfm.pyx":375
  * 
  * cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef FitBlockCtx *ctx = <FitBlockCtx *>raw_ctx             # <<<<<<<<<<<<<<
@@ -20554,7 +20564,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   __pyx_v_ctx = ((struct __pyx_t_6rankfm_7_rankfm_FitBlockCtx *)__pyx_v_raw_ctx);
 
-  /* "rankfm/_rankfm.pyx":374
+  /* "rankfm/_rankfm.pyx":376
  * cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef FitBlockCtx *ctx = <FitBlockCtx *>raw_ctx
  *     cdef int64_t block_end = ctx.block_end             # <<<<<<<<<<<<<<
@@ -20565,7 +20575,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_block_end = __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":375
+  /* "rankfm/_rankfm.pyx":377
  *     cdef FitBlockCtx *ctx = <FitBlockCtx *>raw_ctx
  *     cdef int64_t block_end = ctx.block_end
  *     if ctx.block_start >= block_end:             # <<<<<<<<<<<<<<
@@ -20577,7 +20587,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
   if (__pyx_t_2) {
 
 
-    /* "rankfm/_rankfm.pyx":376
+    /* "rankfm/_rankfm.pyx":378
  *     cdef int64_t block_end = ctx.block_end
  *     if ctx.block_start >= block_end:
  *         return             # <<<<<<<<<<<<<<
@@ -20588,7 +20598,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":375
+    /* "rankfm/_rankfm.pyx":377
  *     cdef FitBlockCtx *ctx = <FitBlockCtx *>raw_ctx
  *     cdef int64_t block_end = ctx.block_end
  *     if ctx.block_start >= block_end:             # <<<<<<<<<<<<<<
@@ -20597,7 +20607,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   }
 
-  /* "rankfm/_rankfm.pyx":378
+  /* "rankfm/_rankfm.pyx":380
  *         return
  * 
  *     cdef int F = ctx.F             # <<<<<<<<<<<<<<
@@ -20608,7 +20618,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_F = __pyx_t_3;
 
-  /* "rankfm/_rankfm.pyx":379
+  /* "rankfm/_rankfm.pyx":381
  * 
  *     cdef int F = ctx.F
  *     cdef int32_t I = ctx.I             # <<<<<<<<<<<<<<
@@ -20619,7 +20629,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_I = __pyx_t_4;
 
-  /* "rankfm/_rankfm.pyx":380
+  /* "rankfm/_rankfm.pyx":382
  *     cdef int F = ctx.F
  *     cdef int32_t I = ctx.I
  *     cdef uint32_t uI = <uint32_t>I             # <<<<<<<<<<<<<<
@@ -20628,7 +20638,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   __pyx_v_uI = ((uint32_t)__pyx_v_I);
 
-  /* "rankfm/_rankfm.pyx":381
+  /* "rankfm/_rankfm.pyx":383
  *     cdef int32_t I = ctx.I
  *     cdef uint32_t uI = <uint32_t>I
  *     cdef int max_samples = ctx.max_samples             # <<<<<<<<<<<<<<
@@ -20639,7 +20649,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_max_samples = __pyx_t_3;
 
-  /* "rankfm/_rankfm.pyx":382
+  /* "rankfm/_rankfm.pyx":384
  *     cdef uint32_t uI = <uint32_t>I
  *     cdef int max_samples = ctx.max_samples
  *     cdef int x_uf_any = ctx.x_uf_any             # <<<<<<<<<<<<<<
@@ -20650,7 +20660,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_x_uf_any = __pyx_t_3;
 
-  /* "rankfm/_rankfm.pyx":383
+  /* "rankfm/_rankfm.pyx":385
  *     cdef int max_samples = ctx.max_samples
  *     cdef int x_uf_any = ctx.x_uf_any
  *     cdef int x_if_any = ctx.x_if_any             # <<<<<<<<<<<<<<
@@ -20661,7 +20671,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_x_if_any = __pyx_t_3;
 
-  /* "rankfm/_rankfm.pyx":384
+  /* "rankfm/_rankfm.pyx":386
  *     cdef int x_uf_any = ctx.x_uf_any
  *     cdef int x_if_any = ctx.x_if_any
  *     cdef int uniform_reg = ctx.uniform_reg             # <<<<<<<<<<<<<<
@@ -20672,7 +20682,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_uniform_reg = __pyx_t_3;
 
-  /* "rankfm/_rankfm.pyx":385
+  /* "rankfm/_rankfm.pyx":387
  *     cdef int x_if_any = ctx.x_if_any
  *     cdef int uniform_reg = ctx.uniform_reg
  *     cdef float eta = ctx.eta             # <<<<<<<<<<<<<<
@@ -20683,7 +20693,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_eta = __pyx_t_5;
 
-  /* "rankfm/_rankfm.pyx":386
+  /* "rankfm/_rankfm.pyx":388
  *     cdef int uniform_reg = ctx.uniform_reg
  *     cdef float eta = ctx.eta
  *     cdef float reg_a_keep = ctx.reg_a_keep             # <<<<<<<<<<<<<<
@@ -20694,7 +20704,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_reg_a_keep = __pyx_t_5;
 
-  /* "rankfm/_rankfm.pyx":387
+  /* "rankfm/_rankfm.pyx":389
  *     cdef float eta = ctx.eta
  *     cdef float reg_a_keep = ctx.reg_a_keep
  *     cdef float reg_b_keep = ctx.reg_b_keep             # <<<<<<<<<<<<<<
@@ -20705,7 +20715,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_reg_b_keep = __pyx_t_5;
 
-  /* "rankfm/_rankfm.pyx":388
+  /* "rankfm/_rankfm.pyx":390
  *     cdef float reg_a_keep = ctx.reg_a_keep
  *     cdef float reg_b_keep = ctx.reg_b_keep
  *     cdef float log_reg_uf_lazy = ctx.log_reg_uf_lazy             # <<<<<<<<<<<<<<
@@ -20716,7 +20726,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_log_reg_uf_lazy = __pyx_t_5;
 
-  /* "rankfm/_rankfm.pyx":389
+  /* "rankfm/_rankfm.pyx":391
  *     cdef float reg_b_keep = ctx.reg_b_keep
  *     cdef float log_reg_uf_lazy = ctx.log_reg_uf_lazy
  *     cdef float log_reg_if_lazy = ctx.log_reg_if_lazy             # <<<<<<<<<<<<<<
@@ -20727,7 +20737,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_log_reg_if_lazy = __pyx_t_5;
 
-  /* "rankfm/_rankfm.pyx":390
+  /* "rankfm/_rankfm.pyx":392
  *     cdef float log_reg_uf_lazy = ctx.log_reg_uf_lazy
  *     cdef float log_reg_if_lazy = ctx.log_reg_if_lazy
  *     cdef float user_dropout = ctx.user_dropout             # <<<<<<<<<<<<<<
@@ -20738,7 +20748,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_user_dropout = __pyx_t_5;
 
-  /* "rankfm/_rankfm.pyx":391
+  /* "rankfm/_rankfm.pyx":393
  *     cdef float log_reg_if_lazy = ctx.log_reg_if_lazy
  *     cdef float user_dropout = ctx.user_dropout
  *     cdef int64_t grain = ctx.grain             # <<<<<<<<<<<<<<
@@ -20749,7 +20759,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
   __pyx_v_grain = __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":393
+  /* "rankfm/_rankfm.pyx":395
  *     cdef int64_t grain = ctx.grain
  * 
  *     cdef float *my_scratch = &ctx.scratch_base[<size_t>tid * ctx.scratch_stride]             # <<<<<<<<<<<<<<
@@ -20758,7 +20768,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   __pyx_v_my_scratch = (&(__pyx_v_ctx->scratch_base[(((size_t)__pyx_v_tid) * __pyx_v_ctx->scratch_stride)]));
 
-  /* "rankfm/_rankfm.pyx":394
+  /* "rankfm/_rankfm.pyx":396
  * 
  *     cdef float *my_scratch = &ctx.scratch_base[<size_t>tid * ctx.scratch_stride]
  *     cdef float *u_emb = my_scratch             # <<<<<<<<<<<<<<
@@ -20767,7 +20777,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   __pyx_v_u_emb = __pyx_v_my_scratch;
 
-  /* "rankfm/_rankfm.pyx":395
+  /* "rankfm/_rankfm.pyx":397
  *     cdef float *my_scratch = &ctx.scratch_base[<size_t>tid * ctx.scratch_stride]
  *     cdef float *u_emb = my_scratch
  *     cdef float *i_emb = &my_scratch[F]             # <<<<<<<<<<<<<<
@@ -20776,7 +20786,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   __pyx_v_i_emb = (&(__pyx_v_my_scratch[__pyx_v_F]));
 
-  /* "rankfm/_rankfm.pyx":396
+  /* "rankfm/_rankfm.pyx":398
  *     cdef float *u_emb = my_scratch
  *     cdef float *i_emb = &my_scratch[F]
  *     cdef float *j_emb = &my_scratch[2 * F]             # <<<<<<<<<<<<<<
@@ -20785,7 +20795,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   __pyx_v_j_emb = (&(__pyx_v_my_scratch[(2 * __pyx_v_F)]));
 
-  /* "rankfm/_rankfm.pyx":397
+  /* "rankfm/_rankfm.pyx":399
  *     cdef float *i_emb = &my_scratch[F]
  *     cdef float *j_emb = &my_scratch[2 * F]
  *     cdef float *diff_ij = &my_scratch[3 * F]             # <<<<<<<<<<<<<<
@@ -20794,7 +20804,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   __pyx_v_diff_ij = (&(__pyx_v_my_scratch[(3 * __pyx_v_F)]));
 
-  /* "rankfm/_rankfm.pyx":406
+  /* "rankfm/_rankfm.pyx":408
  *     cdef float d_outer, scale_step, old_wi, new_wi, old_wj, new_wj, diff_x_if, step_if, lazy_keep
  *     cdef const int32_t *u_seen_ptr
  *     cdef double local_ll = 0.0             # <<<<<<<<<<<<<<
@@ -20803,7 +20813,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   __pyx_v_local_ll = 0.0;
 
-  /* "rankfm/_rankfm.pyx":408
+  /* "rankfm/_rankfm.pyx":410
  *     cdef double local_ll = 0.0
  * 
  *     while True:             # <<<<<<<<<<<<<<
@@ -20812,7 +20822,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   while (1) {
 
-    /* "rankfm/_rankfm.pyx":409
+    /* "rankfm/_rankfm.pyx":411
  * 
  *     while True:
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -20824,7 +20834,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
     if (__pyx_t_2) {
 
 
-      /* "rankfm/_rankfm.pyx":410
+      /* "rankfm/_rankfm.pyx":412
  *     while True:
  *         if n_threads <= 1:
  *             c_start = ctx.block_start             # <<<<<<<<<<<<<<
@@ -20835,7 +20845,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
       __pyx_v_c_start = __pyx_t_1;
 
-      /* "rankfm/_rankfm.pyx":411
+      /* "rankfm/_rankfm.pyx":413
  *         if n_threads <= 1:
  *             c_start = ctx.block_start
  *             c_end = block_end             # <<<<<<<<<<<<<<
@@ -20844,7 +20854,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_c_end = __pyx_v_block_end;
 
-      /* "rankfm/_rankfm.pyx":409
+      /* "rankfm/_rankfm.pyx":411
  * 
  *     while True:
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -20854,7 +20864,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       goto __pyx_L6;
     }
 
-    /* "rankfm/_rankfm.pyx":413
+    /* "rankfm/_rankfm.pyx":415
  *             c_end = block_end
  *         else:
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)             # <<<<<<<<<<<<<<
@@ -20864,7 +20874,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
     /*else*/ {
       __pyx_v_c_start = rfm_atomic_fetch_add_i64((&__pyx_v_ctx->cursor), __pyx_v_grain);
 
-      /* "rankfm/_rankfm.pyx":414
+      /* "rankfm/_rankfm.pyx":416
  *         else:
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)
  *             if c_start >= block_end:             # <<<<<<<<<<<<<<
@@ -20876,7 +20886,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":415
+        /* "rankfm/_rankfm.pyx":417
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)
  *             if c_start >= block_end:
  *                 break             # <<<<<<<<<<<<<<
@@ -20885,7 +20895,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         goto __pyx_L5_break;
 
-        /* "rankfm/_rankfm.pyx":414
+        /* "rankfm/_rankfm.pyx":416
  *         else:
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)
  *             if c_start >= block_end:             # <<<<<<<<<<<<<<
@@ -20894,7 +20904,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       }
 
-      /* "rankfm/_rankfm.pyx":416
+      /* "rankfm/_rankfm.pyx":418
  *             if c_start >= block_end:
  *                 break
  *             c_end = c_start + grain             # <<<<<<<<<<<<<<
@@ -20903,7 +20913,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_c_end = (__pyx_v_c_start + __pyx_v_grain);
 
-      /* "rankfm/_rankfm.pyx":417
+      /* "rankfm/_rankfm.pyx":419
  *                 break
  *             c_end = c_start + grain
  *             if c_end > block_end:             # <<<<<<<<<<<<<<
@@ -20915,7 +20925,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":418
+        /* "rankfm/_rankfm.pyx":420
  *             c_end = c_start + grain
  *             if c_end > block_end:
  *                 c_end = block_end             # <<<<<<<<<<<<<<
@@ -20924,7 +20934,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         __pyx_v_c_end = __pyx_v_block_end;
 
-        /* "rankfm/_rankfm.pyx":417
+        /* "rankfm/_rankfm.pyx":419
  *                 break
  *             c_end = c_start + grain
  *             if c_end > block_end:             # <<<<<<<<<<<<<<
@@ -20935,7 +20945,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
     }
     __pyx_L6:;
 
-    /* "rankfm/_rankfm.pyx":420
+    /* "rankfm/_rankfm.pyx":422
  *                 c_end = block_end
  * 
  *         rfm_rng_seed(&rng, ctx.base_seed, ctx.stream_epoch_base + <uint64_t>c_start)             # <<<<<<<<<<<<<<
@@ -20944,7 +20954,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
     rfm_rng_seed((&__pyx_v_rng), __pyx_v_ctx->base_seed, (__pyx_v_ctx->stream_epoch_base + ((uint64_t)__pyx_v_c_start)));
 
-    /* "rankfm/_rankfm.pyx":422
+    /* "rankfm/_rankfm.pyx":424
  *         rfm_rng_seed(&rng, ctx.base_seed, ctx.stream_epoch_base + <uint64_t>c_start)
  * 
  *         for r in range(c_start, c_end):             # <<<<<<<<<<<<<<
@@ -20958,7 +20968,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
     for (__pyx_t_7 = __pyx_v_c_start; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_r = __pyx_t_7;
 
-      /* "rankfm/_rankfm.pyx":423
+      /* "rankfm/_rankfm.pyx":425
  * 
  *         for r in range(c_start, c_end):
  *             row = ctx.shuf_ptr[r]             # <<<<<<<<<<<<<<
@@ -20967,7 +20977,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_row = (__pyx_v_ctx->shuf_ptr[__pyx_v_r]);
 
-      /* "rankfm/_rankfm.pyx":424
+      /* "rankfm/_rankfm.pyx":426
  *         for r in range(c_start, c_end):
  *             row = ctx.shuf_ptr[r]
  *             u = ctx.intx_ptr[row * 2]             # <<<<<<<<<<<<<<
@@ -20976,7 +20986,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_u = (__pyx_v_ctx->intx_ptr[(__pyx_v_row * 2)]);
 
-      /* "rankfm/_rankfm.pyx":425
+      /* "rankfm/_rankfm.pyx":427
  *             row = ctx.shuf_ptr[r]
  *             u = ctx.intx_ptr[row * 2]
  *             i = ctx.intx_ptr[row * 2 + 1]             # <<<<<<<<<<<<<<
@@ -20985,7 +20995,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_i = (__pyx_v_ctx->intx_ptr[((__pyx_v_row * 2) + 1)]);
 
-      /* "rankfm/_rankfm.pyx":426
+      /* "rankfm/_rankfm.pyx":428
  *             u = ctx.intx_ptr[row * 2]
  *             i = ctx.intx_ptr[row * 2 + 1]
  *             sw = ctx.sw_ptr[row]             # <<<<<<<<<<<<<<
@@ -20994,7 +21004,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_sw = (__pyx_v_ctx->sw_ptr[__pyx_v_row]);
 
-      /* "rankfm/_rankfm.pyx":428
+      /* "rankfm/_rankfm.pyx":430
  *             sw = ctx.sw_ptr[row]
  * 
  *             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]             # <<<<<<<<<<<<<<
@@ -21003,7 +21013,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_n_seen_u = ((__pyx_v_ctx->ui_indptr_ptr[(__pyx_v_u + 1)]) - (__pyx_v_ctx->ui_indptr_ptr[__pyx_v_u]));
 
-      /* "rankfm/_rankfm.pyx":429
+      /* "rankfm/_rankfm.pyx":431
  * 
  *             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]
  *             if n_seen_u >= I:             # <<<<<<<<<<<<<<
@@ -21015,7 +21025,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":430
+        /* "rankfm/_rankfm.pyx":432
  *             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]
  *             if n_seen_u >= I:
  *                 continue             # <<<<<<<<<<<<<<
@@ -21024,7 +21034,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         goto __pyx_L9_continue;
 
-        /* "rankfm/_rankfm.pyx":429
+        /* "rankfm/_rankfm.pyx":431
  * 
  *             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]
  *             if n_seen_u >= I:             # <<<<<<<<<<<<<<
@@ -21033,7 +21043,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       }
 
-      /* "rankfm/_rankfm.pyx":431
+      /* "rankfm/_rankfm.pyx":433
  *             if n_seen_u >= I:
  *                 continue
  *             u_seen_ptr = &ctx.ui_indices_ptr[ctx.ui_indptr_ptr[u]] if ctx.ui_indices_ptr != NULL else NULL             # <<<<<<<<<<<<<<
@@ -21052,7 +21062,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
       __pyx_v_u_seen_ptr = __pyx_t_8;
 
-      /* "rankfm/_rankfm.pyx":433
+      /* "rankfm/_rankfm.pyx":435
  *             u_seen_ptr = &ctx.ui_indices_ptr[ctx.ui_indptr_ptr[u]] if ctx.ui_indices_ptr != NULL else NULL
  * 
  *             u_has_uf = 1 if (x_uf_any and ctx.uf_indptr_ptr[u + 1] > ctx.uf_indptr_ptr[u]) else 0             # <<<<<<<<<<<<<<
@@ -21085,7 +21095,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
       __pyx_v_u_has_uf = __pyx_t_3;
 
-      /* "rankfm/_rankfm.pyx":434
+      /* "rankfm/_rankfm.pyx":436
  * 
  *             u_has_uf = 1 if (x_uf_any and ctx.uf_indptr_ptr[u + 1] > ctx.uf_indptr_ptr[u]) else 0
  *             if u_has_uf and user_dropout > 0.0 and rfm_rng_float01(&rng) < user_dropout:             # <<<<<<<<<<<<<<
@@ -21121,7 +21131,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":435
+        /* "rankfm/_rankfm.pyx":437
  *             u_has_uf = 1 if (x_uf_any and ctx.uf_indptr_ptr[u + 1] > ctx.uf_indptr_ptr[u]) else 0
  *             if u_has_uf and user_dropout > 0.0 and rfm_rng_float01(&rng) < user_dropout:
  *                 use_v_u = 0             # <<<<<<<<<<<<<<
@@ -21130,7 +21140,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         __pyx_v_use_v_u = 0;
 
-        /* "rankfm/_rankfm.pyx":434
+        /* "rankfm/_rankfm.pyx":436
  * 
  *             u_has_uf = 1 if (x_uf_any and ctx.uf_indptr_ptr[u + 1] > ctx.uf_indptr_ptr[u]) else 0
  *             if u_has_uf and user_dropout > 0.0 and rfm_rng_float01(&rng) < user_dropout:             # <<<<<<<<<<<<<<
@@ -21140,7 +21150,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         goto __pyx_L14;
       }
 
-      /* "rankfm/_rankfm.pyx":437
+      /* "rankfm/_rankfm.pyx":439
  *                 use_v_u = 0
  *             else:
  *                 use_v_u = 1             # <<<<<<<<<<<<<<
@@ -21152,7 +21162,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       }
       __pyx_L14:;
 
-      /* "rankfm/_rankfm.pyx":440
+      /* "rankfm/_rankfm.pyx":442
  * 
  *             # Lazy catch-up on user features before reading u_emb when uniform_reg is enabled
  *             if u_has_uf and uniform_reg:             # <<<<<<<<<<<<<<
@@ -21178,7 +21188,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":441
+        /* "rankfm/_rankfm.pyx":443
  *             # Lazy catch-up on user features before reading u_emb when uniform_reg is enabled
  *             if u_has_uf and uniform_reg:
  *                 for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):             # <<<<<<<<<<<<<<
@@ -21192,7 +21202,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         for (__pyx_t_12 = (__pyx_v_ctx->uf_indptr_ptr[__pyx_v_u]); __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
           __pyx_v_idx = __pyx_t_12;
 
-          /* "rankfm/_rankfm.pyx":442
+          /* "rankfm/_rankfm.pyx":444
  *             if u_has_uf and uniform_reg:
  *                 for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
  *                     p = ctx.uf_indices_ptr[idx]             # <<<<<<<<<<<<<<
@@ -21201,7 +21211,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
           __pyx_v_p = (__pyx_v_ctx->uf_indices_ptr[__pyx_v_idx]);
 
-          /* "rankfm/_rankfm.pyx":443
+          /* "rankfm/_rankfm.pyx":445
  *                 for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
  *                     p = ctx.uf_indices_ptr[idx]
  *                     delta_steps = r - ctx.last_step_uf[p]             # <<<<<<<<<<<<<<
@@ -21210,7 +21220,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
           __pyx_v_delta_steps = (__pyx_v_r - (__pyx_v_ctx->last_step_uf[__pyx_v_p]));
 
-          /* "rankfm/_rankfm.pyx":444
+          /* "rankfm/_rankfm.pyx":446
  *                     p = ctx.uf_indices_ptr[idx]
  *                     delta_steps = r - ctx.last_step_uf[p]
  *                     if delta_steps > 0:             # <<<<<<<<<<<<<<
@@ -21222,7 +21232,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           if (__pyx_t_2) {
 
 
-            /* "rankfm/_rankfm.pyx":445
+            /* "rankfm/_rankfm.pyx":447
  *                     delta_steps = r - ctx.last_step_uf[p]
  *                     if delta_steps > 0:
  *                         lazy_keep = <float>exp(<double>log_reg_uf_lazy * <double>delta_steps)             # <<<<<<<<<<<<<<
@@ -21231,7 +21241,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_lazy_keep = ((float)exp((((double)__pyx_v_log_reg_uf_lazy) * ((double)__pyx_v_delta_steps))));
 
-            /* "rankfm/_rankfm.pyx":446
+            /* "rankfm/_rankfm.pyx":448
  *                     if delta_steps > 0:
  *                         lazy_keep = <float>exp(<double>log_reg_uf_lazy * <double>delta_steps)
  *                         rfm_vec_scale(F, lazy_keep, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -21240,7 +21250,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             rfm_vec_scale(__pyx_v_F, __pyx_v_lazy_keep, (&(__pyx_v_ctx->v_uf_ptr[(((int64_t)__pyx_v_p) * ((int64_t)__pyx_v_F))])));
 
-            /* "rankfm/_rankfm.pyx":447
+            /* "rankfm/_rankfm.pyx":449
  *                         lazy_keep = <float>exp(<double>log_reg_uf_lazy * <double>delta_steps)
  *                         rfm_vec_scale(F, lazy_keep, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F])
  *                         ctx.last_step_uf[p] = r             # <<<<<<<<<<<<<<
@@ -21249,7 +21259,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             (__pyx_v_ctx->last_step_uf[__pyx_v_p]) = __pyx_v_r;
 
-            /* "rankfm/_rankfm.pyx":444
+            /* "rankfm/_rankfm.pyx":446
  *                     p = ctx.uf_indices_ptr[idx]
  *                     delta_steps = r - ctx.last_step_uf[p]
  *                     if delta_steps > 0:             # <<<<<<<<<<<<<<
@@ -21260,7 +21270,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         }
 
 
-        /* "rankfm/_rankfm.pyx":440
+        /* "rankfm/_rankfm.pyx":442
  * 
  *             # Lazy catch-up on user features before reading u_emb when uniform_reg is enabled
  *             if u_has_uf and uniform_reg:             # <<<<<<<<<<<<<<
@@ -21269,7 +21279,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       }
 
-      /* "rankfm/_rankfm.pyx":449
+      /* "rankfm/_rankfm.pyx":451
  *                         ctx.last_step_uf[p] = r
  * 
  *             compute_user_embedding_csr(             # <<<<<<<<<<<<<<
@@ -21278,7 +21288,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_f_6rankfm_7_rankfm_compute_user_embedding_csr(__pyx_v_F, __pyx_v_u, __pyx_v_ctx->v_u_ptr, __pyx_v_ctx->v_uf_ptr, __pyx_v_ctx->uf_indptr_ptr, __pyx_v_ctx->uf_indices_ptr, __pyx_v_ctx->uf_data_ptr, __pyx_v_use_v_u, __pyx_v_u_has_uf, __pyx_v_u_emb);
 
-      /* "rankfm/_rankfm.pyx":456
+      /* "rankfm/_rankfm.pyx":458
  * 
  *             # Effective item bias & vector come directly from materialized (b_eff, V_eff): O(F)
  *             rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>i * <int64_t>F], i_emb)             # <<<<<<<<<<<<<<
@@ -21287,7 +21297,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       rfm_vec_copy(__pyx_v_F, (&(__pyx_v_ctx->v_eff_ptr[(((int64_t)__pyx_v_i) * ((int64_t)__pyx_v_F))])), __pyx_v_i_emb);
 
-      /* "rankfm/_rankfm.pyx":457
+      /* "rankfm/_rankfm.pyx":459
  *             # Effective item bias & vector come directly from materialized (b_eff, V_eff): O(F)
  *             rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>i * <int64_t>F], i_emb)
  *             ut_ui = ctx.b_eff_ptr[i] + rfm_dot(F, u_emb, i_emb)             # <<<<<<<<<<<<<<
@@ -21296,7 +21306,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_ut_ui = ((__pyx_v_ctx->b_eff_ptr[__pyx_v_i]) + rfm_dot(__pyx_v_F, __pyx_v_u_emb, __pyx_v_i_emb));
 
-      /* "rankfm/_rankfm.pyx":459
+      /* "rankfm/_rankfm.pyx":461
  *             ut_ui = ctx.b_eff_ptr[i] + rfm_dot(F, u_emb, i_emb)
  * 
  *             min_index = -1             # <<<<<<<<<<<<<<
@@ -21305,7 +21315,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_min_index = -1;
 
-      /* "rankfm/_rankfm.pyx":460
+      /* "rankfm/_rankfm.pyx":462
  * 
  *             min_index = -1
  *             min_pairwise_utility = 1e6             # <<<<<<<<<<<<<<
@@ -21314,7 +21324,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_min_pairwise_utility = 1e6;
 
-      /* "rankfm/_rankfm.pyx":462
+      /* "rankfm/_rankfm.pyx":464
  *             min_pairwise_utility = 1e6
  * 
  *             for sampled in range(1, max_samples + 1):             # <<<<<<<<<<<<<<
@@ -21328,7 +21338,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       for (__pyx_t_3 = 1; __pyx_t_3 < __pyx_t_14; __pyx_t_3+=1) {
         __pyx_v_sampled = __pyx_t_3;
 
-        /* "rankfm/_rankfm.pyx":463
+        /* "rankfm/_rankfm.pyx":465
  * 
  *             for sampled in range(1, max_samples + 1):
  *                 while True:             # <<<<<<<<<<<<<<
@@ -21337,7 +21347,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         while (1) {
 
-          /* "rankfm/_rankfm.pyx":464
+          /* "rankfm/_rankfm.pyx":466
  *             for sampled in range(1, max_samples + 1):
  *                 while True:
  *                     j = <int32_t>rfm_rng_bounded(&rng, uI)             # <<<<<<<<<<<<<<
@@ -21346,7 +21356,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
           __pyx_v_j = ((int32_t)rfm_rng_bounded((&__pyx_v_rng), __pyx_v_uI));
 
-          /* "rankfm/_rankfm.pyx":465
+          /* "rankfm/_rankfm.pyx":467
  *                 while True:
  *                     j = <int32_t>rfm_rng_bounded(&rng, uI)
  *                     if u_seen_ptr == NULL or not item_observed(j, u_seen_ptr, n_seen_u):             # <<<<<<<<<<<<<<
@@ -21372,7 +21382,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           if (__pyx_t_2) {
 
 
-            /* "rankfm/_rankfm.pyx":466
+            /* "rankfm/_rankfm.pyx":468
  *                     j = <int32_t>rfm_rng_bounded(&rng, uI)
  *                     if u_seen_ptr == NULL or not item_observed(j, u_seen_ptr, n_seen_u):
  *                         break             # <<<<<<<<<<<<<<
@@ -21381,7 +21391,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             goto __pyx_L27_break;
 
-            /* "rankfm/_rankfm.pyx":465
+            /* "rankfm/_rankfm.pyx":467
  *                 while True:
  *                     j = <int32_t>rfm_rng_bounded(&rng, uI)
  *                     if u_seen_ptr == NULL or not item_observed(j, u_seen_ptr, n_seen_u):             # <<<<<<<<<<<<<<
@@ -21392,7 +21402,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         }
         __pyx_L27_break:;
 
-        /* "rankfm/_rankfm.pyx":468
+        /* "rankfm/_rankfm.pyx":470
  *                         break
  * 
  *                 ut_uj = ctx.b_eff_ptr[j] + rfm_dot(F, u_emb, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -21401,7 +21411,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         __pyx_v_ut_uj = ((__pyx_v_ctx->b_eff_ptr[__pyx_v_j]) + rfm_dot(__pyx_v_F, __pyx_v_u_emb, (&(__pyx_v_ctx->v_eff_ptr[(((int64_t)__pyx_v_j) * ((int64_t)__pyx_v_F))]))));
 
-        /* "rankfm/_rankfm.pyx":469
+        /* "rankfm/_rankfm.pyx":471
  * 
  *                 ut_uj = ctx.b_eff_ptr[j] + rfm_dot(F, u_emb, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F])
  *                 pairwise_utility = ut_ui - ut_uj             # <<<<<<<<<<<<<<
@@ -21410,7 +21420,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         __pyx_v_pairwise_utility = (__pyx_v_ut_ui - __pyx_v_ut_uj);
 
-        /* "rankfm/_rankfm.pyx":471
+        /* "rankfm/_rankfm.pyx":473
  *                 pairwise_utility = ut_ui - ut_uj
  * 
  *                 if min_index == -1 or pairwise_utility < min_pairwise_utility:             # <<<<<<<<<<<<<<
@@ -21436,7 +21446,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         if (__pyx_t_2) {
 
 
-          /* "rankfm/_rankfm.pyx":472
+          /* "rankfm/_rankfm.pyx":474
  * 
  *                 if min_index == -1 or pairwise_utility < min_pairwise_utility:
  *                     min_index = j             # <<<<<<<<<<<<<<
@@ -21445,7 +21455,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
           __pyx_v_min_index = __pyx_v_j;
 
-          /* "rankfm/_rankfm.pyx":473
+          /* "rankfm/_rankfm.pyx":475
  *                 if min_index == -1 or pairwise_utility < min_pairwise_utility:
  *                     min_index = j
  *                     min_pairwise_utility = pairwise_utility             # <<<<<<<<<<<<<<
@@ -21454,7 +21464,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
           __pyx_v_min_pairwise_utility = __pyx_v_pairwise_utility;
 
-          /* "rankfm/_rankfm.pyx":471
+          /* "rankfm/_rankfm.pyx":473
  *                 pairwise_utility = ut_ui - ut_uj
  * 
  *                 if min_index == -1 or pairwise_utility < min_pairwise_utility:             # <<<<<<<<<<<<<<
@@ -21463,7 +21473,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         }
 
-        /* "rankfm/_rankfm.pyx":475
+        /* "rankfm/_rankfm.pyx":477
  *                     min_pairwise_utility = pairwise_utility
  * 
  *                 if pairwise_utility < 1.0:             # <<<<<<<<<<<<<<
@@ -21475,7 +21485,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         if (__pyx_t_2) {
 
 
-          /* "rankfm/_rankfm.pyx":476
+          /* "rankfm/_rankfm.pyx":478
  * 
  *                 if pairwise_utility < 1.0:
  *                     break             # <<<<<<<<<<<<<<
@@ -21484,7 +21494,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
           goto __pyx_L25_break;
 
-          /* "rankfm/_rankfm.pyx":475
+          /* "rankfm/_rankfm.pyx":477
  *                     min_pairwise_utility = pairwise_utility
  * 
  *                 if pairwise_utility < 1.0:             # <<<<<<<<<<<<<<
@@ -21496,7 +21506,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       __pyx_L25_break:;
 
 
-      /* "rankfm/_rankfm.pyx":478
+      /* "rankfm/_rankfm.pyx":480
  *                     break
  * 
  *             j = min_index             # <<<<<<<<<<<<<<
@@ -21505,7 +21515,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_j = __pyx_v_min_index;
 
-      /* "rankfm/_rankfm.pyx":479
+      /* "rankfm/_rankfm.pyx":481
  * 
  *             j = min_index
  *             pairwise_utility = min_pairwise_utility             # <<<<<<<<<<<<<<
@@ -21514,7 +21524,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_pairwise_utility = __pyx_v_min_pairwise_utility;
 
-      /* "rankfm/_rankfm.pyx":480
+      /* "rankfm/_rankfm.pyx":482
  *             j = min_index
  *             pairwise_utility = min_pairwise_utility
  *             rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F], j_emb)             # <<<<<<<<<<<<<<
@@ -21523,7 +21533,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       rfm_vec_copy(__pyx_v_F, (&(__pyx_v_ctx->v_eff_ptr[(((int64_t)__pyx_v_j) * ((int64_t)__pyx_v_F))])), __pyx_v_j_emb);
 
-      /* "rankfm/_rankfm.pyx":482
+      /* "rankfm/_rankfm.pyx":484
  *             rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F], j_emb)
  * 
  *             if ctx.verbose:             # <<<<<<<<<<<<<<
@@ -21535,7 +21545,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":483
+        /* "rankfm/_rankfm.pyx":485
  * 
  *             if ctx.verbose:
  *                 local_ll += <double>safe_log_sigmoid(pairwise_utility)             # <<<<<<<<<<<<<<
@@ -21544,7 +21554,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         __pyx_v_local_ll = (__pyx_v_local_ll + ((double)__pyx_f_6rankfm_7_rankfm_safe_log_sigmoid(__pyx_v_pairwise_utility)));
 
-        /* "rankfm/_rankfm.pyx":482
+        /* "rankfm/_rankfm.pyx":484
  *             rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F], j_emb)
  * 
  *             if ctx.verbose:             # <<<<<<<<<<<<<<
@@ -21553,7 +21563,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       }
 
-      /* "rankfm/_rankfm.pyx":485
+      /* "rankfm/_rankfm.pyx":487
  *                 local_ll += <double>safe_log_sigmoid(pairwise_utility)
  * 
  *             d_outer = safe_sigmoid_neg(pairwise_utility)             # <<<<<<<<<<<<<<
@@ -21562,7 +21572,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_d_outer = __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(__pyx_v_pairwise_utility);
 
-      /* "rankfm/_rankfm.pyx":486
+      /* "rankfm/_rankfm.pyx":488
  * 
  *             d_outer = safe_sigmoid_neg(pairwise_utility)
  *             scale_step = eta * sw * ctx.mult_lut_ptr[sampled] * d_outer             # <<<<<<<<<<<<<<
@@ -21571,7 +21581,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_scale_step = (((__pyx_v_eta * __pyx_v_sw) * (__pyx_v_ctx->mult_lut_ptr[__pyx_v_sampled])) * __pyx_v_d_outer);
 
-      /* "rankfm/_rankfm.pyx":489
+      /* "rankfm/_rankfm.pyx":491
  * 
  *             # Update item scalar biases (+ immediate b_eff delta when x_if_any)
  *             old_wi = ctx.w_i_ptr[i]             # <<<<<<<<<<<<<<
@@ -21580,7 +21590,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_old_wi = (__pyx_v_ctx->w_i_ptr[__pyx_v_i]);
 
-      /* "rankfm/_rankfm.pyx":490
+      /* "rankfm/_rankfm.pyx":492
  *             # Update item scalar biases (+ immediate b_eff delta when x_if_any)
  *             old_wi = ctx.w_i_ptr[i]
  *             new_wi = old_wi * reg_a_keep + scale_step             # <<<<<<<<<<<<<<
@@ -21589,7 +21599,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_new_wi = ((__pyx_v_old_wi * __pyx_v_reg_a_keep) + __pyx_v_scale_step);
 
-      /* "rankfm/_rankfm.pyx":491
+      /* "rankfm/_rankfm.pyx":493
  *             old_wi = ctx.w_i_ptr[i]
  *             new_wi = old_wi * reg_a_keep + scale_step
  *             ctx.w_i_ptr[i] = new_wi             # <<<<<<<<<<<<<<
@@ -21598,7 +21608,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       (__pyx_v_ctx->w_i_ptr[__pyx_v_i]) = __pyx_v_new_wi;
 
-      /* "rankfm/_rankfm.pyx":493
+      /* "rankfm/_rankfm.pyx":495
  *             ctx.w_i_ptr[i] = new_wi
  * 
  *             old_wj = ctx.w_i_ptr[j]             # <<<<<<<<<<<<<<
@@ -21607,7 +21617,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_old_wj = (__pyx_v_ctx->w_i_ptr[__pyx_v_j]);
 
-      /* "rankfm/_rankfm.pyx":494
+      /* "rankfm/_rankfm.pyx":496
  * 
  *             old_wj = ctx.w_i_ptr[j]
  *             new_wj = old_wj * reg_a_keep - scale_step             # <<<<<<<<<<<<<<
@@ -21616,7 +21626,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       __pyx_v_new_wj = ((__pyx_v_old_wj * __pyx_v_reg_a_keep) - __pyx_v_scale_step);
 
-      /* "rankfm/_rankfm.pyx":495
+      /* "rankfm/_rankfm.pyx":497
  *             old_wj = ctx.w_i_ptr[j]
  *             new_wj = old_wj * reg_a_keep - scale_step
  *             ctx.w_i_ptr[j] = new_wj             # <<<<<<<<<<<<<<
@@ -21625,7 +21635,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       (__pyx_v_ctx->w_i_ptr[__pyx_v_j]) = __pyx_v_new_wj;
 
-      /* "rankfm/_rankfm.pyx":497
+      /* "rankfm/_rankfm.pyx":499
  *             ctx.w_i_ptr[j] = new_wj
  * 
  *             if x_if_any:             # <<<<<<<<<<<<<<
@@ -21637,7 +21647,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":498
+        /* "rankfm/_rankfm.pyx":500
  * 
  *             if x_if_any:
  *                 ctx.b_eff_ptr[i] += (new_wi - old_wi)             # <<<<<<<<<<<<<<
@@ -21648,7 +21658,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         __pyx_t_4 = __pyx_v_i;
         (__pyx_v_ctx->b_eff_ptr[__pyx_t_4]) = ((__pyx_v_ctx->b_eff_ptr[__pyx_t_4]) + (__pyx_v_new_wi - __pyx_v_old_wi));
 
-        /* "rankfm/_rankfm.pyx":499
+        /* "rankfm/_rankfm.pyx":501
  *             if x_if_any:
  *                 ctx.b_eff_ptr[i] += (new_wi - old_wi)
  *                 ctx.b_eff_ptr[j] += (new_wj - old_wj)             # <<<<<<<<<<<<<<
@@ -21659,7 +21669,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         __pyx_t_4 = __pyx_v_j;
         (__pyx_v_ctx->b_eff_ptr[__pyx_t_4]) = ((__pyx_v_ctx->b_eff_ptr[__pyx_t_4]) + (__pyx_v_new_wj - __pyx_v_old_wj));
 
-        /* "rankfm/_rankfm.pyx":497
+        /* "rankfm/_rankfm.pyx":499
  *             ctx.w_i_ptr[j] = new_wj
  * 
  *             if x_if_any:             # <<<<<<<<<<<<<<
@@ -21668,7 +21678,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       }
 
-      /* "rankfm/_rankfm.pyx":502
+      /* "rankfm/_rankfm.pyx":504
  * 
  *             # Contiguous SIMD factor updates
  *             rfm_vec_sub(F, i_emb, j_emb, diff_ij)             # <<<<<<<<<<<<<<
@@ -21677,7 +21687,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       rfm_vec_sub(__pyx_v_F, __pyx_v_i_emb, __pyx_v_j_emb, __pyx_v_diff_ij);
 
-      /* "rankfm/_rankfm.pyx":504
+      /* "rankfm/_rankfm.pyx":506
  *             rfm_vec_sub(F, i_emb, j_emb, diff_ij)
  * 
  *             if use_v_u:             # <<<<<<<<<<<<<<
@@ -21689,7 +21699,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":505
+        /* "rankfm/_rankfm.pyx":507
  * 
  *             if use_v_u:
  *                 rfm_vec_reg_axpy(F, reg_a_keep, scale_step, diff_ij, &ctx.v_u_ptr[<int64_t>u * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -21698,7 +21708,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         rfm_vec_reg_axpy(__pyx_v_F, __pyx_v_reg_a_keep, __pyx_v_scale_step, __pyx_v_diff_ij, (&(__pyx_v_ctx->v_u_ptr[(((int64_t)__pyx_v_u) * ((int64_t)__pyx_v_F))])));
 
-        /* "rankfm/_rankfm.pyx":504
+        /* "rankfm/_rankfm.pyx":506
  *             rfm_vec_sub(F, i_emb, j_emb, diff_ij)
  * 
  *             if use_v_u:             # <<<<<<<<<<<<<<
@@ -21707,7 +21717,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       }
 
-      /* "rankfm/_rankfm.pyx":507
+      /* "rankfm/_rankfm.pyx":509
  *                 rfm_vec_reg_axpy(F, reg_a_keep, scale_step, diff_ij, &ctx.v_u_ptr[<int64_t>u * <int64_t>F])
  * 
  *             rfm_dual_item_update(             # <<<<<<<<<<<<<<
@@ -21716,7 +21726,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       rfm_dual_item_update(__pyx_v_F, __pyx_v_reg_a_keep, __pyx_v_scale_step, __pyx_v_u_emb, (&(__pyx_v_ctx->v_i_ptr[(((int64_t)__pyx_v_i) * ((int64_t)__pyx_v_F))])), (&(__pyx_v_ctx->v_i_ptr[(((int64_t)__pyx_v_j) * ((int64_t)__pyx_v_F))])), (&(__pyx_v_ctx->v_eff_ptr[(((int64_t)__pyx_v_i) * ((int64_t)__pyx_v_F))])), (&(__pyx_v_ctx->v_eff_ptr[(((int64_t)__pyx_v_j) * ((int64_t)__pyx_v_F))])), __pyx_v_x_if_any);
 
-      /* "rankfm/_rankfm.pyx":520
+      /* "rankfm/_rankfm.pyx":522
  * 
  *             # Sparse CSR user-feature factor updates
  *             if u_has_uf:             # <<<<<<<<<<<<<<
@@ -21728,7 +21738,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":521
+        /* "rankfm/_rankfm.pyx":523
  *             # Sparse CSR user-feature factor updates
  *             if u_has_uf:
  *                 if uniform_reg:             # <<<<<<<<<<<<<<
@@ -21740,7 +21750,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         if (__pyx_t_2) {
 
 
-          /* "rankfm/_rankfm.pyx":522
+          /* "rankfm/_rankfm.pyx":524
  *             if u_has_uf:
  *                 if uniform_reg:
  *                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):             # <<<<<<<<<<<<<<
@@ -21754,7 +21764,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           for (__pyx_t_12 = (__pyx_v_ctx->uf_indptr_ptr[__pyx_v_u]); __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
             __pyx_v_idx = __pyx_t_12;
 
-            /* "rankfm/_rankfm.pyx":523
+            /* "rankfm/_rankfm.pyx":525
  *                 if uniform_reg:
  *                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
  *                         p = ctx.uf_indices_ptr[idx]             # <<<<<<<<<<<<<<
@@ -21763,7 +21773,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_p = (__pyx_v_ctx->uf_indices_ptr[__pyx_v_idx]);
 
-            /* "rankfm/_rankfm.pyx":524
+            /* "rankfm/_rankfm.pyx":526
  *                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
  *                         p = ctx.uf_indices_ptr[idx]
  *                         rfm_vec_axpy(F, scale_step * ctx.uf_data_ptr[idx], diff_ij, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -21774,7 +21784,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           }
 
 
-          /* "rankfm/_rankfm.pyx":521
+          /* "rankfm/_rankfm.pyx":523
  *             # Sparse CSR user-feature factor updates
  *             if u_has_uf:
  *                 if uniform_reg:             # <<<<<<<<<<<<<<
@@ -21784,7 +21794,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           goto __pyx_L39;
         }
 
-        /* "rankfm/_rankfm.pyx":526
+        /* "rankfm/_rankfm.pyx":528
  *                         rfm_vec_axpy(F, scale_step * ctx.uf_data_ptr[idx], diff_ij, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F])
  *                 else:
  *                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):             # <<<<<<<<<<<<<<
@@ -21799,7 +21809,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           for (__pyx_t_12 = (__pyx_v_ctx->uf_indptr_ptr[__pyx_v_u]); __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
             __pyx_v_idx = __pyx_t_12;
 
-            /* "rankfm/_rankfm.pyx":527
+            /* "rankfm/_rankfm.pyx":529
  *                 else:
  *                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
  *                         p = ctx.uf_indices_ptr[idx]             # <<<<<<<<<<<<<<
@@ -21808,7 +21818,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_p = (__pyx_v_ctx->uf_indices_ptr[__pyx_v_idx]);
 
-            /* "rankfm/_rankfm.pyx":528
+            /* "rankfm/_rankfm.pyx":530
  *                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
  *                         p = ctx.uf_indices_ptr[idx]
  *                         rfm_vec_reg_axpy(             # <<<<<<<<<<<<<<
@@ -21821,7 +21831,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
         }
         __pyx_L39:;
 
-        /* "rankfm/_rankfm.pyx":520
+        /* "rankfm/_rankfm.pyx":522
  * 
  *             # Sparse CSR user-feature factor updates
  *             if u_has_uf:             # <<<<<<<<<<<<<<
@@ -21830,7 +21840,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       }
 
-      /* "rankfm/_rankfm.pyx":534
+      /* "rankfm/_rankfm.pyx":536
  * 
  *             # Sparse 2-pointer merge over non-zero item features of (i, j)
  *             if x_if_any:             # <<<<<<<<<<<<<<
@@ -21842,7 +21852,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":535
+        /* "rankfm/_rankfm.pyx":537
  *             # Sparse 2-pointer merge over non-zero item features of (i, j)
  *             if x_if_any:
  *                 idx_i = ctx.if_indptr_ptr[i]             # <<<<<<<<<<<<<<
@@ -21851,7 +21861,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         __pyx_v_idx_i = (__pyx_v_ctx->if_indptr_ptr[__pyx_v_i]);
 
-        /* "rankfm/_rankfm.pyx":536
+        /* "rankfm/_rankfm.pyx":538
  *             if x_if_any:
  *                 idx_i = ctx.if_indptr_ptr[i]
  *                 end_i = ctx.if_indptr_ptr[i + 1]             # <<<<<<<<<<<<<<
@@ -21860,7 +21870,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         __pyx_v_end_i = (__pyx_v_ctx->if_indptr_ptr[(__pyx_v_i + 1)]);
 
-        /* "rankfm/_rankfm.pyx":537
+        /* "rankfm/_rankfm.pyx":539
  *                 idx_i = ctx.if_indptr_ptr[i]
  *                 end_i = ctx.if_indptr_ptr[i + 1]
  *                 idx_j = ctx.if_indptr_ptr[j]             # <<<<<<<<<<<<<<
@@ -21869,7 +21879,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         __pyx_v_idx_j = (__pyx_v_ctx->if_indptr_ptr[__pyx_v_j]);
 
-        /* "rankfm/_rankfm.pyx":538
+        /* "rankfm/_rankfm.pyx":540
  *                 end_i = ctx.if_indptr_ptr[i + 1]
  *                 idx_j = ctx.if_indptr_ptr[j]
  *                 end_j = ctx.if_indptr_ptr[j + 1]             # <<<<<<<<<<<<<<
@@ -21878,7 +21888,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
         __pyx_v_end_j = (__pyx_v_ctx->if_indptr_ptr[(__pyx_v_j + 1)]);
 
-        /* "rankfm/_rankfm.pyx":540
+        /* "rankfm/_rankfm.pyx":542
  *                 end_j = ctx.if_indptr_ptr[j + 1]
  * 
  *                 while idx_i < end_i or idx_j < end_j:             # <<<<<<<<<<<<<<
@@ -21905,7 +21915,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
           if (!__pyx_t_2) break;
 
-          /* "rankfm/_rankfm.pyx":541
+          /* "rankfm/_rankfm.pyx":543
  * 
  *                 while idx_i < end_i or idx_j < end_j:
  *                     if idx_j >= end_j or (idx_i < end_i and ctx.if_indices_ptr[idx_i] < ctx.if_indices_ptr[idx_j]):             # <<<<<<<<<<<<<<
@@ -21941,7 +21951,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           if (__pyx_t_2) {
 
 
-            /* "rankfm/_rankfm.pyx":542
+            /* "rankfm/_rankfm.pyx":544
  *                 while idx_i < end_i or idx_j < end_j:
  *                     if idx_j >= end_j or (idx_i < end_i and ctx.if_indices_ptr[idx_i] < ctx.if_indices_ptr[idx_j]):
  *                         q = ctx.if_indices_ptr[idx_i]             # <<<<<<<<<<<<<<
@@ -21950,7 +21960,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_q = (__pyx_v_ctx->if_indices_ptr[__pyx_v_idx_i]);
 
-            /* "rankfm/_rankfm.pyx":543
+            /* "rankfm/_rankfm.pyx":545
  *                     if idx_j >= end_j or (idx_i < end_i and ctx.if_indices_ptr[idx_i] < ctx.if_indices_ptr[idx_j]):
  *                         q = ctx.if_indices_ptr[idx_i]
  *                         diff_x_if = ctx.if_data_ptr[idx_i]             # <<<<<<<<<<<<<<
@@ -21959,7 +21969,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_diff_x_if = (__pyx_v_ctx->if_data_ptr[__pyx_v_idx_i]);
 
-            /* "rankfm/_rankfm.pyx":544
+            /* "rankfm/_rankfm.pyx":546
  *                         q = ctx.if_indices_ptr[idx_i]
  *                         diff_x_if = ctx.if_data_ptr[idx_i]
  *                         idx_i += 1             # <<<<<<<<<<<<<<
@@ -21968,7 +21978,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_idx_i = (__pyx_v_idx_i + 1);
 
-            /* "rankfm/_rankfm.pyx":541
+            /* "rankfm/_rankfm.pyx":543
  * 
  *                 while idx_i < end_i or idx_j < end_j:
  *                     if idx_j >= end_j or (idx_i < end_i and ctx.if_indices_ptr[idx_i] < ctx.if_indices_ptr[idx_j]):             # <<<<<<<<<<<<<<
@@ -21978,7 +21988,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
             goto __pyx_L49;
           }
 
-          /* "rankfm/_rankfm.pyx":545
+          /* "rankfm/_rankfm.pyx":547
  *                         diff_x_if = ctx.if_data_ptr[idx_i]
  *                         idx_i += 1
  *                     elif idx_i >= end_i or ctx.if_indices_ptr[idx_j] < ctx.if_indices_ptr[idx_i]:             # <<<<<<<<<<<<<<
@@ -22004,7 +22014,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           if (__pyx_t_2) {
 
 
-            /* "rankfm/_rankfm.pyx":546
+            /* "rankfm/_rankfm.pyx":548
  *                         idx_i += 1
  *                     elif idx_i >= end_i or ctx.if_indices_ptr[idx_j] < ctx.if_indices_ptr[idx_i]:
  *                         q = ctx.if_indices_ptr[idx_j]             # <<<<<<<<<<<<<<
@@ -22013,7 +22023,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_q = (__pyx_v_ctx->if_indices_ptr[__pyx_v_idx_j]);
 
-            /* "rankfm/_rankfm.pyx":547
+            /* "rankfm/_rankfm.pyx":549
  *                     elif idx_i >= end_i or ctx.if_indices_ptr[idx_j] < ctx.if_indices_ptr[idx_i]:
  *                         q = ctx.if_indices_ptr[idx_j]
  *                         diff_x_if = -ctx.if_data_ptr[idx_j]             # <<<<<<<<<<<<<<
@@ -22022,7 +22032,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_diff_x_if = (-(__pyx_v_ctx->if_data_ptr[__pyx_v_idx_j]));
 
-            /* "rankfm/_rankfm.pyx":548
+            /* "rankfm/_rankfm.pyx":550
  *                         q = ctx.if_indices_ptr[idx_j]
  *                         diff_x_if = -ctx.if_data_ptr[idx_j]
  *                         idx_j += 1             # <<<<<<<<<<<<<<
@@ -22031,7 +22041,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_idx_j = (__pyx_v_idx_j + 1);
 
-            /* "rankfm/_rankfm.pyx":545
+            /* "rankfm/_rankfm.pyx":547
  *                         diff_x_if = ctx.if_data_ptr[idx_i]
  *                         idx_i += 1
  *                     elif idx_i >= end_i or ctx.if_indices_ptr[idx_j] < ctx.if_indices_ptr[idx_i]:             # <<<<<<<<<<<<<<
@@ -22041,7 +22051,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
             goto __pyx_L49;
           }
 
-          /* "rankfm/_rankfm.pyx":550
+          /* "rankfm/_rankfm.pyx":552
  *                         idx_j += 1
  *                     else:
  *                         q = ctx.if_indices_ptr[idx_i]             # <<<<<<<<<<<<<<
@@ -22051,7 +22061,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           /*else*/ {
             __pyx_v_q = (__pyx_v_ctx->if_indices_ptr[__pyx_v_idx_i]);
 
-            /* "rankfm/_rankfm.pyx":551
+            /* "rankfm/_rankfm.pyx":553
  *                     else:
  *                         q = ctx.if_indices_ptr[idx_i]
  *                         diff_x_if = ctx.if_data_ptr[idx_i] - ctx.if_data_ptr[idx_j]             # <<<<<<<<<<<<<<
@@ -22060,7 +22070,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_diff_x_if = ((__pyx_v_ctx->if_data_ptr[__pyx_v_idx_i]) - (__pyx_v_ctx->if_data_ptr[__pyx_v_idx_j]));
 
-            /* "rankfm/_rankfm.pyx":552
+            /* "rankfm/_rankfm.pyx":554
  *                         q = ctx.if_indices_ptr[idx_i]
  *                         diff_x_if = ctx.if_data_ptr[idx_i] - ctx.if_data_ptr[idx_j]
  *                         idx_i += 1             # <<<<<<<<<<<<<<
@@ -22069,7 +22079,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_idx_i = (__pyx_v_idx_i + 1);
 
-            /* "rankfm/_rankfm.pyx":553
+            /* "rankfm/_rankfm.pyx":555
  *                         diff_x_if = ctx.if_data_ptr[idx_i] - ctx.if_data_ptr[idx_j]
  *                         idx_i += 1
  *                         idx_j += 1             # <<<<<<<<<<<<<<
@@ -22080,7 +22090,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           }
           __pyx_L49:;
 
-          /* "rankfm/_rankfm.pyx":555
+          /* "rankfm/_rankfm.pyx":557
  *                         idx_j += 1
  * 
  *                     if uniform_reg:             # <<<<<<<<<<<<<<
@@ -22092,7 +22102,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           if (__pyx_t_2) {
 
 
-            /* "rankfm/_rankfm.pyx":556
+            /* "rankfm/_rankfm.pyx":558
  * 
  *                     if uniform_reg:
  *                         delta_steps = (r + 1) - ctx.last_step_if[q]             # <<<<<<<<<<<<<<
@@ -22101,7 +22111,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             __pyx_v_delta_steps = ((__pyx_v_r + 1) - (__pyx_v_ctx->last_step_if[__pyx_v_q]));
 
-            /* "rankfm/_rankfm.pyx":557
+            /* "rankfm/_rankfm.pyx":559
  *                     if uniform_reg:
  *                         delta_steps = (r + 1) - ctx.last_step_if[q]
  *                         if delta_steps > 0:             # <<<<<<<<<<<<<<
@@ -22113,7 +22123,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
             if (__pyx_t_2) {
 
 
-              /* "rankfm/_rankfm.pyx":558
+              /* "rankfm/_rankfm.pyx":560
  *                         delta_steps = (r + 1) - ctx.last_step_if[q]
  *                         if delta_steps > 0:
  *                             lazy_keep = <float>exp(<double>log_reg_if_lazy * <double>delta_steps)             # <<<<<<<<<<<<<<
@@ -22122,7 +22132,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
               __pyx_v_lazy_keep = ((float)exp((((double)__pyx_v_log_reg_if_lazy) * ((double)__pyx_v_delta_steps))));
 
-              /* "rankfm/_rankfm.pyx":559
+              /* "rankfm/_rankfm.pyx":561
  *                         if delta_steps > 0:
  *                             lazy_keep = <float>exp(<double>log_reg_if_lazy * <double>delta_steps)
  *                             ctx.w_if_ptr[q] *= lazy_keep             # <<<<<<<<<<<<<<
@@ -22133,7 +22143,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
               __pyx_t_4 = __pyx_v_q;
               (__pyx_v_ctx->w_if_ptr[__pyx_t_4]) = ((__pyx_v_ctx->w_if_ptr[__pyx_t_4]) * __pyx_v_lazy_keep);
 
-              /* "rankfm/_rankfm.pyx":560
+              /* "rankfm/_rankfm.pyx":562
  *                             lazy_keep = <float>exp(<double>log_reg_if_lazy * <double>delta_steps)
  *                             ctx.w_if_ptr[q] *= lazy_keep
  *                             rfm_vec_scale(F, lazy_keep, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -22142,7 +22152,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
               rfm_vec_scale(__pyx_v_F, __pyx_v_lazy_keep, (&(__pyx_v_ctx->v_if_ptr[(((int64_t)__pyx_v_q) * ((int64_t)__pyx_v_F))])));
 
-              /* "rankfm/_rankfm.pyx":561
+              /* "rankfm/_rankfm.pyx":563
  *                             ctx.w_if_ptr[q] *= lazy_keep
  *                             rfm_vec_scale(F, lazy_keep, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
  *                             ctx.last_step_if[q] = r + 1             # <<<<<<<<<<<<<<
@@ -22151,7 +22161,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
               (__pyx_v_ctx->last_step_if[__pyx_v_q]) = (__pyx_v_r + 1);
 
-              /* "rankfm/_rankfm.pyx":557
+              /* "rankfm/_rankfm.pyx":559
  *                     if uniform_reg:
  *                         delta_steps = (r + 1) - ctx.last_step_if[q]
  *                         if delta_steps > 0:             # <<<<<<<<<<<<<<
@@ -22160,7 +22170,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             }
 
-            /* "rankfm/_rankfm.pyx":562
+            /* "rankfm/_rankfm.pyx":564
  *                             rfm_vec_scale(F, lazy_keep, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
  *                             ctx.last_step_if[q] = r + 1
  *                         if diff_x_if != 0.0:             # <<<<<<<<<<<<<<
@@ -22172,7 +22182,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
             if (__pyx_t_2) {
 
 
-              /* "rankfm/_rankfm.pyx":563
+              /* "rankfm/_rankfm.pyx":565
  *                             ctx.last_step_if[q] = r + 1
  *                         if diff_x_if != 0.0:
  *                             step_if = scale_step * diff_x_if             # <<<<<<<<<<<<<<
@@ -22181,7 +22191,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
               __pyx_v_step_if = (__pyx_v_scale_step * __pyx_v_diff_x_if);
 
-              /* "rankfm/_rankfm.pyx":564
+              /* "rankfm/_rankfm.pyx":566
  *                         if diff_x_if != 0.0:
  *                             step_if = scale_step * diff_x_if
  *                             ctx.w_if_ptr[q] += step_if             # <<<<<<<<<<<<<<
@@ -22192,7 +22202,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
               __pyx_t_4 = __pyx_v_q;
               (__pyx_v_ctx->w_if_ptr[__pyx_t_4]) = ((__pyx_v_ctx->w_if_ptr[__pyx_t_4]) + __pyx_v_step_if);
 
-              /* "rankfm/_rankfm.pyx":565
+              /* "rankfm/_rankfm.pyx":567
  *                             step_if = scale_step * diff_x_if
  *                             ctx.w_if_ptr[q] += step_if
  *                             rfm_vec_axpy(F, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -22201,7 +22211,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
               rfm_vec_axpy(__pyx_v_F, __pyx_v_step_if, __pyx_v_u_emb, (&(__pyx_v_ctx->v_if_ptr[(((int64_t)__pyx_v_q) * ((int64_t)__pyx_v_F))])));
 
-              /* "rankfm/_rankfm.pyx":562
+              /* "rankfm/_rankfm.pyx":564
  *                             rfm_vec_scale(F, lazy_keep, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
  *                             ctx.last_step_if[q] = r + 1
  *                         if diff_x_if != 0.0:             # <<<<<<<<<<<<<<
@@ -22210,7 +22220,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
             }
 
-            /* "rankfm/_rankfm.pyx":555
+            /* "rankfm/_rankfm.pyx":557
  *                         idx_j += 1
  * 
  *                     if uniform_reg:             # <<<<<<<<<<<<<<
@@ -22220,7 +22230,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
             goto __pyx_L55;
           }
 
-          /* "rankfm/_rankfm.pyx":567
+          /* "rankfm/_rankfm.pyx":569
  *                             rfm_vec_axpy(F, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
  *                     else:
  *                         if diff_x_if != 0.0:             # <<<<<<<<<<<<<<
@@ -22233,7 +22243,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
             if (__pyx_t_2) {
 
 
-              /* "rankfm/_rankfm.pyx":568
+              /* "rankfm/_rankfm.pyx":570
  *                     else:
  *                         if diff_x_if != 0.0:
  *                             step_if = scale_step * diff_x_if             # <<<<<<<<<<<<<<
@@ -22242,7 +22252,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
               __pyx_v_step_if = (__pyx_v_scale_step * __pyx_v_diff_x_if);
 
-              /* "rankfm/_rankfm.pyx":569
+              /* "rankfm/_rankfm.pyx":571
  *                         if diff_x_if != 0.0:
  *                             step_if = scale_step * diff_x_if
  *                             ctx.w_if_ptr[q] = ctx.w_if_ptr[q] * reg_b_keep + step_if             # <<<<<<<<<<<<<<
@@ -22251,7 +22261,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
               (__pyx_v_ctx->w_if_ptr[__pyx_v_q]) = (((__pyx_v_ctx->w_if_ptr[__pyx_v_q]) * __pyx_v_reg_b_keep) + __pyx_v_step_if);
 
-              /* "rankfm/_rankfm.pyx":570
+              /* "rankfm/_rankfm.pyx":572
  *                             step_if = scale_step * diff_x_if
  *                             ctx.w_if_ptr[q] = ctx.w_if_ptr[q] * reg_b_keep + step_if
  *                             rfm_vec_reg_axpy(F, reg_b_keep, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -22260,7 +22270,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
               rfm_vec_reg_axpy(__pyx_v_F, __pyx_v_reg_b_keep, __pyx_v_step_if, __pyx_v_u_emb, (&(__pyx_v_ctx->v_if_ptr[(((int64_t)__pyx_v_q) * ((int64_t)__pyx_v_F))])));
 
-              /* "rankfm/_rankfm.pyx":567
+              /* "rankfm/_rankfm.pyx":569
  *                             rfm_vec_axpy(F, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
  *                     else:
  *                         if diff_x_if != 0.0:             # <<<<<<<<<<<<<<
@@ -22270,7 +22280,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
               goto __pyx_L58;
             }
 
-            /* "rankfm/_rankfm.pyx":572
+            /* "rankfm/_rankfm.pyx":574
  *                             rfm_vec_reg_axpy(F, reg_b_keep, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
  *                         else:
  *                             ctx.w_if_ptr[q] *= reg_b_keep             # <<<<<<<<<<<<<<
@@ -22282,7 +22292,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
               __pyx_t_4 = __pyx_v_q;
               (__pyx_v_ctx->w_if_ptr[__pyx_t_4]) = ((__pyx_v_ctx->w_if_ptr[__pyx_t_4]) * __pyx_v_reg_b_keep);
 
-              /* "rankfm/_rankfm.pyx":573
+              /* "rankfm/_rankfm.pyx":575
  *                         else:
  *                             ctx.w_if_ptr[q] *= reg_b_keep
  *                             rfm_vec_scale(F, reg_b_keep, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -22296,7 +22306,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
           __pyx_L55:;
         }
 
-        /* "rankfm/_rankfm.pyx":534
+        /* "rankfm/_rankfm.pyx":536
  * 
  *             # Sparse 2-pointer merge over non-zero item features of (i, j)
  *             if x_if_any:             # <<<<<<<<<<<<<<
@@ -22308,7 +22318,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
     }
 
 
-    /* "rankfm/_rankfm.pyx":575
+    /* "rankfm/_rankfm.pyx":577
  *                             rfm_vec_scale(F, reg_b_keep, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
  * 
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -22320,7 +22330,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
     if (__pyx_t_2) {
 
 
-      /* "rankfm/_rankfm.pyx":576
+      /* "rankfm/_rankfm.pyx":578
  * 
  *         if n_threads <= 1:
  *             break             # <<<<<<<<<<<<<<
@@ -22329,7 +22339,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
       goto __pyx_L5_break;
 
-      /* "rankfm/_rankfm.pyx":575
+      /* "rankfm/_rankfm.pyx":577
  *                             rfm_vec_scale(F, reg_b_keep, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
  * 
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -22340,7 +22350,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
   }
   __pyx_L5_break:;
 
-  /* "rankfm/_rankfm.pyx":578
+  /* "rankfm/_rankfm.pyx":580
  *             break
  * 
  *     if ctx.verbose:             # <<<<<<<<<<<<<<
@@ -22352,7 +22362,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
   if (__pyx_t_2) {
 
 
-    /* "rankfm/_rankfm.pyx":579
+    /* "rankfm/_rankfm.pyx":581
  * 
  *     if ctx.verbose:
  *         ctx.ll_slots[tid * 8] += local_ll             # <<<<<<<<<<<<<<
@@ -22363,7 +22373,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
     __pyx_t_13 = (__pyx_v_tid * 8);
     (__pyx_v_ctx->ll_slots[__pyx_t_13]) = ((__pyx_v_ctx->ll_slots[__pyx_t_13]) + __pyx_v_local_ll);
 
-    /* "rankfm/_rankfm.pyx":578
+    /* "rankfm/_rankfm.pyx":580
  *             break
  * 
  *     if ctx.verbose:             # <<<<<<<<<<<<<<
@@ -22372,7 +22382,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 */
   }
 
-  /* "rankfm/_rankfm.pyx":372
+  /* "rankfm/_rankfm.pyx":374
  * 
  * 
  * cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -22442,7 +22452,7 @@ static void __pyx_f_6rankfm_7_rankfm__fit_block_worker(int __pyx_v_tid, int __py
 
 }
 
-/* "rankfm/_rankfm.pyx":607
+/* "rankfm/_rankfm.pyx":609
  * 
  * 
  * cdef void _fold_in_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -22497,7 +22507,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
   long __pyx_t_10;
   int __pyx_t_11;
 
-  /* "rankfm/_rankfm.pyx":608
+  /* "rankfm/_rankfm.pyx":610
  * 
  * cdef void _fold_in_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef FoldInCtx *ctx = <FoldInCtx *>raw_ctx             # <<<<<<<<<<<<<<
@@ -22506,7 +22516,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
   __pyx_v_ctx = ((struct __pyx_t_6rankfm_7_rankfm_FoldInCtx *)__pyx_v_raw_ctx);
 
-  /* "rankfm/_rankfm.pyx":609
+  /* "rankfm/_rankfm.pyx":611
  * cdef void _fold_in_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef FoldInCtx *ctx = <FoldInCtx *>raw_ctx
  *     cdef int64_t N = ctx.N             # <<<<<<<<<<<<<<
@@ -22517,7 +22527,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 
   __pyx_v_N = __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":610
+  /* "rankfm/_rankfm.pyx":612
  *     cdef FoldInCtx *ctx = <FoldInCtx *>raw_ctx
  *     cdef int64_t N = ctx.N
  *     if N <= 0:             # <<<<<<<<<<<<<<
@@ -22529,7 +22539,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
   if (__pyx_t_2) {
 
 
-    /* "rankfm/_rankfm.pyx":611
+    /* "rankfm/_rankfm.pyx":613
  *     cdef int64_t N = ctx.N
  *     if N <= 0:
  *         return             # <<<<<<<<<<<<<<
@@ -22540,7 +22550,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":610
+    /* "rankfm/_rankfm.pyx":612
  *     cdef FoldInCtx *ctx = <FoldInCtx *>raw_ctx
  *     cdef int64_t N = ctx.N
  *     if N <= 0:             # <<<<<<<<<<<<<<
@@ -22549,7 +22559,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
   }
 
-  /* "rankfm/_rankfm.pyx":613
+  /* "rankfm/_rankfm.pyx":615
  *         return
  * 
  *     cdef int F = ctx.F             # <<<<<<<<<<<<<<
@@ -22560,7 +22570,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 
   __pyx_v_F = __pyx_t_3;
 
-  /* "rankfm/_rankfm.pyx":614
+  /* "rankfm/_rankfm.pyx":616
  * 
  *     cdef int F = ctx.F
  *     cdef int32_t I = ctx.I             # <<<<<<<<<<<<<<
@@ -22571,7 +22581,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 
   __pyx_v_I = __pyx_t_4;
 
-  /* "rankfm/_rankfm.pyx":615
+  /* "rankfm/_rankfm.pyx":617
  *     cdef int F = ctx.F
  *     cdef int32_t I = ctx.I
  *     cdef uint32_t uI = <uint32_t>I             # <<<<<<<<<<<<<<
@@ -22580,7 +22590,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
   __pyx_v_uI = ((uint32_t)__pyx_v_I);
 
-  /* "rankfm/_rankfm.pyx":616
+  /* "rankfm/_rankfm.pyx":618
  *     cdef int32_t I = ctx.I
  *     cdef uint32_t uI = <uint32_t>I
  *     cdef int max_samples = ctx.max_samples             # <<<<<<<<<<<<<<
@@ -22591,7 +22601,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 
   __pyx_v_max_samples = __pyx_t_3;
 
-  /* "rankfm/_rankfm.pyx":617
+  /* "rankfm/_rankfm.pyx":619
  *     cdef uint32_t uI = <uint32_t>I
  *     cdef int max_samples = ctx.max_samples
  *     cdef float eta = ctx.eta             # <<<<<<<<<<<<<<
@@ -22602,7 +22612,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 
   __pyx_v_eta = __pyx_t_5;
 
-  /* "rankfm/_rankfm.pyx":618
+  /* "rankfm/_rankfm.pyx":620
  *     cdef int max_samples = ctx.max_samples
  *     cdef float eta = ctx.eta
  *     cdef float reg_a_keep = ctx.reg_a_keep             # <<<<<<<<<<<<<<
@@ -22613,7 +22623,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 
   __pyx_v_reg_a_keep = __pyx_t_5;
 
-  /* "rankfm/_rankfm.pyx":619
+  /* "rankfm/_rankfm.pyx":621
  *     cdef float eta = ctx.eta
  *     cdef float reg_a_keep = ctx.reg_a_keep
  *     cdef int64_t grain = ctx.grain             # <<<<<<<<<<<<<<
@@ -22624,7 +22634,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 
   __pyx_v_grain = __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":621
+  /* "rankfm/_rankfm.pyx":623
  *     cdef int64_t grain = ctx.grain
  * 
  *     cdef float *u_emb = &ctx.scratch_base[<size_t>tid * ctx.scratch_stride]             # <<<<<<<<<<<<<<
@@ -22633,7 +22643,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
   __pyx_v_u_emb = (&(__pyx_v_ctx->scratch_base[(((size_t)__pyx_v_tid) * __pyx_v_ctx->scratch_stride)]));
 
-  /* "rankfm/_rankfm.pyx":622
+  /* "rankfm/_rankfm.pyx":624
  * 
  *     cdef float *u_emb = &ctx.scratch_base[<size_t>tid * ctx.scratch_stride]
  *     cdef float *diff_ij = &u_emb[F]             # <<<<<<<<<<<<<<
@@ -22642,7 +22652,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
   __pyx_v_diff_ij = (&(__pyx_v_u_emb[__pyx_v_F]));
 
-  /* "rankfm/_rankfm.pyx":635
+  /* "rankfm/_rankfm.pyx":637
  *     cdef const int32_t *u_seen_ptr
  * 
  *     while True:             # <<<<<<<<<<<<<<
@@ -22651,7 +22661,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
   while (1) {
 
-    /* "rankfm/_rankfm.pyx":636
+    /* "rankfm/_rankfm.pyx":638
  * 
  *     while True:
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -22663,7 +22673,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
     if (__pyx_t_2) {
 
 
-      /* "rankfm/_rankfm.pyx":637
+      /* "rankfm/_rankfm.pyx":639
  *     while True:
  *         if n_threads <= 1:
  *             c_start = 0             # <<<<<<<<<<<<<<
@@ -22672,7 +22682,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_c_start = 0;
 
-      /* "rankfm/_rankfm.pyx":638
+      /* "rankfm/_rankfm.pyx":640
  *         if n_threads <= 1:
  *             c_start = 0
  *             c_end = N             # <<<<<<<<<<<<<<
@@ -22681,7 +22691,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_c_end = __pyx_v_N;
 
-      /* "rankfm/_rankfm.pyx":636
+      /* "rankfm/_rankfm.pyx":638
  * 
  *     while True:
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -22691,7 +22701,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
       goto __pyx_L6;
     }
 
-    /* "rankfm/_rankfm.pyx":640
+    /* "rankfm/_rankfm.pyx":642
  *             c_end = N
  *         else:
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)             # <<<<<<<<<<<<<<
@@ -22701,7 +22711,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
     /*else*/ {
       __pyx_v_c_start = rfm_atomic_fetch_add_i64((&__pyx_v_ctx->cursor), __pyx_v_grain);
 
-      /* "rankfm/_rankfm.pyx":641
+      /* "rankfm/_rankfm.pyx":643
  *         else:
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)
  *             if c_start >= N:             # <<<<<<<<<<<<<<
@@ -22713,7 +22723,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":642
+        /* "rankfm/_rankfm.pyx":644
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)
  *             if c_start >= N:
  *                 break             # <<<<<<<<<<<<<<
@@ -22722,7 +22732,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
         goto __pyx_L5_break;
 
-        /* "rankfm/_rankfm.pyx":641
+        /* "rankfm/_rankfm.pyx":643
  *         else:
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)
  *             if c_start >= N:             # <<<<<<<<<<<<<<
@@ -22731,7 +22741,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       }
 
-      /* "rankfm/_rankfm.pyx":643
+      /* "rankfm/_rankfm.pyx":645
  *             if c_start >= N:
  *                 break
  *             c_end = c_start + grain             # <<<<<<<<<<<<<<
@@ -22740,7 +22750,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_c_end = (__pyx_v_c_start + __pyx_v_grain);
 
-      /* "rankfm/_rankfm.pyx":644
+      /* "rankfm/_rankfm.pyx":646
  *                 break
  *             c_end = c_start + grain
  *             if c_end > N:             # <<<<<<<<<<<<<<
@@ -22752,7 +22762,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":645
+        /* "rankfm/_rankfm.pyx":647
  *             c_end = c_start + grain
  *             if c_end > N:
  *                 c_end = N             # <<<<<<<<<<<<<<
@@ -22761,7 +22771,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
         __pyx_v_c_end = __pyx_v_N;
 
-        /* "rankfm/_rankfm.pyx":644
+        /* "rankfm/_rankfm.pyx":646
  *                 break
  *             c_end = c_start + grain
  *             if c_end > N:             # <<<<<<<<<<<<<<
@@ -22772,7 +22782,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
     }
     __pyx_L6:;
 
-    /* "rankfm/_rankfm.pyx":647
+    /* "rankfm/_rankfm.pyx":649
  *                 c_end = N
  * 
  *         rfm_rng_seed(&rng, ctx.base_seed, ctx.stream_epoch_base + <uint64_t>c_start)             # <<<<<<<<<<<<<<
@@ -22781,7 +22791,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
     rfm_rng_seed((&__pyx_v_rng), __pyx_v_ctx->base_seed, (__pyx_v_ctx->stream_epoch_base + ((uint64_t)__pyx_v_c_start)));
 
-    /* "rankfm/_rankfm.pyx":649
+    /* "rankfm/_rankfm.pyx":651
  *         rfm_rng_seed(&rng, ctx.base_seed, ctx.stream_epoch_base + <uint64_t>c_start)
  * 
  *         for r in range(c_start, c_end):             # <<<<<<<<<<<<<<
@@ -22795,7 +22805,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
     for (__pyx_t_7 = __pyx_v_c_start; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
       __pyx_v_r = __pyx_t_7;
 
-      /* "rankfm/_rankfm.pyx":650
+      /* "rankfm/_rankfm.pyx":652
  * 
  *         for r in range(c_start, c_end):
  *             row = ctx.shuf_ptr[r]             # <<<<<<<<<<<<<<
@@ -22804,7 +22814,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_row = (__pyx_v_ctx->shuf_ptr[__pyx_v_r]);
 
-      /* "rankfm/_rankfm.pyx":651
+      /* "rankfm/_rankfm.pyx":653
  *         for r in range(c_start, c_end):
  *             row = ctx.shuf_ptr[r]
  *             u = ctx.intx_ptr[row * 2]             # <<<<<<<<<<<<<<
@@ -22813,7 +22823,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_u = (__pyx_v_ctx->intx_ptr[(__pyx_v_row * 2)]);
 
-      /* "rankfm/_rankfm.pyx":652
+      /* "rankfm/_rankfm.pyx":654
  *             row = ctx.shuf_ptr[r]
  *             u = ctx.intx_ptr[row * 2]
  *             i = ctx.intx_ptr[row * 2 + 1]             # <<<<<<<<<<<<<<
@@ -22822,7 +22832,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_i = (__pyx_v_ctx->intx_ptr[((__pyx_v_row * 2) + 1)]);
 
-      /* "rankfm/_rankfm.pyx":653
+      /* "rankfm/_rankfm.pyx":655
  *             u = ctx.intx_ptr[row * 2]
  *             i = ctx.intx_ptr[row * 2 + 1]
  *             sw = ctx.sw_ptr[row]             # <<<<<<<<<<<<<<
@@ -22831,7 +22841,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_sw = (__pyx_v_ctx->sw_ptr[__pyx_v_row]);
 
-      /* "rankfm/_rankfm.pyx":655
+      /* "rankfm/_rankfm.pyx":657
  *             sw = ctx.sw_ptr[row]
  * 
  *             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]             # <<<<<<<<<<<<<<
@@ -22840,7 +22850,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_n_seen_u = ((__pyx_v_ctx->ui_indptr_ptr[(__pyx_v_u + 1)]) - (__pyx_v_ctx->ui_indptr_ptr[__pyx_v_u]));
 
-      /* "rankfm/_rankfm.pyx":656
+      /* "rankfm/_rankfm.pyx":658
  * 
  *             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]
  *             if n_seen_u >= I:             # <<<<<<<<<<<<<<
@@ -22852,7 +22862,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":657
+        /* "rankfm/_rankfm.pyx":659
  *             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]
  *             if n_seen_u >= I:
  *                 continue             # <<<<<<<<<<<<<<
@@ -22861,7 +22871,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
         goto __pyx_L9_continue;
 
-        /* "rankfm/_rankfm.pyx":656
+        /* "rankfm/_rankfm.pyx":658
  * 
  *             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]
  *             if n_seen_u >= I:             # <<<<<<<<<<<<<<
@@ -22870,7 +22880,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       }
 
-      /* "rankfm/_rankfm.pyx":658
+      /* "rankfm/_rankfm.pyx":660
  *             if n_seen_u >= I:
  *                 continue
  *             u_seen_ptr = &ctx.ui_indices_ptr[ctx.ui_indptr_ptr[u]] if ctx.ui_indices_ptr != NULL else NULL             # <<<<<<<<<<<<<<
@@ -22889,7 +22899,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 
       __pyx_v_u_seen_ptr = __pyx_t_8;
 
-      /* "rankfm/_rankfm.pyx":660
+      /* "rankfm/_rankfm.pyx":662
  *             u_seen_ptr = &ctx.ui_indices_ptr[ctx.ui_indptr_ptr[u]] if ctx.ui_indices_ptr != NULL else NULL
  * 
  *             v_u_row = &ctx.v_u_ptr[<int64_t>u * <int64_t>F]             # <<<<<<<<<<<<<<
@@ -22898,7 +22908,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_v_u_row = (&(__pyx_v_ctx->v_u_ptr[(((int64_t)__pyx_v_u) * ((int64_t)__pyx_v_F))]));
 
-      /* "rankfm/_rankfm.pyx":661
+      /* "rankfm/_rankfm.pyx":663
  * 
  *             v_u_row = &ctx.v_u_ptr[<int64_t>u * <int64_t>F]
  *             u_feat_row = &ctx.u_feat_ptr[<int64_t>u * <int64_t>F]             # <<<<<<<<<<<<<<
@@ -22907,7 +22917,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_u_feat_row = (&(__pyx_v_ctx->u_feat_ptr[(((int64_t)__pyx_v_u) * ((int64_t)__pyx_v_F))]));
 
-      /* "rankfm/_rankfm.pyx":662
+      /* "rankfm/_rankfm.pyx":664
  *             v_u_row = &ctx.v_u_ptr[<int64_t>u * <int64_t>F]
  *             u_feat_row = &ctx.u_feat_ptr[<int64_t>u * <int64_t>F]
  *             rfm_vec_add(F, v_u_row, u_feat_row, u_emb)             # <<<<<<<<<<<<<<
@@ -22916,7 +22926,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       rfm_vec_add(__pyx_v_F, __pyx_v_v_u_row, __pyx_v_u_feat_row, __pyx_v_u_emb);
 
-      /* "rankfm/_rankfm.pyx":664
+      /* "rankfm/_rankfm.pyx":666
  *             rfm_vec_add(F, v_u_row, u_feat_row, u_emb)
  * 
  *             v_i_row = &ctx.v_i_eff_ptr[<int64_t>i * <int64_t>F]             # <<<<<<<<<<<<<<
@@ -22925,7 +22935,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_v_i_row = (&(__pyx_v_ctx->v_i_eff_ptr[(((int64_t)__pyx_v_i) * ((int64_t)__pyx_v_F))]));
 
-      /* "rankfm/_rankfm.pyx":665
+      /* "rankfm/_rankfm.pyx":667
  * 
  *             v_i_row = &ctx.v_i_eff_ptr[<int64_t>i * <int64_t>F]
  *             ut_ui = ctx.item_bias_ptr[i] + rfm_dot(F, u_emb, v_i_row)             # <<<<<<<<<<<<<<
@@ -22934,7 +22944,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_ut_ui = ((__pyx_v_ctx->item_bias_ptr[__pyx_v_i]) + rfm_dot(__pyx_v_F, __pyx_v_u_emb, __pyx_v_v_i_row));
 
-      /* "rankfm/_rankfm.pyx":667
+      /* "rankfm/_rankfm.pyx":669
  *             ut_ui = ctx.item_bias_ptr[i] + rfm_dot(F, u_emb, v_i_row)
  * 
  *             min_index = -1             # <<<<<<<<<<<<<<
@@ -22943,7 +22953,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_min_index = -1;
 
-      /* "rankfm/_rankfm.pyx":668
+      /* "rankfm/_rankfm.pyx":670
  * 
  *             min_index = -1
  *             min_pairwise_utility = 1e6             # <<<<<<<<<<<<<<
@@ -22952,7 +22962,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_min_pairwise_utility = 1e6;
 
-      /* "rankfm/_rankfm.pyx":670
+      /* "rankfm/_rankfm.pyx":672
  *             min_pairwise_utility = 1e6
  * 
  *             for sampled in range(1, max_samples + 1):             # <<<<<<<<<<<<<<
@@ -22966,7 +22976,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
       for (__pyx_t_3 = 1; __pyx_t_3 < __pyx_t_10; __pyx_t_3+=1) {
         __pyx_v_sampled = __pyx_t_3;
 
-        /* "rankfm/_rankfm.pyx":671
+        /* "rankfm/_rankfm.pyx":673
  * 
  *             for sampled in range(1, max_samples + 1):
  *                 while True:             # <<<<<<<<<<<<<<
@@ -22975,7 +22985,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
         while (1) {
 
-          /* "rankfm/_rankfm.pyx":672
+          /* "rankfm/_rankfm.pyx":674
  *             for sampled in range(1, max_samples + 1):
  *                 while True:
  *                     j = <int32_t>rfm_rng_bounded(&rng, uI)             # <<<<<<<<<<<<<<
@@ -22984,7 +22994,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
           __pyx_v_j = ((int32_t)rfm_rng_bounded((&__pyx_v_rng), __pyx_v_uI));
 
-          /* "rankfm/_rankfm.pyx":673
+          /* "rankfm/_rankfm.pyx":675
  *                 while True:
  *                     j = <int32_t>rfm_rng_bounded(&rng, uI)
  *                     if u_seen_ptr == NULL or not item_observed(j, u_seen_ptr, n_seen_u):             # <<<<<<<<<<<<<<
@@ -23010,7 +23020,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
           if (__pyx_t_2) {
 
 
-            /* "rankfm/_rankfm.pyx":674
+            /* "rankfm/_rankfm.pyx":676
  *                     j = <int32_t>rfm_rng_bounded(&rng, uI)
  *                     if u_seen_ptr == NULL or not item_observed(j, u_seen_ptr, n_seen_u):
  *                         break             # <<<<<<<<<<<<<<
@@ -23019,7 +23029,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
             goto __pyx_L15_break;
 
-            /* "rankfm/_rankfm.pyx":673
+            /* "rankfm/_rankfm.pyx":675
  *                 while True:
  *                     j = <int32_t>rfm_rng_bounded(&rng, uI)
  *                     if u_seen_ptr == NULL or not item_observed(j, u_seen_ptr, n_seen_u):             # <<<<<<<<<<<<<<
@@ -23030,7 +23040,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
         }
         __pyx_L15_break:;
 
-        /* "rankfm/_rankfm.pyx":676
+        /* "rankfm/_rankfm.pyx":678
  *                         break
  * 
  *                 ut_uj = ctx.item_bias_ptr[j] + rfm_dot(F, u_emb, &ctx.v_i_eff_ptr[<int64_t>j * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -23039,7 +23049,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
         __pyx_v_ut_uj = ((__pyx_v_ctx->item_bias_ptr[__pyx_v_j]) + rfm_dot(__pyx_v_F, __pyx_v_u_emb, (&(__pyx_v_ctx->v_i_eff_ptr[(((int64_t)__pyx_v_j) * ((int64_t)__pyx_v_F))]))));
 
-        /* "rankfm/_rankfm.pyx":677
+        /* "rankfm/_rankfm.pyx":679
  * 
  *                 ut_uj = ctx.item_bias_ptr[j] + rfm_dot(F, u_emb, &ctx.v_i_eff_ptr[<int64_t>j * <int64_t>F])
  *                 pairwise_utility = ut_ui - ut_uj             # <<<<<<<<<<<<<<
@@ -23048,7 +23058,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
         __pyx_v_pairwise_utility = (__pyx_v_ut_ui - __pyx_v_ut_uj);
 
-        /* "rankfm/_rankfm.pyx":679
+        /* "rankfm/_rankfm.pyx":681
  *                 pairwise_utility = ut_ui - ut_uj
  * 
  *                 if min_index == -1 or pairwise_utility < min_pairwise_utility:             # <<<<<<<<<<<<<<
@@ -23074,7 +23084,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
         if (__pyx_t_2) {
 
 
-          /* "rankfm/_rankfm.pyx":680
+          /* "rankfm/_rankfm.pyx":682
  * 
  *                 if min_index == -1 or pairwise_utility < min_pairwise_utility:
  *                     min_index = j             # <<<<<<<<<<<<<<
@@ -23083,7 +23093,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
           __pyx_v_min_index = __pyx_v_j;
 
-          /* "rankfm/_rankfm.pyx":681
+          /* "rankfm/_rankfm.pyx":683
  *                 if min_index == -1 or pairwise_utility < min_pairwise_utility:
  *                     min_index = j
  *                     min_pairwise_utility = pairwise_utility             # <<<<<<<<<<<<<<
@@ -23092,7 +23102,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
           __pyx_v_min_pairwise_utility = __pyx_v_pairwise_utility;
 
-          /* "rankfm/_rankfm.pyx":679
+          /* "rankfm/_rankfm.pyx":681
  *                 pairwise_utility = ut_ui - ut_uj
  * 
  *                 if min_index == -1 or pairwise_utility < min_pairwise_utility:             # <<<<<<<<<<<<<<
@@ -23101,7 +23111,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
         }
 
-        /* "rankfm/_rankfm.pyx":683
+        /* "rankfm/_rankfm.pyx":685
  *                     min_pairwise_utility = pairwise_utility
  * 
  *                 if pairwise_utility < 1.0:             # <<<<<<<<<<<<<<
@@ -23113,7 +23123,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
         if (__pyx_t_2) {
 
 
-          /* "rankfm/_rankfm.pyx":684
+          /* "rankfm/_rankfm.pyx":686
  * 
  *                 if pairwise_utility < 1.0:
  *                     break             # <<<<<<<<<<<<<<
@@ -23122,7 +23132,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
           goto __pyx_L13_break;
 
-          /* "rankfm/_rankfm.pyx":683
+          /* "rankfm/_rankfm.pyx":685
  *                     min_pairwise_utility = pairwise_utility
  * 
  *                 if pairwise_utility < 1.0:             # <<<<<<<<<<<<<<
@@ -23134,7 +23144,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
       __pyx_L13_break:;
 
 
-      /* "rankfm/_rankfm.pyx":686
+      /* "rankfm/_rankfm.pyx":688
  *                     break
  * 
  *             j = min_index             # <<<<<<<<<<<<<<
@@ -23143,7 +23153,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_j = __pyx_v_min_index;
 
-      /* "rankfm/_rankfm.pyx":687
+      /* "rankfm/_rankfm.pyx":689
  * 
  *             j = min_index
  *             pairwise_utility = min_pairwise_utility             # <<<<<<<<<<<<<<
@@ -23152,7 +23162,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_pairwise_utility = __pyx_v_min_pairwise_utility;
 
-      /* "rankfm/_rankfm.pyx":688
+      /* "rankfm/_rankfm.pyx":690
  *             j = min_index
  *             pairwise_utility = min_pairwise_utility
  *             d_outer = safe_sigmoid_neg(pairwise_utility)             # <<<<<<<<<<<<<<
@@ -23161,7 +23171,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_d_outer = __pyx_f_6rankfm_7_rankfm_safe_sigmoid_neg(__pyx_v_pairwise_utility);
 
-      /* "rankfm/_rankfm.pyx":689
+      /* "rankfm/_rankfm.pyx":691
  *             pairwise_utility = min_pairwise_utility
  *             d_outer = safe_sigmoid_neg(pairwise_utility)
  *             scale_step = eta * sw * ctx.mult_lut_ptr[sampled] * d_outer             # <<<<<<<<<<<<<<
@@ -23170,7 +23180,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_scale_step = (((__pyx_v_eta * __pyx_v_sw) * (__pyx_v_ctx->mult_lut_ptr[__pyx_v_sampled])) * __pyx_v_d_outer);
 
-      /* "rankfm/_rankfm.pyx":690
+      /* "rankfm/_rankfm.pyx":692
  *             d_outer = safe_sigmoid_neg(pairwise_utility)
  *             scale_step = eta * sw * ctx.mult_lut_ptr[sampled] * d_outer
  *             v_j_row = &ctx.v_i_eff_ptr[<int64_t>j * <int64_t>F]             # <<<<<<<<<<<<<<
@@ -23179,7 +23189,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       __pyx_v_v_j_row = (&(__pyx_v_ctx->v_i_eff_ptr[(((int64_t)__pyx_v_j) * ((int64_t)__pyx_v_F))]));
 
-      /* "rankfm/_rankfm.pyx":692
+      /* "rankfm/_rankfm.pyx":694
  *             v_j_row = &ctx.v_i_eff_ptr[<int64_t>j * <int64_t>F]
  * 
  *             rfm_vec_sub(F, v_i_row, v_j_row, diff_ij)             # <<<<<<<<<<<<<<
@@ -23188,7 +23198,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       rfm_vec_sub(__pyx_v_F, __pyx_v_v_i_row, __pyx_v_v_j_row, __pyx_v_diff_ij);
 
-      /* "rankfm/_rankfm.pyx":693
+      /* "rankfm/_rankfm.pyx":695
  * 
  *             rfm_vec_sub(F, v_i_row, v_j_row, diff_ij)
  *             rfm_vec_reg_axpy(F, reg_a_keep, scale_step, diff_ij, v_u_row)             # <<<<<<<<<<<<<<
@@ -23200,7 +23210,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
     }
 
 
-    /* "rankfm/_rankfm.pyx":695
+    /* "rankfm/_rankfm.pyx":697
  *             rfm_vec_reg_axpy(F, reg_a_keep, scale_step, diff_ij, v_u_row)
  * 
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -23212,7 +23222,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
     if (__pyx_t_2) {
 
 
-      /* "rankfm/_rankfm.pyx":696
+      /* "rankfm/_rankfm.pyx":698
  * 
  *         if n_threads <= 1:
  *             break             # <<<<<<<<<<<<<<
@@ -23221,7 +23231,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 */
       goto __pyx_L5_break;
 
-      /* "rankfm/_rankfm.pyx":695
+      /* "rankfm/_rankfm.pyx":697
  *             rfm_vec_reg_axpy(F, reg_a_keep, scale_step, diff_ij, v_u_row)
  * 
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -23232,7 +23242,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
   }
   __pyx_L5_break:;
 
-  /* "rankfm/_rankfm.pyx":607
+  /* "rankfm/_rankfm.pyx":609
  * 
  * 
  * cdef void _fold_in_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -23278,7 +23288,7 @@ static void __pyx_f_6rankfm_7_rankfm__fold_in_worker(int __pyx_v_tid, int __pyx_
 
 }
 
-/* "rankfm/_rankfm.pyx":710
+/* "rankfm/_rankfm.pyx":712
  * 
  * 
  * cdef void _predict_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -23301,7 +23311,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
   int __pyx_t_5;
   int __pyx_t_6;
 
-  /* "rankfm/_rankfm.pyx":711
+  /* "rankfm/_rankfm.pyx":713
  * 
  * cdef void _predict_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef PredictCtx *ctx = <PredictCtx *>raw_ctx             # <<<<<<<<<<<<<<
@@ -23310,7 +23320,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
 */
   __pyx_v_ctx = ((struct __pyx_t_6rankfm_7_rankfm_PredictCtx *)__pyx_v_raw_ctx);
 
-  /* "rankfm/_rankfm.pyx":712
+  /* "rankfm/_rankfm.pyx":714
  * cdef void _predict_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef PredictCtx *ctx = <PredictCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.N * tid) // n_threads             # <<<<<<<<<<<<<<
@@ -23319,7 +23329,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
 */
   __pyx_v_r_start = ((__pyx_v_ctx->N * __pyx_v_tid) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":713
+  /* "rankfm/_rankfm.pyx":715
  *     cdef PredictCtx *ctx = <PredictCtx *>raw_ctx
  *     cdef int64_t r_start = (ctx.N * tid) // n_threads
  *     cdef int64_t r_end = (ctx.N * (tid + 1)) // n_threads             # <<<<<<<<<<<<<<
@@ -23328,7 +23338,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
 */
   __pyx_v_r_end = ((__pyx_v_ctx->N * (__pyx_v_tid + 1)) / __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":714
+  /* "rankfm/_rankfm.pyx":716
  *     cdef int64_t r_start = (ctx.N * tid) // n_threads
  *     cdef int64_t r_end = (ctx.N * (tid + 1)) // n_threads
  *     cdef int F = ctx.F             # <<<<<<<<<<<<<<
@@ -23339,7 +23349,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
 
   __pyx_v_F = __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":718
+  /* "rankfm/_rankfm.pyx":720
  *     cdef int32_t u, i
  * 
  *     for row in range(r_start, r_end):             # <<<<<<<<<<<<<<
@@ -23353,7 +23363,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
   for (__pyx_t_4 = __pyx_v_r_start; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_row = __pyx_t_4;
 
-    /* "rankfm/_rankfm.pyx":719
+    /* "rankfm/_rankfm.pyx":721
  * 
  *     for row in range(r_start, r_end):
  *         u = ctx.u_ptr[row]             # <<<<<<<<<<<<<<
@@ -23362,7 +23372,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
 */
     __pyx_v_u = (__pyx_v_ctx->u_ptr[__pyx_v_row]);
 
-    /* "rankfm/_rankfm.pyx":720
+    /* "rankfm/_rankfm.pyx":722
  *     for row in range(r_start, r_end):
  *         u = ctx.u_ptr[row]
  *         i = ctx.i_ptr[row]             # <<<<<<<<<<<<<<
@@ -23371,7 +23381,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
 */
     __pyx_v_i = (__pyx_v_ctx->i_ptr[__pyx_v_row]);
 
-    /* "rankfm/_rankfm.pyx":721
+    /* "rankfm/_rankfm.pyx":723
  *         u = ctx.u_ptr[row]
  *         i = ctx.i_ptr[row]
  *         if u >= 0 and i >= 0:             # <<<<<<<<<<<<<<
@@ -23397,7 +23407,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
     if (__pyx_t_5) {
 
 
-      /* "rankfm/_rankfm.pyx":722
+      /* "rankfm/_rankfm.pyx":724
  *         i = ctx.i_ptr[row]
  *         if u >= 0 and i >= 0:
  *             ctx.scores_ptr[row] = ctx.item_bias_ptr[i] + rfm_dot(             # <<<<<<<<<<<<<<
@@ -23406,7 +23416,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
 */
       (__pyx_v_ctx->scores_ptr[__pyx_v_row]) = ((__pyx_v_ctx->item_bias_ptr[__pyx_v_i]) + rfm_dot(__pyx_v_F, (&(__pyx_v_ctx->u_emb_ptr[(((int64_t)__pyx_v_u) * ((int64_t)__pyx_v_F))])), (&(__pyx_v_ctx->v_i_eff_ptr[(((int64_t)__pyx_v_i) * ((int64_t)__pyx_v_F))]))));
 
-      /* "rankfm/_rankfm.pyx":721
+      /* "rankfm/_rankfm.pyx":723
  *         u = ctx.u_ptr[row]
  *         i = ctx.i_ptr[row]
  *         if u >= 0 and i >= 0:             # <<<<<<<<<<<<<<
@@ -23417,7 +23427,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
   }
 
 
-  /* "rankfm/_rankfm.pyx":710
+  /* "rankfm/_rankfm.pyx":712
  * 
  * 
  * cdef void _predict_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -23435,7 +23445,7 @@ static void __pyx_f_6rankfm_7_rankfm__predict_worker(int __pyx_v_tid, int __pyx_
 
 }
 
-/* "rankfm/_rankfm.pyx":744
+/* "rankfm/_rankfm.pyx":746
  * 
  * 
  * cdef void _select_topk_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -23478,7 +23488,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
   int64_t __pyx_t_12;
   int64_t __pyx_t_13;
 
-  /* "rankfm/_rankfm.pyx":745
+  /* "rankfm/_rankfm.pyx":747
  * 
  * cdef void _select_topk_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef TopKChunkCtx *ctx = <TopKChunkCtx *>raw_ctx             # <<<<<<<<<<<<<<
@@ -23487,7 +23497,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   __pyx_v_ctx = ((struct __pyx_t_6rankfm_7_rankfm_TopKChunkCtx *)__pyx_v_raw_ctx);
 
-  /* "rankfm/_rankfm.pyx":746
+  /* "rankfm/_rankfm.pyx":748
  * cdef void _select_topk_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
  *     cdef TopKChunkCtx *ctx = <TopKChunkCtx *>raw_ctx
  *     cdef int64_t B = ctx.B             # <<<<<<<<<<<<<<
@@ -23498,7 +23508,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 
   __pyx_v_B = __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":747
+  /* "rankfm/_rankfm.pyx":749
  *     cdef TopKChunkCtx *ctx = <TopKChunkCtx *>raw_ctx
  *     cdef int64_t B = ctx.B
  *     if B <= 0:             # <<<<<<<<<<<<<<
@@ -23510,7 +23520,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
   if (__pyx_t_2) {
 
 
-    /* "rankfm/_rankfm.pyx":748
+    /* "rankfm/_rankfm.pyx":750
  *     cdef int64_t B = ctx.B
  *     if B <= 0:
  *         return             # <<<<<<<<<<<<<<
@@ -23521,7 +23531,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":747
+    /* "rankfm/_rankfm.pyx":749
  *     cdef TopKChunkCtx *ctx = <TopKChunkCtx *>raw_ctx
  *     cdef int64_t B = ctx.B
  *     if B <= 0:             # <<<<<<<<<<<<<<
@@ -23530,7 +23540,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   }
 
-  /* "rankfm/_rankfm.pyx":750
+  /* "rankfm/_rankfm.pyx":752
  *         return
  * 
  *     cdef int32_t I = ctx.I             # <<<<<<<<<<<<<<
@@ -23541,7 +23551,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 
   __pyx_v_I = __pyx_t_3;
 
-  /* "rankfm/_rankfm.pyx":751
+  /* "rankfm/_rankfm.pyx":753
  * 
  *     cdef int32_t I = ctx.I
  *     cdef int32_t K = ctx.K             # <<<<<<<<<<<<<<
@@ -23552,7 +23562,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 
   __pyx_v_K = __pyx_t_3;
 
-  /* "rankfm/_rankfm.pyx":752
+  /* "rankfm/_rankfm.pyx":754
  *     cdef int32_t I = ctx.I
  *     cdef int32_t K = ctx.K
  *     cdef int filter_previous = ctx.filter_previous             # <<<<<<<<<<<<<<
@@ -23563,7 +23573,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 
   __pyx_v_filter_previous = __pyx_t_4;
 
-  /* "rankfm/_rankfm.pyx":753
+  /* "rankfm/_rankfm.pyx":755
  *     cdef int32_t K = ctx.K
  *     cdef int filter_previous = ctx.filter_previous
  *     cdef int64_t grain = ctx.grain             # <<<<<<<<<<<<<<
@@ -23574,7 +23584,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 
   __pyx_v_grain = __pyx_t_1;
 
-  /* "rankfm/_rankfm.pyx":755
+  /* "rankfm/_rankfm.pyx":757
  *     cdef int64_t grain = ctx.grain
  * 
  *     cdef float *heap_s = <float *>rfm_aligned_malloc(<size_t>K * sizeof(float))             # <<<<<<<<<<<<<<
@@ -23583,7 +23593,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   __pyx_v_heap_s = ((float *)rfm_aligned_malloc((((size_t)__pyx_v_K) * (sizeof(float)))));
 
-  /* "rankfm/_rankfm.pyx":756
+  /* "rankfm/_rankfm.pyx":758
  * 
  *     cdef float *heap_s = <float *>rfm_aligned_malloc(<size_t>K * sizeof(float))
  *     cdef int32_t *heap_i = <int32_t *>rfm_aligned_malloc(<size_t>K * sizeof(int32_t))             # <<<<<<<<<<<<<<
@@ -23592,7 +23602,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   __pyx_v_heap_i = ((int32_t *)rfm_aligned_malloc((((size_t)__pyx_v_K) * (sizeof(int32_t)))));
 
-  /* "rankfm/_rankfm.pyx":757
+  /* "rankfm/_rankfm.pyx":759
  *     cdef float *heap_s = <float *>rfm_aligned_malloc(<size_t>K * sizeof(float))
  *     cdef int32_t *heap_i = <int32_t *>rfm_aligned_malloc(<size_t>K * sizeof(int32_t))
  *     cdef int64_t *seen_tag = <int64_t *>rfm_aligned_malloc(<size_t>I * sizeof(int64_t)) if filter_previous else NULL             # <<<<<<<<<<<<<<
@@ -23611,7 +23621,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 
   __pyx_v_seen_tag = __pyx_t_5;
 
-  /* "rankfm/_rankfm.pyx":759
+  /* "rankfm/_rankfm.pyx":761
  *     cdef int64_t *seen_tag = <int64_t *>rfm_aligned_malloc(<size_t>I * sizeof(int64_t)) if filter_previous else NULL
  * 
  *     if heap_s == NULL or heap_i == NULL or (filter_previous and seen_tag == NULL):             # <<<<<<<<<<<<<<
@@ -23657,7 +23667,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
   if (__pyx_t_2) {
 
 
-    /* "rankfm/_rankfm.pyx":760
+    /* "rankfm/_rankfm.pyx":762
  * 
  *     if heap_s == NULL or heap_i == NULL or (filter_previous and seen_tag == NULL):
  *         rfm_aligned_free(heap_s)             # <<<<<<<<<<<<<<
@@ -23666,7 +23676,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
     rfm_aligned_free(__pyx_v_heap_s);
 
-    /* "rankfm/_rankfm.pyx":761
+    /* "rankfm/_rankfm.pyx":763
  *     if heap_s == NULL or heap_i == NULL or (filter_previous and seen_tag == NULL):
  *         rfm_aligned_free(heap_s)
  *         rfm_aligned_free(heap_i)             # <<<<<<<<<<<<<<
@@ -23675,7 +23685,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
     rfm_aligned_free(__pyx_v_heap_i);
 
-    /* "rankfm/_rankfm.pyx":762
+    /* "rankfm/_rankfm.pyx":764
  *         rfm_aligned_free(heap_s)
  *         rfm_aligned_free(heap_i)
  *         rfm_aligned_free(seen_tag)             # <<<<<<<<<<<<<<
@@ -23684,7 +23694,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
     rfm_aligned_free(__pyx_v_seen_tag);
 
-    /* "rankfm/_rankfm.pyx":763
+    /* "rankfm/_rankfm.pyx":765
  *         rfm_aligned_free(heap_i)
  *         rfm_aligned_free(seen_tag)
  *         return             # <<<<<<<<<<<<<<
@@ -23695,7 +23705,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":759
+    /* "rankfm/_rankfm.pyx":761
  *     cdef int64_t *seen_tag = <int64_t *>rfm_aligned_malloc(<size_t>I * sizeof(int64_t)) if filter_previous else NULL
  * 
  *     if heap_s == NULL or heap_i == NULL or (filter_previous and seen_tag == NULL):             # <<<<<<<<<<<<<<
@@ -23704,7 +23714,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   }
 
-  /* "rankfm/_rankfm.pyx":771
+  /* "rankfm/_rankfm.pyx":773
  *     cdef int32_t *row_out
  * 
  *     if filter_previous:             # <<<<<<<<<<<<<<
@@ -23716,7 +23726,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
   if (__pyx_t_2) {
 
 
-    /* "rankfm/_rankfm.pyx":772
+    /* "rankfm/_rankfm.pyx":774
  * 
  *     if filter_previous:
  *         for i in range(I):             # <<<<<<<<<<<<<<
@@ -23730,7 +23740,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
       __pyx_v_i = __pyx_t_8;
 
-      /* "rankfm/_rankfm.pyx":773
+      /* "rankfm/_rankfm.pyx":775
  *     if filter_previous:
  *         for i in range(I):
  *             seen_tag[i] = -1             # <<<<<<<<<<<<<<
@@ -23741,7 +23751,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     }
 
 
-    /* "rankfm/_rankfm.pyx":771
+    /* "rankfm/_rankfm.pyx":773
  *     cdef int32_t *row_out
  * 
  *     if filter_previous:             # <<<<<<<<<<<<<<
@@ -23750,7 +23760,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   }
 
-  /* "rankfm/_rankfm.pyx":775
+  /* "rankfm/_rankfm.pyx":777
  *             seen_tag[i] = -1
  * 
  *     while True:             # <<<<<<<<<<<<<<
@@ -23759,7 +23769,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   while (1) {
 
-    /* "rankfm/_rankfm.pyx":776
+    /* "rankfm/_rankfm.pyx":778
  * 
  *     while True:
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -23771,7 +23781,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     if (__pyx_t_2) {
 
 
-      /* "rankfm/_rankfm.pyx":777
+      /* "rankfm/_rankfm.pyx":779
  *     while True:
  *         if n_threads <= 1:
  *             c_start = 0             # <<<<<<<<<<<<<<
@@ -23780,7 +23790,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       __pyx_v_c_start = 0;
 
-      /* "rankfm/_rankfm.pyx":778
+      /* "rankfm/_rankfm.pyx":780
  *         if n_threads <= 1:
  *             c_start = 0
  *             c_end = B             # <<<<<<<<<<<<<<
@@ -23789,7 +23799,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       __pyx_v_c_end = __pyx_v_B;
 
-      /* "rankfm/_rankfm.pyx":776
+      /* "rankfm/_rankfm.pyx":778
  * 
  *     while True:
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -23799,7 +23809,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
       goto __pyx_L14;
     }
 
-    /* "rankfm/_rankfm.pyx":780
+    /* "rankfm/_rankfm.pyx":782
  *             c_end = B
  *         else:
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)             # <<<<<<<<<<<<<<
@@ -23809,7 +23819,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     /*else*/ {
       __pyx_v_c_start = rfm_atomic_fetch_add_i64((&__pyx_v_ctx->cursor), __pyx_v_grain);
 
-      /* "rankfm/_rankfm.pyx":781
+      /* "rankfm/_rankfm.pyx":783
  *         else:
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)
  *             if c_start >= B:             # <<<<<<<<<<<<<<
@@ -23821,7 +23831,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":782
+        /* "rankfm/_rankfm.pyx":784
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)
  *             if c_start >= B:
  *                 break             # <<<<<<<<<<<<<<
@@ -23830,7 +23840,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
         goto __pyx_L13_break;
 
-        /* "rankfm/_rankfm.pyx":781
+        /* "rankfm/_rankfm.pyx":783
  *         else:
  *             c_start = rfm_atomic_fetch_add_i64(&ctx.cursor, grain)
  *             if c_start >= B:             # <<<<<<<<<<<<<<
@@ -23839,7 +23849,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       }
 
-      /* "rankfm/_rankfm.pyx":783
+      /* "rankfm/_rankfm.pyx":785
  *             if c_start >= B:
  *                 break
  *             c_end = c_start + grain             # <<<<<<<<<<<<<<
@@ -23848,7 +23858,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       __pyx_v_c_end = (__pyx_v_c_start + __pyx_v_grain);
 
-      /* "rankfm/_rankfm.pyx":784
+      /* "rankfm/_rankfm.pyx":786
  *                 break
  *             c_end = c_start + grain
  *             if c_end > B:             # <<<<<<<<<<<<<<
@@ -23860,7 +23870,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":785
+        /* "rankfm/_rankfm.pyx":787
  *             c_end = c_start + grain
  *             if c_end > B:
  *                 c_end = B             # <<<<<<<<<<<<<<
@@ -23869,7 +23879,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
         __pyx_v_c_end = __pyx_v_B;
 
-        /* "rankfm/_rankfm.pyx":784
+        /* "rankfm/_rankfm.pyx":786
  *                 break
  *             c_end = c_start + grain
  *             if c_end > B:             # <<<<<<<<<<<<<<
@@ -23880,7 +23890,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     }
     __pyx_L14:;
 
-    /* "rankfm/_rankfm.pyx":787
+    /* "rankfm/_rankfm.pyx":789
  *                 c_end = B
  * 
  *         for b in range(c_start, c_end):             # <<<<<<<<<<<<<<
@@ -23894,7 +23904,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     for (__pyx_t_10 = __pyx_v_c_start; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
       __pyx_v_b = __pyx_t_10;
 
-      /* "rankfm/_rankfm.pyx":788
+      /* "rankfm/_rankfm.pyx":790
  * 
  *         for b in range(c_start, c_end):
  *             u = ctx.u_ptr[b]             # <<<<<<<<<<<<<<
@@ -23903,7 +23913,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       __pyx_v_u = (__pyx_v_ctx->u_ptr[__pyx_v_b]);
 
-      /* "rankfm/_rankfm.pyx":789
+      /* "rankfm/_rankfm.pyx":791
  *         for b in range(c_start, c_end):
  *             u = ctx.u_ptr[b]
  *             row_scores = &ctx.scores_ptr[b * <int64_t>I]             # <<<<<<<<<<<<<<
@@ -23912,7 +23922,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       __pyx_v_row_scores = (&(__pyx_v_ctx->scores_ptr[(__pyx_v_b * ((int64_t)__pyx_v_I))]));
 
-      /* "rankfm/_rankfm.pyx":790
+      /* "rankfm/_rankfm.pyx":792
  *             u = ctx.u_ptr[b]
  *             row_scores = &ctx.scores_ptr[b * <int64_t>I]
  *             row_out = &ctx.out_ptr[b * <int64_t>K]             # <<<<<<<<<<<<<<
@@ -23921,7 +23931,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       __pyx_v_row_out = (&(__pyx_v_ctx->out_ptr[(__pyx_v_b * ((int64_t)__pyx_v_K))]));
 
-      /* "rankfm/_rankfm.pyx":792
+      /* "rankfm/_rankfm.pyx":794
  *             row_out = &ctx.out_ptr[b * <int64_t>K]
  * 
  *             if filter_previous and ctx.indices_ptr != NULL:             # <<<<<<<<<<<<<<
@@ -23947,7 +23957,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
       if (__pyx_t_2) {
 
 
-        /* "rankfm/_rankfm.pyx":793
+        /* "rankfm/_rankfm.pyx":795
  * 
  *             if filter_previous and ctx.indices_ptr != NULL:
  *                 for idx in range(ctx.indptr_ptr[u], ctx.indptr_ptr[u + 1]):             # <<<<<<<<<<<<<<
@@ -23961,7 +23971,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
         for (__pyx_t_13 = (__pyx_v_ctx->indptr_ptr[__pyx_v_u]); __pyx_t_13 < __pyx_t_12; __pyx_t_13+=1) {
           __pyx_v_idx = __pyx_t_13;
 
-          /* "rankfm/_rankfm.pyx":794
+          /* "rankfm/_rankfm.pyx":796
  *             if filter_previous and ctx.indices_ptr != NULL:
  *                 for idx in range(ctx.indptr_ptr[u], ctx.indptr_ptr[u + 1]):
  *                     seen_tag[ctx.indices_ptr[idx]] = b             # <<<<<<<<<<<<<<
@@ -23972,7 +23982,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
         }
 
 
-        /* "rankfm/_rankfm.pyx":792
+        /* "rankfm/_rankfm.pyx":794
  *             row_out = &ctx.out_ptr[b * <int64_t>K]
  * 
  *             if filter_previous and ctx.indices_ptr != NULL:             # <<<<<<<<<<<<<<
@@ -23981,7 +23991,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       }
 
-      /* "rankfm/_rankfm.pyx":796
+      /* "rankfm/_rankfm.pyx":798
  *                     seen_tag[ctx.indices_ptr[idx]] = b
  * 
  *             h_size = 0             # <<<<<<<<<<<<<<
@@ -23990,7 +24000,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       __pyx_v_h_size = 0;
 
-      /* "rankfm/_rankfm.pyx":797
+      /* "rankfm/_rankfm.pyx":799
  * 
  *             h_size = 0
  *             for i in range(I):             # <<<<<<<<<<<<<<
@@ -24004,7 +24014,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
       for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
         __pyx_v_i = __pyx_t_8;
 
-        /* "rankfm/_rankfm.pyx":798
+        /* "rankfm/_rankfm.pyx":800
  *             h_size = 0
  *             for i in range(I):
  *                 if filter_previous and seen_tag[i] == b:             # <<<<<<<<<<<<<<
@@ -24030,7 +24040,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
         if (__pyx_t_2) {
 
 
-          /* "rankfm/_rankfm.pyx":799
+          /* "rankfm/_rankfm.pyx":801
  *             for i in range(I):
  *                 if filter_previous and seen_tag[i] == b:
  *                     continue             # <<<<<<<<<<<<<<
@@ -24039,7 +24049,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           goto __pyx_L24_continue;
 
-          /* "rankfm/_rankfm.pyx":798
+          /* "rankfm/_rankfm.pyx":800
  *             h_size = 0
  *             for i in range(I):
  *                 if filter_previous and seen_tag[i] == b:             # <<<<<<<<<<<<<<
@@ -24048,7 +24058,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
         }
 
-        /* "rankfm/_rankfm.pyx":800
+        /* "rankfm/_rankfm.pyx":802
  *                 if filter_previous and seen_tag[i] == b:
  *                     continue
  *                 s = row_scores[i] + ctx.bias_ptr[i]             # <<<<<<<<<<<<<<
@@ -24057,7 +24067,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
         __pyx_v_s = ((__pyx_v_row_scores[__pyx_v_i]) + (__pyx_v_ctx->bias_ptr[__pyx_v_i]));
 
-        /* "rankfm/_rankfm.pyx":801
+        /* "rankfm/_rankfm.pyx":803
  *                     continue
  *                 s = row_scores[i] + ctx.bias_ptr[i]
  *                 if h_size < K:             # <<<<<<<<<<<<<<
@@ -24069,7 +24079,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
         if (__pyx_t_2) {
 
 
-          /* "rankfm/_rankfm.pyx":802
+          /* "rankfm/_rankfm.pyx":804
  *                 s = row_scores[i] + ctx.bias_ptr[i]
  *                 if h_size < K:
  *                     heap_s[h_size] = s             # <<<<<<<<<<<<<<
@@ -24078,7 +24088,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           (__pyx_v_heap_s[__pyx_v_h_size]) = __pyx_v_s;
 
-          /* "rankfm/_rankfm.pyx":803
+          /* "rankfm/_rankfm.pyx":805
  *                 if h_size < K:
  *                     heap_s[h_size] = s
  *                     heap_i[h_size] = i             # <<<<<<<<<<<<<<
@@ -24087,7 +24097,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           (__pyx_v_heap_i[__pyx_v_h_size]) = __pyx_v_i;
 
-          /* "rankfm/_rankfm.pyx":804
+          /* "rankfm/_rankfm.pyx":806
  *                     heap_s[h_size] = s
  *                     heap_i[h_size] = i
  *                     heap_sift_up(heap_s, heap_i, h_size)             # <<<<<<<<<<<<<<
@@ -24096,7 +24106,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           __pyx_f_6rankfm_7_rankfm_heap_sift_up(__pyx_v_heap_s, __pyx_v_heap_i, __pyx_v_h_size);
 
-          /* "rankfm/_rankfm.pyx":805
+          /* "rankfm/_rankfm.pyx":807
  *                     heap_i[h_size] = i
  *                     heap_sift_up(heap_s, heap_i, h_size)
  *                     h_size += 1             # <<<<<<<<<<<<<<
@@ -24105,7 +24115,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           __pyx_v_h_size = (__pyx_v_h_size + 1);
 
-          /* "rankfm/_rankfm.pyx":801
+          /* "rankfm/_rankfm.pyx":803
  *                     continue
  *                 s = row_scores[i] + ctx.bias_ptr[i]
  *                 if h_size < K:             # <<<<<<<<<<<<<<
@@ -24115,7 +24125,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
           goto __pyx_L29;
         }
 
-        /* "rankfm/_rankfm.pyx":806
+        /* "rankfm/_rankfm.pyx":808
  *                     heap_sift_up(heap_s, heap_i, h_size)
  *                     h_size += 1
  *                 elif s > heap_s[0]:             # <<<<<<<<<<<<<<
@@ -24127,7 +24137,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
         if (__pyx_t_2) {
 
 
-          /* "rankfm/_rankfm.pyx":807
+          /* "rankfm/_rankfm.pyx":809
  *                     h_size += 1
  *                 elif s > heap_s[0]:
  *                     heap_s[0] = s             # <<<<<<<<<<<<<<
@@ -24136,7 +24146,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           (__pyx_v_heap_s[0]) = __pyx_v_s;
 
-          /* "rankfm/_rankfm.pyx":808
+          /* "rankfm/_rankfm.pyx":810
  *                 elif s > heap_s[0]:
  *                     heap_s[0] = s
  *                     heap_i[0] = i             # <<<<<<<<<<<<<<
@@ -24145,7 +24155,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           (__pyx_v_heap_i[0]) = __pyx_v_i;
 
-          /* "rankfm/_rankfm.pyx":809
+          /* "rankfm/_rankfm.pyx":811
  *                     heap_s[0] = s
  *                     heap_i[0] = i
  *                     heap_sift_down(heap_s, heap_i, K, 0)             # <<<<<<<<<<<<<<
@@ -24154,7 +24164,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           __pyx_f_6rankfm_7_rankfm_heap_sift_down(__pyx_v_heap_s, __pyx_v_heap_i, __pyx_v_K, 0);
 
-          /* "rankfm/_rankfm.pyx":806
+          /* "rankfm/_rankfm.pyx":808
  *                     heap_sift_up(heap_s, heap_i, h_size)
  *                     h_size += 1
  *                 elif s > heap_s[0]:             # <<<<<<<<<<<<<<
@@ -24167,7 +24177,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
       }
 
 
-      /* "rankfm/_rankfm.pyx":811
+      /* "rankfm/_rankfm.pyx":813
  *                     heap_sift_down(heap_s, heap_i, K, 0)
  * 
  *             for k_idx in range(h_size, K):             # <<<<<<<<<<<<<<
@@ -24181,7 +24191,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
       for (__pyx_t_8 = __pyx_v_h_size; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
         __pyx_v_k_idx = __pyx_t_8;
 
-        /* "rankfm/_rankfm.pyx":812
+        /* "rankfm/_rankfm.pyx":814
  * 
  *             for k_idx in range(h_size, K):
  *                 row_out[k_idx] = -1             # <<<<<<<<<<<<<<
@@ -24192,7 +24202,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
       }
 
 
-      /* "rankfm/_rankfm.pyx":814
+      /* "rankfm/_rankfm.pyx":816
  *                 row_out[k_idx] = -1
  * 
  *             for k_idx in range(h_size - 1, -1, -1):             # <<<<<<<<<<<<<<
@@ -24202,7 +24212,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
       for (__pyx_t_3 = (__pyx_v_h_size - 1); __pyx_t_3 > -1; __pyx_t_3-=1) {
         __pyx_v_k_idx = __pyx_t_3;
 
-        /* "rankfm/_rankfm.pyx":815
+        /* "rankfm/_rankfm.pyx":817
  * 
  *             for k_idx in range(h_size - 1, -1, -1):
  *                 row_out[k_idx] = heap_i[0]             # <<<<<<<<<<<<<<
@@ -24211,7 +24221,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
         (__pyx_v_row_out[__pyx_v_k_idx]) = (__pyx_v_heap_i[0]);
 
-        /* "rankfm/_rankfm.pyx":816
+        /* "rankfm/_rankfm.pyx":818
  *             for k_idx in range(h_size - 1, -1, -1):
  *                 row_out[k_idx] = heap_i[0]
  *                 h_size -= 1             # <<<<<<<<<<<<<<
@@ -24220,7 +24230,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
         __pyx_v_h_size = (__pyx_v_h_size - 1);
 
-        /* "rankfm/_rankfm.pyx":817
+        /* "rankfm/_rankfm.pyx":819
  *                 row_out[k_idx] = heap_i[0]
  *                 h_size -= 1
  *                 if h_size > 0:             # <<<<<<<<<<<<<<
@@ -24232,7 +24242,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
         if (__pyx_t_2) {
 
 
-          /* "rankfm/_rankfm.pyx":818
+          /* "rankfm/_rankfm.pyx":820
  *                 h_size -= 1
  *                 if h_size > 0:
  *                     heap_s[0] = heap_s[h_size]             # <<<<<<<<<<<<<<
@@ -24241,7 +24251,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           (__pyx_v_heap_s[0]) = (__pyx_v_heap_s[__pyx_v_h_size]);
 
-          /* "rankfm/_rankfm.pyx":819
+          /* "rankfm/_rankfm.pyx":821
  *                 if h_size > 0:
  *                     heap_s[0] = heap_s[h_size]
  *                     heap_i[0] = heap_i[h_size]             # <<<<<<<<<<<<<<
@@ -24250,7 +24260,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           (__pyx_v_heap_i[0]) = (__pyx_v_heap_i[__pyx_v_h_size]);
 
-          /* "rankfm/_rankfm.pyx":820
+          /* "rankfm/_rankfm.pyx":822
  *                     heap_s[0] = heap_s[h_size]
  *                     heap_i[0] = heap_i[h_size]
  *                     heap_sift_down(heap_s, heap_i, h_size, 0)             # <<<<<<<<<<<<<<
@@ -24259,7 +24269,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
           __pyx_f_6rankfm_7_rankfm_heap_sift_down(__pyx_v_heap_s, __pyx_v_heap_i, __pyx_v_h_size, 0);
 
-          /* "rankfm/_rankfm.pyx":817
+          /* "rankfm/_rankfm.pyx":819
  *                 row_out[k_idx] = heap_i[0]
  *                 h_size -= 1
  *                 if h_size > 0:             # <<<<<<<<<<<<<<
@@ -24271,7 +24281,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     }
 
 
-    /* "rankfm/_rankfm.pyx":822
+    /* "rankfm/_rankfm.pyx":824
  *                     heap_sift_down(heap_s, heap_i, h_size, 0)
  * 
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -24283,7 +24293,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
     if (__pyx_t_2) {
 
 
-      /* "rankfm/_rankfm.pyx":823
+      /* "rankfm/_rankfm.pyx":825
  * 
  *         if n_threads <= 1:
  *             break             # <<<<<<<<<<<<<<
@@ -24292,7 +24302,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
       goto __pyx_L13_break;
 
-      /* "rankfm/_rankfm.pyx":822
+      /* "rankfm/_rankfm.pyx":824
  *                     heap_sift_down(heap_s, heap_i, h_size, 0)
  * 
  *         if n_threads <= 1:             # <<<<<<<<<<<<<<
@@ -24303,7 +24313,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
   }
   __pyx_L13_break:;
 
-  /* "rankfm/_rankfm.pyx":825
+  /* "rankfm/_rankfm.pyx":827
  *             break
  * 
  *     rfm_aligned_free(heap_s)             # <<<<<<<<<<<<<<
@@ -24312,7 +24322,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   rfm_aligned_free(__pyx_v_heap_s);
 
-  /* "rankfm/_rankfm.pyx":826
+  /* "rankfm/_rankfm.pyx":828
  * 
  *     rfm_aligned_free(heap_s)
  *     rfm_aligned_free(heap_i)             # <<<<<<<<<<<<<<
@@ -24321,7 +24331,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   rfm_aligned_free(__pyx_v_heap_i);
 
-  /* "rankfm/_rankfm.pyx":827
+  /* "rankfm/_rankfm.pyx":829
  *     rfm_aligned_free(heap_s)
  *     rfm_aligned_free(heap_i)
  *     rfm_aligned_free(seen_tag)             # <<<<<<<<<<<<<<
@@ -24330,7 +24340,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 */
   rfm_aligned_free(__pyx_v_seen_tag);
 
-  /* "rankfm/_rankfm.pyx":744
+  /* "rankfm/_rankfm.pyx":746
  * 
  * 
  * cdef void _select_topk_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -24362,7 +24372,7 @@ static void __pyx_f_6rankfm_7_rankfm__select_topk_worker(CYTHON_UNUSED int __pyx
 
 }
 
-/* "rankfm/_rankfm.pyx":834
+/* "rankfm/_rankfm.pyx":836
  * # -------------------------
  * 
  * def dense_to_csr(float[:, ::1] mat, int n_threads=1):             # <<<<<<<<<<<<<<
@@ -24411,48 +24421,48 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_mat,&__pyx_mstate_global->__pyx_n_u_n_threads,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 834, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 836, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 834, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 836, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 834, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 836, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "dense_to_csr", 0) < (0)) __PYX_ERR(0, 834, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "dense_to_csr", 0) < (0)) __PYX_ERR(0, 836, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("dense_to_csr", 0, 1, 2, i); __PYX_ERR(0, 834, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("dense_to_csr", 0, 1, 2, i); __PYX_ERR(0, 836, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 834, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 836, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 834, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 836, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_mat = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mat.memview)) __PYX_ERR(0, 834, __pyx_L3_error)
+    __pyx_v_mat = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_mat.memview)) __PYX_ERR(0, 836, __pyx_L3_error)
     if (values[1]) {
-      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 834, __pyx_L3_error)
+      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[1]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 836, __pyx_L3_error)
     } else {
       __pyx_v_n_threads = ((int)((int)1));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("dense_to_csr", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 834, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("dense_to_csr", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 836, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -24516,7 +24526,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dense_to_csr", 0);
 
-  /* "rankfm/_rankfm.pyx":837
+  /* "rankfm/_rankfm.pyx":839
  *     """convert a 2D float32 feature matrix into (int64 indptr, int32 indices, float32 data, has_any) via 2-pass C scan"""
  * 
  *     cdef int64_t n_rows = mat.shape[0]             # <<<<<<<<<<<<<<
@@ -24525,7 +24535,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
   __pyx_v_n_rows = (__pyx_v_mat.shape[0]);
 
-  /* "rankfm/_rankfm.pyx":838
+  /* "rankfm/_rankfm.pyx":840
  * 
  *     cdef int64_t n_rows = mat.shape[0]
  *     cdef int64_t n_cols = mat.shape[1]             # <<<<<<<<<<<<<<
@@ -24534,7 +24544,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
   __pyx_v_n_cols = (__pyx_v_mat.shape[1]);
 
-  /* "rankfm/_rankfm.pyx":840
+  /* "rankfm/_rankfm.pyx":842
  *     cdef int64_t n_cols = mat.shape[1]
  * 
  *     indptr = np.zeros(n_rows + 1, dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -24542,16 +24552,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
  *         return indptr, np.zeros(1, dtype=np.int32), np.zeros(1, dtype=np.float32), 0
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 840, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 842, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 840, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 842, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyLong_From_int64_t((__pyx_v_n_rows + 1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 840, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int64_t((__pyx_v_n_rows + 1)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 842, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 840, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 842, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 840, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 842, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   #if CYTHON_VECTORCALL
@@ -24572,13 +24582,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_t_3, __pyx_t_6};
     #if CYTHON_VECTORCALL
     __pyx_t_5 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 840, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 842, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_5);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_5 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 840, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 842, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
     }
     #endif
@@ -24590,13 +24600,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 840, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 842, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_indptr = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "rankfm/_rankfm.pyx":841
+  /* "rankfm/_rankfm.pyx":843
  * 
  *     indptr = np.zeros(n_rows + 1, dtype=np.int64)
  *     if n_rows == 0 or n_cols == 0:             # <<<<<<<<<<<<<<
@@ -24622,7 +24632,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
   if (__pyx_t_8) {
 
 
-    /* "rankfm/_rankfm.pyx":842
+    /* "rankfm/_rankfm.pyx":844
  *     indptr = np.zeros(n_rows + 1, dtype=np.int64)
  *     if n_rows == 0 or n_cols == 0:
  *         return indptr, np.zeros(1, dtype=np.int32), np.zeros(1, dtype=np.float32), 0             # <<<<<<<<<<<<<<
@@ -24630,14 +24640,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
  *     cdef int64_t[::1] indptr_mv = indptr
 */
     __pyx_t_4 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 842, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 842, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 842, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 842, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     #if CYTHON_VECTORCALL
@@ -24658,13 +24668,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_mstate_global->__pyx_int_1, __pyx_t_3};
       #if CYTHON_VECTORCALL
       __pyx_t_5 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 842, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 844, __pyx_L1_error)
       __Pyx_INCREF(__pyx_t_5);
       #else
       {
         PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
         __pyx_t_5 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 842, __pyx_L1_error)
+        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 844, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
       }
       #endif
@@ -24675,18 +24685,18 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 842, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 844, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
     __pyx_t_5 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 842, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 842, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 842, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 842, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     #if CYTHON_VECTORCALL
@@ -24707,13 +24717,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       PyObject *__pyx_callargs[3] = {__pyx_t_5, __pyx_mstate_global->__pyx_int_1, __pyx_t_2};
       #if CYTHON_VECTORCALL
       __pyx_t_3 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 842, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 844, __pyx_L1_error)
       __Pyx_INCREF(__pyx_t_3);
       #else
       {
         PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
         __pyx_t_3 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 842, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 844, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
       }
       #endif
@@ -24724,21 +24734,21 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 842, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 844, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
-    __pyx_t_4 = PyTuple_New(4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 842, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_v_indptr);
     __Pyx_GIVEREF(__pyx_v_indptr);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_indptr) != (0)) __PYX_ERR(0, 842, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_indptr) != (0)) __PYX_ERR(0, 844, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1) != (0)) __PYX_ERR(0, 842, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_1) != (0)) __PYX_ERR(0, 844, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_6);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_6) != (0)) __PYX_ERR(0, 842, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_6) != (0)) __PYX_ERR(0, 844, __pyx_L1_error);
     __Pyx_INCREF(__pyx_mstate_global->__pyx_int_0);
     __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_0);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 3, __pyx_mstate_global->__pyx_int_0) != (0)) __PYX_ERR(0, 842, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 3, __pyx_mstate_global->__pyx_int_0) != (0)) __PYX_ERR(0, 844, __pyx_L1_error);
     __pyx_t_1 = 0;
     __pyx_t_6 = 0;
     {
@@ -24752,7 +24762,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
     __pyx_t_4 = 0;
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":841
+    /* "rankfm/_rankfm.pyx":843
  * 
  *     indptr = np.zeros(n_rows + 1, dtype=np.int64)
  *     if n_rows == 0 or n_cols == 0:             # <<<<<<<<<<<<<<
@@ -24761,19 +24771,19 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
   }
 
-  /* "rankfm/_rankfm.pyx":844
+  /* "rankfm/_rankfm.pyx":846
  *         return indptr, np.zeros(1, dtype=np.int32), np.zeros(1, dtype=np.float32), 0
  * 
  *     cdef int64_t[::1] indptr_mv = indptr             # <<<<<<<<<<<<<<
  *     cdef DenseCsrCtx ctx
  *     ctx.mat_ptr = &mat[0, 0]
 */
-  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_indptr, PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 844, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_indptr, PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 846, __pyx_L1_error)
   __pyx_v_indptr_mv = __pyx_t_10;
   __pyx_t_10.memview = NULL;
   __pyx_t_10.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":846
+  /* "rankfm/_rankfm.pyx":848
  *     cdef int64_t[::1] indptr_mv = indptr
  *     cdef DenseCsrCtx ctx
  *     ctx.mat_ptr = &mat[0, 0]             # <<<<<<<<<<<<<<
@@ -24784,7 +24794,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
   __pyx_t_12 = 0;
   __pyx_v_ctx.mat_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_mat.data + __pyx_t_11 * __pyx_v_mat.strides[0]) )) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":847
+  /* "rankfm/_rankfm.pyx":849
  *     cdef DenseCsrCtx ctx
  *     ctx.mat_ptr = &mat[0, 0]
  *     ctx.indptr_ptr = &indptr_mv[0]             # <<<<<<<<<<<<<<
@@ -24794,7 +24804,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
   __pyx_t_12 = 0;
   __pyx_v_ctx.indptr_ptr = (&(*((int64_t *) ( /* dim=0 */ ((char *) (((int64_t *) __pyx_v_indptr_mv.data) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":848
+  /* "rankfm/_rankfm.pyx":850
  *     ctx.mat_ptr = &mat[0, 0]
  *     ctx.indptr_ptr = &indptr_mv[0]
  *     ctx.indices_ptr = NULL             # <<<<<<<<<<<<<<
@@ -24803,7 +24813,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
   __pyx_v_ctx.indices_ptr = NULL;
 
-  /* "rankfm/_rankfm.pyx":849
+  /* "rankfm/_rankfm.pyx":851
  *     ctx.indptr_ptr = &indptr_mv[0]
  *     ctx.indices_ptr = NULL
  *     ctx.data_ptr = NULL             # <<<<<<<<<<<<<<
@@ -24812,7 +24822,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
   __pyx_v_ctx.data_ptr = NULL;
 
-  /* "rankfm/_rankfm.pyx":850
+  /* "rankfm/_rankfm.pyx":852
  *     ctx.indices_ptr = NULL
  *     ctx.data_ptr = NULL
  *     ctx.n_rows = n_rows             # <<<<<<<<<<<<<<
@@ -24821,7 +24831,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
   __pyx_v_ctx.n_rows = __pyx_v_n_rows;
 
-  /* "rankfm/_rankfm.pyx":851
+  /* "rankfm/_rankfm.pyx":853
  *     ctx.data_ptr = NULL
  *     ctx.n_rows = n_rows
  *     ctx.n_cols = n_cols             # <<<<<<<<<<<<<<
@@ -24830,7 +24840,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
   __pyx_v_ctx.n_cols = __pyx_v_n_cols;
 
-  /* "rankfm/_rankfm.pyx":853
+  /* "rankfm/_rankfm.pyx":855
  *     ctx.n_cols = n_cols
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and n_rows * n_cols >= 65536) else 1             # <<<<<<<<<<<<<<
@@ -24863,7 +24873,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 
   __pyx_v_eff_threads = __pyx_t_13;
 
-  /* "rankfm/_rankfm.pyx":854
+  /* "rankfm/_rankfm.pyx":856
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and n_rows * n_cols >= 65536) else 1
  *     cdef rfm_pool_t *pool = NULL             # <<<<<<<<<<<<<<
@@ -24872,7 +24882,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
   __pyx_v_pool = NULL;
 
-  /* "rankfm/_rankfm.pyx":857
+  /* "rankfm/_rankfm.pyx":859
  *     cdef int64_t r, nnz
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -24885,7 +24895,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "rankfm/_rankfm.pyx":858
+        /* "rankfm/_rankfm.pyx":860
  * 
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)             # <<<<<<<<<<<<<<
@@ -24894,7 +24904,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
         __pyx_v_pool = rfm_pool_create(__pyx_v_eff_threads);
 
-        /* "rankfm/_rankfm.pyx":859
+        /* "rankfm/_rankfm.pyx":861
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _dense_count_worker, &ctx)             # <<<<<<<<<<<<<<
@@ -24903,7 +24913,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
         rfm_pool_run(__pyx_v_pool, __pyx_f_6rankfm_7_rankfm__dense_count_worker, (&__pyx_v_ctx));
 
-        /* "rankfm/_rankfm.pyx":860
+        /* "rankfm/_rankfm.pyx":862
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _dense_count_worker, &ctx)
  *         for r in range(n_rows):             # <<<<<<<<<<<<<<
@@ -24917,7 +24927,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
         for (__pyx_t_16 = 0; __pyx_t_16 < __pyx_t_15; __pyx_t_16+=1) {
           __pyx_v_r = __pyx_t_16;
 
-          /* "rankfm/_rankfm.pyx":861
+          /* "rankfm/_rankfm.pyx":863
  *         rfm_pool_run(pool, _dense_count_worker, &ctx)
  *         for r in range(n_rows):
  *             ctx.indptr_ptr[r + 1] += ctx.indptr_ptr[r]             # <<<<<<<<<<<<<<
@@ -24930,7 +24940,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
         }
 
 
-        /* "rankfm/_rankfm.pyx":862
+        /* "rankfm/_rankfm.pyx":864
  *         for r in range(n_rows):
  *             ctx.indptr_ptr[r + 1] += ctx.indptr_ptr[r]
  *         nnz = ctx.indptr_ptr[n_rows]             # <<<<<<<<<<<<<<
@@ -24940,7 +24950,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
         __pyx_v_nnz = (__pyx_v_ctx.indptr_ptr[__pyx_v_n_rows]);
       }
 
-      /* "rankfm/_rankfm.pyx":857
+      /* "rankfm/_rankfm.pyx":859
  *     cdef int64_t r, nnz
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -24957,7 +24967,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       }
   }
 
-  /* "rankfm/_rankfm.pyx":864
+  /* "rankfm/_rankfm.pyx":866
  *         nnz = ctx.indptr_ptr[n_rows]
  * 
  *     if nnz == 0:             # <<<<<<<<<<<<<<
@@ -24969,7 +24979,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
   if (__pyx_t_8) {
 
 
-    /* "rankfm/_rankfm.pyx":865
+    /* "rankfm/_rankfm.pyx":867
  * 
  *     if nnz == 0:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -24982,7 +24992,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
         __Pyx_FastGIL_Remember();
         /*try:*/ {
 
-          /* "rankfm/_rankfm.pyx":866
+          /* "rankfm/_rankfm.pyx":868
  *     if nnz == 0:
  *         with nogil:
  *             rfm_pool_destroy(pool)             # <<<<<<<<<<<<<<
@@ -24992,7 +25002,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
           rfm_pool_destroy(__pyx_v_pool);
         }
 
-        /* "rankfm/_rankfm.pyx":865
+        /* "rankfm/_rankfm.pyx":867
  * 
  *     if nnz == 0:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -25009,7 +25019,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
         }
     }
 
-    /* "rankfm/_rankfm.pyx":867
+    /* "rankfm/_rankfm.pyx":869
  *         with nogil:
  *             rfm_pool_destroy(pool)
  *         return indptr, np.zeros(1, dtype=np.int32), np.zeros(1, dtype=np.float32), 0             # <<<<<<<<<<<<<<
@@ -25017,14 +25027,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
  *     indices = np.empty(nnz, dtype=np.int32)
 */
     __pyx_t_6 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 867, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 869, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 867, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 869, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 867, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 869, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 867, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 869, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     #if CYTHON_VECTORCALL
@@ -25045,13 +25055,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       PyObject *__pyx_callargs[3] = {__pyx_t_6, __pyx_mstate_global->__pyx_int_1, __pyx_t_2};
       #if CYTHON_VECTORCALL
       __pyx_t_1 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 867, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 869, __pyx_L1_error)
       __Pyx_INCREF(__pyx_t_1);
       #else
       {
         PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
         __pyx_t_1 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 867, __pyx_L1_error)
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 869, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
       }
       #endif
@@ -25062,18 +25072,18 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 867, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 869, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     __pyx_t_1 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 867, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 869, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 867, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 869, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 867, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 869, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 867, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 869, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     #if CYTHON_VECTORCALL
@@ -25094,13 +25104,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       PyObject *__pyx_callargs[3] = {__pyx_t_1, __pyx_mstate_global->__pyx_int_1, __pyx_t_5};
       #if CYTHON_VECTORCALL
       __pyx_t_2 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 867, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 869, __pyx_L1_error)
       __Pyx_INCREF(__pyx_t_2);
       #else
       {
         PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
         __pyx_t_2 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 867, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 869, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
       }
       #endif
@@ -25111,21 +25121,21 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 867, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 869, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
-    __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 867, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 869, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_v_indptr);
     __Pyx_GIVEREF(__pyx_v_indptr);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_indptr) != (0)) __PYX_ERR(0, 867, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_indptr) != (0)) __PYX_ERR(0, 869, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_4);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 867, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 869, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_3);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_t_3) != (0)) __PYX_ERR(0, 867, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_t_3) != (0)) __PYX_ERR(0, 869, __pyx_L1_error);
     __Pyx_INCREF(__pyx_mstate_global->__pyx_int_0);
     __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_0);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_mstate_global->__pyx_int_0) != (0)) __PYX_ERR(0, 867, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_mstate_global->__pyx_int_0) != (0)) __PYX_ERR(0, 869, __pyx_L1_error);
     __pyx_t_4 = 0;
     __pyx_t_3 = 0;
     {
@@ -25139,7 +25149,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
     __pyx_t_6 = 0;
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":864
+    /* "rankfm/_rankfm.pyx":866
  *         nnz = ctx.indptr_ptr[n_rows]
  * 
  *     if nnz == 0:             # <<<<<<<<<<<<<<
@@ -25148,7 +25158,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
   }
 
-  /* "rankfm/_rankfm.pyx":869
+  /* "rankfm/_rankfm.pyx":871
  *         return indptr, np.zeros(1, dtype=np.int32), np.zeros(1, dtype=np.float32), 0
  * 
  *     indices = np.empty(nnz, dtype=np.int32)             # <<<<<<<<<<<<<<
@@ -25156,16 +25166,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
  *     cdef int32_t[::1] indices_mv = indices
 */
   __pyx_t_3 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 869, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 871, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 869, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 871, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyLong_From_int64_t(__pyx_v_nnz); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 869, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_int64_t(__pyx_v_nnz); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 871, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 869, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 871, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 869, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 871, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   #if CYTHON_VECTORCALL
@@ -25186,13 +25196,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[3] = {__pyx_t_3, __pyx_t_4, __pyx_t_1};
     #if CYTHON_VECTORCALL
     __pyx_t_5 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 869, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 871, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_5);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_5 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 869, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 871, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
     }
     #endif
@@ -25204,13 +25214,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 869, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 871, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
   }
   __pyx_v_indices = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "rankfm/_rankfm.pyx":870
+  /* "rankfm/_rankfm.pyx":872
  * 
  *     indices = np.empty(nnz, dtype=np.int32)
  *     data = np.empty(nnz, dtype=np.float32)             # <<<<<<<<<<<<<<
@@ -25218,16 +25228,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
  *     cdef float[::1] data_mv = data
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 870, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 872, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 870, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 872, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyLong_From_int64_t(__pyx_v_nnz); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 870, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_From_int64_t(__pyx_v_nnz); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 872, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 870, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 872, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 870, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 872, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   #if CYTHON_VECTORCALL
@@ -25248,13 +25258,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_t_5, __pyx_t_3};
     #if CYTHON_VECTORCALL
     __pyx_t_4 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 870, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 872, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_4);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_4 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 870, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 872, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     #endif
@@ -25266,37 +25276,37 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 870, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 872, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
   }
   __pyx_v_data = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "rankfm/_rankfm.pyx":871
+  /* "rankfm/_rankfm.pyx":873
  *     indices = np.empty(nnz, dtype=np.int32)
  *     data = np.empty(nnz, dtype=np.float32)
  *     cdef int32_t[::1] indices_mv = indices             # <<<<<<<<<<<<<<
  *     cdef float[::1] data_mv = data
  * 
 */
-  __pyx_t_18 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_indices, PyBUF_WRITABLE); if (unlikely(!__pyx_t_18.memview)) __PYX_ERR(0, 871, __pyx_L1_error)
+  __pyx_t_18 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_indices, PyBUF_WRITABLE); if (unlikely(!__pyx_t_18.memview)) __PYX_ERR(0, 873, __pyx_L1_error)
   __pyx_v_indices_mv = __pyx_t_18;
   __pyx_t_18.memview = NULL;
   __pyx_t_18.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":872
+  /* "rankfm/_rankfm.pyx":874
  *     data = np.empty(nnz, dtype=np.float32)
  *     cdef int32_t[::1] indices_mv = indices
  *     cdef float[::1] data_mv = data             # <<<<<<<<<<<<<<
  * 
  *     ctx.indices_ptr = &indices_mv[0]
 */
-  __pyx_t_19 = __Pyx_PyObject_to_MemoryviewSlice_dc_float(__pyx_v_data, PyBUF_WRITABLE); if (unlikely(!__pyx_t_19.memview)) __PYX_ERR(0, 872, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyObject_to_MemoryviewSlice_dc_float(__pyx_v_data, PyBUF_WRITABLE); if (unlikely(!__pyx_t_19.memview)) __PYX_ERR(0, 874, __pyx_L1_error)
   __pyx_v_data_mv = __pyx_t_19;
   __pyx_t_19.memview = NULL;
   __pyx_t_19.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":874
+  /* "rankfm/_rankfm.pyx":876
  *     cdef float[::1] data_mv = data
  * 
  *     ctx.indices_ptr = &indices_mv[0]             # <<<<<<<<<<<<<<
@@ -25306,7 +25316,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
   __pyx_t_12 = 0;
   __pyx_v_ctx.indices_ptr = (&(*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_indices_mv.data) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":875
+  /* "rankfm/_rankfm.pyx":877
  * 
  *     ctx.indices_ptr = &indices_mv[0]
  *     ctx.data_ptr = &data_mv[0]             # <<<<<<<<<<<<<<
@@ -25316,7 +25326,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
   __pyx_t_12 = 0;
   __pyx_v_ctx.data_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_data_mv.data) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":877
+  /* "rankfm/_rankfm.pyx":879
  *     ctx.data_ptr = &data_mv[0]
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -25329,7 +25339,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "rankfm/_rankfm.pyx":878
+        /* "rankfm/_rankfm.pyx":880
  * 
  *     with nogil:
  *         rfm_pool_run(pool, _dense_fill_worker, &ctx)             # <<<<<<<<<<<<<<
@@ -25338,7 +25348,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
 */
         rfm_pool_run(__pyx_v_pool, __pyx_f_6rankfm_7_rankfm__dense_fill_worker, (&__pyx_v_ctx));
 
-        /* "rankfm/_rankfm.pyx":879
+        /* "rankfm/_rankfm.pyx":881
  *     with nogil:
  *         rfm_pool_run(pool, _dense_fill_worker, &ctx)
  *         rfm_pool_destroy(pool)             # <<<<<<<<<<<<<<
@@ -25348,7 +25358,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
         rfm_pool_destroy(__pyx_v_pool);
       }
 
-      /* "rankfm/_rankfm.pyx":877
+      /* "rankfm/_rankfm.pyx":879
  *     ctx.data_ptr = &data_mv[0]
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -25365,27 +25375,27 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
       }
   }
 
-  /* "rankfm/_rankfm.pyx":881
+  /* "rankfm/_rankfm.pyx":883
  *         rfm_pool_destroy(pool)
  * 
  *     return indptr, indices, data, 1             # <<<<<<<<<<<<<<
  * 
  * 
 */
-  __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 881, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 883, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_v_indptr);
   __Pyx_GIVEREF(__pyx_v_indptr);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_indptr) != (0)) __PYX_ERR(0, 881, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_indptr) != (0)) __PYX_ERR(0, 883, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_indices);
   __Pyx_GIVEREF(__pyx_v_indices);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_v_indices) != (0)) __PYX_ERR(0, 881, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_v_indices) != (0)) __PYX_ERR(0, 883, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_data);
   __Pyx_GIVEREF(__pyx_v_data);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_v_data) != (0)) __PYX_ERR(0, 881, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_v_data) != (0)) __PYX_ERR(0, 883, __pyx_L1_error);
   __Pyx_INCREF(__pyx_mstate_global->__pyx_int_1);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 881, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_mstate_global->__pyx_int_1) != (0)) __PYX_ERR(0, 883, __pyx_L1_error);
   {
     PyObject *__pyx_temp;
     {
@@ -25397,7 +25407,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":834
+  /* "rankfm/_rankfm.pyx":836
  * # -------------------------
  * 
  * def dense_to_csr(float[:, ::1] mat, int n_threads=1):             # <<<<<<<<<<<<<<
@@ -25437,7 +25447,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_dense_to_csr(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":884
+/* "rankfm/_rankfm.pyx":886
  * 
  * 
  * def _csr_dense_matmul(             # <<<<<<<<<<<<<<
@@ -25490,40 +25500,40 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_indptr_arr,&__pyx_mstate_global->__pyx_n_u_indices,&__pyx_mstate_global->__pyx_n_u_data,&__pyx_mstate_global->__pyx_n_u_rhs,&__pyx_mstate_global->__pyx_n_u_base,&__pyx_mstate_global->__pyx_n_u_n_threads,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 884, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 886, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 886, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 886, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 886, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 886, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 886, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 886, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_csr_dense_matmul", 0) < (0)) __PYX_ERR(0, 884, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_csr_dense_matmul", 0) < (0)) __PYX_ERR(0, 886, __pyx_L3_error)
 
-      /* "rankfm/_rankfm.pyx":889
+      /* "rankfm/_rankfm.pyx":891
  *     float[::1] data,
  *     float[:, ::1] rhs,
  *     base=None,             # <<<<<<<<<<<<<<
@@ -25532,46 +25542,46 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 */
       if (!values[4]) values[4] = __Pyx_NewRef(((PyObject *)Py_None));
       for (Py_ssize_t i = __pyx_nargs; i < 4; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_csr_dense_matmul", 0, 4, 6, i); __PYX_ERR(0, 884, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_csr_dense_matmul", 0, 4, 6, i); __PYX_ERR(0, 886, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 886, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 886, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 886, __pyx_L3_error)
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 886, __pyx_L3_error)
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 886, __pyx_L3_error)
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 884, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 886, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
       if (!values[4]) values[4] = __Pyx_NewRef(((PyObject *)Py_None));
     }
     __pyx_v_indptr_arr = values[0];
-    __pyx_v_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_indices.memview)) __PYX_ERR(0, 886, __pyx_L3_error)
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 887, __pyx_L3_error)
-    __pyx_v_rhs = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_rhs.memview)) __PYX_ERR(0, 888, __pyx_L3_error)
+    __pyx_v_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_indices.memview)) __PYX_ERR(0, 888, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 889, __pyx_L3_error)
+    __pyx_v_rhs = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_rhs.memview)) __PYX_ERR(0, 890, __pyx_L3_error)
     __pyx_v_base = values[4];
     if (values[5]) {
-      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 890, __pyx_L3_error)
+      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 892, __pyx_L3_error)
     } else {
       __pyx_v_n_threads = ((int)((int)1));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_csr_dense_matmul", 0, 4, 6, __pyx_nargs); __PYX_ERR(0, 884, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_csr_dense_matmul", 0, 4, 6, __pyx_nargs); __PYX_ERR(0, 886, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -25587,7 +25597,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(__pyx_self, __pyx_v_indptr_arr, __pyx_v_indices, __pyx_v_data, __pyx_v_rhs, __pyx_v_base, __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":884
+  /* "rankfm/_rankfm.pyx":886
  * 
  * 
  * def _csr_dense_matmul(             # <<<<<<<<<<<<<<
@@ -25642,7 +25652,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_csr_dense_matmul", 0);
 
-  /* "rankfm/_rankfm.pyx":894
+  /* "rankfm/_rankfm.pyx":896
  *     """compute [base + CSR @ rhs] in parallel nogil C without materializing a dense feature matrix"""
  * 
  *     indptr_i64 = np.ascontiguousarray(indptr_arr, dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -25650,14 +25660,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
  *     cdef int64_t n_rows = indptr_mv.shape[0] - 1
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 894, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 896, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 894, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 896, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 894, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 896, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 894, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 896, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   #if CYTHON_VECTORCALL
@@ -25678,13 +25688,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_v_indptr_arr, __pyx_t_5};
     #if CYTHON_VECTORCALL
     __pyx_t_3 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 894, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 896, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_3);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_3 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 894, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 896, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     #endif
@@ -25695,25 +25705,25 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 894, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 896, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_indptr_i64 = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "rankfm/_rankfm.pyx":895
+  /* "rankfm/_rankfm.pyx":897
  * 
  *     indptr_i64 = np.ascontiguousarray(indptr_arr, dtype=np.int64)
  *     cdef int64_t[::1] indptr_mv = indptr_i64             # <<<<<<<<<<<<<<
  *     cdef int64_t n_rows = indptr_mv.shape[0] - 1
  *     cdef int F = rhs.shape[1]
 */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 895, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 897, __pyx_L1_error)
   __pyx_v_indptr_mv = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":896
+  /* "rankfm/_rankfm.pyx":898
  *     indptr_i64 = np.ascontiguousarray(indptr_arr, dtype=np.int64)
  *     cdef int64_t[::1] indptr_mv = indptr_i64
  *     cdef int64_t n_rows = indptr_mv.shape[0] - 1             # <<<<<<<<<<<<<<
@@ -25722,7 +25732,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 */
   __pyx_v_n_rows = ((__pyx_v_indptr_mv.shape[0]) - 1);
 
-  /* "rankfm/_rankfm.pyx":897
+  /* "rankfm/_rankfm.pyx":899
  *     cdef int64_t[::1] indptr_mv = indptr_i64
  *     cdef int64_t n_rows = indptr_mv.shape[0] - 1
  *     cdef int F = rhs.shape[1]             # <<<<<<<<<<<<<<
@@ -25731,7 +25741,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 */
   __pyx_v_F = (__pyx_v_rhs.shape[1]);
 
-  /* "rankfm/_rankfm.pyx":899
+  /* "rankfm/_rankfm.pyx":901
  *     cdef int F = rhs.shape[1]
  * 
  *     out = np.empty((n_rows, F), dtype=np.float32)             # <<<<<<<<<<<<<<
@@ -25739,26 +25749,26 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
  *         return out
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 899, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 901, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 899, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 901, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyLong_From_int64_t(__pyx_v_n_rows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 899, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int64_t(__pyx_v_n_rows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 901, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_v_F); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 899, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_From_int(__pyx_v_F); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 901, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 899, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 901, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 899, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 901, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 899, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 901, __pyx_L1_error);
   __pyx_t_3 = 0;
   __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 899, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 901, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 899, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 901, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   #if CYTHON_VECTORCALL
@@ -25779,13 +25789,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
     PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_t_8, __pyx_t_3};
     #if CYTHON_VECTORCALL
     __pyx_t_2 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 899, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 901, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_2);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_2 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 899, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 901, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     #endif
@@ -25797,13 +25807,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 899, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 901, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_out = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "rankfm/_rankfm.pyx":900
+  /* "rankfm/_rankfm.pyx":902
  * 
  *     out = np.empty((n_rows, F), dtype=np.float32)
  *     if n_rows <= 0 or F <= 0:             # <<<<<<<<<<<<<<
@@ -25829,7 +25839,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
   if (__pyx_t_9) {
 
 
-    /* "rankfm/_rankfm.pyx":901
+    /* "rankfm/_rankfm.pyx":903
  *     out = np.empty((n_rows, F), dtype=np.float32)
  *     if n_rows <= 0 or F <= 0:
  *         return out             # <<<<<<<<<<<<<<
@@ -25847,7 +25857,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":900
+    /* "rankfm/_rankfm.pyx":902
  * 
  *     out = np.empty((n_rows, F), dtype=np.float32)
  *     if n_rows <= 0 or F <= 0:             # <<<<<<<<<<<<<<
@@ -25856,19 +25866,19 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 */
   }
 
-  /* "rankfm/_rankfm.pyx":903
+  /* "rankfm/_rankfm.pyx":905
  *         return out
  * 
  *     cdef float[:, ::1] out_mv = out             # <<<<<<<<<<<<<<
  *     cdef float[:, ::1] base_mv
  *     cdef int has_base = base is not None
 */
-  __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(__pyx_v_out, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 903, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(__pyx_v_out, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 905, __pyx_L1_error)
   __pyx_v_out_mv = __pyx_t_11;
   __pyx_t_11.memview = NULL;
   __pyx_t_11.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":905
+  /* "rankfm/_rankfm.pyx":907
  *     cdef float[:, ::1] out_mv = out
  *     cdef float[:, ::1] base_mv
  *     cdef int has_base = base is not None             # <<<<<<<<<<<<<<
@@ -25878,7 +25888,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
   __pyx_t_9 = (__pyx_v_base != Py_None);
   __pyx_v_has_base = __pyx_t_9;
 
-  /* "rankfm/_rankfm.pyx":906
+  /* "rankfm/_rankfm.pyx":908
  *     cdef float[:, ::1] base_mv
  *     cdef int has_base = base is not None
  *     if has_base:             # <<<<<<<<<<<<<<
@@ -25890,7 +25900,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
   if (__pyx_t_9) {
 
 
-    /* "rankfm/_rankfm.pyx":907
+    /* "rankfm/_rankfm.pyx":909
  *     cdef int has_base = base is not None
  *     if has_base:
  *         base_mv = np.ascontiguousarray(base, dtype=np.float32)             # <<<<<<<<<<<<<<
@@ -25898,14 +25908,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
  *     cdef CsrSpMMCtx ctx
 */
     __pyx_t_5 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 907, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 909, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 907, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 909, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 907, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 909, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 907, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 909, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     #if CYTHON_VECTORCALL
@@ -25926,13 +25936,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
       PyObject *__pyx_callargs[3] = {__pyx_t_5, __pyx_v_base, __pyx_t_8};
       #if CYTHON_VECTORCALL
       __pyx_t_2 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 907, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 909, __pyx_L1_error)
       __Pyx_INCREF(__pyx_t_2);
       #else
       {
         PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
         __pyx_t_2 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 907, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 909, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
       }
       #endif
@@ -25943,16 +25953,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 907, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 909, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
-    __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 907, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 909, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_base_mv = __pyx_t_11;
     __pyx_t_11.memview = NULL;
     __pyx_t_11.data = NULL;
 
-    /* "rankfm/_rankfm.pyx":906
+    /* "rankfm/_rankfm.pyx":908
  *     cdef float[:, ::1] base_mv
  *     cdef int has_base = base is not None
  *     if has_base:             # <<<<<<<<<<<<<<
@@ -25961,7 +25971,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 */
   }
 
-  /* "rankfm/_rankfm.pyx":910
+  /* "rankfm/_rankfm.pyx":912
  * 
  *     cdef CsrSpMMCtx ctx
  *     ctx.indptr_ptr = &indptr_mv[0]             # <<<<<<<<<<<<<<
@@ -25971,7 +25981,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
   __pyx_t_12 = 0;
   __pyx_v_ctx.indptr_ptr = (&(*((int64_t *) ( /* dim=0 */ ((char *) (((int64_t *) __pyx_v_indptr_mv.data) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":911
+  /* "rankfm/_rankfm.pyx":913
  *     cdef CsrSpMMCtx ctx
  *     ctx.indptr_ptr = &indptr_mv[0]
  *     ctx.indices_ptr = &indices[0] if indices.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -25991,7 +26001,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 
   __pyx_v_ctx.indices_ptr = __pyx_t_13;
 
-  /* "rankfm/_rankfm.pyx":912
+  /* "rankfm/_rankfm.pyx":914
  *     ctx.indptr_ptr = &indptr_mv[0]
  *     ctx.indices_ptr = &indices[0] if indices.shape[0] > 0 else NULL
  *     ctx.data_ptr = &data[0] if data.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -26011,7 +26021,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 
   __pyx_v_ctx.data_ptr = __pyx_t_14;
 
-  /* "rankfm/_rankfm.pyx":913
+  /* "rankfm/_rankfm.pyx":915
  *     ctx.indices_ptr = &indices[0] if indices.shape[0] > 0 else NULL
  *     ctx.data_ptr = &data[0] if data.shape[0] > 0 else NULL
  *     ctx.rhs_ptr = &rhs[0, 0] if rhs.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -26032,7 +26042,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 
   __pyx_v_ctx.rhs_ptr = __pyx_t_14;
 
-  /* "rankfm/_rankfm.pyx":914
+  /* "rankfm/_rankfm.pyx":916
  *     ctx.data_ptr = &data[0] if data.shape[0] > 0 else NULL
  *     ctx.rhs_ptr = &rhs[0, 0] if rhs.shape[0] > 0 else NULL
  *     ctx.base_ptr = &base_mv[0, 0] if has_base else NULL             # <<<<<<<<<<<<<<
@@ -26042,7 +26052,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
   __pyx_t_9 = (__pyx_v_has_base != 0);
 
   if (__pyx_t_9) {
-    if (unlikely(!__pyx_v_base_mv.memview)) { __Pyx_RaiseUnboundLocalError("base_mv"); __PYX_ERR(0, 914, __pyx_L1_error) }
+    if (unlikely(!__pyx_v_base_mv.memview)) { __Pyx_RaiseUnboundLocalError("base_mv"); __PYX_ERR(0, 916, __pyx_L1_error) }
     __pyx_t_15 = 0;
     __pyx_t_12 = 0;
 
@@ -26054,7 +26064,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 
   __pyx_v_ctx.base_ptr = __pyx_t_14;
 
-  /* "rankfm/_rankfm.pyx":915
+  /* "rankfm/_rankfm.pyx":917
  *     ctx.rhs_ptr = &rhs[0, 0] if rhs.shape[0] > 0 else NULL
  *     ctx.base_ptr = &base_mv[0, 0] if has_base else NULL
  *     ctx.out_ptr = &out_mv[0, 0]             # <<<<<<<<<<<<<<
@@ -26065,7 +26075,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
   __pyx_t_15 = 0;
   __pyx_v_ctx.out_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_out_mv.data + __pyx_t_12 * __pyx_v_out_mv.strides[0]) )) + __pyx_t_15)) ))));
 
-  /* "rankfm/_rankfm.pyx":916
+  /* "rankfm/_rankfm.pyx":918
  *     ctx.base_ptr = &base_mv[0, 0] if has_base else NULL
  *     ctx.out_ptr = &out_mv[0, 0]
  *     ctx.n_rows = n_rows             # <<<<<<<<<<<<<<
@@ -26074,7 +26084,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 */
   __pyx_v_ctx.n_rows = __pyx_v_n_rows;
 
-  /* "rankfm/_rankfm.pyx":917
+  /* "rankfm/_rankfm.pyx":919
  *     ctx.out_ptr = &out_mv[0, 0]
  *     ctx.n_rows = n_rows
  *     ctx.F = F             # <<<<<<<<<<<<<<
@@ -26083,7 +26093,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 */
   __pyx_v_ctx.F = __pyx_v_F;
 
-  /* "rankfm/_rankfm.pyx":919
+  /* "rankfm/_rankfm.pyx":921
  *     ctx.F = F
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and n_rows * F >= 16384) else 1             # <<<<<<<<<<<<<<
@@ -26116,7 +26126,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 
   __pyx_v_eff_threads = __pyx_t_16;
 
-  /* "rankfm/_rankfm.pyx":920
+  /* "rankfm/_rankfm.pyx":922
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and n_rows * F >= 16384) else 1
  *     cdef rfm_pool_t *pool = NULL             # <<<<<<<<<<<<<<
@@ -26125,7 +26135,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 */
   __pyx_v_pool = NULL;
 
-  /* "rankfm/_rankfm.pyx":922
+  /* "rankfm/_rankfm.pyx":924
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -26138,7 +26148,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "rankfm/_rankfm.pyx":923
+        /* "rankfm/_rankfm.pyx":925
  * 
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)             # <<<<<<<<<<<<<<
@@ -26147,7 +26157,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 */
         __pyx_v_pool = rfm_pool_create(__pyx_v_eff_threads);
 
-        /* "rankfm/_rankfm.pyx":924
+        /* "rankfm/_rankfm.pyx":926
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _csr_spmm_worker, &ctx)             # <<<<<<<<<<<<<<
@@ -26156,7 +26166,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
 */
         rfm_pool_run(__pyx_v_pool, __pyx_f_6rankfm_7_rankfm__csr_spmm_worker, (&__pyx_v_ctx));
 
-        /* "rankfm/_rankfm.pyx":925
+        /* "rankfm/_rankfm.pyx":927
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _csr_spmm_worker, &ctx)
  *         rfm_pool_destroy(pool)             # <<<<<<<<<<<<<<
@@ -26166,7 +26176,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
         rfm_pool_destroy(__pyx_v_pool);
       }
 
-      /* "rankfm/_rankfm.pyx":922
+      /* "rankfm/_rankfm.pyx":924
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -26183,7 +26193,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
       }
   }
 
-  /* "rankfm/_rankfm.pyx":927
+  /* "rankfm/_rankfm.pyx":929
  *         rfm_pool_destroy(pool)
  * 
  *     return out             # <<<<<<<<<<<<<<
@@ -26201,7 +26211,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
   }
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":884
+  /* "rankfm/_rankfm.pyx":886
  * 
  * 
  * def _csr_dense_matmul(             # <<<<<<<<<<<<<<
@@ -26238,7 +26248,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_2_csr_dense_matmul(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":930
+/* "rankfm/_rankfm.pyx":932
  * 
  * 
  * def _csr_matvec(             # <<<<<<<<<<<<<<
@@ -26291,40 +26301,40 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_indptr_arr,&__pyx_mstate_global->__pyx_n_u_indices,&__pyx_mstate_global->__pyx_n_u_data,&__pyx_mstate_global->__pyx_n_u_vec,&__pyx_mstate_global->__pyx_n_u_base,&__pyx_mstate_global->__pyx_n_u_n_threads,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 930, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 932, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 932, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 932, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 932, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 932, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 932, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 932, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_csr_matvec", 0) < (0)) __PYX_ERR(0, 930, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_csr_matvec", 0) < (0)) __PYX_ERR(0, 932, __pyx_L3_error)
 
-      /* "rankfm/_rankfm.pyx":935
+      /* "rankfm/_rankfm.pyx":937
  *     float[::1] data,
  *     float[::1] vec,
  *     base=None,             # <<<<<<<<<<<<<<
@@ -26333,46 +26343,46 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 */
       if (!values[4]) values[4] = __Pyx_NewRef(((PyObject *)Py_None));
       for (Py_ssize_t i = __pyx_nargs; i < 4; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_csr_matvec", 0, 4, 6, i); __PYX_ERR(0, 930, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_csr_matvec", 0, 4, 6, i); __PYX_ERR(0, 932, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 932, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 932, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 932, __pyx_L3_error)
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 932, __pyx_L3_error)
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 932, __pyx_L3_error)
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 930, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 932, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
       if (!values[4]) values[4] = __Pyx_NewRef(((PyObject *)Py_None));
     }
     __pyx_v_indptr_arr = values[0];
-    __pyx_v_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_indices.memview)) __PYX_ERR(0, 932, __pyx_L3_error)
-    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 933, __pyx_L3_error)
-    __pyx_v_vec = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_vec.memview)) __PYX_ERR(0, 934, __pyx_L3_error)
+    __pyx_v_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_indices.memview)) __PYX_ERR(0, 934, __pyx_L3_error)
+    __pyx_v_data = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_data.memview)) __PYX_ERR(0, 935, __pyx_L3_error)
+    __pyx_v_vec = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_vec.memview)) __PYX_ERR(0, 936, __pyx_L3_error)
     __pyx_v_base = values[4];
     if (values[5]) {
-      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 936, __pyx_L3_error)
+      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 938, __pyx_L3_error)
     } else {
       __pyx_v_n_threads = ((int)((int)1));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_csr_matvec", 0, 4, 6, __pyx_nargs); __PYX_ERR(0, 930, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_csr_matvec", 0, 4, 6, __pyx_nargs); __PYX_ERR(0, 932, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -26388,7 +26398,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_6rankfm_7_rankfm_4_csr_matvec(__pyx_self, __pyx_v_indptr_arr, __pyx_v_indices, __pyx_v_data, __pyx_v_vec, __pyx_v_base, __pyx_v_n_threads);
 
-  /* "rankfm/_rankfm.pyx":930
+  /* "rankfm/_rankfm.pyx":932
  * 
  * 
  * def _csr_matvec(             # <<<<<<<<<<<<<<
@@ -26441,7 +26451,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_csr_matvec", 0);
 
-  /* "rankfm/_rankfm.pyx":940
+  /* "rankfm/_rankfm.pyx":942
  *     """compute [base + CSR @ vec] in parallel nogil C"""
  * 
  *     indptr_i64 = np.ascontiguousarray(indptr_arr, dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -26449,14 +26459,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
  *     cdef int64_t n_rows = indptr_mv.shape[0] - 1
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 940, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 942, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 940, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 942, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 940, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 942, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 940, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 942, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   #if CYTHON_VECTORCALL
@@ -26477,13 +26487,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_v_indptr_arr, __pyx_t_5};
     #if CYTHON_VECTORCALL
     __pyx_t_3 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 940, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 942, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_3);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_3 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 940, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 942, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     #endif
@@ -26494,25 +26504,25 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 940, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 942, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_indptr_i64 = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "rankfm/_rankfm.pyx":941
+  /* "rankfm/_rankfm.pyx":943
  * 
  *     indptr_i64 = np.ascontiguousarray(indptr_arr, dtype=np.int64)
  *     cdef int64_t[::1] indptr_mv = indptr_i64             # <<<<<<<<<<<<<<
  *     cdef int64_t n_rows = indptr_mv.shape[0] - 1
  * 
 */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 941, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 943, __pyx_L1_error)
   __pyx_v_indptr_mv = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":942
+  /* "rankfm/_rankfm.pyx":944
  *     indptr_i64 = np.ascontiguousarray(indptr_arr, dtype=np.int64)
  *     cdef int64_t[::1] indptr_mv = indptr_i64
  *     cdef int64_t n_rows = indptr_mv.shape[0] - 1             # <<<<<<<<<<<<<<
@@ -26521,7 +26531,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 */
   __pyx_v_n_rows = ((__pyx_v_indptr_mv.shape[0]) - 1);
 
-  /* "rankfm/_rankfm.pyx":944
+  /* "rankfm/_rankfm.pyx":946
  *     cdef int64_t n_rows = indptr_mv.shape[0] - 1
  * 
  *     out = np.empty(n_rows, dtype=np.float32)             # <<<<<<<<<<<<<<
@@ -26529,16 +26539,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
  *         return out
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 944, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 946, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 944, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_empty); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 946, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyLong_From_int64_t(__pyx_v_n_rows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 944, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int64_t(__pyx_v_n_rows); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 946, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 944, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 946, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 944, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 946, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   #if CYTHON_VECTORCALL
@@ -26559,13 +26569,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_t_3, __pyx_t_8};
     #if CYTHON_VECTORCALL
     __pyx_t_2 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 944, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 946, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_2);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_2 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 944, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 946, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     #endif
@@ -26577,13 +26587,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 944, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 946, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_out = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "rankfm/_rankfm.pyx":945
+  /* "rankfm/_rankfm.pyx":947
  * 
  *     out = np.empty(n_rows, dtype=np.float32)
  *     if n_rows <= 0:             # <<<<<<<<<<<<<<
@@ -26595,7 +26605,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
   if (__pyx_t_9) {
 
 
-    /* "rankfm/_rankfm.pyx":946
+    /* "rankfm/_rankfm.pyx":948
  *     out = np.empty(n_rows, dtype=np.float32)
  *     if n_rows <= 0:
  *         return out             # <<<<<<<<<<<<<<
@@ -26613,7 +26623,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":945
+    /* "rankfm/_rankfm.pyx":947
  * 
  *     out = np.empty(n_rows, dtype=np.float32)
  *     if n_rows <= 0:             # <<<<<<<<<<<<<<
@@ -26622,19 +26632,19 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 */
   }
 
-  /* "rankfm/_rankfm.pyx":948
+  /* "rankfm/_rankfm.pyx":950
  *         return out
  * 
  *     cdef float[::1] out_mv = out             # <<<<<<<<<<<<<<
  *     cdef float[::1] base_mv
  *     cdef int has_base = base is not None
 */
-  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_float(__pyx_v_out, PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 948, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_float(__pyx_v_out, PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 950, __pyx_L1_error)
   __pyx_v_out_mv = __pyx_t_10;
   __pyx_t_10.memview = NULL;
   __pyx_t_10.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":950
+  /* "rankfm/_rankfm.pyx":952
  *     cdef float[::1] out_mv = out
  *     cdef float[::1] base_mv
  *     cdef int has_base = base is not None             # <<<<<<<<<<<<<<
@@ -26644,7 +26654,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
   __pyx_t_9 = (__pyx_v_base != Py_None);
   __pyx_v_has_base = __pyx_t_9;
 
-  /* "rankfm/_rankfm.pyx":951
+  /* "rankfm/_rankfm.pyx":953
  *     cdef float[::1] base_mv
  *     cdef int has_base = base is not None
  *     if has_base:             # <<<<<<<<<<<<<<
@@ -26656,7 +26666,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
   if (__pyx_t_9) {
 
 
-    /* "rankfm/_rankfm.pyx":952
+    /* "rankfm/_rankfm.pyx":954
  *     cdef int has_base = base is not None
  *     if has_base:
  *         base_mv = np.ascontiguousarray(base, dtype=np.float32)             # <<<<<<<<<<<<<<
@@ -26664,14 +26674,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
  *     cdef CsrSpMVCtx ctx
 */
     __pyx_t_5 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 952, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 954, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 952, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 954, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 952, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 954, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 952, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 954, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     #if CYTHON_VECTORCALL
@@ -26692,13 +26702,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
       PyObject *__pyx_callargs[3] = {__pyx_t_5, __pyx_v_base, __pyx_t_3};
       #if CYTHON_VECTORCALL
       __pyx_t_2 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 952, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 954, __pyx_L1_error)
       __Pyx_INCREF(__pyx_t_2);
       #else
       {
         PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
         __pyx_t_2 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 952, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 954, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
       }
       #endif
@@ -26709,16 +26719,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 952, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 954, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
-    __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_float(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 952, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_float(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 954, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_base_mv = __pyx_t_10;
     __pyx_t_10.memview = NULL;
     __pyx_t_10.data = NULL;
 
-    /* "rankfm/_rankfm.pyx":951
+    /* "rankfm/_rankfm.pyx":953
  *     cdef float[::1] base_mv
  *     cdef int has_base = base is not None
  *     if has_base:             # <<<<<<<<<<<<<<
@@ -26727,7 +26737,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 */
   }
 
-  /* "rankfm/_rankfm.pyx":955
+  /* "rankfm/_rankfm.pyx":957
  * 
  *     cdef CsrSpMVCtx ctx
  *     ctx.indptr_ptr = &indptr_mv[0]             # <<<<<<<<<<<<<<
@@ -26737,7 +26747,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
   __pyx_t_11 = 0;
   __pyx_v_ctx.indptr_ptr = (&(*((int64_t *) ( /* dim=0 */ ((char *) (((int64_t *) __pyx_v_indptr_mv.data) + __pyx_t_11)) ))));
 
-  /* "rankfm/_rankfm.pyx":956
+  /* "rankfm/_rankfm.pyx":958
  *     cdef CsrSpMVCtx ctx
  *     ctx.indptr_ptr = &indptr_mv[0]
  *     ctx.indices_ptr = &indices[0] if indices.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -26757,7 +26767,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 
   __pyx_v_ctx.indices_ptr = __pyx_t_12;
 
-  /* "rankfm/_rankfm.pyx":957
+  /* "rankfm/_rankfm.pyx":959
  *     ctx.indptr_ptr = &indptr_mv[0]
  *     ctx.indices_ptr = &indices[0] if indices.shape[0] > 0 else NULL
  *     ctx.data_ptr = &data[0] if data.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -26777,7 +26787,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 
   __pyx_v_ctx.data_ptr = __pyx_t_13;
 
-  /* "rankfm/_rankfm.pyx":958
+  /* "rankfm/_rankfm.pyx":960
  *     ctx.indices_ptr = &indices[0] if indices.shape[0] > 0 else NULL
  *     ctx.data_ptr = &data[0] if data.shape[0] > 0 else NULL
  *     ctx.vec_ptr = &vec[0] if vec.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -26797,7 +26807,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 
   __pyx_v_ctx.vec_ptr = __pyx_t_13;
 
-  /* "rankfm/_rankfm.pyx":959
+  /* "rankfm/_rankfm.pyx":961
  *     ctx.data_ptr = &data[0] if data.shape[0] > 0 else NULL
  *     ctx.vec_ptr = &vec[0] if vec.shape[0] > 0 else NULL
  *     ctx.base_ptr = &base_mv[0] if has_base else NULL             # <<<<<<<<<<<<<<
@@ -26807,7 +26817,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
   __pyx_t_9 = (__pyx_v_has_base != 0);
 
   if (__pyx_t_9) {
-    if (unlikely(!__pyx_v_base_mv.memview)) { __Pyx_RaiseUnboundLocalError("base_mv"); __PYX_ERR(0, 959, __pyx_L1_error) }
+    if (unlikely(!__pyx_v_base_mv.memview)) { __Pyx_RaiseUnboundLocalError("base_mv"); __PYX_ERR(0, 961, __pyx_L1_error) }
     __pyx_t_11 = 0;
 
     __pyx_t_13 = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_base_mv.data) + __pyx_t_11)) ))));
@@ -26818,7 +26828,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 
   __pyx_v_ctx.base_ptr = __pyx_t_13;
 
-  /* "rankfm/_rankfm.pyx":960
+  /* "rankfm/_rankfm.pyx":962
  *     ctx.vec_ptr = &vec[0] if vec.shape[0] > 0 else NULL
  *     ctx.base_ptr = &base_mv[0] if has_base else NULL
  *     ctx.out_ptr = &out_mv[0]             # <<<<<<<<<<<<<<
@@ -26828,7 +26838,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
   __pyx_t_11 = 0;
   __pyx_v_ctx.out_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_out_mv.data) + __pyx_t_11)) ))));
 
-  /* "rankfm/_rankfm.pyx":961
+  /* "rankfm/_rankfm.pyx":963
  *     ctx.base_ptr = &base_mv[0] if has_base else NULL
  *     ctx.out_ptr = &out_mv[0]
  *     ctx.n_rows = n_rows             # <<<<<<<<<<<<<<
@@ -26837,7 +26847,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 */
   __pyx_v_ctx.n_rows = __pyx_v_n_rows;
 
-  /* "rankfm/_rankfm.pyx":963
+  /* "rankfm/_rankfm.pyx":965
  *     ctx.n_rows = n_rows
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and n_rows >= 4096) else 1             # <<<<<<<<<<<<<<
@@ -26870,7 +26880,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 
   __pyx_v_eff_threads = __pyx_t_14;
 
-  /* "rankfm/_rankfm.pyx":964
+  /* "rankfm/_rankfm.pyx":966
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and n_rows >= 4096) else 1
  *     cdef rfm_pool_t *pool = NULL             # <<<<<<<<<<<<<<
@@ -26879,7 +26889,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 */
   __pyx_v_pool = NULL;
 
-  /* "rankfm/_rankfm.pyx":966
+  /* "rankfm/_rankfm.pyx":968
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -26892,7 +26902,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "rankfm/_rankfm.pyx":967
+        /* "rankfm/_rankfm.pyx":969
  * 
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)             # <<<<<<<<<<<<<<
@@ -26901,7 +26911,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 */
         __pyx_v_pool = rfm_pool_create(__pyx_v_eff_threads);
 
-        /* "rankfm/_rankfm.pyx":968
+        /* "rankfm/_rankfm.pyx":970
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _csr_spmv_worker, &ctx)             # <<<<<<<<<<<<<<
@@ -26910,7 +26920,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
 */
         rfm_pool_run(__pyx_v_pool, __pyx_f_6rankfm_7_rankfm__csr_spmv_worker, (&__pyx_v_ctx));
 
-        /* "rankfm/_rankfm.pyx":969
+        /* "rankfm/_rankfm.pyx":971
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _csr_spmv_worker, &ctx)
  *         rfm_pool_destroy(pool)             # <<<<<<<<<<<<<<
@@ -26920,7 +26930,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
         rfm_pool_destroy(__pyx_v_pool);
       }
 
-      /* "rankfm/_rankfm.pyx":966
+      /* "rankfm/_rankfm.pyx":968
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -26937,7 +26947,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
       }
   }
 
-  /* "rankfm/_rankfm.pyx":971
+  /* "rankfm/_rankfm.pyx":973
  *         rfm_pool_destroy(pool)
  * 
  *     return out             # <<<<<<<<<<<<<<
@@ -26955,7 +26965,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
   }
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":930
+  /* "rankfm/_rankfm.pyx":932
  * 
  * 
  * def _csr_matvec(             # <<<<<<<<<<<<<<
@@ -26991,11 +27001,11 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_4_csr_matvec(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":974
+/* "rankfm/_rankfm.pyx":976
  * 
  * 
  * def assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if):             # <<<<<<<<<<<<<<
- *     """assert all model weights are finite"""
+ *     """raise AssertionError unless all model weights are finite
  * 
 */
 
@@ -27007,7 +27017,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_6rankfm_7_rankfm_6assert_finite, "assert all model weights are finite");
+PyDoc_STRVAR(__pyx_doc_6rankfm_7_rankfm_6assert_finite, "raise AssertionError unless all model weights are finite\n\n    raised explicitly rather than with [assert] statements, which `python -O` removes: a diverged model must never be returned silently\n    ");
 static PyMethodDef __pyx_mdef_6rankfm_7_rankfm_7assert_finite = {"assert_finite", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6rankfm_7_rankfm_7assert_finite, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6rankfm_7_rankfm_6assert_finite};
 static PyObject *__pyx_pw_6rankfm_7_rankfm_7assert_finite(PyObject *__pyx_self, 
 #if CYTHON_VECTORCALL
@@ -27044,56 +27054,56 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_w_i,&__pyx_mstate_global->__pyx_n_u_w_if,&__pyx_mstate_global->__pyx_n_u_v_u,&__pyx_mstate_global->__pyx_n_u_v_i,&__pyx_mstate_global->__pyx_n_u_v_uf,&__pyx_mstate_global->__pyx_n_u_v_if,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 974, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 976, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 974, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 976, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 974, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 976, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 974, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 976, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 974, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 976, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 974, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 976, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 974, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 976, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "assert_finite", 0) < (0)) __PYX_ERR(0, 974, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "assert_finite", 0) < (0)) __PYX_ERR(0, 976, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 6; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("assert_finite", 1, 6, 6, i); __PYX_ERR(0, 974, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("assert_finite", 1, 6, 6, i); __PYX_ERR(0, 976, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 6)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 974, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 976, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 974, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 976, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 974, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 976, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 974, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 976, __pyx_L3_error)
       values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 974, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 976, __pyx_L3_error)
       values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 974, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 976, __pyx_L3_error)
     }
     __pyx_v_w_i = values[0];
     __pyx_v_w_if = values[1];
@@ -27104,7 +27114,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("assert_finite", 1, 6, 6, __pyx_nargs); __PYX_ERR(0, 974, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("assert_finite", 1, 6, 6, __pyx_nargs); __PYX_ERR(0, 976, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -27126,6 +27136,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 }
 
 static PyObject *__pyx_pf_6rankfm_7_rankfm_6assert_finite(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_w_i, PyObject *__pyx_v_w_if, PyObject *__pyx_v_v_u, PyObject *__pyx_v_v_i, PyObject *__pyx_v_v_uf, PyObject *__pyx_v_v_if) {
+  PyObject *__pyx_v_label = NULL;
+  PyObject *__pyx_v_weights = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -27135,601 +27147,338 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_6assert_finite(CYTHON_UNUSED PyObject
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
-  PyObject *__pyx_t_8 = NULL;
-  size_t __pyx_t_9;
-  int __pyx_t_10;
+  Py_ssize_t __pyx_t_8;
+  PyObject *__pyx_t_9 = NULL;
+  PyObject *__pyx_t_10 = NULL;
+  size_t __pyx_t_11;
+  int __pyx_t_12;
+  int __pyx_t_13;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("assert_finite", 0);
 
-  /* "rankfm/_rankfm.pyx":977
- *     """assert all model weights are finite"""
+  /* "rankfm/_rankfm.pyx":983
  * 
- *     assert np.isfinite(np.sum(w_i, dtype=np.float64)), "item weights [w_i] are not finite - try decreasing feature/sample_weight magnitudes"             # <<<<<<<<<<<<<<
- *     assert np.isfinite(np.sum(w_if, dtype=np.float64)), "item feature weights [w_if] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_u, dtype=np.float64)), "user factors [v_u] are not finite - try decreasing feature/sample_weight magnitudes"
+ *     for label, weights in (
+ *         ("item weights [w_i]", w_i),             # <<<<<<<<<<<<<<
+ *         ("item feature weights [w_if]", w_if),
+ *         ("user factors [v_u]", v_u),
 */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(__pyx_assertions_enabled())) {
-    __pyx_t_2 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 977, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_isfinite); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 977, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 977, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sum); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 977, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 977, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 977, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    #if CYTHON_VECTORCALL
-    #endif
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_7))) {
-      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_7);
-      assert(__pyx_t_5);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_7);
-      __Pyx_INCREF(__pyx_t_5);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_7, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[3] = {__pyx_t_5, __pyx_v_w_i, __pyx_t_8};
-      #if CYTHON_VECTORCALL
-      __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 977, __pyx_L1_error)
-      __Pyx_INCREF(__pyx_t_6);
-      #else
-      {
-        PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
-        __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 977, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
-      }
-      #endif
-      __pyx_t_3 = __Pyx_Object_VectorcallKwds((PyObject*)__pyx_t_7, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      #if CYTHON_VECTORCALL
-      #endif
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 977, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-    }
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
-      assert(__pyx_t_2);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
-      __Pyx_INCREF(__pyx_t_2);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_3};
-      __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 977, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-    }
-    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 977, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_10)) {
-      __Pyx_Raise(((PyObject *)(((PyTypeObject*)PyExc_AssertionError))), __pyx_mstate_global->__pyx_kp_u_item_weights_w_i_are_not_finite, 0, 0);
-      __PYX_ERR(0, 977, __pyx_L1_error)
-    }
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 983, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_item_weights_w_i);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_kp_u_item_weights_w_i);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_mstate_global->__pyx_kp_u_item_weights_w_i) != (0)) __PYX_ERR(0, 983, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_v_w_i);
+  __Pyx_GIVEREF(__pyx_v_w_i);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_w_i) != (0)) __PYX_ERR(0, 983, __pyx_L1_error);
 
-  }
-  #else
-  if ((1)); else __PYX_ERR(0, 977, __pyx_L1_error)
-  #endif
+  /* "rankfm/_rankfm.pyx":984
+ *     for label, weights in (
+ *         ("item weights [w_i]", w_i),
+ *         ("item feature weights [w_if]", w_if),             # <<<<<<<<<<<<<<
+ *         ("user factors [v_u]", v_u),
+ *         ("item factors [v_i]", v_i),
+*/
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 984, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_item_feature_weights_w_if);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_kp_u_item_feature_weights_w_if);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_mstate_global->__pyx_kp_u_item_feature_weights_w_if) != (0)) __PYX_ERR(0, 984, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_v_w_if);
+  __Pyx_GIVEREF(__pyx_v_w_if);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_w_if) != (0)) __PYX_ERR(0, 984, __pyx_L1_error);
 
-  /* "rankfm/_rankfm.pyx":978
+  /* "rankfm/_rankfm.pyx":985
+ *         ("item weights [w_i]", w_i),
+ *         ("item feature weights [w_if]", w_if),
+ *         ("user factors [v_u]", v_u),             # <<<<<<<<<<<<<<
+ *         ("item factors [v_i]", v_i),
+ *         ("user-feature factors [v_uf]", v_uf),
+*/
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 985, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_user_factors_v_u);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_kp_u_user_factors_v_u);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_kp_u_user_factors_v_u) != (0)) __PYX_ERR(0, 985, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_v_v_u);
+  __Pyx_GIVEREF(__pyx_v_v_u);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_v_u) != (0)) __PYX_ERR(0, 985, __pyx_L1_error);
+
+  /* "rankfm/_rankfm.pyx":986
+ *         ("item feature weights [w_if]", w_if),
+ *         ("user factors [v_u]", v_u),
+ *         ("item factors [v_i]", v_i),             # <<<<<<<<<<<<<<
+ *         ("user-feature factors [v_uf]", v_uf),
+ *         ("item-feature factors [v_if]", v_if),
+*/
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 986, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_item_factors_v_i);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_kp_u_item_factors_v_i);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_kp_u_item_factors_v_i) != (0)) __PYX_ERR(0, 986, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_v_v_i);
+  __Pyx_GIVEREF(__pyx_v_v_i);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_v_i) != (0)) __PYX_ERR(0, 986, __pyx_L1_error);
+
+  /* "rankfm/_rankfm.pyx":987
+ *         ("user factors [v_u]", v_u),
+ *         ("item factors [v_i]", v_i),
+ *         ("user-feature factors [v_uf]", v_uf),             # <<<<<<<<<<<<<<
+ *         ("item-feature factors [v_if]", v_if),
+ *     ):
+*/
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 987, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_user_feature_factors_v_uf);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_kp_u_user_feature_factors_v_uf);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_mstate_global->__pyx_kp_u_user_feature_factors_v_uf) != (0)) __PYX_ERR(0, 987, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_v_v_uf);
+  __Pyx_GIVEREF(__pyx_v_v_uf);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_v_v_uf) != (0)) __PYX_ERR(0, 987, __pyx_L1_error);
+
+  /* "rankfm/_rankfm.pyx":988
+ *         ("item factors [v_i]", v_i),
+ *         ("user-feature factors [v_uf]", v_uf),
+ *         ("item-feature factors [v_if]", v_if),             # <<<<<<<<<<<<<<
+ *     ):
+ *         if not np.isfinite(np.sum(weights, dtype=np.float64)):
+*/
+  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 988, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_item_feature_factors_v_if);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_kp_u_item_feature_factors_v_if);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_mstate_global->__pyx_kp_u_item_feature_factors_v_if) != (0)) __PYX_ERR(0, 988, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_v_v_if);
+  __Pyx_GIVEREF(__pyx_v_v_if);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_v_v_if) != (0)) __PYX_ERR(0, 988, __pyx_L1_error);
+
+  /* "rankfm/_rankfm.pyx":983
  * 
- *     assert np.isfinite(np.sum(w_i, dtype=np.float64)), "item weights [w_i] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(w_if, dtype=np.float64)), "item feature weights [w_if] are not finite - try decreasing feature/sample_weight magnitudes"             # <<<<<<<<<<<<<<
- *     assert np.isfinite(np.sum(v_u, dtype=np.float64)), "user factors [v_u] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_i, dtype=np.float64)), "item factors [v_i] are not finite - try decreasing feature/sample_weight magnitudes"
+ *     for label, weights in (
+ *         ("item weights [w_i]", w_i),             # <<<<<<<<<<<<<<
+ *         ("item feature weights [w_if]", w_if),
+ *         ("user factors [v_u]", v_u),
 */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(__pyx_assertions_enabled())) {
-    __pyx_t_4 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 978, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_isfinite); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 978, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_7 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 978, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sum); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 978, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 978, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 978, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    #if CYTHON_VECTORCALL
-    #endif
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_8))) {
-      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_8);
-      assert(__pyx_t_7);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_8);
-      __Pyx_INCREF(__pyx_t_7);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_8, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[3] = {__pyx_t_7, __pyx_v_w_if, __pyx_t_5};
-      #if CYTHON_VECTORCALL
-      __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 978, __pyx_L1_error)
-      __Pyx_INCREF(__pyx_t_6);
-      #else
-      {
-        PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
-        __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 978, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
-      }
-      #endif
-      __pyx_t_3 = __Pyx_Object_VectorcallKwds((PyObject*)__pyx_t_8, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      #if CYTHON_VECTORCALL
-      #endif
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 978, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-    }
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_2))) {
-      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
-      assert(__pyx_t_4);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_4);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_2, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_t_3};
-      __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 978, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-    }
-    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 978, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_10)) {
-      __Pyx_Raise(((PyObject *)(((PyTypeObject*)PyExc_AssertionError))), __pyx_mstate_global->__pyx_kp_u_item_feature_weights_w_if_are_no, 0, 0);
-      __PYX_ERR(0, 978, __pyx_L1_error)
-    }
-
-  }
-  #else
-  if ((1)); else __PYX_ERR(0, 978, __pyx_L1_error)
-  #endif
-
-  /* "rankfm/_rankfm.pyx":979
- *     assert np.isfinite(np.sum(w_i, dtype=np.float64)), "item weights [w_i] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(w_if, dtype=np.float64)), "item feature weights [w_if] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_u, dtype=np.float64)), "user factors [v_u] are not finite - try decreasing feature/sample_weight magnitudes"             # <<<<<<<<<<<<<<
- *     assert np.isfinite(np.sum(v_i, dtype=np.float64)), "item factors [v_i] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_uf, dtype=np.float64)), "user-feature factors [v_uf] are not finite - try decreasing feature/sample_weight magnitudes"
-*/
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(__pyx_assertions_enabled())) {
-    __pyx_t_2 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 979, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_isfinite); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 979, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_8 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 979, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 979, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 979, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 979, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    #if CYTHON_VECTORCALL
-    #endif
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_5))) {
-      __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_5);
-      assert(__pyx_t_8);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_5);
-      __Pyx_INCREF(__pyx_t_8);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_5, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[3] = {__pyx_t_8, __pyx_v_v_u, __pyx_t_7};
-      #if CYTHON_VECTORCALL
-      __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 979, __pyx_L1_error)
-      __Pyx_INCREF(__pyx_t_6);
-      #else
-      {
-        PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
-        __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 979, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
-      }
-      #endif
-      __pyx_t_3 = __Pyx_Object_VectorcallKwds((PyObject*)__pyx_t_5, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      #if CYTHON_VECTORCALL
-      #endif
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 979, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-    }
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
-      assert(__pyx_t_2);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
-      __Pyx_INCREF(__pyx_t_2);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_3};
-      __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 979, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-    }
-    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 979, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_10)) {
-      __Pyx_Raise(((PyObject *)(((PyTypeObject*)PyExc_AssertionError))), __pyx_mstate_global->__pyx_kp_u_user_factors_v_u_are_not_finite, 0, 0);
-      __PYX_ERR(0, 979, __pyx_L1_error)
-    }
-
-  }
-  #else
-  if ((1)); else __PYX_ERR(0, 979, __pyx_L1_error)
-  #endif
-
-  /* "rankfm/_rankfm.pyx":980
- *     assert np.isfinite(np.sum(w_if, dtype=np.float64)), "item feature weights [w_if] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_u, dtype=np.float64)), "user factors [v_u] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_i, dtype=np.float64)), "item factors [v_i] are not finite - try decreasing feature/sample_weight magnitudes"             # <<<<<<<<<<<<<<
- *     assert np.isfinite(np.sum(v_uf, dtype=np.float64)), "user-feature factors [v_uf] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_if, dtype=np.float64)), "item-feature factors [v_if] are not finite - try decreasing feature/sample_weight magnitudes"
-*/
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(__pyx_assertions_enabled())) {
-    __pyx_t_4 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 980, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_isfinite); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 980, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 980, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sum); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 980, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 980, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 980, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    #if CYTHON_VECTORCALL
-    #endif
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_7))) {
-      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_7);
-      assert(__pyx_t_5);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_7);
-      __Pyx_INCREF(__pyx_t_5);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_7, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[3] = {__pyx_t_5, __pyx_v_v_i, __pyx_t_8};
-      #if CYTHON_VECTORCALL
-      __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 980, __pyx_L1_error)
-      __Pyx_INCREF(__pyx_t_6);
-      #else
-      {
-        PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
-        __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 980, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
-      }
-      #endif
-      __pyx_t_3 = __Pyx_Object_VectorcallKwds((PyObject*)__pyx_t_7, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      #if CYTHON_VECTORCALL
-      #endif
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 980, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-    }
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_2))) {
-      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
-      assert(__pyx_t_4);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_4);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_2, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_t_3};
-      __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 980, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-    }
-    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 980, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_10)) {
-      __Pyx_Raise(((PyObject *)(((PyTypeObject*)PyExc_AssertionError))), __pyx_mstate_global->__pyx_kp_u_item_factors_v_i_are_not_finite, 0, 0);
-      __PYX_ERR(0, 980, __pyx_L1_error)
-    }
-
-  }
-  #else
-  if ((1)); else __PYX_ERR(0, 980, __pyx_L1_error)
-  #endif
-
-  /* "rankfm/_rankfm.pyx":981
- *     assert np.isfinite(np.sum(v_u, dtype=np.float64)), "user factors [v_u] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_i, dtype=np.float64)), "item factors [v_i] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_uf, dtype=np.float64)), "user-feature factors [v_uf] are not finite - try decreasing feature/sample_weight magnitudes"             # <<<<<<<<<<<<<<
- *     assert np.isfinite(np.sum(v_if, dtype=np.float64)), "item-feature factors [v_if] are not finite - try decreasing feature/sample_weight magnitudes"
- * 
-*/
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(__pyx_assertions_enabled())) {
-    __pyx_t_2 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 981, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_isfinite); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 981, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_7 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 981, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sum); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 981, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 981, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 981, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    #if CYTHON_VECTORCALL
-    #endif
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_8))) {
-      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_8);
-      assert(__pyx_t_7);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_8);
-      __Pyx_INCREF(__pyx_t_7);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_8, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[3] = {__pyx_t_7, __pyx_v_v_uf, __pyx_t_5};
-      #if CYTHON_VECTORCALL
-      __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 981, __pyx_L1_error)
-      __Pyx_INCREF(__pyx_t_6);
-      #else
-      {
-        PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
-        __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 981, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
-      }
-      #endif
-      __pyx_t_3 = __Pyx_Object_VectorcallKwds((PyObject*)__pyx_t_8, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      #if CYTHON_VECTORCALL
-      #endif
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 981, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-    }
-    __pyx_t_9 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
-      assert(__pyx_t_2);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
-      __Pyx_INCREF(__pyx_t_2);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
-      __pyx_t_9 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_3};
-      __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 981, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-    }
-    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 981, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_10)) {
-      __Pyx_Raise(((PyObject *)(((PyTypeObject*)PyExc_AssertionError))), __pyx_mstate_global->__pyx_kp_u_user_feature_factors_v_uf_are_no, 0, 0);
-      __PYX_ERR(0, 981, __pyx_L1_error)
-    }
-
-  }
-  #else
-  if ((1)); else __PYX_ERR(0, 981, __pyx_L1_error)
-  #endif
+  __pyx_t_7 = PyTuple_New(6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 983, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __Pyx_GIVEREF(__pyx_t_1);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 983, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_2);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 983, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_3);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_3) != (0)) __PYX_ERR(0, 983, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_4);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 3, __pyx_t_4) != (0)) __PYX_ERR(0, 983, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_5);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 4, __pyx_t_5) != (0)) __PYX_ERR(0, 983, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_6);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 5, __pyx_t_6) != (0)) __PYX_ERR(0, 983, __pyx_L1_error);
+  __pyx_t_1 = 0;
+  __pyx_t_2 = 0;
+  __pyx_t_3 = 0;
+  __pyx_t_4 = 0;
+  __pyx_t_5 = 0;
+  __pyx_t_6 = 0;
 
   /* "rankfm/_rankfm.pyx":982
- *     assert np.isfinite(np.sum(v_i, dtype=np.float64)), "item factors [v_i] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_uf, dtype=np.float64)), "user-feature factors [v_uf] are not finite - try decreasing feature/sample_weight magnitudes"
- *     assert np.isfinite(np.sum(v_if, dtype=np.float64)), "item-feature factors [v_if] are not finite - try decreasing feature/sample_weight magnitudes"             # <<<<<<<<<<<<<<
+ *     """
  * 
+ *     for label, weights in (             # <<<<<<<<<<<<<<
+ *         ("item weights [w_i]", w_i),
+ *         ("item feature weights [w_if]", w_if),
+*/
+  __pyx_t_6 = __pyx_t_7; __Pyx_INCREF(__pyx_t_6);
+  __pyx_t_8 = 0;
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  for (;;) {
+    if (__pyx_t_8 >= 6) break;
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    __pyx_t_7 = __Pyx_NewRef(PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_8));
+    #else
+    __pyx_t_7 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_8);
+    #endif
+    ++__pyx_t_8;
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 982, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    if (!(likely(PyTuple_CheckExact(__pyx_t_7))||((__pyx_t_7) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_7))) __PYX_ERR(0, 982, __pyx_L1_error)
+    if (likely(__pyx_t_7 != Py_None)) {
+      PyObject* sequence = __pyx_t_7;
+      Py_ssize_t size = __Pyx_PyTuple_GET_SIZE(sequence);
+      if (unlikely(size != 2)) {
+        if (size > 2) __Pyx_RaiseTooManyValuesError(2);
+        else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
+        __PYX_ERR(0, 982, __pyx_L1_error)
+      }
+      #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+      __pyx_t_5 = PyTuple_GET_ITEM(sequence, 0);
+      __Pyx_INCREF(__pyx_t_5);
+      __pyx_t_4 = PyTuple_GET_ITEM(sequence, 1);
+      __Pyx_INCREF(__pyx_t_4);
+      #else
+      __pyx_t_5 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 982, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_4 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 982, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      #endif
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    } else {
+      __Pyx_RaiseNoneNotIterableError(); __PYX_ERR(0, 982, __pyx_L1_error)
+    }
+    if (!(likely(PyUnicode_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_5))) __PYX_ERR(0, 982, __pyx_L1_error)
+    __Pyx_XDECREF_SET(__pyx_v_label, ((PyObject*)__pyx_t_5));
+    __pyx_t_5 = 0;
+    __Pyx_XDECREF_SET(__pyx_v_weights, __pyx_t_4);
+    __pyx_t_4 = 0;
+
+    /* "rankfm/_rankfm.pyx":990
+ *         ("item-feature factors [v_if]", v_if),
+ *     ):
+ *         if not np.isfinite(np.sum(weights, dtype=np.float64)):             # <<<<<<<<<<<<<<
+ *             raise AssertionError("{} are not finite - try decreasing feature/sample_weight magnitudes".format(label))
  * 
 */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(__pyx_assertions_enabled())) {
     __pyx_t_4 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 982, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_isfinite); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 982, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_8 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 982, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_sum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 982, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 990, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 982, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 982, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_isfinite); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 990, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_2 = NULL;
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 990, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_sum); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 990, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 990, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 990, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     #if CYTHON_VECTORCALL
     #endif
-    __pyx_t_9 = 1;
+    __pyx_t_11 = 1;
     #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_5))) {
-      __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_5);
-      assert(__pyx_t_8);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_5);
-      __Pyx_INCREF(__pyx_t_8);
+    if (unlikely(PyMethod_Check(__pyx_t_9))) {
+      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_9);
+      assert(__pyx_t_2);
+      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_9);
+      __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_5, __pyx__function);
-      __pyx_t_9 = 0;
+      __Pyx_DECREF_SET(__pyx_t_9, __pyx__function);
+      __pyx_t_11 = 0;
     }
     #endif
     {
-      PyObject *__pyx_callargs[3] = {__pyx_t_8, __pyx_v_v_if, __pyx_t_7};
+      PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_v_weights, __pyx_t_10};
       #if CYTHON_VECTORCALL
-      __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 982, __pyx_L1_error)
-      __Pyx_INCREF(__pyx_t_6);
+      __pyx_t_1 = __pyx_mstate_global->__pyx_tuple[2];
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 990, __pyx_L1_error)
+      __Pyx_INCREF(__pyx_t_1);
       #else
       {
         PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
-        __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 982, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_1 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 990, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
       }
       #endif
-      __pyx_t_3 = __Pyx_Object_VectorcallKwds((PyObject*)__pyx_t_5, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_6);
-      __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __pyx_t_5 = __Pyx_Object_VectorcallKwds((PyObject*)__pyx_t_9, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_1);
+      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       #if CYTHON_VECTORCALL
       #endif
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 982, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 990, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
     }
-    __pyx_t_9 = 1;
+    __pyx_t_11 = 1;
     #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_2))) {
-      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
+    if (unlikely(PyMethod_Check(__pyx_t_3))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
       assert(__pyx_t_4);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_3);
       __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_2, __pyx__function);
-      __pyx_t_9 = 0;
+      __Pyx_DECREF_SET(__pyx_t_3, __pyx__function);
+      __pyx_t_11 = 0;
     }
     #endif
     {
-      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_t_3};
-      __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_9, (2-__pyx_t_9) | (__pyx_t_9*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_t_5};
+      __pyx_t_7 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_3, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 982, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
+      if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 990, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_7);
     }
-    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 982, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_10)) {
-      __Pyx_Raise(((PyObject *)(((PyTypeObject*)PyExc_AssertionError))), __pyx_mstate_global->__pyx_kp_u_item_feature_factors_v_if_are_no, 0, 0);
-      __PYX_ERR(0, 982, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 990, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __pyx_t_13 = (!__pyx_t_12);
+
+
+    if (unlikely(__pyx_t_13)) {
+
+
+      /* "rankfm/_rankfm.pyx":991
+ *     ):
+ *         if not np.isfinite(np.sum(weights, dtype=np.float64)):
+ *             raise AssertionError("{} are not finite - try decreasing feature/sample_weight magnitudes".format(label))             # <<<<<<<<<<<<<<
+ * 
+ * 
+*/
+      __pyx_t_3 = NULL;
+      __pyx_t_4 = __pyx_mstate_global->__pyx_kp_u_are_not_finite_try_decreasing_f;
+      __Pyx_INCREF(__pyx_t_4);
+      __pyx_t_11 = 0;
+      {
+        PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_label};
+        __pyx_t_5 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_format, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 991, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_5);
+      }
+      if (!(likely(PyUnicode_CheckExact(__pyx_t_5))||((__pyx_t_5) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_5))) __PYX_ERR(0, 991, __pyx_L1_error)
+      __pyx_t_11 = 1;
+      {
+        PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_t_5};
+        __pyx_t_7 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_AssertionError)), __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 991, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_7);
+      }
+      __Pyx_Raise(__pyx_t_7, 0, 0, 0);
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __PYX_ERR(0, 991, __pyx_L1_error)
+
+      /* "rankfm/_rankfm.pyx":990
+ *         ("item-feature factors [v_if]", v_if),
+ *     ):
+ *         if not np.isfinite(np.sum(weights, dtype=np.float64)):             # <<<<<<<<<<<<<<
+ *             raise AssertionError("{} are not finite - try decreasing feature/sample_weight magnitudes".format(label))
+ * 
+*/
     }
 
+    /* "rankfm/_rankfm.pyx":982
+ *     """
+ * 
+ *     for label, weights in (             # <<<<<<<<<<<<<<
+ *         ("item weights [w_i]", w_i),
+ *         ("item feature weights [w_if]", w_if),
+*/
   }
-  #else
-  if ((1)); else __PYX_ERR(0, 982, __pyx_L1_error)
-  #endif
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "rankfm/_rankfm.pyx":974
+  /* "rankfm/_rankfm.pyx":976
  * 
  * 
  * def assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if):             # <<<<<<<<<<<<<<
- *     """assert all model weights are finite"""
+ *     """raise AssertionError unless all model weights are finite
  * 
 */
 
@@ -27744,16 +27493,19 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_6assert_finite(CYTHON_UNUSED PyObject
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_10);
   __Pyx_AddTraceback("rankfm._rankfm.assert_finite", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_label);
+  __Pyx_XDECREF(__pyx_v_weights);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":985
+/* "rankfm/_rankfm.pyx":994
  * 
  * 
  * def reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if):             # <<<<<<<<<<<<<<
@@ -27808,68 +27560,68 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_alpha,&__pyx_mstate_global->__pyx_n_u_beta,&__pyx_mstate_global->__pyx_n_u_w_i,&__pyx_mstate_global->__pyx_n_u_w_if,&__pyx_mstate_global->__pyx_n_u_v_u,&__pyx_mstate_global->__pyx_n_u_v_i,&__pyx_mstate_global->__pyx_n_u_v_uf,&__pyx_mstate_global->__pyx_n_u_v_if,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 985, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 994, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 985, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 994, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 985, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 994, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 985, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 994, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 985, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 994, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 985, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 994, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 985, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 994, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 985, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 994, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 985, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 994, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "reg_penalty", 0) < (0)) __PYX_ERR(0, 985, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "reg_penalty", 0) < (0)) __PYX_ERR(0, 994, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 8; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("reg_penalty", 1, 8, 8, i); __PYX_ERR(0, 985, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("reg_penalty", 1, 8, 8, i); __PYX_ERR(0, 994, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 8)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 985, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 994, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 985, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 994, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 985, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 994, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 985, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 994, __pyx_L3_error)
       values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 985, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 994, __pyx_L3_error)
       values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 985, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 994, __pyx_L3_error)
       values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 985, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 994, __pyx_L3_error)
       values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 985, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 994, __pyx_L3_error)
     }
     __pyx_v_alpha = values[0];
     __pyx_v_beta = values[1];
@@ -27882,7 +27634,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("reg_penalty", 1, 8, 8, __pyx_nargs); __PYX_ERR(0, 985, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("reg_penalty", 1, 8, 8, __pyx_nargs); __PYX_ERR(0, 994, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -27920,7 +27672,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("reg_penalty", 0);
 
-  /* "rankfm/_rankfm.pyx":988
+  /* "rankfm/_rankfm.pyx":997
  *     """calculate the total regularization penalty for all model weights without allocating temporary full-size arrays"""
  * 
  *     penalty = 0.0             # <<<<<<<<<<<<<<
@@ -27929,23 +27681,23 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
 */
   __pyx_v_penalty = 0.0;
 
-  /* "rankfm/_rankfm.pyx":989
+  /* "rankfm/_rankfm.pyx":998
  * 
  *     penalty = 0.0
  *     penalty += float(alpha) * float(np.einsum('i,i->', w_i, w_i, dtype=np.float64))             # <<<<<<<<<<<<<<
  *     penalty += float(alpha) * float(np.einsum('ij,ij->', v_u, v_u, dtype=np.float64))
  *     penalty += float(alpha) * float(np.einsum('ij,ij->', v_i, v_i, dtype=np.float64))
 */
-  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_v_alpha); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 989, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_v_alpha); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 998, __pyx_L1_error)
   __pyx_t_3 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 989, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 998, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 989, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 998, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 989, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 998, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 989, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 998, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   #if CYTHON_VECTORCALL
@@ -27966,13 +27718,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[5] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_i_i, __pyx_v_w_i, __pyx_v_w_i, __pyx_t_6};
     #if CYTHON_VECTORCALL
     __pyx_t_4 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 989, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 998, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_4);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_4 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+4, 1);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 989, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 998, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     #endif
@@ -27983,32 +27735,32 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 989, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 998, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   }
-  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 989, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 998, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_penalty = (__pyx_v_penalty + (__pyx_t_1 * __pyx_t_8));
 
 
 
-  /* "rankfm/_rankfm.pyx":990
+  /* "rankfm/_rankfm.pyx":999
  *     penalty = 0.0
  *     penalty += float(alpha) * float(np.einsum('i,i->', w_i, w_i, dtype=np.float64))
  *     penalty += float(alpha) * float(np.einsum('ij,ij->', v_u, v_u, dtype=np.float64))             # <<<<<<<<<<<<<<
  *     penalty += float(alpha) * float(np.einsum('ij,ij->', v_i, v_i, dtype=np.float64))
  *     penalty += float(beta) * float(np.einsum('i,i->', w_if, w_if, dtype=np.float64))
 */
-  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_v_alpha); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 990, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_v_alpha); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 999, __pyx_L1_error)
   __pyx_t_5 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 990, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 999, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 990, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 999, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 990, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 999, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 990, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 999, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   #if CYTHON_VECTORCALL
@@ -28029,13 +27781,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[5] = {__pyx_t_5, __pyx_mstate_global->__pyx_kp_u_ij_ij, __pyx_v_v_u, __pyx_v_v_u, __pyx_t_3};
     #if CYTHON_VECTORCALL
     __pyx_t_4 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 990, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 999, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_4);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_4 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+4, 1);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 990, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 999, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     #endif
@@ -28046,32 +27798,32 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 990, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 999, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   }
-  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 990, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 999, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_penalty = (__pyx_v_penalty + (__pyx_t_8 * __pyx_t_1));
 
 
 
-  /* "rankfm/_rankfm.pyx":991
+  /* "rankfm/_rankfm.pyx":1000
  *     penalty += float(alpha) * float(np.einsum('i,i->', w_i, w_i, dtype=np.float64))
  *     penalty += float(alpha) * float(np.einsum('ij,ij->', v_u, v_u, dtype=np.float64))
  *     penalty += float(alpha) * float(np.einsum('ij,ij->', v_i, v_i, dtype=np.float64))             # <<<<<<<<<<<<<<
  *     penalty += float(beta) * float(np.einsum('i,i->', w_if, w_if, dtype=np.float64))
  *     penalty += float(beta) * float(np.einsum('ij,ij->', v_uf, v_uf, dtype=np.float64))
 */
-  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_v_alpha); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 991, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_v_alpha); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 1000, __pyx_L1_error)
   __pyx_t_6 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 991, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1000, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 991, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1000, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 991, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1000, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 991, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1000, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   #if CYTHON_VECTORCALL
@@ -28092,13 +27844,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[5] = {__pyx_t_6, __pyx_mstate_global->__pyx_kp_u_ij_ij, __pyx_v_v_i, __pyx_v_v_i, __pyx_t_5};
     #if CYTHON_VECTORCALL
     __pyx_t_4 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 991, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1000, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_4);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_4 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+4, 1);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 991, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1000, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     #endif
@@ -28109,32 +27861,32 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 991, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1000, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   }
-  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 991, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 1000, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_penalty = (__pyx_v_penalty + (__pyx_t_1 * __pyx_t_8));
 
 
 
-  /* "rankfm/_rankfm.pyx":992
+  /* "rankfm/_rankfm.pyx":1001
  *     penalty += float(alpha) * float(np.einsum('ij,ij->', v_u, v_u, dtype=np.float64))
  *     penalty += float(alpha) * float(np.einsum('ij,ij->', v_i, v_i, dtype=np.float64))
  *     penalty += float(beta) * float(np.einsum('i,i->', w_if, w_if, dtype=np.float64))             # <<<<<<<<<<<<<<
  *     penalty += float(beta) * float(np.einsum('ij,ij->', v_uf, v_uf, dtype=np.float64))
  *     penalty += float(beta) * float(np.einsum('ij,ij->', v_if, v_if, dtype=np.float64))
 */
-  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_v_beta); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 992, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_v_beta); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 1001, __pyx_L1_error)
   __pyx_t_3 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 992, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1001, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 992, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1001, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 992, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1001, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 992, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1001, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   #if CYTHON_VECTORCALL
@@ -28155,13 +27907,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[5] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_i_i, __pyx_v_w_if, __pyx_v_w_if, __pyx_t_6};
     #if CYTHON_VECTORCALL
     __pyx_t_4 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 992, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1001, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_4);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_4 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+4, 1);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 992, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1001, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     #endif
@@ -28172,32 +27924,32 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 992, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1001, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   }
-  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 992, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 1001, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_penalty = (__pyx_v_penalty + (__pyx_t_8 * __pyx_t_1));
 
 
 
-  /* "rankfm/_rankfm.pyx":993
+  /* "rankfm/_rankfm.pyx":1002
  *     penalty += float(alpha) * float(np.einsum('ij,ij->', v_i, v_i, dtype=np.float64))
  *     penalty += float(beta) * float(np.einsum('i,i->', w_if, w_if, dtype=np.float64))
  *     penalty += float(beta) * float(np.einsum('ij,ij->', v_uf, v_uf, dtype=np.float64))             # <<<<<<<<<<<<<<
  *     penalty += float(beta) * float(np.einsum('ij,ij->', v_if, v_if, dtype=np.float64))
  *     return penalty
 */
-  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_v_beta); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 993, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_v_beta); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 1002, __pyx_L1_error)
   __pyx_t_5 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 993, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 993, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 993, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 993, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   #if CYTHON_VECTORCALL
@@ -28218,13 +27970,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[5] = {__pyx_t_5, __pyx_mstate_global->__pyx_kp_u_ij_ij, __pyx_v_v_uf, __pyx_v_v_uf, __pyx_t_3};
     #if CYTHON_VECTORCALL
     __pyx_t_4 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 993, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1002, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_4);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_4 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+4, 1);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 993, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1002, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     #endif
@@ -28235,32 +27987,32 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 993, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1002, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   }
-  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 993, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 1002, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_penalty = (__pyx_v_penalty + (__pyx_t_1 * __pyx_t_8));
 
 
 
-  /* "rankfm/_rankfm.pyx":994
+  /* "rankfm/_rankfm.pyx":1003
  *     penalty += float(beta) * float(np.einsum('i,i->', w_if, w_if, dtype=np.float64))
  *     penalty += float(beta) * float(np.einsum('ij,ij->', v_uf, v_uf, dtype=np.float64))
  *     penalty += float(beta) * float(np.einsum('ij,ij->', v_if, v_if, dtype=np.float64))             # <<<<<<<<<<<<<<
  *     return penalty
  * 
 */
-  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_v_beta); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 994, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_AsDouble(__pyx_v_beta); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_8, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 1003, __pyx_L1_error)
   __pyx_t_6 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 994, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1003, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 994, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_einsum); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1003, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 994, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1003, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 994, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1003, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   #if CYTHON_VECTORCALL
@@ -28281,13 +28033,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[5] = {__pyx_t_6, __pyx_mstate_global->__pyx_kp_u_ij_ij, __pyx_v_v_if, __pyx_v_v_if, __pyx_t_5};
     #if CYTHON_VECTORCALL
     __pyx_t_4 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 994, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1003, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_4);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_4 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+4, 1);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 994, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1003, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     #endif
@@ -28298,23 +28050,23 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 994, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1003, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
   }
-  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 994, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_1, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 1003, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_penalty = (__pyx_v_penalty + (__pyx_t_8 * __pyx_t_1));
 
 
 
-  /* "rankfm/_rankfm.pyx":995
+  /* "rankfm/_rankfm.pyx":1004
  *     penalty += float(beta) * float(np.einsum('ij,ij->', v_uf, v_uf, dtype=np.float64))
  *     penalty += float(beta) * float(np.einsum('ij,ij->', v_if, v_if, dtype=np.float64))
  *     return penalty             # <<<<<<<<<<<<<<
  * 
  * 
 */
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_penalty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 995, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_penalty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1004, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   {
     PyObject *__pyx_temp;
@@ -28327,7 +28079,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":985
+  /* "rankfm/_rankfm.pyx":994
  * 
  * 
  * def reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if):             # <<<<<<<<<<<<<<
@@ -28351,7 +28103,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_8reg_penalty(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":1002
+/* "rankfm/_rankfm.pyx":1011
  * # --------------------------------
  * 
  * def _fit_csr(             # <<<<<<<<<<<<<<
@@ -28428,258 +28180,258 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_interactions,&__pyx_mstate_global->__pyx_n_u_sample_weight,&__pyx_mstate_global->__pyx_n_u_ui_indptr_arr,&__pyx_mstate_global->__pyx_n_u_ui_indices,&__pyx_mstate_global->__pyx_n_u_uf_indptr_arr,&__pyx_mstate_global->__pyx_n_u_uf_indices,&__pyx_mstate_global->__pyx_n_u_uf_data,&__pyx_mstate_global->__pyx_n_u_x_uf_any,&__pyx_mstate_global->__pyx_n_u_if_indptr_arr,&__pyx_mstate_global->__pyx_n_u_if_indices,&__pyx_mstate_global->__pyx_n_u_if_data,&__pyx_mstate_global->__pyx_n_u_x_if_any,&__pyx_mstate_global->__pyx_n_u_w_i,&__pyx_mstate_global->__pyx_n_u_w_if,&__pyx_mstate_global->__pyx_n_u_v_u,&__pyx_mstate_global->__pyx_n_u_v_i,&__pyx_mstate_global->__pyx_n_u_v_uf,&__pyx_mstate_global->__pyx_n_u_v_if,&__pyx_mstate_global->__pyx_n_u_alpha,&__pyx_mstate_global->__pyx_n_u_beta,&__pyx_mstate_global->__pyx_n_u_learning_rate,&__pyx_mstate_global->__pyx_n_u_learning_schedule,&__pyx_mstate_global->__pyx_n_u_learning_exponent,&__pyx_mstate_global->__pyx_n_u_max_samples,&__pyx_mstate_global->__pyx_n_u_epochs,&__pyx_mstate_global->__pyx_n_u_verbose,&__pyx_mstate_global->__pyx_n_u_user_dropout,&__pyx_mstate_global->__pyx_n_u_seed,&__pyx_mstate_global->__pyx_n_u_n_threads,&__pyx_mstate_global->__pyx_n_u_uniform_feature_reg,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1002, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1011, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case 30:
         values[29] = __Pyx_ArgRef_FASTCALL(__pyx_args, 29);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[29])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[29])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 29:
         values[28] = __Pyx_ArgRef_FASTCALL(__pyx_args, 28);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[28])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[28])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 28:
         values[27] = __Pyx_ArgRef_FASTCALL(__pyx_args, 27);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[27])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[27])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 27:
         values[26] = __Pyx_ArgRef_FASTCALL(__pyx_args, 26);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[26])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[26])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 26:
         values[25] = __Pyx_ArgRef_FASTCALL(__pyx_args, 25);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[25])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[25])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 25:
         values[24] = __Pyx_ArgRef_FASTCALL(__pyx_args, 24);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[24])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[24])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 24:
         values[23] = __Pyx_ArgRef_FASTCALL(__pyx_args, 23);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[23])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[23])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 23:
         values[22] = __Pyx_ArgRef_FASTCALL(__pyx_args, 22);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[22])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[22])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 22:
         values[21] = __Pyx_ArgRef_FASTCALL(__pyx_args, 21);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[21])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[21])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 21:
         values[20] = __Pyx_ArgRef_FASTCALL(__pyx_args, 20);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[20])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[20])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 20:
         values[19] = __Pyx_ArgRef_FASTCALL(__pyx_args, 19);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[19])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[19])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 19:
         values[18] = __Pyx_ArgRef_FASTCALL(__pyx_args, 18);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[18])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[18])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 18:
         values[17] = __Pyx_ArgRef_FASTCALL(__pyx_args, 17);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[17])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[17])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 17:
         values[16] = __Pyx_ArgRef_FASTCALL(__pyx_args, 16);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[16])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[16])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 16:
         values[15] = __Pyx_ArgRef_FASTCALL(__pyx_args, 15);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 15:
         values[14] = __Pyx_ArgRef_FASTCALL(__pyx_args, 14);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 14:
         values[13] = __Pyx_ArgRef_FASTCALL(__pyx_args, 13);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 13:
         values[12] = __Pyx_ArgRef_FASTCALL(__pyx_args, 12);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 12:
         values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 11:
         values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 10:
         values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  9:
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_fit_csr", 0) < (0)) __PYX_ERR(0, 1002, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_fit_csr", 0) < (0)) __PYX_ERR(0, 1011, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 26; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_fit_csr", 0, 26, 30, i); __PYX_ERR(0, 1002, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_fit_csr", 0, 26, 30, i); __PYX_ERR(0, 1011, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case 30:
         values[29] = __Pyx_ArgRef_FASTCALL(__pyx_args, 29);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[29])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[29])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 29:
         values[28] = __Pyx_ArgRef_FASTCALL(__pyx_args, 28);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[28])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[28])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 28:
         values[27] = __Pyx_ArgRef_FASTCALL(__pyx_args, 27);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[27])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[27])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 27:
         values[26] = __Pyx_ArgRef_FASTCALL(__pyx_args, 26);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[26])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[26])) __PYX_ERR(0, 1011, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 26:
         values[25] = __Pyx_ArgRef_FASTCALL(__pyx_args, 25);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[25])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[25])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[24] = __Pyx_ArgRef_FASTCALL(__pyx_args, 24);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[24])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[24])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[23] = __Pyx_ArgRef_FASTCALL(__pyx_args, 23);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[23])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[23])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[22] = __Pyx_ArgRef_FASTCALL(__pyx_args, 22);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[22])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[22])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[21] = __Pyx_ArgRef_FASTCALL(__pyx_args, 21);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[21])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[21])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[20] = __Pyx_ArgRef_FASTCALL(__pyx_args, 20);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[20])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[20])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[19] = __Pyx_ArgRef_FASTCALL(__pyx_args, 19);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[19])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[19])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[18] = __Pyx_ArgRef_FASTCALL(__pyx_args, 18);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[18])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[18])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[17] = __Pyx_ArgRef_FASTCALL(__pyx_args, 17);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[17])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[17])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[16] = __Pyx_ArgRef_FASTCALL(__pyx_args, 16);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[16])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[16])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[15] = __Pyx_ArgRef_FASTCALL(__pyx_args, 15);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[14] = __Pyx_ArgRef_FASTCALL(__pyx_args, 14);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[13] = __Pyx_ArgRef_FASTCALL(__pyx_args, 13);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[12] = __Pyx_ArgRef_FASTCALL(__pyx_args, 12);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1011, __pyx_L3_error)
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1002, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1011, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_interactions = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn_int32_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_interactions.memview)) __PYX_ERR(0, 1003, __pyx_L3_error)
-    __pyx_v_sample_weight = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_sample_weight.memview)) __PYX_ERR(0, 1004, __pyx_L3_error)
+    __pyx_v_interactions = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn_int32_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_interactions.memview)) __PYX_ERR(0, 1012, __pyx_L3_error)
+    __pyx_v_sample_weight = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_sample_weight.memview)) __PYX_ERR(0, 1013, __pyx_L3_error)
     __pyx_v_ui_indptr_arr = values[2];
-    __pyx_v_ui_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ui_indices.memview)) __PYX_ERR(0, 1006, __pyx_L3_error)
+    __pyx_v_ui_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ui_indices.memview)) __PYX_ERR(0, 1015, __pyx_L3_error)
     __pyx_v_uf_indptr_arr = values[4];
-    __pyx_v_uf_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_uf_indices.memview)) __PYX_ERR(0, 1008, __pyx_L3_error)
-    __pyx_v_uf_data = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_uf_data.memview)) __PYX_ERR(0, 1009, __pyx_L3_error)
-    __pyx_v_x_uf_any = __Pyx_PyLong_As_int(values[7]); if (unlikely((__pyx_v_x_uf_any == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1010, __pyx_L3_error)
+    __pyx_v_uf_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_uf_indices.memview)) __PYX_ERR(0, 1017, __pyx_L3_error)
+    __pyx_v_uf_data = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_uf_data.memview)) __PYX_ERR(0, 1018, __pyx_L3_error)
+    __pyx_v_x_uf_any = __Pyx_PyLong_As_int(values[7]); if (unlikely((__pyx_v_x_uf_any == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1019, __pyx_L3_error)
     __pyx_v_if_indptr_arr = values[8];
-    __pyx_v_if_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[9], PyBUF_WRITABLE); if (unlikely(!__pyx_v_if_indices.memview)) __PYX_ERR(0, 1012, __pyx_L3_error)
-    __pyx_v_if_data = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[10], PyBUF_WRITABLE); if (unlikely(!__pyx_v_if_data.memview)) __PYX_ERR(0, 1013, __pyx_L3_error)
-    __pyx_v_x_if_any = __Pyx_PyLong_As_int(values[11]); if (unlikely((__pyx_v_x_if_any == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1014, __pyx_L3_error)
-    __pyx_v_w_i = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[12], PyBUF_WRITABLE); if (unlikely(!__pyx_v_w_i.memview)) __PYX_ERR(0, 1015, __pyx_L3_error)
-    __pyx_v_w_if = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[13], PyBUF_WRITABLE); if (unlikely(!__pyx_v_w_if.memview)) __PYX_ERR(0, 1016, __pyx_L3_error)
-    __pyx_v_v_u = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[14], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_u.memview)) __PYX_ERR(0, 1017, __pyx_L3_error)
-    __pyx_v_v_i = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[15], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_i.memview)) __PYX_ERR(0, 1018, __pyx_L3_error)
-    __pyx_v_v_uf = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[16], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_uf.memview)) __PYX_ERR(0, 1019, __pyx_L3_error)
-    __pyx_v_v_if = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[17], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_if.memview)) __PYX_ERR(0, 1020, __pyx_L3_error)
-    __pyx_v_alpha = __Pyx_PyFloat_AsFloat(values[18]); if (unlikely((__pyx_v_alpha == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1021, __pyx_L3_error)
-    __pyx_v_beta = __Pyx_PyFloat_AsFloat(values[19]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1022, __pyx_L3_error)
-    __pyx_v_learning_rate = __Pyx_PyFloat_AsFloat(values[20]); if (unlikely((__pyx_v_learning_rate == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1023, __pyx_L3_error)
+    __pyx_v_if_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[9], PyBUF_WRITABLE); if (unlikely(!__pyx_v_if_indices.memview)) __PYX_ERR(0, 1021, __pyx_L3_error)
+    __pyx_v_if_data = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[10], PyBUF_WRITABLE); if (unlikely(!__pyx_v_if_data.memview)) __PYX_ERR(0, 1022, __pyx_L3_error)
+    __pyx_v_x_if_any = __Pyx_PyLong_As_int(values[11]); if (unlikely((__pyx_v_x_if_any == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1023, __pyx_L3_error)
+    __pyx_v_w_i = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[12], PyBUF_WRITABLE); if (unlikely(!__pyx_v_w_i.memview)) __PYX_ERR(0, 1024, __pyx_L3_error)
+    __pyx_v_w_if = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[13], PyBUF_WRITABLE); if (unlikely(!__pyx_v_w_if.memview)) __PYX_ERR(0, 1025, __pyx_L3_error)
+    __pyx_v_v_u = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[14], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_u.memview)) __PYX_ERR(0, 1026, __pyx_L3_error)
+    __pyx_v_v_i = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[15], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_i.memview)) __PYX_ERR(0, 1027, __pyx_L3_error)
+    __pyx_v_v_uf = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[16], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_uf.memview)) __PYX_ERR(0, 1028, __pyx_L3_error)
+    __pyx_v_v_if = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[17], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_if.memview)) __PYX_ERR(0, 1029, __pyx_L3_error)
+    __pyx_v_alpha = __Pyx_PyFloat_AsFloat(values[18]); if (unlikely((__pyx_v_alpha == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1030, __pyx_L3_error)
+    __pyx_v_beta = __Pyx_PyFloat_AsFloat(values[19]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1031, __pyx_L3_error)
+    __pyx_v_learning_rate = __Pyx_PyFloat_AsFloat(values[20]); if (unlikely((__pyx_v_learning_rate == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1032, __pyx_L3_error)
     __pyx_v_learning_schedule = ((PyObject*)values[21]);
-    __pyx_v_learning_exponent = __Pyx_PyFloat_AsFloat(values[22]); if (unlikely((__pyx_v_learning_exponent == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1025, __pyx_L3_error)
-    __pyx_v_max_samples = __Pyx_PyLong_As_int(values[23]); if (unlikely((__pyx_v_max_samples == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1026, __pyx_L3_error)
-    __pyx_v_epochs = __Pyx_PyLong_As_int(values[24]); if (unlikely((__pyx_v_epochs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1027, __pyx_L3_error)
-    __pyx_v_verbose = __Pyx_PyObject_IsTrue(values[25]); if (unlikely((__pyx_v_verbose == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1028, __pyx_L3_error)
+    __pyx_v_learning_exponent = __Pyx_PyFloat_AsFloat(values[22]); if (unlikely((__pyx_v_learning_exponent == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1034, __pyx_L3_error)
+    __pyx_v_max_samples = __Pyx_PyLong_As_int(values[23]); if (unlikely((__pyx_v_max_samples == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1035, __pyx_L3_error)
+    __pyx_v_epochs = __Pyx_PyLong_As_int(values[24]); if (unlikely((__pyx_v_epochs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1036, __pyx_L3_error)
+    __pyx_v_verbose = __Pyx_PyObject_IsTrue(values[25]); if (unlikely((__pyx_v_verbose == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1037, __pyx_L3_error)
     if (values[26]) {
-      __pyx_v_user_dropout = __Pyx_PyFloat_AsFloat(values[26]); if (unlikely((__pyx_v_user_dropout == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1029, __pyx_L3_error)
+      __pyx_v_user_dropout = __Pyx_PyFloat_AsFloat(values[26]); if (unlikely((__pyx_v_user_dropout == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1038, __pyx_L3_error)
     } else {
       __pyx_v_user_dropout = ((float)((double)0.0));
     }
     if (values[27]) {
-      __pyx_v_seed = __Pyx_PyLong_As_int(values[27]); if (unlikely((__pyx_v_seed == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1030, __pyx_L3_error)
+      __pyx_v_seed = __Pyx_PyLong_As_int(values[27]); if (unlikely((__pyx_v_seed == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1039, __pyx_L3_error)
     } else {
       __pyx_v_seed = ((int)((int)0x5D4));
     }
     if (values[28]) {
-      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[28]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1031, __pyx_L3_error)
+      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[28]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1040, __pyx_L3_error)
     } else {
       __pyx_v_n_threads = ((int)((int)1));
     }
     if (values[29]) {
-      __pyx_v_uniform_feature_reg = __Pyx_PyObject_IsTrue(values[29]); if (unlikely((__pyx_v_uniform_feature_reg == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1032, __pyx_L3_error)
+      __pyx_v_uniform_feature_reg = __Pyx_PyObject_IsTrue(values[29]); if (unlikely((__pyx_v_uniform_feature_reg == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1041, __pyx_L3_error)
     } else {
 
-      /* "rankfm/_rankfm.pyx":1032
+      /* "rankfm/_rankfm.pyx":1041
  *     int seed=1492,
  *     int n_threads=1,
  *     bint uniform_feature_reg=False             # <<<<<<<<<<<<<<
@@ -28691,7 +28443,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_fit_csr", 0, 26, 30, __pyx_nargs); __PYX_ERR(0, 1002, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_fit_csr", 0, 26, 30, __pyx_nargs); __PYX_ERR(0, 1011, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -28715,10 +28467,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_learning_schedule), (&PyUnicode_Type), 1, "learning_schedule", 1))) __PYX_ERR(0, 1024, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_learning_schedule), (&PyUnicode_Type), 1, "learning_schedule", 1))) __PYX_ERR(0, 1033, __pyx_L1_error)
   __pyx_r = __pyx_pf_6rankfm_7_rankfm_10_fit_csr(__pyx_self, __pyx_v_interactions, __pyx_v_sample_weight, __pyx_v_ui_indptr_arr, __pyx_v_ui_indices, __pyx_v_uf_indptr_arr, __pyx_v_uf_indices, __pyx_v_uf_data, __pyx_v_x_uf_any, __pyx_v_if_indptr_arr, __pyx_v_if_indices, __pyx_v_if_data, __pyx_v_x_if_any, __pyx_v_w_i, __pyx_v_w_if, __pyx_v_v_u, __pyx_v_v_i, __pyx_v_v_uf, __pyx_v_v_if, __pyx_v_alpha, __pyx_v_beta, __pyx_v_learning_rate, __pyx_v_learning_schedule, __pyx_v_learning_exponent, __pyx_v_max_samples, __pyx_v_epochs, __pyx_v_verbose, __pyx_v_user_dropout, __pyx_v_seed, __pyx_v_n_threads, __pyx_v_uniform_feature_reg);
 
-  /* "rankfm/_rankfm.pyx":1002
+  /* "rankfm/_rankfm.pyx":1011
  * # --------------------------------
  * 
  * def _fit_csr(             # <<<<<<<<<<<<<<
@@ -28867,7 +28619,8 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_fit_csr", 0);
 
-  /* "rankfm/_rankfm.pyx":1036
+
+  /* "rankfm/_rankfm.pyx":1045
  *     """learn model weights via multi-threaded nogil BPR/WARP SGD with materialized effective item cache and native CSR features"""
  * 
  *     cdef int64_t N = interactions.shape[0]             # <<<<<<<<<<<<<<
@@ -28876,7 +28629,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_N = (__pyx_v_interactions.shape[0]);
 
-  /* "rankfm/_rankfm.pyx":1037
+  /* "rankfm/_rankfm.pyx":1046
  * 
  *     cdef int64_t N = interactions.shape[0]
  *     cdef int32_t I = <int32_t>v_i.shape[0]             # <<<<<<<<<<<<<<
@@ -28885,7 +28638,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_I = ((int32_t)(__pyx_v_v_i.shape[0]));
 
-  /* "rankfm/_rankfm.pyx":1038
+  /* "rankfm/_rankfm.pyx":1047
  *     cdef int64_t N = interactions.shape[0]
  *     cdef int32_t I = <int32_t>v_i.shape[0]
  *     cdef int F = <int>v_u.shape[1]             # <<<<<<<<<<<<<<
@@ -28894,7 +28647,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_F = ((int)(__pyx_v_v_u.shape[1]));
 
-  /* "rankfm/_rankfm.pyx":1039
+  /* "rankfm/_rankfm.pyx":1048
  *     cdef int32_t I = <int32_t>v_i.shape[0]
  *     cdef int F = <int>v_u.shape[1]
  *     cdef int64_t P_uf = v_uf.shape[0]             # <<<<<<<<<<<<<<
@@ -28903,7 +28656,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_P_uf = (__pyx_v_v_uf.shape[0]);
 
-  /* "rankfm/_rankfm.pyx":1040
+  /* "rankfm/_rankfm.pyx":1049
  *     cdef int F = <int>v_u.shape[1]
  *     cdef int64_t P_uf = v_uf.shape[0]
  *     cdef int64_t P_if = v_if.shape[0]             # <<<<<<<<<<<<<<
@@ -28912,7 +28665,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_P_if = (__pyx_v_v_if.shape[0]);
 
-  /* "rankfm/_rankfm.pyx":1042
+  /* "rankfm/_rankfm.pyx":1051
  *     cdef int64_t P_if = v_if.shape[0]
  * 
  *     if N == 0 or I <= 1 or epochs <= 0:             # <<<<<<<<<<<<<<
@@ -28948,12 +28701,12 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1043
+    /* "rankfm/_rankfm.pyx":1052
  * 
  *     if N == 0 or I <= 1 or epochs <= 0:
  *         return             # <<<<<<<<<<<<<<
  * 
- *     cdef int schedule_mode
+ *     # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
 */
     {
       PyObject *__pyx_temp;
@@ -28965,7 +28718,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":1042
+    /* "rankfm/_rankfm.pyx":1051
  *     cdef int64_t P_if = v_if.shape[0]
  * 
  *     if N == 0 or I <= 1 or epochs <= 0:             # <<<<<<<<<<<<<<
@@ -28974,18 +28727,89 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1046
+  /* "rankfm/_rankfm.pyx":1056
+ *     # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
+ *     # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
+ *     if N > 2147483647:             # <<<<<<<<<<<<<<
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:
+*/
+  __pyx_t_1 = (__pyx_v_N > 0x7FFFFFFF);
+
+  if (unlikely(__pyx_t_1)) {
+
+
+    /* "rankfm/_rankfm.pyx":1057
+ *     # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
+ *     if N > 2147483647:
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")             # <<<<<<<<<<<<<<
+ *     if max_samples > I - 1:
+ *         max_samples = I - 1
+*/
+    __pyx_t_4 = NULL;
+    __pyx_t_5 = 1;
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_RankFM_supports_at_most_2_147_48};
+      __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1057, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+    }
+    __Pyx_Raise(__pyx_t_3, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __PYX_ERR(0, 1057, __pyx_L1_error)
+
+    /* "rankfm/_rankfm.pyx":1056
+ *     # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
+ *     # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
+ *     if N > 2147483647:             # <<<<<<<<<<<<<<
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:
+*/
+  }
+
+  /* "rankfm/_rankfm.pyx":1058
+ *     if N > 2147483647:
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:             # <<<<<<<<<<<<<<
+ *         max_samples = I - 1
+ * 
+*/
+  __pyx_t_1 = (__pyx_v_max_samples > (__pyx_v_I - 1));
+
+  if (__pyx_t_1) {
+
+
+    /* "rankfm/_rankfm.pyx":1059
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:
+ *         max_samples = I - 1             # <<<<<<<<<<<<<<
+ * 
+ *     cdef int schedule_mode
+*/
+    __pyx_v_max_samples = (__pyx_v_I - 1);
+
+    /* "rankfm/_rankfm.pyx":1058
+ *     if N > 2147483647:
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:             # <<<<<<<<<<<<<<
+ *         max_samples = I - 1
+ * 
+*/
+  }
+
+  /* "rankfm/_rankfm.pyx":1062
  * 
  *     cdef int schedule_mode
  *     if learning_schedule == 'constant':             # <<<<<<<<<<<<<<
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':
 */
-  __pyx_t_1 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_learning_schedule, __pyx_mstate_global->__pyx_n_u_constant, Py_EQ); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 1046, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_learning_schedule, __pyx_mstate_global->__pyx_n_u_constant, Py_EQ); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 1062, __pyx_L1_error)
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1047
+    /* "rankfm/_rankfm.pyx":1063
  *     cdef int schedule_mode
  *     if learning_schedule == 'constant':
  *         schedule_mode = 0             # <<<<<<<<<<<<<<
@@ -28994,28 +28818,28 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     __pyx_v_schedule_mode = 0;
 
-    /* "rankfm/_rankfm.pyx":1046
+    /* "rankfm/_rankfm.pyx":1062
  * 
  *     cdef int schedule_mode
  *     if learning_schedule == 'constant':             # <<<<<<<<<<<<<<
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':
 */
-    goto __pyx_L7;
+    goto __pyx_L9;
   }
 
-  /* "rankfm/_rankfm.pyx":1048
+  /* "rankfm/_rankfm.pyx":1064
  *     if learning_schedule == 'constant':
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':             # <<<<<<<<<<<<<<
  *         schedule_mode = 1
  *     else:
 */
-  __pyx_t_1 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_learning_schedule, __pyx_mstate_global->__pyx_n_u_invscaling, Py_EQ); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 1048, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_learning_schedule, __pyx_mstate_global->__pyx_n_u_invscaling, Py_EQ); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 1064, __pyx_L1_error)
   if (likely(__pyx_t_1)) {
 
 
-    /* "rankfm/_rankfm.pyx":1049
+    /* "rankfm/_rankfm.pyx":1065
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':
  *         schedule_mode = 1             # <<<<<<<<<<<<<<
@@ -29024,17 +28848,17 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     __pyx_v_schedule_mode = 1;
 
-    /* "rankfm/_rankfm.pyx":1048
+    /* "rankfm/_rankfm.pyx":1064
  *     if learning_schedule == 'constant':
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':             # <<<<<<<<<<<<<<
  *         schedule_mode = 1
  *     else:
 */
-    goto __pyx_L7;
+    goto __pyx_L9;
   }
 
-  /* "rankfm/_rankfm.pyx":1051
+  /* "rankfm/_rankfm.pyx":1067
  *         schedule_mode = 1
  *     else:
  *         raise ValueError('unknown [learning_schedule]')             # <<<<<<<<<<<<<<
@@ -29048,16 +28872,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
       PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_unknown_learning_schedule};
       __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1051, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1067, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 1051, __pyx_L1_error)
+    __PYX_ERR(0, 1067, __pyx_L1_error)
   }
-  __pyx_L7:;
+  __pyx_L9:;
 
-  /* "rankfm/_rankfm.pyx":1053
+  /* "rankfm/_rankfm.pyx":1069
  *         raise ValueError('unknown [learning_schedule]')
  * 
  *     ui_indptr_i64 = np.ascontiguousarray(ui_indptr_arr, dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -29065,14 +28889,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
  *     if_indptr_i64 = np.ascontiguousarray(if_indptr_arr, dtype=np.int64)
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1053, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1069, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1053, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1069, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1053, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1069, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1053, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1069, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   #if CYTHON_VECTORCALL
@@ -29093,13 +28917,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_v_ui_indptr_arr, __pyx_t_8};
     #if CYTHON_VECTORCALL
     __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1053, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1069, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_6);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1053, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1069, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
     #endif
@@ -29110,13 +28934,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1053, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1069, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_v_ui_indptr_i64 = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "rankfm/_rankfm.pyx":1054
+  /* "rankfm/_rankfm.pyx":1070
  * 
  *     ui_indptr_i64 = np.ascontiguousarray(ui_indptr_arr, dtype=np.int64)
  *     uf_indptr_i64 = np.ascontiguousarray(uf_indptr_arr, dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -29124,14 +28948,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
  * 
 */
   __pyx_t_7 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1054, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1070, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1054, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1070, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1054, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1070, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1054, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1070, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   #if CYTHON_VECTORCALL
@@ -29152,13 +28976,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     PyObject *__pyx_callargs[3] = {__pyx_t_7, __pyx_v_uf_indptr_arr, __pyx_t_4};
     #if CYTHON_VECTORCALL
     __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1054, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1070, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_6);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1054, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1070, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
     #endif
@@ -29169,13 +28993,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1054, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1070, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_v_uf_indptr_i64 = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "rankfm/_rankfm.pyx":1055
+  /* "rankfm/_rankfm.pyx":1071
  *     ui_indptr_i64 = np.ascontiguousarray(ui_indptr_arr, dtype=np.int64)
  *     uf_indptr_i64 = np.ascontiguousarray(uf_indptr_arr, dtype=np.int64)
  *     if_indptr_i64 = np.ascontiguousarray(if_indptr_arr, dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -29183,14 +29007,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
  *     cdef int64_t[::1] ui_indptr = ui_indptr_i64
 */
   __pyx_t_8 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1055, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1071, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1055, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1071, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1055, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1071, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1055, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1071, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   #if CYTHON_VECTORCALL
@@ -29211,13 +29035,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     PyObject *__pyx_callargs[3] = {__pyx_t_8, __pyx_v_if_indptr_arr, __pyx_t_7};
     #if CYTHON_VECTORCALL
     __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1055, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1071, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_6);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1055, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1071, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
     #endif
@@ -29228,49 +29052,49 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1055, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1071, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_v_if_indptr_i64 = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "rankfm/_rankfm.pyx":1057
+  /* "rankfm/_rankfm.pyx":1073
  *     if_indptr_i64 = np.ascontiguousarray(if_indptr_arr, dtype=np.int64)
  * 
  *     cdef int64_t[::1] ui_indptr = ui_indptr_i64             # <<<<<<<<<<<<<<
  *     cdef int64_t[::1] uf_indptr = uf_indptr_i64
  *     cdef int64_t[::1] if_indptr = if_indptr_i64
 */
-  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_ui_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1057, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_ui_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1073, __pyx_L1_error)
   __pyx_v_ui_indptr = __pyx_t_9;
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":1058
+  /* "rankfm/_rankfm.pyx":1074
  * 
  *     cdef int64_t[::1] ui_indptr = ui_indptr_i64
  *     cdef int64_t[::1] uf_indptr = uf_indptr_i64             # <<<<<<<<<<<<<<
  *     cdef int64_t[::1] if_indptr = if_indptr_i64
  * 
 */
-  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_uf_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1058, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_uf_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1074, __pyx_L1_error)
   __pyx_v_uf_indptr = __pyx_t_9;
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":1059
+  /* "rankfm/_rankfm.pyx":1075
  *     cdef int64_t[::1] ui_indptr = ui_indptr_i64
  *     cdef int64_t[::1] uf_indptr = uf_indptr_i64
  *     cdef int64_t[::1] if_indptr = if_indptr_i64             # <<<<<<<<<<<<<<
  * 
  *     shuffle_index = np.arange(N, dtype=np.int32)
 */
-  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_if_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1059, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_if_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1075, __pyx_L1_error)
   __pyx_v_if_indptr = __pyx_t_9;
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":1061
+  /* "rankfm/_rankfm.pyx":1077
  *     cdef int64_t[::1] if_indptr = if_indptr_i64
  * 
  *     shuffle_index = np.arange(N, dtype=np.int32)             # <<<<<<<<<<<<<<
@@ -29278,16 +29102,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
  * 
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1061, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1077, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_arange); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1061, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_arange); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1077, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyLong_From_int64_t(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1061, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyLong_From_int64_t(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1077, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1061, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1077, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1061, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1077, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   #if CYTHON_VECTORCALL
@@ -29308,13 +29132,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_t_6, __pyx_t_10};
     #if CYTHON_VECTORCALL
     __pyx_t_8 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1061, __pyx_L1_error)
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1077, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_8);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_8 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1061, __pyx_L1_error)
+      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1077, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
     }
     #endif
@@ -29326,25 +29150,25 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1061, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1077, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_v_shuffle_index = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "rankfm/_rankfm.pyx":1062
+  /* "rankfm/_rankfm.pyx":1078
  * 
  *     shuffle_index = np.arange(N, dtype=np.int32)
  *     cdef int32_t[::1] shuffle_index_mv = shuffle_index             # <<<<<<<<<<<<<<
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
 */
-  __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_shuffle_index, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 1062, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_shuffle_index, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 1078, __pyx_L1_error)
   __pyx_v_shuffle_index_mv = __pyx_t_11;
   __pyx_t_11.memview = NULL;
   __pyx_t_11.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":1064
+  /* "rankfm/_rankfm.pyx":1080
  *     cdef int32_t[::1] shuffle_index_mv = shuffle_index
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1             # <<<<<<<<<<<<<<
@@ -29359,14 +29183,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
     __pyx_t_1 = __pyx_t_2;
 
-    goto __pyx_L8_bool_binop_done;
+    goto __pyx_L10_bool_binop_done;
   }
   __pyx_t_2 = (__pyx_v_N >= 0x400);
 
 
   __pyx_t_1 = __pyx_t_2;
 
-  __pyx_L8_bool_binop_done:;
+  __pyx_L10_bool_binop_done:;
   if (__pyx_t_1) {
 
     __pyx_t_12 = __pyx_v_n_threads;
@@ -29377,7 +29201,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_eff_threads = __pyx_t_12;
 
-  /* "rankfm/_rankfm.pyx":1065
+  /* "rankfm/_rankfm.pyx":1081
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
  *     if eff_threads > 1 and N // eff_threads < 256:             # <<<<<<<<<<<<<<
@@ -29392,18 +29216,18 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
     __pyx_t_1 = __pyx_t_2;
 
-    goto __pyx_L11_bool_binop_done;
+    goto __pyx_L13_bool_binop_done;
   }
   __pyx_t_2 = ((__pyx_v_N / __pyx_v_eff_threads) < 0x100);
 
 
   __pyx_t_1 = __pyx_t_2;
 
-  __pyx_L11_bool_binop_done:;
+  __pyx_L13_bool_binop_done:;
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1066
+    /* "rankfm/_rankfm.pyx":1082
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
  *     if eff_threads > 1 and N // eff_threads < 256:
  *         eff_threads = max(1, <int>(N // 256))             # <<<<<<<<<<<<<<
@@ -29427,7 +29251,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     __pyx_v_eff_threads = __pyx_t_14;
 
 
-    /* "rankfm/_rankfm.pyx":1065
+    /* "rankfm/_rankfm.pyx":1081
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
  *     if eff_threads > 1 and N // eff_threads < 256:             # <<<<<<<<<<<<<<
@@ -29436,7 +29260,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1069
+  /* "rankfm/_rankfm.pyx":1085
  * 
  *     # Pad per-thread scratch stride (4 * F floats) to 64-byte cache lines (16 floats)
  *     cdef size_t raw_floats = <size_t>(4 * F)             # <<<<<<<<<<<<<<
@@ -29445,7 +29269,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_raw_floats = ((size_t)(4 * __pyx_v_F));
 
-  /* "rankfm/_rankfm.pyx":1070
+  /* "rankfm/_rankfm.pyx":1086
  *     # Pad per-thread scratch stride (4 * F floats) to 64-byte cache lines (16 floats)
  *     cdef size_t raw_floats = <size_t>(4 * F)
  *     cdef size_t scratch_stride = (raw_floats + 15u) & ~(<size_t>15u)             # <<<<<<<<<<<<<<
@@ -29454,7 +29278,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_scratch_stride = ((__pyx_v_raw_floats + 15U) & (~((size_t)15U)));
 
-  /* "rankfm/_rankfm.pyx":1072
+  /* "rankfm/_rankfm.pyx":1088
  *     cdef size_t scratch_stride = (raw_floats + 15u) & ~(<size_t>15u)
  * 
  *     cdef float *mult_lut = <float *>rfm_aligned_malloc(<size_t>(max_samples + 1) * sizeof(float))             # <<<<<<<<<<<<<<
@@ -29463,7 +29287,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_mult_lut = ((float *)rfm_aligned_malloc((((size_t)(__pyx_v_max_samples + 1)) * (sizeof(float)))));
 
-  /* "rankfm/_rankfm.pyx":1073
+  /* "rankfm/_rankfm.pyx":1089
  * 
  *     cdef float *mult_lut = <float *>rfm_aligned_malloc(<size_t>(max_samples + 1) * sizeof(float))
  *     cdef float *scratch_base = <float *>rfm_aligned_malloc(<size_t>eff_threads * scratch_stride * sizeof(float))             # <<<<<<<<<<<<<<
@@ -29472,7 +29296,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_scratch_base = ((float *)rfm_aligned_malloc(((((size_t)__pyx_v_eff_threads) * __pyx_v_scratch_stride) * (sizeof(float)))));
 
-  /* "rankfm/_rankfm.pyx":1074
+  /* "rankfm/_rankfm.pyx":1090
  *     cdef float *mult_lut = <float *>rfm_aligned_malloc(<size_t>(max_samples + 1) * sizeof(float))
  *     cdef float *scratch_base = <float *>rfm_aligned_malloc(<size_t>eff_threads * scratch_stride * sizeof(float))
  *     cdef double *ll_slots = <double *>calloc(<size_t>(eff_threads * 8), sizeof(double))             # <<<<<<<<<<<<<<
@@ -29481,7 +29305,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ll_slots = ((double *)calloc(((size_t)(__pyx_v_eff_threads * 8)), (sizeof(double))));
 
-  /* "rankfm/_rankfm.pyx":1075
+  /* "rankfm/_rankfm.pyx":1091
  *     cdef float *scratch_base = <float *>rfm_aligned_malloc(<size_t>eff_threads * scratch_stride * sizeof(float))
  *     cdef double *ll_slots = <double *>calloc(<size_t>(eff_threads * 8), sizeof(double))
  *     cdef float *b_eff_alloc = NULL             # <<<<<<<<<<<<<<
@@ -29490,7 +29314,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_b_eff_alloc = NULL;
 
-  /* "rankfm/_rankfm.pyx":1076
+  /* "rankfm/_rankfm.pyx":1092
  *     cdef double *ll_slots = <double *>calloc(<size_t>(eff_threads * 8), sizeof(double))
  *     cdef float *b_eff_alloc = NULL
  *     cdef float *v_eff_alloc = NULL             # <<<<<<<<<<<<<<
@@ -29499,7 +29323,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_v_eff_alloc = NULL;
 
-  /* "rankfm/_rankfm.pyx":1077
+  /* "rankfm/_rankfm.pyx":1093
  *     cdef float *b_eff_alloc = NULL
  *     cdef float *v_eff_alloc = NULL
  *     cdef int64_t *last_step_uf = NULL             # <<<<<<<<<<<<<<
@@ -29508,7 +29332,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_last_step_uf = NULL;
 
-  /* "rankfm/_rankfm.pyx":1078
+  /* "rankfm/_rankfm.pyx":1094
  *     cdef float *v_eff_alloc = NULL
  *     cdef int64_t *last_step_uf = NULL
  *     cdef int64_t *last_step_if = NULL             # <<<<<<<<<<<<<<
@@ -29517,7 +29341,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_last_step_if = NULL;
 
-  /* "rankfm/_rankfm.pyx":1079
+  /* "rankfm/_rankfm.pyx":1095
  *     cdef int64_t *last_step_uf = NULL
  *     cdef int64_t *last_step_if = NULL
  *     cdef rfm_pool_t *pool = NULL             # <<<<<<<<<<<<<<
@@ -29526,7 +29350,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_pool = NULL;
 
-  /* "rankfm/_rankfm.pyx":1081
+  /* "rankfm/_rankfm.pyx":1097
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     if mult_lut == NULL or scratch_base == NULL or ll_slots == NULL:             # <<<<<<<<<<<<<<
@@ -29541,7 +29365,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
     __pyx_t_1 = __pyx_t_2;
 
-    goto __pyx_L14_bool_binop_done;
+    goto __pyx_L16_bool_binop_done;
   }
   __pyx_t_2 = (__pyx_v_scratch_base == NULL);
 
@@ -29551,18 +29375,18 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
     __pyx_t_1 = __pyx_t_2;
 
-    goto __pyx_L14_bool_binop_done;
+    goto __pyx_L16_bool_binop_done;
   }
   __pyx_t_2 = (__pyx_v_ll_slots == NULL);
 
 
   __pyx_t_1 = __pyx_t_2;
 
-  __pyx_L14_bool_binop_done:;
+  __pyx_L16_bool_binop_done:;
   if (unlikely(__pyx_t_1)) {
 
 
-    /* "rankfm/_rankfm.pyx":1082
+    /* "rankfm/_rankfm.pyx":1098
  * 
  *     if mult_lut == NULL or scratch_base == NULL or ll_slots == NULL:
  *         rfm_aligned_free(mult_lut)             # <<<<<<<<<<<<<<
@@ -29571,7 +29395,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     rfm_aligned_free(__pyx_v_mult_lut);
 
-    /* "rankfm/_rankfm.pyx":1083
+    /* "rankfm/_rankfm.pyx":1099
  *     if mult_lut == NULL or scratch_base == NULL or ll_slots == NULL:
  *         rfm_aligned_free(mult_lut)
  *         rfm_aligned_free(scratch_base)             # <<<<<<<<<<<<<<
@@ -29580,7 +29404,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     rfm_aligned_free(__pyx_v_scratch_base);
 
-    /* "rankfm/_rankfm.pyx":1084
+    /* "rankfm/_rankfm.pyx":1100
  *         rfm_aligned_free(mult_lut)
  *         rfm_aligned_free(scratch_base)
  *         free(ll_slots)             # <<<<<<<<<<<<<<
@@ -29589,7 +29413,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     free(__pyx_v_ll_slots);
 
-    /* "rankfm/_rankfm.pyx":1085
+    /* "rankfm/_rankfm.pyx":1101
  *         rfm_aligned_free(scratch_base)
  *         free(ll_slots)
  *         raise MemoryError("failed to allocate RankFM training scratch buffers")             # <<<<<<<<<<<<<<
@@ -29602,14 +29426,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
       PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_mstate_global->__pyx_kp_u_failed_to_allocate_RankFM_traini};
       __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1085, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1101, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 1085, __pyx_L1_error)
+    __PYX_ERR(0, 1101, __pyx_L1_error)
 
-    /* "rankfm/_rankfm.pyx":1081
+    /* "rankfm/_rankfm.pyx":1097
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     if mult_lut == NULL or scratch_base == NULL or ll_slots == NULL:             # <<<<<<<<<<<<<<
@@ -29618,7 +29442,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1087
+  /* "rankfm/_rankfm.pyx":1103
  *         raise MemoryError("failed to allocate RankFM training scratch buffers")
  * 
  *     if x_if_any:             # <<<<<<<<<<<<<<
@@ -29630,7 +29454,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1088
+    /* "rankfm/_rankfm.pyx":1104
  * 
  *     if x_if_any:
  *         b_eff_alloc = <float *>rfm_aligned_malloc(<size_t>I * sizeof(float))             # <<<<<<<<<<<<<<
@@ -29639,7 +29463,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     __pyx_v_b_eff_alloc = ((float *)rfm_aligned_malloc((((size_t)__pyx_v_I) * (sizeof(float)))));
 
-    /* "rankfm/_rankfm.pyx":1089
+    /* "rankfm/_rankfm.pyx":1105
  *     if x_if_any:
  *         b_eff_alloc = <float *>rfm_aligned_malloc(<size_t>I * sizeof(float))
  *         v_eff_alloc = <float *>rfm_aligned_malloc(<size_t>I * <size_t>F * sizeof(float))             # <<<<<<<<<<<<<<
@@ -29648,7 +29472,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     __pyx_v_v_eff_alloc = ((float *)rfm_aligned_malloc(((((size_t)__pyx_v_I) * ((size_t)__pyx_v_F)) * (sizeof(float)))));
 
-    /* "rankfm/_rankfm.pyx":1090
+    /* "rankfm/_rankfm.pyx":1106
  *         b_eff_alloc = <float *>rfm_aligned_malloc(<size_t>I * sizeof(float))
  *         v_eff_alloc = <float *>rfm_aligned_malloc(<size_t>I * <size_t>F * sizeof(float))
  *         if b_eff_alloc == NULL or v_eff_alloc == NULL:             # <<<<<<<<<<<<<<
@@ -29663,18 +29487,18 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
       __pyx_t_1 = __pyx_t_2;
 
-      goto __pyx_L19_bool_binop_done;
+      goto __pyx_L21_bool_binop_done;
     }
     __pyx_t_2 = (__pyx_v_v_eff_alloc == NULL);
 
 
     __pyx_t_1 = __pyx_t_2;
 
-    __pyx_L19_bool_binop_done:;
+    __pyx_L21_bool_binop_done:;
     if (unlikely(__pyx_t_1)) {
 
 
-      /* "rankfm/_rankfm.pyx":1091
+      /* "rankfm/_rankfm.pyx":1107
  *         v_eff_alloc = <float *>rfm_aligned_malloc(<size_t>I * <size_t>F * sizeof(float))
  *         if b_eff_alloc == NULL or v_eff_alloc == NULL:
  *             rfm_aligned_free(mult_lut)             # <<<<<<<<<<<<<<
@@ -29683,7 +29507,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       rfm_aligned_free(__pyx_v_mult_lut);
 
-      /* "rankfm/_rankfm.pyx":1092
+      /* "rankfm/_rankfm.pyx":1108
  *         if b_eff_alloc == NULL or v_eff_alloc == NULL:
  *             rfm_aligned_free(mult_lut)
  *             rfm_aligned_free(scratch_base)             # <<<<<<<<<<<<<<
@@ -29692,7 +29516,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       rfm_aligned_free(__pyx_v_scratch_base);
 
-      /* "rankfm/_rankfm.pyx":1093
+      /* "rankfm/_rankfm.pyx":1109
  *             rfm_aligned_free(mult_lut)
  *             rfm_aligned_free(scratch_base)
  *             free(ll_slots)             # <<<<<<<<<<<<<<
@@ -29701,7 +29525,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       free(__pyx_v_ll_slots);
 
-      /* "rankfm/_rankfm.pyx":1094
+      /* "rankfm/_rankfm.pyx":1110
  *             rfm_aligned_free(scratch_base)
  *             free(ll_slots)
  *             rfm_aligned_free(b_eff_alloc)             # <<<<<<<<<<<<<<
@@ -29710,7 +29534,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       rfm_aligned_free(__pyx_v_b_eff_alloc);
 
-      /* "rankfm/_rankfm.pyx":1095
+      /* "rankfm/_rankfm.pyx":1111
  *             free(ll_slots)
  *             rfm_aligned_free(b_eff_alloc)
  *             rfm_aligned_free(v_eff_alloc)             # <<<<<<<<<<<<<<
@@ -29719,7 +29543,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       rfm_aligned_free(__pyx_v_v_eff_alloc);
 
-      /* "rankfm/_rankfm.pyx":1096
+      /* "rankfm/_rankfm.pyx":1112
  *             rfm_aligned_free(b_eff_alloc)
  *             rfm_aligned_free(v_eff_alloc)
  *             raise MemoryError("failed to allocate RankFM effective item cache")             # <<<<<<<<<<<<<<
@@ -29732,14 +29556,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
         PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_mstate_global->__pyx_kp_u_failed_to_allocate_RankFM_effect};
         __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1096, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1112, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
       }
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(0, 1096, __pyx_L1_error)
+      __PYX_ERR(0, 1112, __pyx_L1_error)
 
-      /* "rankfm/_rankfm.pyx":1090
+      /* "rankfm/_rankfm.pyx":1106
  *         b_eff_alloc = <float *>rfm_aligned_malloc(<size_t>I * sizeof(float))
  *         v_eff_alloc = <float *>rfm_aligned_malloc(<size_t>I * <size_t>F * sizeof(float))
  *         if b_eff_alloc == NULL or v_eff_alloc == NULL:             # <<<<<<<<<<<<<<
@@ -29748,7 +29572,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     }
 
-    /* "rankfm/_rankfm.pyx":1087
+    /* "rankfm/_rankfm.pyx":1103
  *         raise MemoryError("failed to allocate RankFM training scratch buffers")
  * 
  *     if x_if_any:             # <<<<<<<<<<<<<<
@@ -29757,7 +29581,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1098
+  /* "rankfm/_rankfm.pyx":1114
  *             raise MemoryError("failed to allocate RankFM effective item cache")
  * 
  *     if uniform_feature_reg:             # <<<<<<<<<<<<<<
@@ -29766,7 +29590,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   if (__pyx_v_uniform_feature_reg) {
 
-    /* "rankfm/_rankfm.pyx":1099
+    /* "rankfm/_rankfm.pyx":1115
  * 
  *     if uniform_feature_reg:
  *         if x_uf_any and P_uf > 0:             # <<<<<<<<<<<<<<
@@ -29781,18 +29605,18 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
       __pyx_t_1 = __pyx_t_2;
 
-      goto __pyx_L23_bool_binop_done;
+      goto __pyx_L25_bool_binop_done;
     }
     __pyx_t_2 = (__pyx_v_P_uf > 0);
 
 
     __pyx_t_1 = __pyx_t_2;
 
-    __pyx_L23_bool_binop_done:;
+    __pyx_L25_bool_binop_done:;
     if (__pyx_t_1) {
 
 
-      /* "rankfm/_rankfm.pyx":1100
+      /* "rankfm/_rankfm.pyx":1116
  *     if uniform_feature_reg:
  *         if x_uf_any and P_uf > 0:
  *             last_step_uf = <int64_t *>calloc(<size_t>P_uf, sizeof(int64_t))             # <<<<<<<<<<<<<<
@@ -29801,7 +29625,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       __pyx_v_last_step_uf = ((int64_t *)calloc(((size_t)__pyx_v_P_uf), (sizeof(int64_t))));
 
-      /* "rankfm/_rankfm.pyx":1099
+      /* "rankfm/_rankfm.pyx":1115
  * 
  *     if uniform_feature_reg:
  *         if x_uf_any and P_uf > 0:             # <<<<<<<<<<<<<<
@@ -29810,7 +29634,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     }
 
-    /* "rankfm/_rankfm.pyx":1101
+    /* "rankfm/_rankfm.pyx":1117
  *         if x_uf_any and P_uf > 0:
  *             last_step_uf = <int64_t *>calloc(<size_t>P_uf, sizeof(int64_t))
  *         if x_if_any and P_if > 0:             # <<<<<<<<<<<<<<
@@ -29825,18 +29649,18 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
       __pyx_t_1 = __pyx_t_2;
 
-      goto __pyx_L26_bool_binop_done;
+      goto __pyx_L28_bool_binop_done;
     }
     __pyx_t_2 = (__pyx_v_P_if > 0);
 
 
     __pyx_t_1 = __pyx_t_2;
 
-    __pyx_L26_bool_binop_done:;
+    __pyx_L28_bool_binop_done:;
     if (__pyx_t_1) {
 
 
-      /* "rankfm/_rankfm.pyx":1102
+      /* "rankfm/_rankfm.pyx":1118
  *             last_step_uf = <int64_t *>calloc(<size_t>P_uf, sizeof(int64_t))
  *         if x_if_any and P_if > 0:
  *             last_step_if = <int64_t *>calloc(<size_t>P_if, sizeof(int64_t))             # <<<<<<<<<<<<<<
@@ -29845,7 +29669,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       __pyx_v_last_step_if = ((int64_t *)calloc(((size_t)__pyx_v_P_if), (sizeof(int64_t))));
 
-      /* "rankfm/_rankfm.pyx":1101
+      /* "rankfm/_rankfm.pyx":1117
  *         if x_uf_any and P_uf > 0:
  *             last_step_uf = <int64_t *>calloc(<size_t>P_uf, sizeof(int64_t))
  *         if x_if_any and P_if > 0:             # <<<<<<<<<<<<<<
@@ -29854,7 +29678,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     }
 
-    /* "rankfm/_rankfm.pyx":1098
+    /* "rankfm/_rankfm.pyx":1114
  *             raise MemoryError("failed to allocate RankFM effective item cache")
  * 
  *     if uniform_feature_reg:             # <<<<<<<<<<<<<<
@@ -29863,7 +29687,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1105
+  /* "rankfm/_rankfm.pyx":1121
  * 
  *     cdef int s_idx
  *     cdef double denom_log_I = log(<double>I)             # <<<<<<<<<<<<<<
@@ -29872,7 +29696,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_denom_log_I = log(((double)__pyx_v_I));
 
-  /* "rankfm/_rankfm.pyx":1106
+  /* "rankfm/_rankfm.pyx":1122
  *     cdef int s_idx
  *     cdef double denom_log_I = log(<double>I)
  *     mult_lut[0] = 1.0             # <<<<<<<<<<<<<<
@@ -29881,7 +29705,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   (__pyx_v_mult_lut[0]) = 1.0;
 
-  /* "rankfm/_rankfm.pyx":1107
+  /* "rankfm/_rankfm.pyx":1123
  *     cdef double denom_log_I = log(<double>I)
  *     mult_lut[0] = 1.0
  *     for s_idx in range(1, max_samples + 1):             # <<<<<<<<<<<<<<
@@ -29895,7 +29719,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   for (__pyx_t_12 = 1; __pyx_t_12 < __pyx_t_13; __pyx_t_12+=1) {
     __pyx_v_s_idx = __pyx_t_12;
 
-    /* "rankfm/_rankfm.pyx":1108
+    /* "rankfm/_rankfm.pyx":1124
  *     mult_lut[0] = 1.0
  *     for s_idx in range(1, max_samples + 1):
  *         mult_lut[s_idx] = <float>(log(<double>(I - 1) / <double>s_idx) / denom_log_I)             # <<<<<<<<<<<<<<
@@ -29906,7 +29730,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   }
 
 
-  /* "rankfm/_rankfm.pyx":1113
+  /* "rankfm/_rankfm.pyx":1129
  *     # amortizes O(nnz_if * F) refresh to < 1% of WARP work while bounding staleness <= 32,768 steps
  *     cdef int64_t sync_interval
  *     if not x_if_any:             # <<<<<<<<<<<<<<
@@ -29918,7 +29742,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1114
+    /* "rankfm/_rankfm.pyx":1130
  *     cdef int64_t sync_interval
  *     if not x_if_any:
  *         sync_interval = N             # <<<<<<<<<<<<<<
@@ -29927,17 +29751,17 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     __pyx_v_sync_interval = __pyx_v_N;
 
-    /* "rankfm/_rankfm.pyx":1113
+    /* "rankfm/_rankfm.pyx":1129
  *     # amortizes O(nnz_if * F) refresh to < 1% of WARP work while bounding staleness <= 32,768 steps
  *     cdef int64_t sync_interval
  *     if not x_if_any:             # <<<<<<<<<<<<<<
  *         sync_interval = N
  *     elif N <= 2048:
 */
-    goto __pyx_L30;
+    goto __pyx_L32;
   }
 
-  /* "rankfm/_rankfm.pyx":1115
+  /* "rankfm/_rankfm.pyx":1131
  *     if not x_if_any:
  *         sync_interval = N
  *     elif N <= 2048:             # <<<<<<<<<<<<<<
@@ -29949,7 +29773,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1116
+    /* "rankfm/_rankfm.pyx":1132
  *         sync_interval = N
  *     elif N <= 2048:
  *         sync_interval = max(<int64_t>32, N // 4)             # <<<<<<<<<<<<<<
@@ -29973,17 +29797,17 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     __pyx_v_sync_interval = __pyx_t_17;
 
 
-    /* "rankfm/_rankfm.pyx":1115
+    /* "rankfm/_rankfm.pyx":1131
  *     if not x_if_any:
  *         sync_interval = N
  *     elif N <= 2048:             # <<<<<<<<<<<<<<
  *         sync_interval = max(<int64_t>32, N // 4)
  *     else:
 */
-    goto __pyx_L30;
+    goto __pyx_L32;
   }
 
-  /* "rankfm/_rankfm.pyx":1118
+  /* "rankfm/_rankfm.pyx":1134
  *         sync_interval = max(<int64_t>32, N // 4)
  *     else:
  *         sync_interval = max(<int64_t>2048, min(N, min(<int64_t>32768, max(<int64_t>4096, if_indptr[I] // 4))))             # <<<<<<<<<<<<<<
@@ -30054,9 +29878,9 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     __pyx_v_sync_interval = __pyx_t_15;
 
   }
-  __pyx_L30:;
+  __pyx_L32:;
 
-  /* "rankfm/_rankfm.pyx":1121
+  /* "rankfm/_rankfm.pyx":1137
  * 
  *     cdef RefreshEffItemsCtx ref_ctx
  *     ref_ctx.w_i_ptr = &w_i[0]             # <<<<<<<<<<<<<<
@@ -30066,7 +29890,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_18 = 0;
   __pyx_v_ref_ctx.w_i_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_w_i.data) + __pyx_t_18)) ))));
 
-  /* "rankfm/_rankfm.pyx":1122
+  /* "rankfm/_rankfm.pyx":1138
  *     cdef RefreshEffItemsCtx ref_ctx
  *     ref_ctx.w_i_ptr = &w_i[0]
  *     ref_ctx.w_if_ptr = &w_if[0]             # <<<<<<<<<<<<<<
@@ -30076,7 +29900,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_18 = 0;
   __pyx_v_ref_ctx.w_if_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_w_if.data) + __pyx_t_18)) ))));
 
-  /* "rankfm/_rankfm.pyx":1123
+  /* "rankfm/_rankfm.pyx":1139
  *     ref_ctx.w_i_ptr = &w_i[0]
  *     ref_ctx.w_if_ptr = &w_if[0]
  *     ref_ctx.v_i_ptr = &v_i[0, 0]             # <<<<<<<<<<<<<<
@@ -30087,7 +29911,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ref_ctx.v_i_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_v_i.data + __pyx_t_18 * __pyx_v_v_i.strides[0]) )) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1124
+  /* "rankfm/_rankfm.pyx":1140
  *     ref_ctx.w_if_ptr = &w_if[0]
  *     ref_ctx.v_i_ptr = &v_i[0, 0]
  *     ref_ctx.v_if_ptr = &v_if[0, 0]             # <<<<<<<<<<<<<<
@@ -30098,7 +29922,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_18 = 0;
   __pyx_v_ref_ctx.v_if_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_v_if.data + __pyx_t_19 * __pyx_v_v_if.strides[0]) )) + __pyx_t_18)) ))));
 
-  /* "rankfm/_rankfm.pyx":1125
+  /* "rankfm/_rankfm.pyx":1141
  *     ref_ctx.v_i_ptr = &v_i[0, 0]
  *     ref_ctx.v_if_ptr = &v_if[0, 0]
  *     ref_ctx.if_indptr_ptr = &if_indptr[0]             # <<<<<<<<<<<<<<
@@ -30108,7 +29932,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_18 = 0;
   __pyx_v_ref_ctx.if_indptr_ptr = (&(*((int64_t *) ( /* dim=0 */ ((char *) (((int64_t *) __pyx_v_if_indptr.data) + __pyx_t_18)) ))));
 
-  /* "rankfm/_rankfm.pyx":1126
+  /* "rankfm/_rankfm.pyx":1142
  *     ref_ctx.v_if_ptr = &v_if[0, 0]
  *     ref_ctx.if_indptr_ptr = &if_indptr[0]
  *     ref_ctx.if_indices_ptr = &if_indices[0] if if_indices.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -30128,7 +29952,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ref_ctx.if_indices_ptr = __pyx_t_20;
 
-  /* "rankfm/_rankfm.pyx":1127
+  /* "rankfm/_rankfm.pyx":1143
  *     ref_ctx.if_indptr_ptr = &if_indptr[0]
  *     ref_ctx.if_indices_ptr = &if_indices[0] if if_indices.shape[0] > 0 else NULL
  *     ref_ctx.if_data_ptr = &if_data[0] if if_data.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -30148,7 +29972,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ref_ctx.if_data_ptr = __pyx_t_21;
 
-  /* "rankfm/_rankfm.pyx":1128
+  /* "rankfm/_rankfm.pyx":1144
  *     ref_ctx.if_indices_ptr = &if_indices[0] if if_indices.shape[0] > 0 else NULL
  *     ref_ctx.if_data_ptr = &if_data[0] if if_data.shape[0] > 0 else NULL
  *     ref_ctx.b_eff_ptr = b_eff_alloc             # <<<<<<<<<<<<<<
@@ -30157,7 +29981,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ref_ctx.b_eff_ptr = __pyx_v_b_eff_alloc;
 
-  /* "rankfm/_rankfm.pyx":1129
+  /* "rankfm/_rankfm.pyx":1145
  *     ref_ctx.if_data_ptr = &if_data[0] if if_data.shape[0] > 0 else NULL
  *     ref_ctx.b_eff_ptr = b_eff_alloc
  *     ref_ctx.v_eff_ptr = v_eff_alloc             # <<<<<<<<<<<<<<
@@ -30166,7 +29990,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ref_ctx.v_eff_ptr = __pyx_v_v_eff_alloc;
 
-  /* "rankfm/_rankfm.pyx":1130
+  /* "rankfm/_rankfm.pyx":1146
  *     ref_ctx.b_eff_ptr = b_eff_alloc
  *     ref_ctx.v_eff_ptr = v_eff_alloc
  *     ref_ctx.I = I             # <<<<<<<<<<<<<<
@@ -30175,7 +29999,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ref_ctx.I = __pyx_v_I;
 
-  /* "rankfm/_rankfm.pyx":1131
+  /* "rankfm/_rankfm.pyx":1147
  *     ref_ctx.v_eff_ptr = v_eff_alloc
  *     ref_ctx.I = I
  *     ref_ctx.F = F             # <<<<<<<<<<<<<<
@@ -30184,7 +30008,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ref_ctx.F = __pyx_v_F;
 
-  /* "rankfm/_rankfm.pyx":1134
+  /* "rankfm/_rankfm.pyx":1150
  * 
  *     cdef FitBlockCtx ctx
  *     ctx.intx_ptr = &interactions[0, 0]             # <<<<<<<<<<<<<<
@@ -30195,7 +30019,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.intx_ptr = (&(*((int32_t *) ( /* dim=1 */ ((char *) (((int32_t *) ( /* dim=0 */ (__pyx_v_interactions.data + __pyx_t_18 * __pyx_v_interactions.strides[0]) )) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1135
+  /* "rankfm/_rankfm.pyx":1151
  *     cdef FitBlockCtx ctx
  *     ctx.intx_ptr = &interactions[0, 0]
  *     ctx.sw_ptr = &sample_weight[0]             # <<<<<<<<<<<<<<
@@ -30205,7 +30029,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.sw_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_sample_weight.data) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1136
+  /* "rankfm/_rankfm.pyx":1152
  *     ctx.intx_ptr = &interactions[0, 0]
  *     ctx.sw_ptr = &sample_weight[0]
  *     ctx.shuf_ptr = &shuffle_index_mv[0]             # <<<<<<<<<<<<<<
@@ -30215,7 +30039,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.shuf_ptr = (&(*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_shuffle_index_mv.data) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1137
+  /* "rankfm/_rankfm.pyx":1153
  *     ctx.sw_ptr = &sample_weight[0]
  *     ctx.shuf_ptr = &shuffle_index_mv[0]
  *     ctx.ui_indptr_ptr = &ui_indptr[0]             # <<<<<<<<<<<<<<
@@ -30225,7 +30049,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.ui_indptr_ptr = (&(*((int64_t *) ( /* dim=0 */ ((char *) (((int64_t *) __pyx_v_ui_indptr.data) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1138
+  /* "rankfm/_rankfm.pyx":1154
  *     ctx.shuf_ptr = &shuffle_index_mv[0]
  *     ctx.ui_indptr_ptr = &ui_indptr[0]
  *     ctx.ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -30245,7 +30069,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ctx.ui_indices_ptr = __pyx_t_20;
 
-  /* "rankfm/_rankfm.pyx":1139
+  /* "rankfm/_rankfm.pyx":1155
  *     ctx.ui_indptr_ptr = &ui_indptr[0]
  *     ctx.ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL
  *     ctx.uf_indptr_ptr = &uf_indptr[0]             # <<<<<<<<<<<<<<
@@ -30255,7 +30079,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.uf_indptr_ptr = (&(*((int64_t *) ( /* dim=0 */ ((char *) (((int64_t *) __pyx_v_uf_indptr.data) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1140
+  /* "rankfm/_rankfm.pyx":1156
  *     ctx.ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL
  *     ctx.uf_indptr_ptr = &uf_indptr[0]
  *     ctx.uf_indices_ptr = &uf_indices[0] if uf_indices.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -30275,7 +30099,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ctx.uf_indices_ptr = __pyx_t_20;
 
-  /* "rankfm/_rankfm.pyx":1141
+  /* "rankfm/_rankfm.pyx":1157
  *     ctx.uf_indptr_ptr = &uf_indptr[0]
  *     ctx.uf_indices_ptr = &uf_indices[0] if uf_indices.shape[0] > 0 else NULL
  *     ctx.uf_data_ptr = &uf_data[0] if uf_data.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -30295,7 +30119,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ctx.uf_data_ptr = __pyx_t_21;
 
-  /* "rankfm/_rankfm.pyx":1142
+  /* "rankfm/_rankfm.pyx":1158
  *     ctx.uf_indices_ptr = &uf_indices[0] if uf_indices.shape[0] > 0 else NULL
  *     ctx.uf_data_ptr = &uf_data[0] if uf_data.shape[0] > 0 else NULL
  *     ctx.if_indptr_ptr = &if_indptr[0]             # <<<<<<<<<<<<<<
@@ -30305,7 +30129,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.if_indptr_ptr = (&(*((int64_t *) ( /* dim=0 */ ((char *) (((int64_t *) __pyx_v_if_indptr.data) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1143
+  /* "rankfm/_rankfm.pyx":1159
  *     ctx.uf_data_ptr = &uf_data[0] if uf_data.shape[0] > 0 else NULL
  *     ctx.if_indptr_ptr = &if_indptr[0]
  *     ctx.if_indices_ptr = &if_indices[0] if if_indices.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -30325,7 +30149,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ctx.if_indices_ptr = __pyx_t_20;
 
-  /* "rankfm/_rankfm.pyx":1144
+  /* "rankfm/_rankfm.pyx":1160
  *     ctx.if_indptr_ptr = &if_indptr[0]
  *     ctx.if_indices_ptr = &if_indices[0] if if_indices.shape[0] > 0 else NULL
  *     ctx.if_data_ptr = &if_data[0] if if_data.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -30345,7 +30169,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ctx.if_data_ptr = __pyx_t_21;
 
-  /* "rankfm/_rankfm.pyx":1145
+  /* "rankfm/_rankfm.pyx":1161
  *     ctx.if_indices_ptr = &if_indices[0] if if_indices.shape[0] > 0 else NULL
  *     ctx.if_data_ptr = &if_data[0] if if_data.shape[0] > 0 else NULL
  *     ctx.w_i_ptr = &w_i[0]             # <<<<<<<<<<<<<<
@@ -30355,7 +30179,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.w_i_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_w_i.data) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1146
+  /* "rankfm/_rankfm.pyx":1162
  *     ctx.if_data_ptr = &if_data[0] if if_data.shape[0] > 0 else NULL
  *     ctx.w_i_ptr = &w_i[0]
  *     ctx.w_if_ptr = &w_if[0]             # <<<<<<<<<<<<<<
@@ -30365,7 +30189,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.w_if_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_w_if.data) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1147
+  /* "rankfm/_rankfm.pyx":1163
  *     ctx.w_i_ptr = &w_i[0]
  *     ctx.w_if_ptr = &w_if[0]
  *     ctx.v_u_ptr = &v_u[0, 0]             # <<<<<<<<<<<<<<
@@ -30376,7 +30200,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_18 = 0;
   __pyx_v_ctx.v_u_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_v_u.data + __pyx_t_19 * __pyx_v_v_u.strides[0]) )) + __pyx_t_18)) ))));
 
-  /* "rankfm/_rankfm.pyx":1148
+  /* "rankfm/_rankfm.pyx":1164
  *     ctx.w_if_ptr = &w_if[0]
  *     ctx.v_u_ptr = &v_u[0, 0]
  *     ctx.v_i_ptr = &v_i[0, 0]             # <<<<<<<<<<<<<<
@@ -30387,7 +30211,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.v_i_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_v_i.data + __pyx_t_18 * __pyx_v_v_i.strides[0]) )) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1149
+  /* "rankfm/_rankfm.pyx":1165
  *     ctx.v_u_ptr = &v_u[0, 0]
  *     ctx.v_i_ptr = &v_i[0, 0]
  *     ctx.v_uf_ptr = &v_uf[0, 0]             # <<<<<<<<<<<<<<
@@ -30398,7 +30222,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_18 = 0;
   __pyx_v_ctx.v_uf_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_v_uf.data + __pyx_t_19 * __pyx_v_v_uf.strides[0]) )) + __pyx_t_18)) ))));
 
-  /* "rankfm/_rankfm.pyx":1150
+  /* "rankfm/_rankfm.pyx":1166
  *     ctx.v_i_ptr = &v_i[0, 0]
  *     ctx.v_uf_ptr = &v_uf[0, 0]
  *     ctx.v_if_ptr = &v_if[0, 0]             # <<<<<<<<<<<<<<
@@ -30409,7 +30233,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_t_19 = 0;
   __pyx_v_ctx.v_if_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_v_if.data + __pyx_t_18 * __pyx_v_v_if.strides[0]) )) + __pyx_t_19)) ))));
 
-  /* "rankfm/_rankfm.pyx":1151
+  /* "rankfm/_rankfm.pyx":1167
  *     ctx.v_uf_ptr = &v_uf[0, 0]
  *     ctx.v_if_ptr = &v_if[0, 0]
  *     ctx.b_eff_ptr = b_eff_alloc if x_if_any else &w_i[0]             # <<<<<<<<<<<<<<
@@ -30429,7 +30253,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ctx.b_eff_ptr = __pyx_t_21;
 
-  /* "rankfm/_rankfm.pyx":1152
+  /* "rankfm/_rankfm.pyx":1168
  *     ctx.v_if_ptr = &v_if[0, 0]
  *     ctx.b_eff_ptr = b_eff_alloc if x_if_any else &w_i[0]
  *     ctx.v_eff_ptr = v_eff_alloc if x_if_any else &v_i[0, 0]             # <<<<<<<<<<<<<<
@@ -30450,7 +30274,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ctx.v_eff_ptr = __pyx_t_21;
 
-  /* "rankfm/_rankfm.pyx":1153
+  /* "rankfm/_rankfm.pyx":1169
  *     ctx.b_eff_ptr = b_eff_alloc if x_if_any else &w_i[0]
  *     ctx.v_eff_ptr = v_eff_alloc if x_if_any else &v_i[0, 0]
  *     ctx.mult_lut_ptr = mult_lut             # <<<<<<<<<<<<<<
@@ -30459,7 +30283,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.mult_lut_ptr = __pyx_v_mult_lut;
 
-  /* "rankfm/_rankfm.pyx":1154
+  /* "rankfm/_rankfm.pyx":1170
  *     ctx.v_eff_ptr = v_eff_alloc if x_if_any else &v_i[0, 0]
  *     ctx.mult_lut_ptr = mult_lut
  *     ctx.scratch_base = scratch_base             # <<<<<<<<<<<<<<
@@ -30468,7 +30292,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.scratch_base = __pyx_v_scratch_base;
 
-  /* "rankfm/_rankfm.pyx":1155
+  /* "rankfm/_rankfm.pyx":1171
  *     ctx.mult_lut_ptr = mult_lut
  *     ctx.scratch_base = scratch_base
  *     ctx.scratch_stride = scratch_stride             # <<<<<<<<<<<<<<
@@ -30477,7 +30301,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.scratch_stride = __pyx_v_scratch_stride;
 
-  /* "rankfm/_rankfm.pyx":1156
+  /* "rankfm/_rankfm.pyx":1172
  *     ctx.scratch_base = scratch_base
  *     ctx.scratch_stride = scratch_stride
  *     ctx.ll_slots = ll_slots             # <<<<<<<<<<<<<<
@@ -30486,7 +30310,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.ll_slots = __pyx_v_ll_slots;
 
-  /* "rankfm/_rankfm.pyx":1157
+  /* "rankfm/_rankfm.pyx":1173
  *     ctx.scratch_stride = scratch_stride
  *     ctx.ll_slots = ll_slots
  *     ctx.last_step_uf = last_step_uf             # <<<<<<<<<<<<<<
@@ -30495,7 +30319,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.last_step_uf = __pyx_v_last_step_uf;
 
-  /* "rankfm/_rankfm.pyx":1158
+  /* "rankfm/_rankfm.pyx":1174
  *     ctx.ll_slots = ll_slots
  *     ctx.last_step_uf = last_step_uf
  *     ctx.last_step_if = last_step_if             # <<<<<<<<<<<<<<
@@ -30504,7 +30328,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.last_step_if = __pyx_v_last_step_if;
 
-  /* "rankfm/_rankfm.pyx":1159
+  /* "rankfm/_rankfm.pyx":1175
  *     ctx.last_step_uf = last_step_uf
  *     ctx.last_step_if = last_step_if
  *     ctx.I = I             # <<<<<<<<<<<<<<
@@ -30513,7 +30337,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.I = __pyx_v_I;
 
-  /* "rankfm/_rankfm.pyx":1160
+  /* "rankfm/_rankfm.pyx":1176
  *     ctx.last_step_if = last_step_if
  *     ctx.I = I
  *     ctx.F = F             # <<<<<<<<<<<<<<
@@ -30522,7 +30346,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.F = __pyx_v_F;
 
-  /* "rankfm/_rankfm.pyx":1161
+  /* "rankfm/_rankfm.pyx":1177
  *     ctx.I = I
  *     ctx.F = F
  *     ctx.max_samples = max_samples             # <<<<<<<<<<<<<<
@@ -30531,7 +30355,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.max_samples = __pyx_v_max_samples;
 
-  /* "rankfm/_rankfm.pyx":1162
+  /* "rankfm/_rankfm.pyx":1178
  *     ctx.F = F
  *     ctx.max_samples = max_samples
  *     ctx.x_uf_any = x_uf_any             # <<<<<<<<<<<<<<
@@ -30540,7 +30364,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.x_uf_any = __pyx_v_x_uf_any;
 
-  /* "rankfm/_rankfm.pyx":1163
+  /* "rankfm/_rankfm.pyx":1179
  *     ctx.max_samples = max_samples
  *     ctx.x_uf_any = x_uf_any
  *     ctx.x_if_any = x_if_any             # <<<<<<<<<<<<<<
@@ -30549,12 +30373,12 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.x_if_any = __pyx_v_x_if_any;
 
-  /* "rankfm/_rankfm.pyx":1164
+  /* "rankfm/_rankfm.pyx":1180
  *     ctx.x_uf_any = x_uf_any
  *     ctx.x_if_any = x_if_any
  *     ctx.verbose = 1 if verbose else 0             # <<<<<<<<<<<<<<
  *     ctx.uniform_reg = 1 if (uniform_feature_reg and eff_threads == 1) else 0
- *     ctx.user_dropout = user_dropout
+ *     if uniform_feature_reg and eff_threads > 1:
 */
   if (__pyx_v_verbose) {
 
@@ -30565,25 +30389,25 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   }
   __pyx_v_ctx.verbose = __pyx_t_12;
 
-  /* "rankfm/_rankfm.pyx":1165
+  /* "rankfm/_rankfm.pyx":1181
  *     ctx.x_if_any = x_if_any
  *     ctx.verbose = 1 if verbose else 0
  *     ctx.uniform_reg = 1 if (uniform_feature_reg and eff_threads == 1) else 0             # <<<<<<<<<<<<<<
- *     ctx.user_dropout = user_dropout
- *     ctx.base_seed = <uint64_t>(<uint32_t>seed)
+ *     if uniform_feature_reg and eff_threads > 1:
+ *         warnings.warn(
 */
   if (__pyx_v_uniform_feature_reg) {
   } else {
 
     __pyx_t_1 = __pyx_v_uniform_feature_reg;
-    goto __pyx_L31_bool_binop_done;
+    goto __pyx_L33_bool_binop_done;
   }
   __pyx_t_2 = (__pyx_v_eff_threads == 1);
 
 
   __pyx_t_1 = __pyx_t_2;
 
-  __pyx_L31_bool_binop_done:;
+  __pyx_L33_bool_binop_done:;
   if (__pyx_t_1) {
 
     __pyx_t_12 = 1;
@@ -30594,17 +30418,114 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ctx.uniform_reg = __pyx_t_12;
 
-  /* "rankfm/_rankfm.pyx":1166
+  /* "rankfm/_rankfm.pyx":1182
  *     ctx.verbose = 1 if verbose else 0
  *     ctx.uniform_reg = 1 if (uniform_feature_reg and eff_threads == 1) else 0
+ *     if uniform_feature_reg and eff_threads > 1:             # <<<<<<<<<<<<<<
+ *         warnings.warn(
+ *             "feature_reg='uniform' relies on per-feature step counters that are only valid single-threaded; "
+*/
+  if (__pyx_v_uniform_feature_reg) {
+  } else {
+
+    __pyx_t_1 = __pyx_v_uniform_feature_reg;
+    goto __pyx_L36_bool_binop_done;
+  }
+  __pyx_t_2 = (__pyx_v_eff_threads > 1);
+
+
+  __pyx_t_1 = __pyx_t_2;
+
+  __pyx_L36_bool_binop_done:;
+  if (__pyx_t_1) {
+
+
+    /* "rankfm/_rankfm.pyx":1183
+ *     ctx.uniform_reg = 1 if (uniform_feature_reg and eff_threads == 1) else 0
+ *     if uniform_feature_reg and eff_threads > 1:
+ *         warnings.warn(             # <<<<<<<<<<<<<<
+ *             "feature_reg='uniform' relies on per-feature step counters that are only valid single-threaded; "
+ *             "training on {} threads uses 'stochastic' feature regularization instead (set n_jobs=1 to keep 'uniform')".format(eff_threads),
+*/
+    __pyx_t_7 = NULL;
+    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_warnings); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1183, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_warn); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1183, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+
+    /* "rankfm/_rankfm.pyx":1185
+ *         warnings.warn(
+ *             "feature_reg='uniform' relies on per-feature step counters that are only valid single-threaded; "
+ *             "training on {} threads uses 'stochastic' feature regularization instead (set n_jobs=1 to keep 'uniform')".format(eff_threads),             # <<<<<<<<<<<<<<
+ *             RuntimeWarning
+ *         )
+*/
+    __pyx_t_6 = __pyx_mstate_global->__pyx_kp_u_feature_reg_uniform_relies_on_pe;
+    __Pyx_INCREF(__pyx_t_6);
+    __pyx_t_4 = __Pyx_PyLong_From_int(__pyx_v_eff_threads); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1185, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_5 = 0;
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_t_4};
+      __pyx_t_8 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_format, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1185, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+    }
+    if (!(likely(PyUnicode_CheckExact(__pyx_t_8))||((__pyx_t_8) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_8))) __PYX_ERR(0, 1185, __pyx_L1_error)
+
+    /* "rankfm/_rankfm.pyx":1186
+ *             "feature_reg='uniform' relies on per-feature step counters that are only valid single-threaded; "
+ *             "training on {} threads uses 'stochastic' feature regularization instead (set n_jobs=1 to keep 'uniform')".format(eff_threads),
+ *             RuntimeWarning             # <<<<<<<<<<<<<<
+ *         )
+ *     ctx.user_dropout = user_dropout
+*/
+    __pyx_t_5 = 1;
+    #if CYTHON_UNPACK_METHODS
+    if (unlikely(PyMethod_Check(__pyx_t_10))) {
+      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_10);
+      assert(__pyx_t_7);
+      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_10);
+      __Pyx_INCREF(__pyx_t_7);
+      __Pyx_INCREF(__pyx__function);
+      __Pyx_DECREF_SET(__pyx_t_10, __pyx__function);
+      __pyx_t_5 = 0;
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[3] = {__pyx_t_7, __pyx_t_8, ((PyObject *)(((PyTypeObject*)PyExc_RuntimeWarning)))};
+      __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_10, __pyx_callargs+__pyx_t_5, (3-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1183, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+    }
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "rankfm/_rankfm.pyx":1182
+ *     ctx.verbose = 1 if verbose else 0
+ *     ctx.uniform_reg = 1 if (uniform_feature_reg and eff_threads == 1) else 0
+ *     if uniform_feature_reg and eff_threads > 1:             # <<<<<<<<<<<<<<
+ *         warnings.warn(
+ *             "feature_reg='uniform' relies on per-feature step counters that are only valid single-threaded; "
+*/
+  }
+
+  /* "rankfm/_rankfm.pyx":1188
+ *             RuntimeWarning
+ *         )
  *     ctx.user_dropout = user_dropout             # <<<<<<<<<<<<<<
  *     ctx.base_seed = <uint64_t>(<uint32_t>seed)
  * 
 */
   __pyx_v_ctx.user_dropout = __pyx_v_user_dropout;
 
-  /* "rankfm/_rankfm.pyx":1167
- *     ctx.uniform_reg = 1 if (uniform_feature_reg and eff_threads == 1) else 0
+  /* "rankfm/_rankfm.pyx":1189
+ *         )
  *     ctx.user_dropout = user_dropout
  *     ctx.base_seed = <uint64_t>(<uint32_t>seed)             # <<<<<<<<<<<<<<
  * 
@@ -30612,7 +30533,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.base_seed = ((uint64_t)((uint32_t)__pyx_v_seed));
 
-  /* "rankfm/_rankfm.pyx":1171
+  /* "rankfm/_rankfm.pyx":1193
  *     cdef int epoch, t_i
  *     cdef int64_t b_start, b_end, p_idx, q_idx, rem_steps
  *     cdef int64_t n_u_rows = max(<int64_t>1, <int64_t>v_u.shape[0])             # <<<<<<<<<<<<<<
@@ -30636,7 +30557,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_v_n_u_rows = __pyx_t_16;
 
 
-  /* "rankfm/_rankfm.pyx":1172
+  /* "rankfm/_rankfm.pyx":1194
  *     cdef int64_t b_start, b_end, p_idx, q_idx, rem_steps
  *     cdef int64_t n_u_rows = max(<int64_t>1, <int64_t>v_u.shape[0])
  *     cdef double uf_density = (<double>uf_indptr[n_u_rows]) / max(1.0, <double>n_u_rows * <double>max(<int64_t>1, P_uf)) if x_uf_any else 0.0             # <<<<<<<<<<<<<<
@@ -30686,7 +30607,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_uf_density = __pyx_t_22;
 
-  /* "rankfm/_rankfm.pyx":1173
+  /* "rankfm/_rankfm.pyx":1195
  *     cdef int64_t n_u_rows = max(<int64_t>1, <int64_t>v_u.shape[0])
  *     cdef double uf_density = (<double>uf_indptr[n_u_rows]) / max(1.0, <double>n_u_rows * <double>max(<int64_t>1, P_uf)) if x_uf_any else 0.0
  *     cdef double if_density = (2.0 * <double>if_indptr[I]) / max(1.0, <double>I * <double>max(<int64_t>1, P_if)) if x_if_any else 0.0             # <<<<<<<<<<<<<<
@@ -30736,7 +30657,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   __pyx_v_if_density = __pyx_t_22;
 
-  /* "rankfm/_rankfm.pyx":1174
+  /* "rankfm/_rankfm.pyx":1196
  *     cdef double uf_density = (<double>uf_indptr[n_u_rows]) / max(1.0, <double>n_u_rows * <double>max(<int64_t>1, P_uf)) if x_uf_any else 0.0
  *     cdef double if_density = (2.0 * <double>if_indptr[I]) / max(1.0, <double>I * <double>max(<int64_t>1, P_if)) if x_if_any else 0.0
  *     cdef float eta, d_reg_a = 2.0 * alpha, d_reg_b = 2.0 * beta, lazy_tail             # <<<<<<<<<<<<<<
@@ -30746,7 +30667,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
   __pyx_v_d_reg_a = (2.0 * __pyx_v_alpha);
   __pyx_v_d_reg_b = (2.0 * __pyx_v_beta);
 
-  /* "rankfm/_rankfm.pyx":1177
+  /* "rankfm/_rankfm.pyx":1199
  *     cdef double log_likelihood
  *     cdef rfm_rng_t shuf_rng
  *     rfm_rng_seed(&shuf_rng, ctx.base_seed, 0xA5A5A5A5ULL)             # <<<<<<<<<<<<<<
@@ -30755,7 +30676,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   rfm_rng_seed((&__pyx_v_shuf_rng), __pyx_v_ctx.base_seed, 0xA5A5A5A5ULL);
 
-  /* "rankfm/_rankfm.pyx":1179
+  /* "rankfm/_rankfm.pyx":1201
  *     rfm_rng_seed(&shuf_rng, ctx.base_seed, 0xA5A5A5A5ULL)
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -30764,7 +30685,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
   /*try:*/ {
 
-    /* "rankfm/_rankfm.pyx":1180
+    /* "rankfm/_rankfm.pyx":1202
  * 
  *     try:
  *         pool = rfm_pool_create(eff_threads)             # <<<<<<<<<<<<<<
@@ -30773,7 +30694,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
     __pyx_v_pool = rfm_pool_create(__pyx_v_eff_threads);
 
-    /* "rankfm/_rankfm.pyx":1182
+    /* "rankfm/_rankfm.pyx":1204
  *         pool = rfm_pool_create(eff_threads)
  * 
  *         for epoch in range(epochs):             # <<<<<<<<<<<<<<
@@ -30787,7 +30708,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
     for (__pyx_t_27 = 0; __pyx_t_27 < __pyx_t_26; __pyx_t_27+=1) {
       __pyx_v_epoch = __pyx_t_27;
 
-      /* "rankfm/_rankfm.pyx":1183
+      /* "rankfm/_rankfm.pyx":1205
  * 
  *         for epoch in range(epochs):
  *             if schedule_mode == 0:             # <<<<<<<<<<<<<<
@@ -30799,7 +30720,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
       if (__pyx_t_1) {
 
 
-        /* "rankfm/_rankfm.pyx":1184
+        /* "rankfm/_rankfm.pyx":1206
  *         for epoch in range(epochs):
  *             if schedule_mode == 0:
  *                 eta = learning_rate             # <<<<<<<<<<<<<<
@@ -30808,17 +30729,17 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         __pyx_v_eta = __pyx_v_learning_rate;
 
-        /* "rankfm/_rankfm.pyx":1183
+        /* "rankfm/_rankfm.pyx":1205
  * 
  *         for epoch in range(epochs):
  *             if schedule_mode == 0:             # <<<<<<<<<<<<<<
  *                 eta = learning_rate
  *             else:
 */
-        goto __pyx_L38;
+        goto __pyx_L43;
       }
 
-      /* "rankfm/_rankfm.pyx":1186
+      /* "rankfm/_rankfm.pyx":1208
  *                 eta = learning_rate
  *             else:
  *                 eta = learning_rate / <float>pow(<double>(epoch + 1), <double>learning_exponent)             # <<<<<<<<<<<<<<
@@ -30828,9 +30749,9 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
       /*else*/ {
         __pyx_v_eta = (__pyx_v_learning_rate / ((float)pow(((double)(__pyx_v_epoch + 1)), ((double)__pyx_v_learning_exponent))));
       }
-      __pyx_L38:;
+      __pyx_L43:;
 
-      /* "rankfm/_rankfm.pyx":1188
+      /* "rankfm/_rankfm.pyx":1210
  *                 eta = learning_rate / <float>pow(<double>(epoch + 1), <double>learning_exponent)
  * 
  *             ctx.eta = eta             # <<<<<<<<<<<<<<
@@ -30839,7 +30760,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       __pyx_v_ctx.eta = __pyx_v_eta;
 
-      /* "rankfm/_rankfm.pyx":1189
+      /* "rankfm/_rankfm.pyx":1211
  * 
  *             ctx.eta = eta
  *             ctx.reg_a_keep = 1.0 - eta * d_reg_a             # <<<<<<<<<<<<<<
@@ -30848,7 +30769,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       __pyx_v_ctx.reg_a_keep = (1.0 - (__pyx_v_eta * __pyx_v_d_reg_a));
 
-      /* "rankfm/_rankfm.pyx":1190
+      /* "rankfm/_rankfm.pyx":1212
  *             ctx.eta = eta
  *             ctx.reg_a_keep = 1.0 - eta * d_reg_a
  *             ctx.reg_b_keep = 1.0 - eta * d_reg_b             # <<<<<<<<<<<<<<
@@ -30857,7 +30778,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       __pyx_v_ctx.reg_b_keep = (1.0 - (__pyx_v_eta * __pyx_v_d_reg_b));
 
-      /* "rankfm/_rankfm.pyx":1191
+      /* "rankfm/_rankfm.pyx":1213
  *             ctx.reg_a_keep = 1.0 - eta * d_reg_a
  *             ctx.reg_b_keep = 1.0 - eta * d_reg_b
  *             if ctx.uniform_reg:             # <<<<<<<<<<<<<<
@@ -30869,7 +30790,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
       if (__pyx_t_1) {
 
 
-        /* "rankfm/_rankfm.pyx":1192
+        /* "rankfm/_rankfm.pyx":1214
  *             ctx.reg_b_keep = 1.0 - eta * d_reg_b
  *             if ctx.uniform_reg:
  *                 ctx.log_reg_uf_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(uf_density, 1.0 / <double>N)))             # <<<<<<<<<<<<<<
@@ -30908,7 +30829,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
         __pyx_v_ctx.log_reg_uf_lazy = ((float)log(__pyx_t_24));
 
 
-        /* "rankfm/_rankfm.pyx":1193
+        /* "rankfm/_rankfm.pyx":1215
  *             if ctx.uniform_reg:
  *                 ctx.log_reg_uf_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(uf_density, 1.0 / <double>N)))
  *                 ctx.log_reg_if_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(if_density, 1.0 / <double>N)))             # <<<<<<<<<<<<<<
@@ -30947,7 +30868,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
         __pyx_v_ctx.log_reg_if_lazy = ((float)log(__pyx_t_22));
 
 
-        /* "rankfm/_rankfm.pyx":1194
+        /* "rankfm/_rankfm.pyx":1216
  *                 ctx.log_reg_uf_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(uf_density, 1.0 / <double>N)))
  *                 ctx.log_reg_if_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(if_density, 1.0 / <double>N)))
  *                 if last_step_uf != NULL:             # <<<<<<<<<<<<<<
@@ -30959,7 +30880,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
         if (__pyx_t_1) {
 
 
-          /* "rankfm/_rankfm.pyx":1195
+          /* "rankfm/_rankfm.pyx":1217
  *                 ctx.log_reg_if_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(if_density, 1.0 / <double>N)))
  *                 if last_step_uf != NULL:
  *                     memset(last_step_uf, 0, <size_t>P_uf * sizeof(int64_t))             # <<<<<<<<<<<<<<
@@ -30968,7 +30889,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
           (void)(memset(__pyx_v_last_step_uf, 0, (((size_t)__pyx_v_P_uf) * (sizeof(int64_t)))));
 
-          /* "rankfm/_rankfm.pyx":1194
+          /* "rankfm/_rankfm.pyx":1216
  *                 ctx.log_reg_uf_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(uf_density, 1.0 / <double>N)))
  *                 ctx.log_reg_if_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(if_density, 1.0 / <double>N)))
  *                 if last_step_uf != NULL:             # <<<<<<<<<<<<<<
@@ -30977,7 +30898,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         }
 
-        /* "rankfm/_rankfm.pyx":1196
+        /* "rankfm/_rankfm.pyx":1218
  *                 if last_step_uf != NULL:
  *                     memset(last_step_uf, 0, <size_t>P_uf * sizeof(int64_t))
  *                 if last_step_if != NULL:             # <<<<<<<<<<<<<<
@@ -30989,7 +30910,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
         if (__pyx_t_1) {
 
 
-          /* "rankfm/_rankfm.pyx":1197
+          /* "rankfm/_rankfm.pyx":1219
  *                     memset(last_step_uf, 0, <size_t>P_uf * sizeof(int64_t))
  *                 if last_step_if != NULL:
  *                     memset(last_step_if, 0, <size_t>P_if * sizeof(int64_t))             # <<<<<<<<<<<<<<
@@ -30998,7 +30919,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
           (void)(memset(__pyx_v_last_step_if, 0, (((size_t)__pyx_v_P_if) * (sizeof(int64_t)))));
 
-          /* "rankfm/_rankfm.pyx":1196
+          /* "rankfm/_rankfm.pyx":1218
  *                 if last_step_uf != NULL:
  *                     memset(last_step_uf, 0, <size_t>P_uf * sizeof(int64_t))
  *                 if last_step_if != NULL:             # <<<<<<<<<<<<<<
@@ -31007,17 +30928,17 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         }
 
-        /* "rankfm/_rankfm.pyx":1191
+        /* "rankfm/_rankfm.pyx":1213
  *             ctx.reg_a_keep = 1.0 - eta * d_reg_a
  *             ctx.reg_b_keep = 1.0 - eta * d_reg_b
  *             if ctx.uniform_reg:             # <<<<<<<<<<<<<<
  *                 ctx.log_reg_uf_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(uf_density, 1.0 / <double>N)))
  *                 ctx.log_reg_if_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(if_density, 1.0 / <double>N)))
 */
-        goto __pyx_L39;
+        goto __pyx_L44;
       }
 
-      /* "rankfm/_rankfm.pyx":1199
+      /* "rankfm/_rankfm.pyx":1221
  *                     memset(last_step_if, 0, <size_t>P_if * sizeof(int64_t))
  *             else:
  *                 ctx.log_reg_uf_lazy = 0.0             # <<<<<<<<<<<<<<
@@ -31027,7 +30948,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
       /*else*/ {
         __pyx_v_ctx.log_reg_uf_lazy = 0.0;
 
-        /* "rankfm/_rankfm.pyx":1200
+        /* "rankfm/_rankfm.pyx":1222
  *             else:
  *                 ctx.log_reg_uf_lazy = 0.0
  *                 ctx.log_reg_if_lazy = 0.0             # <<<<<<<<<<<<<<
@@ -31036,9 +30957,9 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         __pyx_v_ctx.log_reg_if_lazy = 0.0;
       }
-      __pyx_L39:;
+      __pyx_L44:;
 
-      /* "rankfm/_rankfm.pyx":1202
+      /* "rankfm/_rankfm.pyx":1224
  *                 ctx.log_reg_if_lazy = 0.0
  * 
  *             if verbose:             # <<<<<<<<<<<<<<
@@ -31047,7 +30968,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       if (__pyx_v_verbose) {
 
-        /* "rankfm/_rankfm.pyx":1203
+        /* "rankfm/_rankfm.pyx":1225
  * 
  *             if verbose:
  *                 memset(ll_slots, 0, <size_t>(eff_threads * 8) * sizeof(double))             # <<<<<<<<<<<<<<
@@ -31056,7 +30977,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         (void)(memset(__pyx_v_ll_slots, 0, (((size_t)(__pyx_v_eff_threads * 8)) * (sizeof(double)))));
 
-        /* "rankfm/_rankfm.pyx":1202
+        /* "rankfm/_rankfm.pyx":1224
  *                 ctx.log_reg_if_lazy = 0.0
  * 
  *             if verbose:             # <<<<<<<<<<<<<<
@@ -31065,7 +30986,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       }
 
-      /* "rankfm/_rankfm.pyx":1205
+      /* "rankfm/_rankfm.pyx":1227
  *                 memset(ll_slots, 0, <size_t>(eff_threads * 8) * sizeof(double))
  * 
  *             with nogil:             # <<<<<<<<<<<<<<
@@ -31078,7 +30999,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
           __Pyx_FastGIL_Remember();
           /*try:*/ {
 
-            /* "rankfm/_rankfm.pyx":1206
+            /* "rankfm/_rankfm.pyx":1228
  * 
  *             with nogil:
  *                 rfm_shuffle_int32(&shuffle_index_mv[0], N, &shuf_rng)             # <<<<<<<<<<<<<<
@@ -31088,7 +31009,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
             __pyx_t_18 = 0;
             rfm_shuffle_int32((&(*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_shuffle_index_mv.data) + __pyx_t_18)) )))), __pyx_v_N, (&__pyx_v_shuf_rng));
 
-            /* "rankfm/_rankfm.pyx":1208
+            /* "rankfm/_rankfm.pyx":1230
  *                 rfm_shuffle_int32(&shuffle_index_mv[0], N, &shuf_rng)
  * 
  *                 b_start = 0             # <<<<<<<<<<<<<<
@@ -31097,7 +31018,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
             __pyx_v_b_start = 0;
 
-            /* "rankfm/_rankfm.pyx":1209
+            /* "rankfm/_rankfm.pyx":1231
  * 
  *                 b_start = 0
  *                 while b_start < N:             # <<<<<<<<<<<<<<
@@ -31110,7 +31031,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
               if (!__pyx_t_1) break;
 
-              /* "rankfm/_rankfm.pyx":1210
+              /* "rankfm/_rankfm.pyx":1232
  *                 b_start = 0
  *                 while b_start < N:
  *                     b_end = b_start + sync_interval             # <<<<<<<<<<<<<<
@@ -31119,7 +31040,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
               __pyx_v_b_end = (__pyx_v_b_start + __pyx_v_sync_interval);
 
-              /* "rankfm/_rankfm.pyx":1211
+              /* "rankfm/_rankfm.pyx":1233
  *                 while b_start < N:
  *                     b_end = b_start + sync_interval
  *                     if b_end > N:             # <<<<<<<<<<<<<<
@@ -31131,7 +31052,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
               if (__pyx_t_1) {
 
 
-                /* "rankfm/_rankfm.pyx":1212
+                /* "rankfm/_rankfm.pyx":1234
  *                     b_end = b_start + sync_interval
  *                     if b_end > N:
  *                         b_end = N             # <<<<<<<<<<<<<<
@@ -31140,7 +31061,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
                 __pyx_v_b_end = __pyx_v_N;
 
-                /* "rankfm/_rankfm.pyx":1211
+                /* "rankfm/_rankfm.pyx":1233
  *                 while b_start < N:
  *                     b_end = b_start + sync_interval
  *                     if b_end > N:             # <<<<<<<<<<<<<<
@@ -31149,7 +31070,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
               }
 
-              /* "rankfm/_rankfm.pyx":1214
+              /* "rankfm/_rankfm.pyx":1236
  *                         b_end = N
  * 
  *                     if x_if_any:             # <<<<<<<<<<<<<<
@@ -31161,7 +31082,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
               if (__pyx_t_1) {
 
 
-                /* "rankfm/_rankfm.pyx":1215
+                /* "rankfm/_rankfm.pyx":1237
  * 
  *                     if x_if_any:
  *                         rfm_pool_run(pool, _refresh_eff_items_worker, &ref_ctx)             # <<<<<<<<<<<<<<
@@ -31170,7 +31091,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
                 rfm_pool_run(__pyx_v_pool, __pyx_f_6rankfm_7_rankfm__refresh_eff_items_worker, (&__pyx_v_ref_ctx));
 
-                /* "rankfm/_rankfm.pyx":1214
+                /* "rankfm/_rankfm.pyx":1236
  *                         b_end = N
  * 
  *                     if x_if_any:             # <<<<<<<<<<<<<<
@@ -31179,7 +31100,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
               }
 
-              /* "rankfm/_rankfm.pyx":1217
+              /* "rankfm/_rankfm.pyx":1239
  *                         rfm_pool_run(pool, _refresh_eff_items_worker, &ref_ctx)
  * 
  *                     ctx.block_start = b_start             # <<<<<<<<<<<<<<
@@ -31188,7 +31109,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
               __pyx_v_ctx.block_start = __pyx_v_b_start;
 
-              /* "rankfm/_rankfm.pyx":1218
+              /* "rankfm/_rankfm.pyx":1240
  * 
  *                     ctx.block_start = b_start
  *                     ctx.block_end = b_end             # <<<<<<<<<<<<<<
@@ -31197,21 +31118,21 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
               __pyx_v_ctx.block_end = __pyx_v_b_end;
 
-              /* "rankfm/_rankfm.pyx":1219
+              /* "rankfm/_rankfm.pyx":1241
  *                     ctx.block_start = b_start
  *                     ctx.block_end = b_end
  *                     ctx.cursor = b_start             # <<<<<<<<<<<<<<
  *                     ctx.grain = max(<int64_t>64, min(<int64_t>256, (b_end - b_start) // max(<int64_t>1, <int64_t>(eff_threads * 4))))
- *                     ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 1ULL
+ *                     # one RNG stream per (epoch, chunk start): the epoch sits above bit 40 so epochs can never share a stream
 */
               __pyx_v_ctx.cursor = __pyx_v_b_start;
 
-              /* "rankfm/_rankfm.pyx":1220
+              /* "rankfm/_rankfm.pyx":1242
  *                     ctx.block_end = b_end
  *                     ctx.cursor = b_start
  *                     ctx.grain = max(<int64_t>64, min(<int64_t>256, (b_end - b_start) // max(<int64_t>1, <int64_t>(eff_threads * 4))))             # <<<<<<<<<<<<<<
- *                     ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 1ULL
- *                     rfm_pool_run(pool, _fit_block_worker, &ctx)
+ *                     # one RNG stream per (epoch, chunk start): the epoch sits above bit 40 so epochs can never share a stream
+ *                     ctx.stream_epoch_base = (<uint64_t>(epoch + 1)) << 40
 */
 
               __pyx_t_15 = ((int64_t)(__pyx_v_eff_threads * 4));
@@ -31260,25 +31181,25 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
               __pyx_v_ctx.grain = __pyx_t_16;
 
 
-              /* "rankfm/_rankfm.pyx":1221
- *                     ctx.cursor = b_start
+              /* "rankfm/_rankfm.pyx":1244
  *                     ctx.grain = max(<int64_t>64, min(<int64_t>256, (b_end - b_start) // max(<int64_t>1, <int64_t>(eff_threads * 4))))
- *                     ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 1ULL             # <<<<<<<<<<<<<<
+ *                     # one RNG stream per (epoch, chunk start): the epoch sits above bit 40 so epochs can never share a stream
+ *                     ctx.stream_epoch_base = (<uint64_t>(epoch + 1)) << 40             # <<<<<<<<<<<<<<
  *                     rfm_pool_run(pool, _fit_block_worker, &ctx)
  * 
 */
-              __pyx_v_ctx.stream_epoch_base = ((((uint64_t)__pyx_v_epoch) * 1048576ULL) + 1ULL);
+              __pyx_v_ctx.stream_epoch_base = (((uint64_t)(__pyx_v_epoch + 1)) << 40);
 
-              /* "rankfm/_rankfm.pyx":1222
- *                     ctx.grain = max(<int64_t>64, min(<int64_t>256, (b_end - b_start) // max(<int64_t>1, <int64_t>(eff_threads * 4))))
- *                     ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 1ULL
+              /* "rankfm/_rankfm.pyx":1245
+ *                     # one RNG stream per (epoch, chunk start): the epoch sits above bit 40 so epochs can never share a stream
+ *                     ctx.stream_epoch_base = (<uint64_t>(epoch + 1)) << 40
  *                     rfm_pool_run(pool, _fit_block_worker, &ctx)             # <<<<<<<<<<<<<<
  * 
  *                     b_start = b_end
 */
               rfm_pool_run(__pyx_v_pool, __pyx_f_6rankfm_7_rankfm__fit_block_worker, (&__pyx_v_ctx));
 
-              /* "rankfm/_rankfm.pyx":1224
+              /* "rankfm/_rankfm.pyx":1247
  *                     rfm_pool_run(pool, _fit_block_worker, &ctx)
  * 
  *                     b_start = b_end             # <<<<<<<<<<<<<<
@@ -31288,7 +31209,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
               __pyx_v_b_start = __pyx_v_b_end;
             }
 
-            /* "rankfm/_rankfm.pyx":1226
+            /* "rankfm/_rankfm.pyx":1249
  *                     b_start = b_end
  * 
  *                 if ctx.uniform_reg:             # <<<<<<<<<<<<<<
@@ -31300,7 +31221,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
             if (__pyx_t_1) {
 
 
-              /* "rankfm/_rankfm.pyx":1227
+              /* "rankfm/_rankfm.pyx":1250
  * 
  *                 if ctx.uniform_reg:
  *                     if last_step_uf != NULL:             # <<<<<<<<<<<<<<
@@ -31312,7 +31233,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
               if (__pyx_t_1) {
 
 
-                /* "rankfm/_rankfm.pyx":1228
+                /* "rankfm/_rankfm.pyx":1251
  *                 if ctx.uniform_reg:
  *                     if last_step_uf != NULL:
  *                         for p_idx in range(P_uf):             # <<<<<<<<<<<<<<
@@ -31326,7 +31247,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
                 for (__pyx_t_17 = 0; __pyx_t_17 < __pyx_t_15; __pyx_t_17+=1) {
                   __pyx_v_p_idx = __pyx_t_17;
 
-                  /* "rankfm/_rankfm.pyx":1229
+                  /* "rankfm/_rankfm.pyx":1252
  *                     if last_step_uf != NULL:
  *                         for p_idx in range(P_uf):
  *                             rem_steps = N - last_step_uf[p_idx]             # <<<<<<<<<<<<<<
@@ -31335,7 +31256,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
                   __pyx_v_rem_steps = (__pyx_v_N - (__pyx_v_last_step_uf[__pyx_v_p_idx]));
 
-                  /* "rankfm/_rankfm.pyx":1230
+                  /* "rankfm/_rankfm.pyx":1253
  *                         for p_idx in range(P_uf):
  *                             rem_steps = N - last_step_uf[p_idx]
  *                             if rem_steps > 0:             # <<<<<<<<<<<<<<
@@ -31347,7 +31268,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
                   if (__pyx_t_1) {
 
 
-                    /* "rankfm/_rankfm.pyx":1231
+                    /* "rankfm/_rankfm.pyx":1254
  *                             rem_steps = N - last_step_uf[p_idx]
  *                             if rem_steps > 0:
  *                                 lazy_tail = <float>exp(<double>ctx.log_reg_uf_lazy * <double>rem_steps)             # <<<<<<<<<<<<<<
@@ -31356,7 +31277,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
                     __pyx_v_lazy_tail = ((float)exp((((double)__pyx_v_ctx.log_reg_uf_lazy) * ((double)__pyx_v_rem_steps))));
 
-                    /* "rankfm/_rankfm.pyx":1232
+                    /* "rankfm/_rankfm.pyx":1255
  *                             if rem_steps > 0:
  *                                 lazy_tail = <float>exp(<double>ctx.log_reg_uf_lazy * <double>rem_steps)
  *                                 rfm_vec_scale(F, lazy_tail, &ctx.v_uf_ptr[p_idx * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -31365,7 +31286,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
                     rfm_vec_scale(__pyx_v_F, __pyx_v_lazy_tail, (&(__pyx_v_ctx.v_uf_ptr[(__pyx_v_p_idx * ((int64_t)__pyx_v_F))])));
 
-                    /* "rankfm/_rankfm.pyx":1230
+                    /* "rankfm/_rankfm.pyx":1253
  *                         for p_idx in range(P_uf):
  *                             rem_steps = N - last_step_uf[p_idx]
  *                             if rem_steps > 0:             # <<<<<<<<<<<<<<
@@ -31376,7 +31297,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
                 }
 
 
-                /* "rankfm/_rankfm.pyx":1227
+                /* "rankfm/_rankfm.pyx":1250
  * 
  *                 if ctx.uniform_reg:
  *                     if last_step_uf != NULL:             # <<<<<<<<<<<<<<
@@ -31385,7 +31306,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
               }
 
-              /* "rankfm/_rankfm.pyx":1233
+              /* "rankfm/_rankfm.pyx":1256
  *                                 lazy_tail = <float>exp(<double>ctx.log_reg_uf_lazy * <double>rem_steps)
  *                                 rfm_vec_scale(F, lazy_tail, &ctx.v_uf_ptr[p_idx * <int64_t>F])
  *                     if last_step_if != NULL:             # <<<<<<<<<<<<<<
@@ -31397,7 +31318,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
               if (__pyx_t_1) {
 
 
-                /* "rankfm/_rankfm.pyx":1234
+                /* "rankfm/_rankfm.pyx":1257
  *                                 rfm_vec_scale(F, lazy_tail, &ctx.v_uf_ptr[p_idx * <int64_t>F])
  *                     if last_step_if != NULL:
  *                         for q_idx in range(P_if):             # <<<<<<<<<<<<<<
@@ -31411,7 +31332,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
                 for (__pyx_t_17 = 0; __pyx_t_17 < __pyx_t_15; __pyx_t_17+=1) {
                   __pyx_v_q_idx = __pyx_t_17;
 
-                  /* "rankfm/_rankfm.pyx":1235
+                  /* "rankfm/_rankfm.pyx":1258
  *                     if last_step_if != NULL:
  *                         for q_idx in range(P_if):
  *                             rem_steps = N - last_step_if[q_idx]             # <<<<<<<<<<<<<<
@@ -31420,7 +31341,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
                   __pyx_v_rem_steps = (__pyx_v_N - (__pyx_v_last_step_if[__pyx_v_q_idx]));
 
-                  /* "rankfm/_rankfm.pyx":1236
+                  /* "rankfm/_rankfm.pyx":1259
  *                         for q_idx in range(P_if):
  *                             rem_steps = N - last_step_if[q_idx]
  *                             if rem_steps > 0:             # <<<<<<<<<<<<<<
@@ -31432,7 +31353,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
                   if (__pyx_t_1) {
 
 
-                    /* "rankfm/_rankfm.pyx":1237
+                    /* "rankfm/_rankfm.pyx":1260
  *                             rem_steps = N - last_step_if[q_idx]
  *                             if rem_steps > 0:
  *                                 lazy_tail = <float>exp(<double>ctx.log_reg_if_lazy * <double>rem_steps)             # <<<<<<<<<<<<<<
@@ -31441,7 +31362,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
                     __pyx_v_lazy_tail = ((float)exp((((double)__pyx_v_ctx.log_reg_if_lazy) * ((double)__pyx_v_rem_steps))));
 
-                    /* "rankfm/_rankfm.pyx":1238
+                    /* "rankfm/_rankfm.pyx":1261
  *                             if rem_steps > 0:
  *                                 lazy_tail = <float>exp(<double>ctx.log_reg_if_lazy * <double>rem_steps)
  *                                 ctx.w_if_ptr[q_idx] *= lazy_tail             # <<<<<<<<<<<<<<
@@ -31452,7 +31373,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
                     __pyx_t_28 = __pyx_v_q_idx;
                     (__pyx_v_ctx.w_if_ptr[__pyx_t_28]) = ((__pyx_v_ctx.w_if_ptr[__pyx_t_28]) * __pyx_v_lazy_tail);
 
-                    /* "rankfm/_rankfm.pyx":1239
+                    /* "rankfm/_rankfm.pyx":1262
  *                                 lazy_tail = <float>exp(<double>ctx.log_reg_if_lazy * <double>rem_steps)
  *                                 ctx.w_if_ptr[q_idx] *= lazy_tail
  *                                 rfm_vec_scale(F, lazy_tail, &ctx.v_if_ptr[q_idx * <int64_t>F])             # <<<<<<<<<<<<<<
@@ -31461,7 +31382,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
                     rfm_vec_scale(__pyx_v_F, __pyx_v_lazy_tail, (&(__pyx_v_ctx.v_if_ptr[(__pyx_v_q_idx * ((int64_t)__pyx_v_F))])));
 
-                    /* "rankfm/_rankfm.pyx":1236
+                    /* "rankfm/_rankfm.pyx":1259
  *                         for q_idx in range(P_if):
  *                             rem_steps = N - last_step_if[q_idx]
  *                             if rem_steps > 0:             # <<<<<<<<<<<<<<
@@ -31472,7 +31393,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
                 }
 
 
-                /* "rankfm/_rankfm.pyx":1233
+                /* "rankfm/_rankfm.pyx":1256
  *                                 lazy_tail = <float>exp(<double>ctx.log_reg_uf_lazy * <double>rem_steps)
  *                                 rfm_vec_scale(F, lazy_tail, &ctx.v_uf_ptr[p_idx * <int64_t>F])
  *                     if last_step_if != NULL:             # <<<<<<<<<<<<<<
@@ -31481,7 +31402,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
               }
 
-              /* "rankfm/_rankfm.pyx":1226
+              /* "rankfm/_rankfm.pyx":1249
  *                     b_start = b_end
  * 
  *                 if ctx.uniform_reg:             # <<<<<<<<<<<<<<
@@ -31491,7 +31412,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
             }
           }
 
-          /* "rankfm/_rankfm.pyx":1205
+          /* "rankfm/_rankfm.pyx":1227
  *                 memset(ll_slots, 0, <size_t>(eff_threads * 8) * sizeof(double))
  * 
  *             with nogil:             # <<<<<<<<<<<<<<
@@ -31502,63 +31423,63 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
             /*normal exit:*/{
               __Pyx_FastGIL_Forget();
               PyEval_RestoreThread(_save);
-              goto __pyx_L47;
+              goto __pyx_L52;
             }
-            __pyx_L47:;
+            __pyx_L52:;
           }
       }
 
-      /* "rankfm/_rankfm.pyx":1241
+      /* "rankfm/_rankfm.pyx":1264
  *                                 rfm_vec_scale(F, lazy_tail, &ctx.v_if_ptr[q_idx * <int64_t>F])
  * 
  *             assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if)             # <<<<<<<<<<<<<<
  * 
  *             if verbose:
 */
-      __pyx_t_7 = NULL;
-      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_assert_finite); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1241, __pyx_L34_error)
+      __pyx_t_10 = NULL;
+      __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_assert_finite); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1264, __pyx_L39_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_w_i, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1241, __pyx_L34_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_w_if, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1241, __pyx_L34_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_v_u, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1241, __pyx_L34_error)
+      __pyx_t_7 = __pyx_memoryview_fromslice(__pyx_v_w_i, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1264, __pyx_L39_error)
+      __Pyx_GOTREF(__pyx_t_7);
+      __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_w_if, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1264, __pyx_L39_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_29 = __pyx_memoryview_fromslice(__pyx_v_v_i, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 1241, __pyx_L34_error)
+      __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_v_u, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1264, __pyx_L39_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_29 = __pyx_memoryview_fromslice(__pyx_v_v_i, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 1264, __pyx_L39_error)
       __Pyx_GOTREF(__pyx_t_29);
-      __pyx_t_30 = __pyx_memoryview_fromslice(__pyx_v_v_uf, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 1241, __pyx_L34_error)
+      __pyx_t_30 = __pyx_memoryview_fromslice(__pyx_v_v_uf, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 1264, __pyx_L39_error)
       __Pyx_GOTREF(__pyx_t_30);
-      __pyx_t_31 = __pyx_memoryview_fromslice(__pyx_v_v_if, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 1241, __pyx_L34_error)
+      __pyx_t_31 = __pyx_memoryview_fromslice(__pyx_v_v_if, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 1264, __pyx_L39_error)
       __Pyx_GOTREF(__pyx_t_31);
       __pyx_t_5 = 1;
       #if CYTHON_UNPACK_METHODS
       if (unlikely(PyMethod_Check(__pyx_t_8))) {
-        __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_8);
-        assert(__pyx_t_7);
+        __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_8);
+        assert(__pyx_t_10);
         PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_8);
-        __Pyx_INCREF(__pyx_t_7);
+        __Pyx_INCREF(__pyx_t_10);
         __Pyx_INCREF(__pyx__function);
         __Pyx_DECREF_SET(__pyx_t_8, __pyx__function);
         __pyx_t_5 = 0;
       }
       #endif
       {
-        PyObject *__pyx_callargs[7] = {__pyx_t_7, __pyx_t_10, __pyx_t_6, __pyx_t_4, __pyx_t_29, __pyx_t_30, __pyx_t_31};
+        PyObject *__pyx_callargs[7] = {__pyx_t_10, __pyx_t_7, __pyx_t_4, __pyx_t_6, __pyx_t_29, __pyx_t_30, __pyx_t_31};
         __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_8, __pyx_callargs+__pyx_t_5, (7-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-        __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+        __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
         __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
         __Pyx_DECREF(__pyx_t_31); __pyx_t_31 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1241, __pyx_L34_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1264, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_3);
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "rankfm/_rankfm.pyx":1243
+      /* "rankfm/_rankfm.pyx":1266
  *             assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if)
  * 
  *             if verbose:             # <<<<<<<<<<<<<<
@@ -31567,7 +31488,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       if (__pyx_v_verbose) {
 
-        /* "rankfm/_rankfm.pyx":1244
+        /* "rankfm/_rankfm.pyx":1267
  * 
  *             if verbose:
  *                 log_likelihood = 0.0             # <<<<<<<<<<<<<<
@@ -31576,7 +31497,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         __pyx_v_log_likelihood = 0.0;
 
-        /* "rankfm/_rankfm.pyx":1245
+        /* "rankfm/_rankfm.pyx":1268
  *             if verbose:
  *                 log_likelihood = 0.0
  *                 for t_i in range(eff_threads):             # <<<<<<<<<<<<<<
@@ -31590,7 +31511,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
         for (__pyx_t_34 = 0; __pyx_t_34 < __pyx_t_33; __pyx_t_34+=1) {
           __pyx_v_t_i = __pyx_t_34;
 
-          /* "rankfm/_rankfm.pyx":1246
+          /* "rankfm/_rankfm.pyx":1269
  *                 log_likelihood = 0.0
  *                 for t_i in range(eff_threads):
  *                     log_likelihood += ll_slots[t_i * 8]             # <<<<<<<<<<<<<<
@@ -31601,7 +31522,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
         }
 
 
-        /* "rankfm/_rankfm.pyx":1247
+        /* "rankfm/_rankfm.pyx":1270
  *                 for t_i in range(eff_threads):
  *                     log_likelihood += ll_slots[t_i * 8]
  *                 penalty = reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if)             # <<<<<<<<<<<<<<
@@ -31609,23 +31530,23 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
  *                 print("\ntraining epoch:", epoch)
 */
         __pyx_t_8 = NULL;
-        __Pyx_GetModuleGlobalName(__pyx_t_31, __pyx_mstate_global->__pyx_n_u_reg_penalty); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 1247, __pyx_L34_error)
+        __Pyx_GetModuleGlobalName(__pyx_t_31, __pyx_mstate_global->__pyx_n_u_reg_penalty); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 1270, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_31);
-        __pyx_t_30 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 1247, __pyx_L34_error)
+        __pyx_t_30 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 1270, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_30);
-        __pyx_t_29 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 1247, __pyx_L34_error)
+        __pyx_t_29 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 1270, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_29);
-        __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_w_i, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1247, __pyx_L34_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_w_if, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1247, __pyx_L34_error)
+        __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_w_i, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1270, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_v_u, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1247, __pyx_L34_error)
-        __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_7 = __pyx_memoryview_fromslice(__pyx_v_v_i, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1247, __pyx_L34_error)
+        __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_w_if, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1270, __pyx_L39_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_7 = __pyx_memoryview_fromslice(__pyx_v_v_u, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1270, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_v_v_uf, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 1247, __pyx_L34_error)
+        __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_v_i, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1270, __pyx_L39_error)
+        __Pyx_GOTREF(__pyx_t_10);
+        __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_v_v_uf, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 1270, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_35);
-        __pyx_t_36 = __pyx_memoryview_fromslice(__pyx_v_v_if, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_36)) __PYX_ERR(0, 1247, __pyx_L34_error)
+        __pyx_t_36 = __pyx_memoryview_fromslice(__pyx_v_v_if, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_36)) __PYX_ERR(0, 1270, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_36);
         __pyx_t_5 = 1;
         #if CYTHON_UNPACK_METHODS
@@ -31640,25 +31561,25 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
         }
         #endif
         {
-          PyObject *__pyx_callargs[9] = {__pyx_t_8, __pyx_t_30, __pyx_t_29, __pyx_t_4, __pyx_t_6, __pyx_t_10, __pyx_t_7, __pyx_t_35, __pyx_t_36};
+          PyObject *__pyx_callargs[9] = {__pyx_t_8, __pyx_t_30, __pyx_t_29, __pyx_t_6, __pyx_t_4, __pyx_t_7, __pyx_t_10, __pyx_t_35, __pyx_t_36};
           __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_31, __pyx_callargs+__pyx_t_5, (9-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
           __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+          __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
           __Pyx_DECREF(__pyx_t_36); __pyx_t_36 = 0;
           __Pyx_DECREF(__pyx_t_31); __pyx_t_31 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1247, __pyx_L34_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1270, __pyx_L39_error)
           __Pyx_GOTREF(__pyx_t_3);
         }
         __Pyx_XDECREF_SET(__pyx_v_penalty, __pyx_t_3);
         __pyx_t_3 = 0;
 
-        /* "rankfm/_rankfm.pyx":1248
+        /* "rankfm/_rankfm.pyx":1271
  *                     log_likelihood += ll_slots[t_i * 8]
  *                 penalty = reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if)
  *                 log_likelihood = round(log_likelihood - penalty, 2)             # <<<<<<<<<<<<<<
@@ -31666,9 +31587,9 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
  *                 print("log likelihood:", log_likelihood)
 */
         __pyx_t_31 = NULL;
-        __pyx_t_36 = PyFloat_FromDouble(__pyx_v_log_likelihood); if (unlikely(!__pyx_t_36)) __PYX_ERR(0, 1248, __pyx_L34_error)
+        __pyx_t_36 = PyFloat_FromDouble(__pyx_v_log_likelihood); if (unlikely(!__pyx_t_36)) __PYX_ERR(0, 1271, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_36);
-        __pyx_t_35 = __Pyx_PyNumber_Subtract_float_object(__pyx_t_36, __pyx_v_penalty); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 1248, __pyx_L34_error)
+        __pyx_t_35 = __Pyx_PyNumber_Subtract_float_object(__pyx_t_36, __pyx_v_penalty); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 1271, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_35);
         __Pyx_DECREF(__pyx_t_36); __pyx_t_36 = 0;
         __pyx_t_5 = 1;
@@ -31677,14 +31598,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
           __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_round, __pyx_callargs+__pyx_t_5, (3-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_31); __pyx_t_31 = 0;
           __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1248, __pyx_L34_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1271, __pyx_L39_error)
           __Pyx_GOTREF(__pyx_t_3);
         }
-        __pyx_t_22 = __Pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_22 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 1248, __pyx_L34_error)
+        __pyx_t_22 = __Pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_22 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 1271, __pyx_L39_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_v_log_likelihood = __pyx_t_22;
 
-        /* "rankfm/_rankfm.pyx":1249
+        /* "rankfm/_rankfm.pyx":1272
  *                 penalty = reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if)
  *                 log_likelihood = round(log_likelihood - penalty, 2)
  *                 print("\ntraining epoch:", epoch)             # <<<<<<<<<<<<<<
@@ -31692,7 +31613,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
  * 
 */
         __pyx_t_35 = NULL;
-        __pyx_t_31 = __Pyx_PyLong_From_int(__pyx_v_epoch); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 1249, __pyx_L34_error)
+        __pyx_t_31 = __Pyx_PyLong_From_int(__pyx_v_epoch); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 1272, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_31);
         __pyx_t_5 = 1;
         {
@@ -31700,12 +31621,12 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
           __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (3-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_35); __pyx_t_35 = 0;
           __Pyx_DECREF(__pyx_t_31); __pyx_t_31 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1249, __pyx_L34_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1272, __pyx_L39_error)
           __Pyx_GOTREF(__pyx_t_3);
         }
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "rankfm/_rankfm.pyx":1250
+        /* "rankfm/_rankfm.pyx":1273
  *                 log_likelihood = round(log_likelihood - penalty, 2)
  *                 print("\ntraining epoch:", epoch)
  *                 print("log likelihood:", log_likelihood)             # <<<<<<<<<<<<<<
@@ -31713,7 +31634,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
  *     finally:
 */
         __pyx_t_31 = NULL;
-        __pyx_t_35 = PyFloat_FromDouble(__pyx_v_log_likelihood); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 1250, __pyx_L34_error)
+        __pyx_t_35 = PyFloat_FromDouble(__pyx_v_log_likelihood); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 1273, __pyx_L39_error)
         __Pyx_GOTREF(__pyx_t_35);
         __pyx_t_5 = 1;
         {
@@ -31721,12 +31642,12 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
           __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (3-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_31); __pyx_t_31 = 0;
           __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1250, __pyx_L34_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1273, __pyx_L39_error)
           __Pyx_GOTREF(__pyx_t_3);
         }
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "rankfm/_rankfm.pyx":1243
+        /* "rankfm/_rankfm.pyx":1266
  *             assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if)
  * 
  *             if verbose:             # <<<<<<<<<<<<<<
@@ -31738,7 +31659,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
   }
 
-  /* "rankfm/_rankfm.pyx":1253
+  /* "rankfm/_rankfm.pyx":1276
  * 
  *     finally:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -31753,7 +31674,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
           __Pyx_FastGIL_Remember();
           /*try:*/ {
 
-            /* "rankfm/_rankfm.pyx":1254
+            /* "rankfm/_rankfm.pyx":1277
  *     finally:
  *         with nogil:
  *             rfm_pool_destroy(pool)             # <<<<<<<<<<<<<<
@@ -31763,7 +31684,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
             rfm_pool_destroy(__pyx_v_pool);
           }
 
-          /* "rankfm/_rankfm.pyx":1253
+          /* "rankfm/_rankfm.pyx":1276
  * 
  *     finally:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -31774,13 +31695,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
             /*normal exit:*/{
               __Pyx_FastGIL_Forget();
               PyEval_RestoreThread(_save);
-              goto __pyx_L66;
+              goto __pyx_L71;
             }
-            __pyx_L66:;
+            __pyx_L71:;
           }
       }
 
-      /* "rankfm/_rankfm.pyx":1255
+      /* "rankfm/_rankfm.pyx":1278
  *         with nogil:
  *             rfm_pool_destroy(pool)
  *         rfm_aligned_free(mult_lut)             # <<<<<<<<<<<<<<
@@ -31789,7 +31710,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       rfm_aligned_free(__pyx_v_mult_lut);
 
-      /* "rankfm/_rankfm.pyx":1256
+      /* "rankfm/_rankfm.pyx":1279
  *             rfm_pool_destroy(pool)
  *         rfm_aligned_free(mult_lut)
  *         rfm_aligned_free(scratch_base)             # <<<<<<<<<<<<<<
@@ -31798,7 +31719,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       rfm_aligned_free(__pyx_v_scratch_base);
 
-      /* "rankfm/_rankfm.pyx":1257
+      /* "rankfm/_rankfm.pyx":1280
  *         rfm_aligned_free(mult_lut)
  *         rfm_aligned_free(scratch_base)
  *         free(ll_slots)             # <<<<<<<<<<<<<<
@@ -31807,7 +31728,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       free(__pyx_v_ll_slots);
 
-      /* "rankfm/_rankfm.pyx":1258
+      /* "rankfm/_rankfm.pyx":1281
  *         rfm_aligned_free(scratch_base)
  *         free(ll_slots)
  *         rfm_aligned_free(b_eff_alloc)             # <<<<<<<<<<<<<<
@@ -31816,7 +31737,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       rfm_aligned_free(__pyx_v_b_eff_alloc);
 
-      /* "rankfm/_rankfm.pyx":1259
+      /* "rankfm/_rankfm.pyx":1282
  *         free(ll_slots)
  *         rfm_aligned_free(b_eff_alloc)
  *         rfm_aligned_free(v_eff_alloc)             # <<<<<<<<<<<<<<
@@ -31825,7 +31746,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       rfm_aligned_free(__pyx_v_v_eff_alloc);
 
-      /* "rankfm/_rankfm.pyx":1260
+      /* "rankfm/_rankfm.pyx":1283
  *         rfm_aligned_free(b_eff_alloc)
  *         rfm_aligned_free(v_eff_alloc)
  *         free(last_step_uf)             # <<<<<<<<<<<<<<
@@ -31834,7 +31755,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
       free(__pyx_v_last_step_uf);
 
-      /* "rankfm/_rankfm.pyx":1261
+      /* "rankfm/_rankfm.pyx":1284
  *         rfm_aligned_free(v_eff_alloc)
  *         free(last_step_uf)
  *         free(last_step_if)             # <<<<<<<<<<<<<<
@@ -31842,9 +31763,9 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
  * 
 */
       free(__pyx_v_last_step_if);
-      goto __pyx_L35;
+      goto __pyx_L40;
     }
-    __pyx_L34_error:;
+    __pyx_L39_error:;
     /*exception exit:*/{
       __Pyx_PyThreadState_declare
       __Pyx_PyThreadState_assign
@@ -31873,7 +31794,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
       __pyx_t_12 = __pyx_lineno; __pyx_t_26 = __pyx_clineno; __pyx_t_37 = __pyx_filename;
       {
 
-        /* "rankfm/_rankfm.pyx":1253
+        /* "rankfm/_rankfm.pyx":1276
  * 
  *     finally:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -31886,7 +31807,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
             __Pyx_FastGIL_Remember();
             /*try:*/ {
 
-              /* "rankfm/_rankfm.pyx":1254
+              /* "rankfm/_rankfm.pyx":1277
  *     finally:
  *         with nogil:
  *             rfm_pool_destroy(pool)             # <<<<<<<<<<<<<<
@@ -31896,7 +31817,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
               rfm_pool_destroy(__pyx_v_pool);
             }
 
-            /* "rankfm/_rankfm.pyx":1253
+            /* "rankfm/_rankfm.pyx":1276
  * 
  *     finally:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -31907,13 +31828,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
               /*normal exit:*/{
                 __Pyx_FastGIL_Forget();
                 PyEval_RestoreThread(_save);
-                goto __pyx_L71;
+                goto __pyx_L76;
               }
-              __pyx_L71:;
+              __pyx_L76:;
             }
         }
 
-        /* "rankfm/_rankfm.pyx":1255
+        /* "rankfm/_rankfm.pyx":1278
  *         with nogil:
  *             rfm_pool_destroy(pool)
  *         rfm_aligned_free(mult_lut)             # <<<<<<<<<<<<<<
@@ -31922,7 +31843,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         rfm_aligned_free(__pyx_v_mult_lut);
 
-        /* "rankfm/_rankfm.pyx":1256
+        /* "rankfm/_rankfm.pyx":1279
  *             rfm_pool_destroy(pool)
  *         rfm_aligned_free(mult_lut)
  *         rfm_aligned_free(scratch_base)             # <<<<<<<<<<<<<<
@@ -31931,7 +31852,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         rfm_aligned_free(__pyx_v_scratch_base);
 
-        /* "rankfm/_rankfm.pyx":1257
+        /* "rankfm/_rankfm.pyx":1280
  *         rfm_aligned_free(mult_lut)
  *         rfm_aligned_free(scratch_base)
  *         free(ll_slots)             # <<<<<<<<<<<<<<
@@ -31940,7 +31861,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         free(__pyx_v_ll_slots);
 
-        /* "rankfm/_rankfm.pyx":1258
+        /* "rankfm/_rankfm.pyx":1281
  *         rfm_aligned_free(scratch_base)
  *         free(ll_slots)
  *         rfm_aligned_free(b_eff_alloc)             # <<<<<<<<<<<<<<
@@ -31949,7 +31870,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         rfm_aligned_free(__pyx_v_b_eff_alloc);
 
-        /* "rankfm/_rankfm.pyx":1259
+        /* "rankfm/_rankfm.pyx":1282
  *         free(ll_slots)
  *         rfm_aligned_free(b_eff_alloc)
  *         rfm_aligned_free(v_eff_alloc)             # <<<<<<<<<<<<<<
@@ -31958,7 +31879,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         rfm_aligned_free(__pyx_v_v_eff_alloc);
 
-        /* "rankfm/_rankfm.pyx":1260
+        /* "rankfm/_rankfm.pyx":1283
  *         rfm_aligned_free(b_eff_alloc)
  *         rfm_aligned_free(v_eff_alloc)
  *         free(last_step_uf)             # <<<<<<<<<<<<<<
@@ -31967,7 +31888,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 */
         free(__pyx_v_last_step_uf);
 
-        /* "rankfm/_rankfm.pyx":1261
+        /* "rankfm/_rankfm.pyx":1284
  *         rfm_aligned_free(v_eff_alloc)
  *         free(last_step_uf)
  *         free(last_step_if)             # <<<<<<<<<<<<<<
@@ -31988,10 +31909,10 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
       __pyx_lineno = __pyx_t_12; __pyx_clineno = __pyx_t_26; __pyx_filename = __pyx_t_37;
       goto __pyx_L1_error;
     }
-    __pyx_L35:;
+    __pyx_L40:;
   }
 
-  /* "rankfm/_rankfm.pyx":1002
+  /* "rankfm/_rankfm.pyx":1011
  * # --------------------------------
  * 
  * def _fit_csr(             # <<<<<<<<<<<<<<
@@ -32066,12 +31987,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_10_fit_csr(CYTHON_UNUSED PyObject *__
 
 
   __Pyx_XDECREF(__pyx_v_penalty);
+
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":1264
+/* "rankfm/_rankfm.pyx":1287
  * 
  * 
  * def _fit(             # <<<<<<<<<<<<<<
@@ -32142,216 +32064,216 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_interactions,&__pyx_mstate_global->__pyx_n_u_sample_weight,&__pyx_mstate_global->__pyx_n_u_ui_indptr,&__pyx_mstate_global->__pyx_n_u_ui_indices,&__pyx_mstate_global->__pyx_n_u_x_uf,&__pyx_mstate_global->__pyx_n_u_x_if,&__pyx_mstate_global->__pyx_n_u_w_i,&__pyx_mstate_global->__pyx_n_u_w_if,&__pyx_mstate_global->__pyx_n_u_v_u,&__pyx_mstate_global->__pyx_n_u_v_i,&__pyx_mstate_global->__pyx_n_u_v_uf,&__pyx_mstate_global->__pyx_n_u_v_if,&__pyx_mstate_global->__pyx_n_u_alpha,&__pyx_mstate_global->__pyx_n_u_beta,&__pyx_mstate_global->__pyx_n_u_learning_rate,&__pyx_mstate_global->__pyx_n_u_learning_schedule,&__pyx_mstate_global->__pyx_n_u_learning_exponent,&__pyx_mstate_global->__pyx_n_u_max_samples,&__pyx_mstate_global->__pyx_n_u_epochs,&__pyx_mstate_global->__pyx_n_u_verbose,&__pyx_mstate_global->__pyx_n_u_user_dropout,&__pyx_mstate_global->__pyx_n_u_seed,&__pyx_mstate_global->__pyx_n_u_n_threads,&__pyx_mstate_global->__pyx_n_u_uniform_feature_reg,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1264, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1287, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case 24:
         values[23] = __Pyx_ArgRef_FASTCALL(__pyx_args, 23);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[23])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[23])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 23:
         values[22] = __Pyx_ArgRef_FASTCALL(__pyx_args, 22);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[22])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[22])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 22:
         values[21] = __Pyx_ArgRef_FASTCALL(__pyx_args, 21);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[21])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[21])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 21:
         values[20] = __Pyx_ArgRef_FASTCALL(__pyx_args, 20);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[20])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[20])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 20:
         values[19] = __Pyx_ArgRef_FASTCALL(__pyx_args, 19);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[19])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[19])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 19:
         values[18] = __Pyx_ArgRef_FASTCALL(__pyx_args, 18);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[18])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[18])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 18:
         values[17] = __Pyx_ArgRef_FASTCALL(__pyx_args, 17);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[17])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[17])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 17:
         values[16] = __Pyx_ArgRef_FASTCALL(__pyx_args, 16);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[16])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[16])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 16:
         values[15] = __Pyx_ArgRef_FASTCALL(__pyx_args, 15);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 15:
         values[14] = __Pyx_ArgRef_FASTCALL(__pyx_args, 14);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 14:
         values[13] = __Pyx_ArgRef_FASTCALL(__pyx_args, 13);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 13:
         values[12] = __Pyx_ArgRef_FASTCALL(__pyx_args, 12);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 12:
         values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 11:
         values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 10:
         values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  9:
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_fit", 0) < (0)) __PYX_ERR(0, 1264, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_fit", 0) < (0)) __PYX_ERR(0, 1287, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 20; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_fit", 0, 20, 24, i); __PYX_ERR(0, 1264, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_fit", 0, 20, 24, i); __PYX_ERR(0, 1287, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case 24:
         values[23] = __Pyx_ArgRef_FASTCALL(__pyx_args, 23);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[23])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[23])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 23:
         values[22] = __Pyx_ArgRef_FASTCALL(__pyx_args, 22);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[22])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[22])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 22:
         values[21] = __Pyx_ArgRef_FASTCALL(__pyx_args, 21);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[21])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[21])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 21:
         values[20] = __Pyx_ArgRef_FASTCALL(__pyx_args, 20);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[20])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[20])) __PYX_ERR(0, 1287, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 20:
         values[19] = __Pyx_ArgRef_FASTCALL(__pyx_args, 19);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[19])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[19])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[18] = __Pyx_ArgRef_FASTCALL(__pyx_args, 18);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[18])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[18])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[17] = __Pyx_ArgRef_FASTCALL(__pyx_args, 17);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[17])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[17])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[16] = __Pyx_ArgRef_FASTCALL(__pyx_args, 16);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[16])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[16])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[15] = __Pyx_ArgRef_FASTCALL(__pyx_args, 15);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[14] = __Pyx_ArgRef_FASTCALL(__pyx_args, 14);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[13] = __Pyx_ArgRef_FASTCALL(__pyx_args, 13);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[12] = __Pyx_ArgRef_FASTCALL(__pyx_args, 12);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1287, __pyx_L3_error)
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1264, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1287, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_interactions = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn_int32_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_interactions.memview)) __PYX_ERR(0, 1265, __pyx_L3_error)
-    __pyx_v_sample_weight = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_sample_weight.memview)) __PYX_ERR(0, 1266, __pyx_L3_error)
+    __pyx_v_interactions = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn_int32_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_interactions.memview)) __PYX_ERR(0, 1288, __pyx_L3_error)
+    __pyx_v_sample_weight = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_sample_weight.memview)) __PYX_ERR(0, 1289, __pyx_L3_error)
     __pyx_v_ui_indptr = values[2];
-    __pyx_v_ui_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ui_indices.memview)) __PYX_ERR(0, 1268, __pyx_L3_error)
-    __pyx_v_x_uf = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_x_uf.memview)) __PYX_ERR(0, 1269, __pyx_L3_error)
-    __pyx_v_x_if = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_x_if.memview)) __PYX_ERR(0, 1270, __pyx_L3_error)
-    __pyx_v_w_i = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_w_i.memview)) __PYX_ERR(0, 1271, __pyx_L3_error)
-    __pyx_v_w_if = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[7], PyBUF_WRITABLE); if (unlikely(!__pyx_v_w_if.memview)) __PYX_ERR(0, 1272, __pyx_L3_error)
-    __pyx_v_v_u = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[8], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_u.memview)) __PYX_ERR(0, 1273, __pyx_L3_error)
-    __pyx_v_v_i = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[9], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_i.memview)) __PYX_ERR(0, 1274, __pyx_L3_error)
-    __pyx_v_v_uf = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[10], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_uf.memview)) __PYX_ERR(0, 1275, __pyx_L3_error)
-    __pyx_v_v_if = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[11], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_if.memview)) __PYX_ERR(0, 1276, __pyx_L3_error)
-    __pyx_v_alpha = __Pyx_PyFloat_AsFloat(values[12]); if (unlikely((__pyx_v_alpha == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1277, __pyx_L3_error)
-    __pyx_v_beta = __Pyx_PyFloat_AsFloat(values[13]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1278, __pyx_L3_error)
-    __pyx_v_learning_rate = __Pyx_PyFloat_AsFloat(values[14]); if (unlikely((__pyx_v_learning_rate == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1279, __pyx_L3_error)
+    __pyx_v_ui_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ui_indices.memview)) __PYX_ERR(0, 1291, __pyx_L3_error)
+    __pyx_v_x_uf = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_x_uf.memview)) __PYX_ERR(0, 1292, __pyx_L3_error)
+    __pyx_v_x_if = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_x_if.memview)) __PYX_ERR(0, 1293, __pyx_L3_error)
+    __pyx_v_w_i = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_w_i.memview)) __PYX_ERR(0, 1294, __pyx_L3_error)
+    __pyx_v_w_if = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[7], PyBUF_WRITABLE); if (unlikely(!__pyx_v_w_if.memview)) __PYX_ERR(0, 1295, __pyx_L3_error)
+    __pyx_v_v_u = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[8], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_u.memview)) __PYX_ERR(0, 1296, __pyx_L3_error)
+    __pyx_v_v_i = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[9], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_i.memview)) __PYX_ERR(0, 1297, __pyx_L3_error)
+    __pyx_v_v_uf = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[10], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_uf.memview)) __PYX_ERR(0, 1298, __pyx_L3_error)
+    __pyx_v_v_if = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[11], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_if.memview)) __PYX_ERR(0, 1299, __pyx_L3_error)
+    __pyx_v_alpha = __Pyx_PyFloat_AsFloat(values[12]); if (unlikely((__pyx_v_alpha == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1300, __pyx_L3_error)
+    __pyx_v_beta = __Pyx_PyFloat_AsFloat(values[13]); if (unlikely((__pyx_v_beta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1301, __pyx_L3_error)
+    __pyx_v_learning_rate = __Pyx_PyFloat_AsFloat(values[14]); if (unlikely((__pyx_v_learning_rate == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1302, __pyx_L3_error)
     __pyx_v_learning_schedule = ((PyObject*)values[15]);
-    __pyx_v_learning_exponent = __Pyx_PyFloat_AsFloat(values[16]); if (unlikely((__pyx_v_learning_exponent == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1281, __pyx_L3_error)
-    __pyx_v_max_samples = __Pyx_PyLong_As_int(values[17]); if (unlikely((__pyx_v_max_samples == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1282, __pyx_L3_error)
-    __pyx_v_epochs = __Pyx_PyLong_As_int(values[18]); if (unlikely((__pyx_v_epochs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1283, __pyx_L3_error)
-    __pyx_v_verbose = __Pyx_PyObject_IsTrue(values[19]); if (unlikely((__pyx_v_verbose == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1284, __pyx_L3_error)
+    __pyx_v_learning_exponent = __Pyx_PyFloat_AsFloat(values[16]); if (unlikely((__pyx_v_learning_exponent == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1304, __pyx_L3_error)
+    __pyx_v_max_samples = __Pyx_PyLong_As_int(values[17]); if (unlikely((__pyx_v_max_samples == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1305, __pyx_L3_error)
+    __pyx_v_epochs = __Pyx_PyLong_As_int(values[18]); if (unlikely((__pyx_v_epochs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1306, __pyx_L3_error)
+    __pyx_v_verbose = __Pyx_PyObject_IsTrue(values[19]); if (unlikely((__pyx_v_verbose == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1307, __pyx_L3_error)
     if (values[20]) {
-      __pyx_v_user_dropout = __Pyx_PyFloat_AsFloat(values[20]); if (unlikely((__pyx_v_user_dropout == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1285, __pyx_L3_error)
+      __pyx_v_user_dropout = __Pyx_PyFloat_AsFloat(values[20]); if (unlikely((__pyx_v_user_dropout == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1308, __pyx_L3_error)
     } else {
       __pyx_v_user_dropout = ((float)((double)0.0));
     }
     if (values[21]) {
-      __pyx_v_seed = __Pyx_PyLong_As_int(values[21]); if (unlikely((__pyx_v_seed == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1286, __pyx_L3_error)
+      __pyx_v_seed = __Pyx_PyLong_As_int(values[21]); if (unlikely((__pyx_v_seed == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1309, __pyx_L3_error)
     } else {
       __pyx_v_seed = ((int)((int)0x5D4));
     }
     if (values[22]) {
-      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[22]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1287, __pyx_L3_error)
+      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[22]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1310, __pyx_L3_error)
     } else {
       __pyx_v_n_threads = ((int)((int)1));
     }
     if (values[23]) {
-      __pyx_v_uniform_feature_reg = __Pyx_PyObject_IsTrue(values[23]); if (unlikely((__pyx_v_uniform_feature_reg == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1288, __pyx_L3_error)
+      __pyx_v_uniform_feature_reg = __Pyx_PyObject_IsTrue(values[23]); if (unlikely((__pyx_v_uniform_feature_reg == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1311, __pyx_L3_error)
     } else {
 
-      /* "rankfm/_rankfm.pyx":1288
+      /* "rankfm/_rankfm.pyx":1311
  *     int seed=1492,
  *     int n_threads=1,
  *     bint uniform_feature_reg=False             # <<<<<<<<<<<<<<
@@ -32363,7 +32285,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_fit", 0, 20, 24, __pyx_nargs); __PYX_ERR(0, 1264, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_fit", 0, 20, 24, __pyx_nargs); __PYX_ERR(0, 1287, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -32385,10 +32307,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_learning_schedule), (&PyUnicode_Type), 1, "learning_schedule", 1))) __PYX_ERR(0, 1280, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_learning_schedule), (&PyUnicode_Type), 1, "learning_schedule", 1))) __PYX_ERR(0, 1303, __pyx_L1_error)
   __pyx_r = __pyx_pf_6rankfm_7_rankfm_12_fit(__pyx_self, __pyx_v_interactions, __pyx_v_sample_weight, __pyx_v_ui_indptr, __pyx_v_ui_indices, __pyx_v_x_uf, __pyx_v_x_if, __pyx_v_w_i, __pyx_v_w_if, __pyx_v_v_u, __pyx_v_v_i, __pyx_v_v_uf, __pyx_v_v_if, __pyx_v_alpha, __pyx_v_beta, __pyx_v_learning_rate, __pyx_v_learning_schedule, __pyx_v_learning_exponent, __pyx_v_max_samples, __pyx_v_epochs, __pyx_v_verbose, __pyx_v_user_dropout, __pyx_v_seed, __pyx_v_n_threads, __pyx_v_uniform_feature_reg);
 
-  /* "rankfm/_rankfm.pyx":1264
+  /* "rankfm/_rankfm.pyx":1287
  * 
  * 
  * def _fit(             # <<<<<<<<<<<<<<
@@ -32476,7 +32398,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_fit", 0);
 
-  /* "rankfm/_rankfm.pyx":1292
+  /* "rankfm/_rankfm.pyx":1315
  *     """backwards-compatible dense-feature wrapper delegating to _fit_csr"""
  * 
  *     uf_indptr, uf_indices, uf_data, x_uf_any = dense_to_csr(x_uf, n_threads)             # <<<<<<<<<<<<<<
@@ -32484,11 +32406,11 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
  *     _fit_csr(
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_dense_to_csr); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1292, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_dense_to_csr); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_x_uf, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1292, __pyx_L1_error)
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_x_uf, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_n_threads); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1292, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_From_int(__pyx_v_n_threads); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1315, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -32509,7 +32431,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1292, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
@@ -32518,7 +32440,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
     if (unlikely(size != 4)) {
       if (size > 4) __Pyx_RaiseTooManyValuesError(4);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 1292, __pyx_L1_error)
+      __PYX_ERR(0, 1315, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -32532,16 +32454,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
       __Pyx_INCREF(__pyx_t_2);
     } else {
       __pyx_t_3 = __Pyx_PyList_GET_ITEM_REF(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1292, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1315, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_3);
       __pyx_t_5 = __Pyx_PyList_GET_ITEM_REF(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1292, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1315, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_5);
       __pyx_t_4 = __Pyx_PyList_GET_ITEM_REF(sequence, 2, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1292, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1315, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_4);
       __pyx_t_2 = __Pyx_PyList_GET_ITEM_REF(sequence, 3, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1292, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1315, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_2);
     }
     #else
@@ -32549,7 +32471,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
       Py_ssize_t i;
       PyObject** temps[4] = {&__pyx_t_3,&__pyx_t_5,&__pyx_t_4,&__pyx_t_2};
       for (i=0; i < 4; i++) {
-        PyObject* item = __Pyx_PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 1292, __pyx_L1_error)
+        PyObject* item = __Pyx_PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 1315, __pyx_L1_error)
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -32559,7 +32481,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
   } else {
     Py_ssize_t index = -1;
     PyObject** temps[4] = {&__pyx_t_3,&__pyx_t_5,&__pyx_t_4,&__pyx_t_2};
-    __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1292, __pyx_L1_error)
+    __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1315, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_7);
@@ -32568,7 +32490,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
       __Pyx_GOTREF(item);
       *(temps[index]) = item;
     }
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 4) < (0)) __PYX_ERR(0, 1292, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 4) < (0)) __PYX_ERR(0, 1315, __pyx_L1_error)
     __pyx_t_8 = NULL;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     goto __pyx_L4_unpacking_done;
@@ -32576,7 +32498,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_8 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 1292, __pyx_L1_error)
+    __PYX_ERR(0, 1315, __pyx_L1_error)
     __pyx_L4_unpacking_done:;
   }
   __pyx_v_uf_indptr = __pyx_t_3;
@@ -32588,7 +32510,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
   __pyx_v_x_uf_any = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "rankfm/_rankfm.pyx":1293
+  /* "rankfm/_rankfm.pyx":1316
  * 
  *     uf_indptr, uf_indices, uf_data, x_uf_any = dense_to_csr(x_uf, n_threads)
  *     if_indptr, if_indices, if_data, x_if_any = dense_to_csr(x_if, n_threads)             # <<<<<<<<<<<<<<
@@ -32596,11 +32518,11 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
  *         interactions,
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_dense_to_csr); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1293, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_dense_to_csr); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_x_if, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1293, __pyx_L1_error)
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_x_if, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1293, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int(__pyx_v_n_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -32621,7 +32543,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1293, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1316, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
@@ -32630,7 +32552,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
     if (unlikely(size != 4)) {
       if (size > 4) __Pyx_RaiseTooManyValuesError(4);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 1293, __pyx_L1_error)
+      __PYX_ERR(0, 1316, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -32644,16 +32566,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
       __Pyx_INCREF(__pyx_t_2);
     } else {
       __pyx_t_4 = __Pyx_PyList_GET_ITEM_REF(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1293, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1316, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_4);
       __pyx_t_3 = __Pyx_PyList_GET_ITEM_REF(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1293, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1316, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_3);
       __pyx_t_5 = __Pyx_PyList_GET_ITEM_REF(sequence, 2, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1293, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1316, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_5);
       __pyx_t_2 = __Pyx_PyList_GET_ITEM_REF(sequence, 3, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1293, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1316, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_2);
     }
     #else
@@ -32661,7 +32583,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
       Py_ssize_t i;
       PyObject** temps[4] = {&__pyx_t_4,&__pyx_t_3,&__pyx_t_5,&__pyx_t_2};
       for (i=0; i < 4; i++) {
-        PyObject* item = __Pyx_PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 1293, __pyx_L1_error)
+        PyObject* item = __Pyx_PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 1316, __pyx_L1_error)
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -32671,7 +32593,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
   } else {
     Py_ssize_t index = -1;
     PyObject** temps[4] = {&__pyx_t_4,&__pyx_t_3,&__pyx_t_5,&__pyx_t_2};
-    __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1293, __pyx_L1_error)
+    __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1316, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_8 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_7);
@@ -32680,7 +32602,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
       __Pyx_GOTREF(item);
       *(temps[index]) = item;
     }
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 4) < (0)) __PYX_ERR(0, 1293, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 4) < (0)) __PYX_ERR(0, 1316, __pyx_L1_error)
     __pyx_t_8 = NULL;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     goto __pyx_L6_unpacking_done;
@@ -32688,7 +32610,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_8 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 1293, __pyx_L1_error)
+    __PYX_ERR(0, 1316, __pyx_L1_error)
     __pyx_L6_unpacking_done:;
   }
   __pyx_v_if_indptr = __pyx_t_4;
@@ -32700,7 +32622,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
   __pyx_v_x_if_any = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "rankfm/_rankfm.pyx":1294
+  /* "rankfm/_rankfm.pyx":1317
  *     uf_indptr, uf_indices, uf_data, x_uf_any = dense_to_csr(x_uf, n_threads)
  *     if_indptr, if_indices, if_data, x_if_any = dense_to_csr(x_if, n_threads)
  *     _fit_csr(             # <<<<<<<<<<<<<<
@@ -32708,207 +32630,207 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
  *         sample_weight,
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_fit_csr); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1294, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_fit_csr); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1317, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "rankfm/_rankfm.pyx":1295
+  /* "rankfm/_rankfm.pyx":1318
  *     if_indptr, if_indices, if_data, x_if_any = dense_to_csr(x_if, n_threads)
  *     _fit_csr(
  *         interactions,             # <<<<<<<<<<<<<<
  *         sample_weight,
  *         ui_indptr,
 */
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_interactions, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn_int32_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_int32_t, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1295, __pyx_L1_error)
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_interactions, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn_int32_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_int32_t, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1318, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "rankfm/_rankfm.pyx":1296
+  /* "rankfm/_rankfm.pyx":1319
  *     _fit_csr(
  *         interactions,
  *         sample_weight,             # <<<<<<<<<<<<<<
  *         ui_indptr,
  *         ui_indices,
 */
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_sample_weight, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1296, __pyx_L1_error)
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_sample_weight, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "rankfm/_rankfm.pyx":1298
+  /* "rankfm/_rankfm.pyx":1321
  *         sample_weight,
  *         ui_indptr,
  *         ui_indices,             # <<<<<<<<<<<<<<
  *         uf_indptr,
  *         uf_indices,
 */
-  __pyx_t_7 = __pyx_memoryview_fromslice(__pyx_v_ui_indices, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_int32_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_int32_t, 0);; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1298, __pyx_L1_error)
+  __pyx_t_7 = __pyx_memoryview_fromslice(__pyx_v_ui_indices, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn_int32_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn_int32_t, 0);; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1321, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "rankfm/_rankfm.pyx":1307
+  /* "rankfm/_rankfm.pyx":1330
  *         if_data,
  *         x_if_any,
  *         w_i,             # <<<<<<<<<<<<<<
  *         w_if,
  *         v_u,
 */
-  __pyx_t_9 = __pyx_memoryview_fromslice(__pyx_v_w_i, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1307, __pyx_L1_error)
+  __pyx_t_9 = __pyx_memoryview_fromslice(__pyx_v_w_i, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1330, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
 
-  /* "rankfm/_rankfm.pyx":1308
+  /* "rankfm/_rankfm.pyx":1331
  *         x_if_any,
  *         w_i,
  *         w_if,             # <<<<<<<<<<<<<<
  *         v_u,
  *         v_i,
 */
-  __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_w_if, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1308, __pyx_L1_error)
+  __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_w_if, 1, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1331, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
 
-  /* "rankfm/_rankfm.pyx":1309
+  /* "rankfm/_rankfm.pyx":1332
  *         w_i,
  *         w_if,
  *         v_u,             # <<<<<<<<<<<<<<
  *         v_i,
  *         v_uf,
 */
-  __pyx_t_11 = __pyx_memoryview_fromslice(__pyx_v_v_u, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 1309, __pyx_L1_error)
+  __pyx_t_11 = __pyx_memoryview_fromslice(__pyx_v_v_u, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 1332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
 
-  /* "rankfm/_rankfm.pyx":1310
+  /* "rankfm/_rankfm.pyx":1333
  *         w_if,
  *         v_u,
  *         v_i,             # <<<<<<<<<<<<<<
  *         v_uf,
  *         v_if,
 */
-  __pyx_t_12 = __pyx_memoryview_fromslice(__pyx_v_v_i, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 1310, __pyx_L1_error)
+  __pyx_t_12 = __pyx_memoryview_fromslice(__pyx_v_v_i, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 1333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
 
-  /* "rankfm/_rankfm.pyx":1311
+  /* "rankfm/_rankfm.pyx":1334
  *         v_u,
  *         v_i,
  *         v_uf,             # <<<<<<<<<<<<<<
  *         v_if,
  *         alpha,
 */
-  __pyx_t_13 = __pyx_memoryview_fromslice(__pyx_v_v_uf, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1311, __pyx_L1_error)
+  __pyx_t_13 = __pyx_memoryview_fromslice(__pyx_v_v_uf, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 1334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
 
-  /* "rankfm/_rankfm.pyx":1312
+  /* "rankfm/_rankfm.pyx":1335
  *         v_i,
  *         v_uf,
  *         v_if,             # <<<<<<<<<<<<<<
  *         alpha,
  *         beta,
 */
-  __pyx_t_14 = __pyx_memoryview_fromslice(__pyx_v_v_if, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1312, __pyx_L1_error)
+  __pyx_t_14 = __pyx_memoryview_fromslice(__pyx_v_v_if, 2, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 1335, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
 
-  /* "rankfm/_rankfm.pyx":1313
+  /* "rankfm/_rankfm.pyx":1336
  *         v_uf,
  *         v_if,
  *         alpha,             # <<<<<<<<<<<<<<
  *         beta,
  *         learning_rate,
 */
-  __pyx_t_15 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 1313, __pyx_L1_error)
+  __pyx_t_15 = PyFloat_FromDouble(__pyx_v_alpha); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 1336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
 
-  /* "rankfm/_rankfm.pyx":1314
+  /* "rankfm/_rankfm.pyx":1337
  *         v_if,
  *         alpha,
  *         beta,             # <<<<<<<<<<<<<<
  *         learning_rate,
  *         learning_schedule,
 */
-  __pyx_t_16 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 1314, __pyx_L1_error)
+  __pyx_t_16 = PyFloat_FromDouble(__pyx_v_beta); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 1337, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
 
-  /* "rankfm/_rankfm.pyx":1315
+  /* "rankfm/_rankfm.pyx":1338
  *         alpha,
  *         beta,
  *         learning_rate,             # <<<<<<<<<<<<<<
  *         learning_schedule,
  *         learning_exponent,
 */
-  __pyx_t_17 = PyFloat_FromDouble(__pyx_v_learning_rate); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 1315, __pyx_L1_error)
+  __pyx_t_17 = PyFloat_FromDouble(__pyx_v_learning_rate); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 1338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_17);
 
-  /* "rankfm/_rankfm.pyx":1317
+  /* "rankfm/_rankfm.pyx":1340
  *         learning_rate,
  *         learning_schedule,
  *         learning_exponent,             # <<<<<<<<<<<<<<
  *         max_samples,
  *         epochs,
 */
-  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_learning_exponent); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 1317, __pyx_L1_error)
+  __pyx_t_18 = PyFloat_FromDouble(__pyx_v_learning_exponent); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 1340, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
 
-  /* "rankfm/_rankfm.pyx":1318
+  /* "rankfm/_rankfm.pyx":1341
  *         learning_schedule,
  *         learning_exponent,
  *         max_samples,             # <<<<<<<<<<<<<<
  *         epochs,
  *         verbose,
 */
-  __pyx_t_19 = __Pyx_PyLong_From_int(__pyx_v_max_samples); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 1318, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyLong_From_int(__pyx_v_max_samples); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 1341, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_19);
 
-  /* "rankfm/_rankfm.pyx":1319
+  /* "rankfm/_rankfm.pyx":1342
  *         learning_exponent,
  *         max_samples,
  *         epochs,             # <<<<<<<<<<<<<<
  *         verbose,
  *         user_dropout,
 */
-  __pyx_t_20 = __Pyx_PyLong_From_int(__pyx_v_epochs); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 1319, __pyx_L1_error)
+  __pyx_t_20 = __Pyx_PyLong_From_int(__pyx_v_epochs); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 1342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_20);
 
-  /* "rankfm/_rankfm.pyx":1320
+  /* "rankfm/_rankfm.pyx":1343
  *         max_samples,
  *         epochs,
  *         verbose,             # <<<<<<<<<<<<<<
  *         user_dropout,
  *         seed,
 */
-  __pyx_t_21 = __Pyx_PyBool_FromLong(__pyx_v_verbose); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 1320, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyBool_FromLong(__pyx_v_verbose); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 1343, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_21);
 
-  /* "rankfm/_rankfm.pyx":1321
+  /* "rankfm/_rankfm.pyx":1344
  *         epochs,
  *         verbose,
  *         user_dropout,             # <<<<<<<<<<<<<<
  *         seed,
  *         n_threads,
 */
-  __pyx_t_22 = PyFloat_FromDouble(__pyx_v_user_dropout); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 1321, __pyx_L1_error)
+  __pyx_t_22 = PyFloat_FromDouble(__pyx_v_user_dropout); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 1344, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_22);
 
-  /* "rankfm/_rankfm.pyx":1322
+  /* "rankfm/_rankfm.pyx":1345
  *         verbose,
  *         user_dropout,
  *         seed,             # <<<<<<<<<<<<<<
  *         n_threads,
  *         uniform_feature_reg
 */
-  __pyx_t_23 = __Pyx_PyLong_From_int(__pyx_v_seed); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 1322, __pyx_L1_error)
+  __pyx_t_23 = __Pyx_PyLong_From_int(__pyx_v_seed); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 1345, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_23);
 
-  /* "rankfm/_rankfm.pyx":1323
+  /* "rankfm/_rankfm.pyx":1346
  *         user_dropout,
  *         seed,
  *         n_threads,             # <<<<<<<<<<<<<<
  *         uniform_feature_reg
  *     )
 */
-  __pyx_t_24 = __Pyx_PyLong_From_int(__pyx_v_n_threads); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 1323, __pyx_L1_error)
+  __pyx_t_24 = __Pyx_PyLong_From_int(__pyx_v_n_threads); if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 1346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_24);
 
-  /* "rankfm/_rankfm.pyx":1324
+  /* "rankfm/_rankfm.pyx":1347
  *         seed,
  *         n_threads,
  *         uniform_feature_reg             # <<<<<<<<<<<<<<
  *     )
  * 
 */
-  __pyx_t_25 = __Pyx_PyBool_FromLong(__pyx_v_uniform_feature_reg); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 1324, __pyx_L1_error)
+  __pyx_t_25 = __Pyx_PyBool_FromLong(__pyx_v_uniform_feature_reg); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 1347, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_25);
   __pyx_t_6 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -32947,12 +32869,12 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
     __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
     __Pyx_DECREF(__pyx_t_25); __pyx_t_25 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1294, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1317, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "rankfm/_rankfm.pyx":1264
+  /* "rankfm/_rankfm.pyx":1287
  * 
  * 
  * def _fit(             # <<<<<<<<<<<<<<
@@ -33003,7 +32925,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_12_fit(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":1328
+/* "rankfm/_rankfm.pyx":1351
  * 
  * 
  * def _fold_in(             # <<<<<<<<<<<<<<
@@ -33066,152 +32988,152 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_interactions,&__pyx_mstate_global->__pyx_n_u_sample_weight,&__pyx_mstate_global->__pyx_n_u_ui_indptr_arr,&__pyx_mstate_global->__pyx_n_u_ui_indices,&__pyx_mstate_global->__pyx_n_u_u_feat_emb,&__pyx_mstate_global->__pyx_n_u_item_bias,&__pyx_mstate_global->__pyx_n_u_v_i_eff,&__pyx_mstate_global->__pyx_n_u_v_u,&__pyx_mstate_global->__pyx_n_u_alpha,&__pyx_mstate_global->__pyx_n_u_learning_rate,&__pyx_mstate_global->__pyx_n_u_learning_schedule,&__pyx_mstate_global->__pyx_n_u_learning_exponent,&__pyx_mstate_global->__pyx_n_u_max_samples,&__pyx_mstate_global->__pyx_n_u_epochs,&__pyx_mstate_global->__pyx_n_u_seed,&__pyx_mstate_global->__pyx_n_u_n_threads,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1328, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1351, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case 16:
         values[15] = __Pyx_ArgRef_FASTCALL(__pyx_args, 15);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 15:
         values[14] = __Pyx_ArgRef_FASTCALL(__pyx_args, 14);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 14:
         values[13] = __Pyx_ArgRef_FASTCALL(__pyx_args, 13);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 13:
         values[12] = __Pyx_ArgRef_FASTCALL(__pyx_args, 12);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 12:
         values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 11:
         values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 10:
         values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  9:
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_fold_in", 0) < (0)) __PYX_ERR(0, 1328, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_fold_in", 0) < (0)) __PYX_ERR(0, 1351, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 14; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_fold_in", 0, 14, 16, i); __PYX_ERR(0, 1328, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_fold_in", 0, 14, 16, i); __PYX_ERR(0, 1351, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case 16:
         values[15] = __Pyx_ArgRef_FASTCALL(__pyx_args, 15);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[15])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 15:
         values[14] = __Pyx_ArgRef_FASTCALL(__pyx_args, 14);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[14])) __PYX_ERR(0, 1351, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case 14:
         values[13] = __Pyx_ArgRef_FASTCALL(__pyx_args, 13);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[13])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[12] = __Pyx_ArgRef_FASTCALL(__pyx_args, 12);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[12])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[11] = __Pyx_ArgRef_FASTCALL(__pyx_args, 11);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[11])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[10] = __Pyx_ArgRef_FASTCALL(__pyx_args, 10);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[10])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1351, __pyx_L3_error)
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1328, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1351, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_interactions = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn_int32_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_interactions.memview)) __PYX_ERR(0, 1329, __pyx_L3_error)
-    __pyx_v_sample_weight = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_sample_weight.memview)) __PYX_ERR(0, 1330, __pyx_L3_error)
+    __pyx_v_interactions = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn_int32_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_interactions.memview)) __PYX_ERR(0, 1352, __pyx_L3_error)
+    __pyx_v_sample_weight = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_sample_weight.memview)) __PYX_ERR(0, 1353, __pyx_L3_error)
     __pyx_v_ui_indptr_arr = values[2];
-    __pyx_v_ui_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ui_indices.memview)) __PYX_ERR(0, 1332, __pyx_L3_error)
-    __pyx_v_u_feat_emb = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_u_feat_emb.memview)) __PYX_ERR(0, 1333, __pyx_L3_error)
-    __pyx_v_item_bias = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_item_bias.memview)) __PYX_ERR(0, 1334, __pyx_L3_error)
-    __pyx_v_v_i_eff = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_i_eff.memview)) __PYX_ERR(0, 1335, __pyx_L3_error)
-    __pyx_v_v_u = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[7], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_u.memview)) __PYX_ERR(0, 1336, __pyx_L3_error)
-    __pyx_v_alpha = __Pyx_PyFloat_AsFloat(values[8]); if (unlikely((__pyx_v_alpha == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1337, __pyx_L3_error)
-    __pyx_v_learning_rate = __Pyx_PyFloat_AsFloat(values[9]); if (unlikely((__pyx_v_learning_rate == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1338, __pyx_L3_error)
+    __pyx_v_ui_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ui_indices.memview)) __PYX_ERR(0, 1355, __pyx_L3_error)
+    __pyx_v_u_feat_emb = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_u_feat_emb.memview)) __PYX_ERR(0, 1356, __pyx_L3_error)
+    __pyx_v_item_bias = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_item_bias.memview)) __PYX_ERR(0, 1357, __pyx_L3_error)
+    __pyx_v_v_i_eff = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[6], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_i_eff.memview)) __PYX_ERR(0, 1358, __pyx_L3_error)
+    __pyx_v_v_u = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[7], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_u.memview)) __PYX_ERR(0, 1359, __pyx_L3_error)
+    __pyx_v_alpha = __Pyx_PyFloat_AsFloat(values[8]); if (unlikely((__pyx_v_alpha == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1360, __pyx_L3_error)
+    __pyx_v_learning_rate = __Pyx_PyFloat_AsFloat(values[9]); if (unlikely((__pyx_v_learning_rate == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1361, __pyx_L3_error)
     __pyx_v_learning_schedule = ((PyObject*)values[10]);
-    __pyx_v_learning_exponent = __Pyx_PyFloat_AsFloat(values[11]); if (unlikely((__pyx_v_learning_exponent == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1340, __pyx_L3_error)
-    __pyx_v_max_samples = __Pyx_PyLong_As_int(values[12]); if (unlikely((__pyx_v_max_samples == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1341, __pyx_L3_error)
-    __pyx_v_epochs = __Pyx_PyLong_As_int(values[13]); if (unlikely((__pyx_v_epochs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1342, __pyx_L3_error)
+    __pyx_v_learning_exponent = __Pyx_PyFloat_AsFloat(values[11]); if (unlikely((__pyx_v_learning_exponent == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 1363, __pyx_L3_error)
+    __pyx_v_max_samples = __Pyx_PyLong_As_int(values[12]); if (unlikely((__pyx_v_max_samples == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1364, __pyx_L3_error)
+    __pyx_v_epochs = __Pyx_PyLong_As_int(values[13]); if (unlikely((__pyx_v_epochs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1365, __pyx_L3_error)
     if (values[14]) {
-      __pyx_v_seed = __Pyx_PyLong_As_int(values[14]); if (unlikely((__pyx_v_seed == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1343, __pyx_L3_error)
+      __pyx_v_seed = __Pyx_PyLong_As_int(values[14]); if (unlikely((__pyx_v_seed == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1366, __pyx_L3_error)
     } else {
       __pyx_v_seed = ((int)((int)0x5D4));
     }
     if (values[15]) {
-      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[15]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1344, __pyx_L3_error)
+      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[15]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1367, __pyx_L3_error)
     } else {
       __pyx_v_n_threads = ((int)((int)1));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_fold_in", 0, 14, 16, __pyx_nargs); __PYX_ERR(0, 1328, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_fold_in", 0, 14, 16, __pyx_nargs); __PYX_ERR(0, 1351, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -33229,7 +33151,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_learning_schedule), (&PyUnicode_Type), 1, "learning_schedule", 1))) __PYX_ERR(0, 1339, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_learning_schedule), (&PyUnicode_Type), 1, "learning_schedule", 1))) __PYX_ERR(0, 1362, __pyx_L1_error)
   __pyx_r = __pyx_pf_6rankfm_7_rankfm_14_fold_in(__pyx_self, __pyx_v_interactions, __pyx_v_sample_weight, __pyx_v_ui_indptr_arr, __pyx_v_ui_indices, __pyx_v_u_feat_emb, __pyx_v_item_bias, __pyx_v_v_i_eff, __pyx_v_v_u, __pyx_v_alpha, __pyx_v_learning_rate, __pyx_v_learning_schedule, __pyx_v_learning_exponent, __pyx_v_max_samples, __pyx_v_epochs, __pyx_v_seed, __pyx_v_n_threads);
 
   /* function exit code */
@@ -33313,7 +33235,8 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_fold_in", 0);
 
-  /* "rankfm/_rankfm.pyx":1348
+
+  /* "rankfm/_rankfm.pyx":1371
  *     """learn or refine user latent factors [v_u] in multi-threaded nogil C while holding item/feature weights fixed"""
  * 
  *     cdef int64_t N = interactions.shape[0]             # <<<<<<<<<<<<<<
@@ -33322,7 +33245,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_N = (__pyx_v_interactions.shape[0]);
 
-  /* "rankfm/_rankfm.pyx":1349
+  /* "rankfm/_rankfm.pyx":1372
  * 
  *     cdef int64_t N = interactions.shape[0]
  *     cdef int32_t I = <int32_t>v_i_eff.shape[0]             # <<<<<<<<<<<<<<
@@ -33331,7 +33254,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_I = ((int32_t)(__pyx_v_v_i_eff.shape[0]));
 
-  /* "rankfm/_rankfm.pyx":1350
+  /* "rankfm/_rankfm.pyx":1373
  *     cdef int64_t N = interactions.shape[0]
  *     cdef int32_t I = <int32_t>v_i_eff.shape[0]
  *     cdef int F = <int>v_u.shape[1]             # <<<<<<<<<<<<<<
@@ -33340,7 +33263,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_F = ((int)(__pyx_v_v_u.shape[1]));
 
-  /* "rankfm/_rankfm.pyx":1352
+  /* "rankfm/_rankfm.pyx":1375
  *     cdef int F = <int>v_u.shape[1]
  * 
  *     if N == 0 or I <= 1 or epochs <= 0:             # <<<<<<<<<<<<<<
@@ -33376,12 +33299,12 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1353
+    /* "rankfm/_rankfm.pyx":1376
  * 
  *     if N == 0 or I <= 1 or epochs <= 0:
  *         return             # <<<<<<<<<<<<<<
  * 
- *     cdef int schedule_mode
+ *     # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
 */
     {
       PyObject *__pyx_temp;
@@ -33393,7 +33316,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":1352
+    /* "rankfm/_rankfm.pyx":1375
  *     cdef int F = <int>v_u.shape[1]
  * 
  *     if N == 0 or I <= 1 or epochs <= 0:             # <<<<<<<<<<<<<<
@@ -33402,18 +33325,89 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1356
+  /* "rankfm/_rankfm.pyx":1380
+ *     # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
+ *     # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
+ *     if N > 2147483647:             # <<<<<<<<<<<<<<
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:
+*/
+  __pyx_t_1 = (__pyx_v_N > 0x7FFFFFFF);
+
+  if (unlikely(__pyx_t_1)) {
+
+
+    /* "rankfm/_rankfm.pyx":1381
+ *     # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
+ *     if N > 2147483647:
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")             # <<<<<<<<<<<<<<
+ *     if max_samples > I - 1:
+ *         max_samples = I - 1
+*/
+    __pyx_t_4 = NULL;
+    __pyx_t_5 = 1;
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_RankFM_supports_at_most_2_147_48};
+      __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1381, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+    }
+    __Pyx_Raise(__pyx_t_3, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __PYX_ERR(0, 1381, __pyx_L1_error)
+
+    /* "rankfm/_rankfm.pyx":1380
+ *     # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
+ *     # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
+ *     if N > 2147483647:             # <<<<<<<<<<<<<<
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:
+*/
+  }
+
+  /* "rankfm/_rankfm.pyx":1382
+ *     if N > 2147483647:
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:             # <<<<<<<<<<<<<<
+ *         max_samples = I - 1
+ * 
+*/
+  __pyx_t_1 = (__pyx_v_max_samples > (__pyx_v_I - 1));
+
+  if (__pyx_t_1) {
+
+
+    /* "rankfm/_rankfm.pyx":1383
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:
+ *         max_samples = I - 1             # <<<<<<<<<<<<<<
+ * 
+ *     cdef int schedule_mode
+*/
+    __pyx_v_max_samples = (__pyx_v_I - 1);
+
+    /* "rankfm/_rankfm.pyx":1382
+ *     if N > 2147483647:
+ *         raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+ *     if max_samples > I - 1:             # <<<<<<<<<<<<<<
+ *         max_samples = I - 1
+ * 
+*/
+  }
+
+  /* "rankfm/_rankfm.pyx":1386
  * 
  *     cdef int schedule_mode
  *     if learning_schedule == 'constant':             # <<<<<<<<<<<<<<
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':
 */
-  __pyx_t_1 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_learning_schedule, __pyx_mstate_global->__pyx_n_u_constant, Py_EQ); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 1356, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_learning_schedule, __pyx_mstate_global->__pyx_n_u_constant, Py_EQ); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 1386, __pyx_L1_error)
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1357
+    /* "rankfm/_rankfm.pyx":1387
  *     cdef int schedule_mode
  *     if learning_schedule == 'constant':
  *         schedule_mode = 0             # <<<<<<<<<<<<<<
@@ -33422,28 +33416,28 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
     __pyx_v_schedule_mode = 0;
 
-    /* "rankfm/_rankfm.pyx":1356
+    /* "rankfm/_rankfm.pyx":1386
  * 
  *     cdef int schedule_mode
  *     if learning_schedule == 'constant':             # <<<<<<<<<<<<<<
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':
 */
-    goto __pyx_L7;
+    goto __pyx_L9;
   }
 
-  /* "rankfm/_rankfm.pyx":1358
+  /* "rankfm/_rankfm.pyx":1388
  *     if learning_schedule == 'constant':
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':             # <<<<<<<<<<<<<<
  *         schedule_mode = 1
  *     else:
 */
-  __pyx_t_1 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_learning_schedule, __pyx_mstate_global->__pyx_n_u_invscaling, Py_EQ); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 1358, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CompareBoolEq_str_str(__pyx_v_learning_schedule, __pyx_mstate_global->__pyx_n_u_invscaling, Py_EQ); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 1388, __pyx_L1_error)
   if (likely(__pyx_t_1)) {
 
 
-    /* "rankfm/_rankfm.pyx":1359
+    /* "rankfm/_rankfm.pyx":1389
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':
  *         schedule_mode = 1             # <<<<<<<<<<<<<<
@@ -33452,17 +33446,17 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
     __pyx_v_schedule_mode = 1;
 
-    /* "rankfm/_rankfm.pyx":1358
+    /* "rankfm/_rankfm.pyx":1388
  *     if learning_schedule == 'constant':
  *         schedule_mode = 0
  *     elif learning_schedule == 'invscaling':             # <<<<<<<<<<<<<<
  *         schedule_mode = 1
  *     else:
 */
-    goto __pyx_L7;
+    goto __pyx_L9;
   }
 
-  /* "rankfm/_rankfm.pyx":1361
+  /* "rankfm/_rankfm.pyx":1391
  *         schedule_mode = 1
  *     else:
  *         raise ValueError('unknown [learning_schedule]')             # <<<<<<<<<<<<<<
@@ -33476,16 +33470,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
       PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_unknown_learning_schedule};
       __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1361, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1391, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 1361, __pyx_L1_error)
+    __PYX_ERR(0, 1391, __pyx_L1_error)
   }
-  __pyx_L7:;
+  __pyx_L9:;
 
-  /* "rankfm/_rankfm.pyx":1363
+  /* "rankfm/_rankfm.pyx":1393
  *         raise ValueError('unknown [learning_schedule]')
  * 
  *     ui_indptr_i64 = np.ascontiguousarray(ui_indptr_arr, dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -33493,14 +33487,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
  * 
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1363, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1393, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1363, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1393, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1363, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1393, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1363, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1393, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   #if CYTHON_VECTORCALL
@@ -33521,13 +33515,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
     PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_v_ui_indptr_arr, __pyx_t_8};
     #if CYTHON_VECTORCALL
     __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1363, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1393, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_6);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1363, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1393, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
     #endif
@@ -33538,25 +33532,25 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1363, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1393, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_v_ui_indptr_i64 = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "rankfm/_rankfm.pyx":1364
+  /* "rankfm/_rankfm.pyx":1394
  * 
  *     ui_indptr_i64 = np.ascontiguousarray(ui_indptr_arr, dtype=np.int64)
  *     cdef int64_t[::1] ui_indptr = ui_indptr_i64             # <<<<<<<<<<<<<<
  * 
  *     shuffle_index = np.arange(N, dtype=np.int32)
 */
-  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_ui_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1364, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_ui_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1394, __pyx_L1_error)
   __pyx_v_ui_indptr = __pyx_t_9;
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":1366
+  /* "rankfm/_rankfm.pyx":1396
  *     cdef int64_t[::1] ui_indptr = ui_indptr_i64
  * 
  *     shuffle_index = np.arange(N, dtype=np.int32)             # <<<<<<<<<<<<<<
@@ -33564,16 +33558,16 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
  * 
 */
   __pyx_t_7 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1366, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1396, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_arange); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1366, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_arange); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1396, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyLong_From_int64_t(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1366, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyLong_From_int64_t(__pyx_v_N); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1396, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1366, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1396, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1366, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1396, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   #if CYTHON_VECTORCALL
@@ -33594,13 +33588,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
     PyObject *__pyx_callargs[3] = {__pyx_t_7, __pyx_t_6, __pyx_t_10};
     #if CYTHON_VECTORCALL
     __pyx_t_4 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1366, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1396, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_4);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_4 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1366, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1396, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
     }
     #endif
@@ -33612,25 +33606,25 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1366, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1396, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_v_shuffle_index = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "rankfm/_rankfm.pyx":1367
+  /* "rankfm/_rankfm.pyx":1397
  * 
  *     shuffle_index = np.arange(N, dtype=np.int32)
  *     cdef int32_t[::1] shuffle_index_mv = shuffle_index             # <<<<<<<<<<<<<<
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
 */
-  __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_shuffle_index, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 1367, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(__pyx_v_shuffle_index, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 1397, __pyx_L1_error)
   __pyx_v_shuffle_index_mv = __pyx_t_11;
   __pyx_t_11.memview = NULL;
   __pyx_t_11.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":1369
+  /* "rankfm/_rankfm.pyx":1399
  *     cdef int32_t[::1] shuffle_index_mv = shuffle_index
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1             # <<<<<<<<<<<<<<
@@ -33645,14 +33639,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 
     __pyx_t_1 = __pyx_t_2;
 
-    goto __pyx_L8_bool_binop_done;
+    goto __pyx_L10_bool_binop_done;
   }
   __pyx_t_2 = (__pyx_v_N >= 0x400);
 
 
   __pyx_t_1 = __pyx_t_2;
 
-  __pyx_L8_bool_binop_done:;
+  __pyx_L10_bool_binop_done:;
   if (__pyx_t_1) {
 
     __pyx_t_12 = __pyx_v_n_threads;
@@ -33663,7 +33657,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 
   __pyx_v_eff_threads = __pyx_t_12;
 
-  /* "rankfm/_rankfm.pyx":1370
+  /* "rankfm/_rankfm.pyx":1400
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
  *     if eff_threads > 1 and N // eff_threads < 256:             # <<<<<<<<<<<<<<
@@ -33678,18 +33672,18 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 
     __pyx_t_1 = __pyx_t_2;
 
-    goto __pyx_L11_bool_binop_done;
+    goto __pyx_L13_bool_binop_done;
   }
   __pyx_t_2 = ((__pyx_v_N / __pyx_v_eff_threads) < 0x100);
 
 
   __pyx_t_1 = __pyx_t_2;
 
-  __pyx_L11_bool_binop_done:;
+  __pyx_L13_bool_binop_done:;
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1371
+    /* "rankfm/_rankfm.pyx":1401
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
  *     if eff_threads > 1 and N // eff_threads < 256:
  *         eff_threads = max(1, <int>(N // 256))             # <<<<<<<<<<<<<<
@@ -33713,7 +33707,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
     __pyx_v_eff_threads = __pyx_t_14;
 
 
-    /* "rankfm/_rankfm.pyx":1370
+    /* "rankfm/_rankfm.pyx":1400
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
  *     if eff_threads > 1 and N // eff_threads < 256:             # <<<<<<<<<<<<<<
@@ -33722,7 +33716,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1373
+  /* "rankfm/_rankfm.pyx":1403
  *         eff_threads = max(1, <int>(N // 256))
  * 
  *     cdef size_t scratch_stride = (<size_t>(2 * F) + 15u) & ~(<size_t>15u)             # <<<<<<<<<<<<<<
@@ -33731,7 +33725,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_scratch_stride = ((((size_t)(2 * __pyx_v_F)) + 15U) & (~((size_t)15U)));
 
-  /* "rankfm/_rankfm.pyx":1374
+  /* "rankfm/_rankfm.pyx":1404
  * 
  *     cdef size_t scratch_stride = (<size_t>(2 * F) + 15u) & ~(<size_t>15u)
  *     cdef float *mult_lut = <float *>rfm_aligned_malloc(<size_t>(max_samples + 1) * sizeof(float))             # <<<<<<<<<<<<<<
@@ -33740,7 +33734,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_mult_lut = ((float *)rfm_aligned_malloc((((size_t)(__pyx_v_max_samples + 1)) * (sizeof(float)))));
 
-  /* "rankfm/_rankfm.pyx":1375
+  /* "rankfm/_rankfm.pyx":1405
  *     cdef size_t scratch_stride = (<size_t>(2 * F) + 15u) & ~(<size_t>15u)
  *     cdef float *mult_lut = <float *>rfm_aligned_malloc(<size_t>(max_samples + 1) * sizeof(float))
  *     cdef float *scratch_base = <float *>rfm_aligned_malloc(<size_t>eff_threads * scratch_stride * sizeof(float))             # <<<<<<<<<<<<<<
@@ -33749,7 +33743,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_scratch_base = ((float *)rfm_aligned_malloc(((((size_t)__pyx_v_eff_threads) * __pyx_v_scratch_stride) * (sizeof(float)))));
 
-  /* "rankfm/_rankfm.pyx":1376
+  /* "rankfm/_rankfm.pyx":1406
  *     cdef float *mult_lut = <float *>rfm_aligned_malloc(<size_t>(max_samples + 1) * sizeof(float))
  *     cdef float *scratch_base = <float *>rfm_aligned_malloc(<size_t>eff_threads * scratch_stride * sizeof(float))
  *     cdef rfm_pool_t *pool = NULL             # <<<<<<<<<<<<<<
@@ -33758,7 +33752,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_pool = NULL;
 
-  /* "rankfm/_rankfm.pyx":1378
+  /* "rankfm/_rankfm.pyx":1408
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     if mult_lut == NULL or scratch_base == NULL:             # <<<<<<<<<<<<<<
@@ -33773,18 +33767,18 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 
     __pyx_t_1 = __pyx_t_2;
 
-    goto __pyx_L14_bool_binop_done;
+    goto __pyx_L16_bool_binop_done;
   }
   __pyx_t_2 = (__pyx_v_scratch_base == NULL);
 
 
   __pyx_t_1 = __pyx_t_2;
 
-  __pyx_L14_bool_binop_done:;
+  __pyx_L16_bool_binop_done:;
   if (unlikely(__pyx_t_1)) {
 
 
-    /* "rankfm/_rankfm.pyx":1379
+    /* "rankfm/_rankfm.pyx":1409
  * 
  *     if mult_lut == NULL or scratch_base == NULL:
  *         rfm_aligned_free(mult_lut)             # <<<<<<<<<<<<<<
@@ -33793,7 +33787,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
     rfm_aligned_free(__pyx_v_mult_lut);
 
-    /* "rankfm/_rankfm.pyx":1380
+    /* "rankfm/_rankfm.pyx":1410
  *     if mult_lut == NULL or scratch_base == NULL:
  *         rfm_aligned_free(mult_lut)
  *         rfm_aligned_free(scratch_base)             # <<<<<<<<<<<<<<
@@ -33802,7 +33796,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
     rfm_aligned_free(__pyx_v_scratch_base);
 
-    /* "rankfm/_rankfm.pyx":1381
+    /* "rankfm/_rankfm.pyx":1411
  *         rfm_aligned_free(mult_lut)
  *         rfm_aligned_free(scratch_base)
  *         raise MemoryError("failed to allocate RankFM fold-in scratch buffers")             # <<<<<<<<<<<<<<
@@ -33815,14 +33809,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
       PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_mstate_global->__pyx_kp_u_failed_to_allocate_RankFM_fold_i};
       __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1381, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1411, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 1381, __pyx_L1_error)
+    __PYX_ERR(0, 1411, __pyx_L1_error)
 
-    /* "rankfm/_rankfm.pyx":1378
+    /* "rankfm/_rankfm.pyx":1408
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     if mult_lut == NULL or scratch_base == NULL:             # <<<<<<<<<<<<<<
@@ -33831,7 +33825,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1384
+  /* "rankfm/_rankfm.pyx":1414
  * 
  *     cdef int s_idx
  *     cdef double denom_log_I = log(<double>I)             # <<<<<<<<<<<<<<
@@ -33840,7 +33834,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_denom_log_I = log(((double)__pyx_v_I));
 
-  /* "rankfm/_rankfm.pyx":1385
+  /* "rankfm/_rankfm.pyx":1415
  *     cdef int s_idx
  *     cdef double denom_log_I = log(<double>I)
  *     mult_lut[0] = 1.0             # <<<<<<<<<<<<<<
@@ -33849,7 +33843,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   (__pyx_v_mult_lut[0]) = 1.0;
 
-  /* "rankfm/_rankfm.pyx":1386
+  /* "rankfm/_rankfm.pyx":1416
  *     cdef double denom_log_I = log(<double>I)
  *     mult_lut[0] = 1.0
  *     for s_idx in range(1, max_samples + 1):             # <<<<<<<<<<<<<<
@@ -33863,7 +33857,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   for (__pyx_t_12 = 1; __pyx_t_12 < __pyx_t_13; __pyx_t_12+=1) {
     __pyx_v_s_idx = __pyx_t_12;
 
-    /* "rankfm/_rankfm.pyx":1387
+    /* "rankfm/_rankfm.pyx":1417
  *     mult_lut[0] = 1.0
  *     for s_idx in range(1, max_samples + 1):
  *         mult_lut[s_idx] = <float>(log(<double>(I - 1) / <double>s_idx) / denom_log_I)             # <<<<<<<<<<<<<<
@@ -33874,7 +33868,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   }
 
 
-  /* "rankfm/_rankfm.pyx":1390
+  /* "rankfm/_rankfm.pyx":1420
  * 
  *     cdef FoldInCtx ctx
  *     ctx.intx_ptr = &interactions[0, 0]             # <<<<<<<<<<<<<<
@@ -33885,7 +33879,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   __pyx_t_16 = 0;
   __pyx_v_ctx.intx_ptr = (&(*((int32_t *) ( /* dim=1 */ ((char *) (((int32_t *) ( /* dim=0 */ (__pyx_v_interactions.data + __pyx_t_15 * __pyx_v_interactions.strides[0]) )) + __pyx_t_16)) ))));
 
-  /* "rankfm/_rankfm.pyx":1391
+  /* "rankfm/_rankfm.pyx":1421
  *     cdef FoldInCtx ctx
  *     ctx.intx_ptr = &interactions[0, 0]
  *     ctx.sw_ptr = &sample_weight[0]             # <<<<<<<<<<<<<<
@@ -33895,7 +33889,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   __pyx_t_16 = 0;
   __pyx_v_ctx.sw_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_sample_weight.data) + __pyx_t_16)) ))));
 
-  /* "rankfm/_rankfm.pyx":1392
+  /* "rankfm/_rankfm.pyx":1422
  *     ctx.intx_ptr = &interactions[0, 0]
  *     ctx.sw_ptr = &sample_weight[0]
  *     ctx.shuf_ptr = &shuffle_index_mv[0]             # <<<<<<<<<<<<<<
@@ -33905,7 +33899,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   __pyx_t_16 = 0;
   __pyx_v_ctx.shuf_ptr = (&(*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_shuffle_index_mv.data) + __pyx_t_16)) ))));
 
-  /* "rankfm/_rankfm.pyx":1393
+  /* "rankfm/_rankfm.pyx":1423
  *     ctx.sw_ptr = &sample_weight[0]
  *     ctx.shuf_ptr = &shuffle_index_mv[0]
  *     ctx.ui_indptr_ptr = &ui_indptr[0]             # <<<<<<<<<<<<<<
@@ -33915,7 +33909,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   __pyx_t_16 = 0;
   __pyx_v_ctx.ui_indptr_ptr = (&(*((int64_t *) ( /* dim=0 */ ((char *) (((int64_t *) __pyx_v_ui_indptr.data) + __pyx_t_16)) ))));
 
-  /* "rankfm/_rankfm.pyx":1394
+  /* "rankfm/_rankfm.pyx":1424
  *     ctx.shuf_ptr = &shuffle_index_mv[0]
  *     ctx.ui_indptr_ptr = &ui_indptr[0]
  *     ctx.ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL             # <<<<<<<<<<<<<<
@@ -33935,7 +33929,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 
   __pyx_v_ctx.ui_indices_ptr = __pyx_t_17;
 
-  /* "rankfm/_rankfm.pyx":1395
+  /* "rankfm/_rankfm.pyx":1425
  *     ctx.ui_indptr_ptr = &ui_indptr[0]
  *     ctx.ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL
  *     ctx.u_feat_ptr = &u_feat_emb[0, 0]             # <<<<<<<<<<<<<<
@@ -33946,7 +33940,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   __pyx_t_15 = 0;
   __pyx_v_ctx.u_feat_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_u_feat_emb.data + __pyx_t_16 * __pyx_v_u_feat_emb.strides[0]) )) + __pyx_t_15)) ))));
 
-  /* "rankfm/_rankfm.pyx":1396
+  /* "rankfm/_rankfm.pyx":1426
  *     ctx.ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL
  *     ctx.u_feat_ptr = &u_feat_emb[0, 0]
  *     ctx.item_bias_ptr = &item_bias[0]             # <<<<<<<<<<<<<<
@@ -33956,7 +33950,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   __pyx_t_15 = 0;
   __pyx_v_ctx.item_bias_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_item_bias.data) + __pyx_t_15)) ))));
 
-  /* "rankfm/_rankfm.pyx":1397
+  /* "rankfm/_rankfm.pyx":1427
  *     ctx.u_feat_ptr = &u_feat_emb[0, 0]
  *     ctx.item_bias_ptr = &item_bias[0]
  *     ctx.v_i_eff_ptr = &v_i_eff[0, 0]             # <<<<<<<<<<<<<<
@@ -33967,7 +33961,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   __pyx_t_16 = 0;
   __pyx_v_ctx.v_i_eff_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_v_i_eff.data + __pyx_t_15 * __pyx_v_v_i_eff.strides[0]) )) + __pyx_t_16)) ))));
 
-  /* "rankfm/_rankfm.pyx":1398
+  /* "rankfm/_rankfm.pyx":1428
  *     ctx.item_bias_ptr = &item_bias[0]
  *     ctx.v_i_eff_ptr = &v_i_eff[0, 0]
  *     ctx.v_u_ptr = &v_u[0, 0]             # <<<<<<<<<<<<<<
@@ -33978,7 +33972,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   __pyx_t_15 = 0;
   __pyx_v_ctx.v_u_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_v_u.data + __pyx_t_16 * __pyx_v_v_u.strides[0]) )) + __pyx_t_15)) ))));
 
-  /* "rankfm/_rankfm.pyx":1399
+  /* "rankfm/_rankfm.pyx":1429
  *     ctx.v_i_eff_ptr = &v_i_eff[0, 0]
  *     ctx.v_u_ptr = &v_u[0, 0]
  *     ctx.mult_lut_ptr = mult_lut             # <<<<<<<<<<<<<<
@@ -33987,7 +33981,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.mult_lut_ptr = __pyx_v_mult_lut;
 
-  /* "rankfm/_rankfm.pyx":1400
+  /* "rankfm/_rankfm.pyx":1430
  *     ctx.v_u_ptr = &v_u[0, 0]
  *     ctx.mult_lut_ptr = mult_lut
  *     ctx.scratch_base = scratch_base             # <<<<<<<<<<<<<<
@@ -33996,7 +33990,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.scratch_base = __pyx_v_scratch_base;
 
-  /* "rankfm/_rankfm.pyx":1401
+  /* "rankfm/_rankfm.pyx":1431
  *     ctx.mult_lut_ptr = mult_lut
  *     ctx.scratch_base = scratch_base
  *     ctx.scratch_stride = scratch_stride             # <<<<<<<<<<<<<<
@@ -34005,7 +33999,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.scratch_stride = __pyx_v_scratch_stride;
 
-  /* "rankfm/_rankfm.pyx":1402
+  /* "rankfm/_rankfm.pyx":1432
  *     ctx.scratch_base = scratch_base
  *     ctx.scratch_stride = scratch_stride
  *     ctx.N = N             # <<<<<<<<<<<<<<
@@ -34014,7 +34008,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.N = __pyx_v_N;
 
-  /* "rankfm/_rankfm.pyx":1403
+  /* "rankfm/_rankfm.pyx":1433
  *     ctx.scratch_stride = scratch_stride
  *     ctx.N = N
  *     ctx.grain = max(<int64_t>64, min(<int64_t>256, N // max(<int64_t>1, <int64_t>(eff_threads * 4))))             # <<<<<<<<<<<<<<
@@ -34068,7 +34062,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
   __pyx_v_ctx.grain = __pyx_t_20;
 
 
-  /* "rankfm/_rankfm.pyx":1404
+  /* "rankfm/_rankfm.pyx":1434
  *     ctx.N = N
  *     ctx.grain = max(<int64_t>64, min(<int64_t>256, N // max(<int64_t>1, <int64_t>(eff_threads * 4))))
  *     ctx.I = I             # <<<<<<<<<<<<<<
@@ -34077,7 +34071,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.I = __pyx_v_I;
 
-  /* "rankfm/_rankfm.pyx":1405
+  /* "rankfm/_rankfm.pyx":1435
  *     ctx.grain = max(<int64_t>64, min(<int64_t>256, N // max(<int64_t>1, <int64_t>(eff_threads * 4))))
  *     ctx.I = I
  *     ctx.F = F             # <<<<<<<<<<<<<<
@@ -34086,7 +34080,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.F = __pyx_v_F;
 
-  /* "rankfm/_rankfm.pyx":1406
+  /* "rankfm/_rankfm.pyx":1436
  *     ctx.I = I
  *     ctx.F = F
  *     ctx.max_samples = max_samples             # <<<<<<<<<<<<<<
@@ -34095,7 +34089,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.max_samples = __pyx_v_max_samples;
 
-  /* "rankfm/_rankfm.pyx":1407
+  /* "rankfm/_rankfm.pyx":1437
  *     ctx.F = F
  *     ctx.max_samples = max_samples
  *     ctx.base_seed = <uint64_t>(<uint32_t>seed)             # <<<<<<<<<<<<<<
@@ -34104,7 +34098,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.base_seed = ((uint64_t)((uint32_t)__pyx_v_seed));
 
-  /* "rankfm/_rankfm.pyx":1410
+  /* "rankfm/_rankfm.pyx":1440
  * 
  *     cdef int epoch
  *     cdef float eta, d_reg_a = 2.0 * alpha             # <<<<<<<<<<<<<<
@@ -34113,7 +34107,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_d_reg_a = (2.0 * __pyx_v_alpha);
 
-  /* "rankfm/_rankfm.pyx":1412
+  /* "rankfm/_rankfm.pyx":1442
  *     cdef float eta, d_reg_a = 2.0 * alpha
  *     cdef rfm_rng_t shuf_rng
  *     rfm_rng_seed(&shuf_rng, ctx.base_seed, 0x5A5A5A5AULL)             # <<<<<<<<<<<<<<
@@ -34122,7 +34116,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   rfm_rng_seed((&__pyx_v_shuf_rng), __pyx_v_ctx.base_seed, 0x5A5A5A5AULL);
 
-  /* "rankfm/_rankfm.pyx":1414
+  /* "rankfm/_rankfm.pyx":1444
  *     rfm_rng_seed(&shuf_rng, ctx.base_seed, 0x5A5A5A5AULL)
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -34131,7 +34125,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
   /*try:*/ {
 
-    /* "rankfm/_rankfm.pyx":1415
+    /* "rankfm/_rankfm.pyx":1445
  * 
  *     try:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -34144,7 +34138,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
         __Pyx_FastGIL_Remember();
         /*try:*/ {
 
-          /* "rankfm/_rankfm.pyx":1416
+          /* "rankfm/_rankfm.pyx":1446
  *     try:
  *         with nogil:
  *             pool = rfm_pool_create(eff_threads)             # <<<<<<<<<<<<<<
@@ -34153,7 +34147,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
           __pyx_v_pool = rfm_pool_create(__pyx_v_eff_threads);
 
-          /* "rankfm/_rankfm.pyx":1417
+          /* "rankfm/_rankfm.pyx":1447
  *         with nogil:
  *             pool = rfm_pool_create(eff_threads)
  *             for epoch in range(epochs):             # <<<<<<<<<<<<<<
@@ -34167,7 +34161,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
           for (__pyx_t_22 = 0; __pyx_t_22 < __pyx_t_21; __pyx_t_22+=1) {
             __pyx_v_epoch = __pyx_t_22;
 
-            /* "rankfm/_rankfm.pyx":1418
+            /* "rankfm/_rankfm.pyx":1448
  *             pool = rfm_pool_create(eff_threads)
  *             for epoch in range(epochs):
  *                 if schedule_mode == 0:             # <<<<<<<<<<<<<<
@@ -34179,7 +34173,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
             if (__pyx_t_1) {
 
 
-              /* "rankfm/_rankfm.pyx":1419
+              /* "rankfm/_rankfm.pyx":1449
  *             for epoch in range(epochs):
  *                 if schedule_mode == 0:
  *                     eta = learning_rate             # <<<<<<<<<<<<<<
@@ -34188,17 +34182,17 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
               __pyx_v_eta = __pyx_v_learning_rate;
 
-              /* "rankfm/_rankfm.pyx":1418
+              /* "rankfm/_rankfm.pyx":1448
  *             pool = rfm_pool_create(eff_threads)
  *             for epoch in range(epochs):
  *                 if schedule_mode == 0:             # <<<<<<<<<<<<<<
  *                     eta = learning_rate
  *                 else:
 */
-              goto __pyx_L26;
+              goto __pyx_L28;
             }
 
-            /* "rankfm/_rankfm.pyx":1421
+            /* "rankfm/_rankfm.pyx":1451
  *                     eta = learning_rate
  *                 else:
  *                     eta = learning_rate / <float>pow(<double>(epoch + 1), <double>learning_exponent)             # <<<<<<<<<<<<<<
@@ -34208,9 +34202,9 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
             /*else*/ {
               __pyx_v_eta = (__pyx_v_learning_rate / ((float)pow(((double)(__pyx_v_epoch + 1)), ((double)__pyx_v_learning_exponent))));
             }
-            __pyx_L26:;
+            __pyx_L28:;
 
-            /* "rankfm/_rankfm.pyx":1423
+            /* "rankfm/_rankfm.pyx":1453
  *                     eta = learning_rate / <float>pow(<double>(epoch + 1), <double>learning_exponent)
  * 
  *                 ctx.eta = eta             # <<<<<<<<<<<<<<
@@ -34219,35 +34213,35 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
             __pyx_v_ctx.eta = __pyx_v_eta;
 
-            /* "rankfm/_rankfm.pyx":1424
+            /* "rankfm/_rankfm.pyx":1454
  * 
  *                 ctx.eta = eta
  *                 ctx.reg_a_keep = 1.0 - eta * d_reg_a             # <<<<<<<<<<<<<<
  *                 ctx.cursor = 0
- *                 ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 17ULL
+ *                 ctx.stream_epoch_base = ((<uint64_t>(epoch + 1)) << 40) | (1ULL << 39)
 */
             __pyx_v_ctx.reg_a_keep = (1.0 - (__pyx_v_eta * __pyx_v_d_reg_a));
 
-            /* "rankfm/_rankfm.pyx":1425
+            /* "rankfm/_rankfm.pyx":1455
  *                 ctx.eta = eta
  *                 ctx.reg_a_keep = 1.0 - eta * d_reg_a
  *                 ctx.cursor = 0             # <<<<<<<<<<<<<<
- *                 ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 17ULL
+ *                 ctx.stream_epoch_base = ((<uint64_t>(epoch + 1)) << 40) | (1ULL << 39)
  * 
 */
             __pyx_v_ctx.cursor = 0;
 
-            /* "rankfm/_rankfm.pyx":1426
+            /* "rankfm/_rankfm.pyx":1456
  *                 ctx.reg_a_keep = 1.0 - eta * d_reg_a
  *                 ctx.cursor = 0
- *                 ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 17ULL             # <<<<<<<<<<<<<<
+ *                 ctx.stream_epoch_base = ((<uint64_t>(epoch + 1)) << 40) | (1ULL << 39)             # <<<<<<<<<<<<<<
  * 
  *                 rfm_shuffle_int32(&shuffle_index_mv[0], N, &shuf_rng)
 */
-            __pyx_v_ctx.stream_epoch_base = ((((uint64_t)__pyx_v_epoch) * 1048576ULL) + 17ULL);
+            __pyx_v_ctx.stream_epoch_base = ((((uint64_t)(__pyx_v_epoch + 1)) << 40) | 0x8000000000LL);
 
-            /* "rankfm/_rankfm.pyx":1428
- *                 ctx.stream_epoch_base = (<uint64_t>epoch * 1048576ULL) + 17ULL
+            /* "rankfm/_rankfm.pyx":1458
+ *                 ctx.stream_epoch_base = ((<uint64_t>(epoch + 1)) << 40) | (1ULL << 39)
  * 
  *                 rfm_shuffle_int32(&shuffle_index_mv[0], N, &shuf_rng)             # <<<<<<<<<<<<<<
  *                 rfm_pool_run(pool, _fold_in_worker, &ctx)
@@ -34256,7 +34250,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
             __pyx_t_15 = 0;
             rfm_shuffle_int32((&(*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_shuffle_index_mv.data) + __pyx_t_15)) )))), __pyx_v_N, (&__pyx_v_shuf_rng));
 
-            /* "rankfm/_rankfm.pyx":1429
+            /* "rankfm/_rankfm.pyx":1459
  * 
  *                 rfm_shuffle_int32(&shuffle_index_mv[0], N, &shuf_rng)
  *                 rfm_pool_run(pool, _fold_in_worker, &ctx)             # <<<<<<<<<<<<<<
@@ -34268,7 +34262,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 
         }
 
-        /* "rankfm/_rankfm.pyx":1415
+        /* "rankfm/_rankfm.pyx":1445
  * 
  *     try:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -34279,14 +34273,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
           /*normal exit:*/{
             __Pyx_FastGIL_Forget();
             PyEval_RestoreThread(_save);
-            goto __pyx_L23;
+            goto __pyx_L25;
           }
-          __pyx_L23:;
+          __pyx_L25:;
         }
     }
   }
 
-  /* "rankfm/_rankfm.pyx":1431
+  /* "rankfm/_rankfm.pyx":1461
  *                 rfm_pool_run(pool, _fold_in_worker, &ctx)
  *     finally:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -34301,7 +34295,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
           __Pyx_FastGIL_Remember();
           /*try:*/ {
 
-            /* "rankfm/_rankfm.pyx":1432
+            /* "rankfm/_rankfm.pyx":1462
  *     finally:
  *         with nogil:
  *             rfm_pool_destroy(pool)             # <<<<<<<<<<<<<<
@@ -34311,7 +34305,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
             rfm_pool_destroy(__pyx_v_pool);
           }
 
-          /* "rankfm/_rankfm.pyx":1431
+          /* "rankfm/_rankfm.pyx":1461
  *                 rfm_pool_run(pool, _fold_in_worker, &ctx)
  *     finally:
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -34322,13 +34316,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
             /*normal exit:*/{
               __Pyx_FastGIL_Forget();
               PyEval_RestoreThread(_save);
-              goto __pyx_L29;
+              goto __pyx_L31;
             }
-            __pyx_L29:;
+            __pyx_L31:;
           }
       }
 
-      /* "rankfm/_rankfm.pyx":1433
+      /* "rankfm/_rankfm.pyx":1463
  *         with nogil:
  *             rfm_pool_destroy(pool)
  *         rfm_aligned_free(mult_lut)             # <<<<<<<<<<<<<<
@@ -34337,7 +34331,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 */
       rfm_aligned_free(__pyx_v_mult_lut);
 
-      /* "rankfm/_rankfm.pyx":1434
+      /* "rankfm/_rankfm.pyx":1464
  *             rfm_pool_destroy(pool)
  *         rfm_aligned_free(mult_lut)
  *         rfm_aligned_free(scratch_base)             # <<<<<<<<<<<<<<
@@ -34345,12 +34339,12 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
  * 
 */
       rfm_aligned_free(__pyx_v_scratch_base);
-      goto __pyx_L20;
+      goto __pyx_L22;
     }
-    __pyx_L20:;
+    __pyx_L22:;
   }
 
-  /* "rankfm/_rankfm.pyx":1328
+  /* "rankfm/_rankfm.pyx":1351
  * 
  * 
  * def _fold_in(             # <<<<<<<<<<<<<<
@@ -34393,12 +34387,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_14_fold_in(CYTHON_UNUSED PyObject *__
 
 
 
+
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":1437
+/* "rankfm/_rankfm.pyx":1467
  * 
  * 
  * def _predict(             # <<<<<<<<<<<<<<
@@ -34451,76 +34446,76 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_u_idx,&__pyx_mstate_global->__pyx_n_u_i_idx,&__pyx_mstate_global->__pyx_n_u_u_emb,&__pyx_mstate_global->__pyx_n_u_item_bias,&__pyx_mstate_global->__pyx_n_u_v_i_eff,&__pyx_mstate_global->__pyx_n_u_n_threads,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1437, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1467, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1467, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1467, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1467, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1467, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1467, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1467, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_predict", 0) < (0)) __PYX_ERR(0, 1437, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_predict", 0) < (0)) __PYX_ERR(0, 1467, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 5; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_predict", 0, 5, 6, i); __PYX_ERR(0, 1437, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_predict", 0, 5, 6, i); __PYX_ERR(0, 1467, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1467, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1467, __pyx_L3_error)
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1467, __pyx_L3_error)
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1467, __pyx_L3_error)
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1467, __pyx_L3_error)
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1437, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1467, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_u_idx = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_u_idx.memview)) __PYX_ERR(0, 1438, __pyx_L3_error)
-    __pyx_v_i_idx = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_i_idx.memview)) __PYX_ERR(0, 1439, __pyx_L3_error)
-    __pyx_v_u_emb = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_u_emb.memview)) __PYX_ERR(0, 1440, __pyx_L3_error)
-    __pyx_v_item_bias = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_item_bias.memview)) __PYX_ERR(0, 1441, __pyx_L3_error)
-    __pyx_v_v_i_eff = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_i_eff.memview)) __PYX_ERR(0, 1442, __pyx_L3_error)
+    __pyx_v_u_idx = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_u_idx.memview)) __PYX_ERR(0, 1468, __pyx_L3_error)
+    __pyx_v_i_idx = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_i_idx.memview)) __PYX_ERR(0, 1469, __pyx_L3_error)
+    __pyx_v_u_emb = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_u_emb.memview)) __PYX_ERR(0, 1470, __pyx_L3_error)
+    __pyx_v_item_bias = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[3], PyBUF_WRITABLE); if (unlikely(!__pyx_v_item_bias.memview)) __PYX_ERR(0, 1471, __pyx_L3_error)
+    __pyx_v_v_i_eff = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_v_i_eff.memview)) __PYX_ERR(0, 1472, __pyx_L3_error)
     if (values[5]) {
-      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1443, __pyx_L3_error)
+      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1473, __pyx_L3_error)
     } else {
       __pyx_v_n_threads = ((int)((int)1));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_predict", 0, 5, 6, __pyx_nargs); __PYX_ERR(0, 1437, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_predict", 0, 5, 6, __pyx_nargs); __PYX_ERR(0, 1467, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -34581,7 +34576,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_predict", 0);
 
-  /* "rankfm/_rankfm.pyx":1447
+  /* "rankfm/_rankfm.pyx":1477
  *     """score (user, item) pairs in multi-threaded nogil C using integer indices (-1 indicates missing)"""
  * 
  *     cdef int64_t N = u_idx.shape[0]             # <<<<<<<<<<<<<<
@@ -34590,7 +34585,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_N = (__pyx_v_u_idx.shape[0]);
 
-  /* "rankfm/_rankfm.pyx":1448
+  /* "rankfm/_rankfm.pyx":1478
  * 
  *     cdef int64_t N = u_idx.shape[0]
  *     cdef int F = <int>u_emb.shape[1]             # <<<<<<<<<<<<<<
@@ -34599,7 +34594,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_F = ((int)(__pyx_v_u_emb.shape[1]));
 
-  /* "rankfm/_rankfm.pyx":1450
+  /* "rankfm/_rankfm.pyx":1480
  *     cdef int F = <int>u_emb.shape[1]
  * 
  *     scores = np.full(N, np.nan, dtype=np.float32)             # <<<<<<<<<<<<<<
@@ -34607,21 +34602,21 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
  *         return scores
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1450, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_full); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1450, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_full); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyLong_From_int64_t(__pyx_v_N); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1450, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_From_int64_t(__pyx_v_N); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1450, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_nan); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1450, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_nan); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1450, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1450, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_float32); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1480, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   #if CYTHON_VECTORCALL
@@ -34642,13 +34637,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
     PyObject *__pyx_callargs[4] = {__pyx_t_2, __pyx_t_3, __pyx_t_6, __pyx_t_7};
     #if CYTHON_VECTORCALL
     __pyx_t_5 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1450, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1480, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_5);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
       __pyx_t_5 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+3, 1);
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1450, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1480, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
     }
     #endif
@@ -34661,13 +34656,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1450, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1480, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_scores = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "rankfm/_rankfm.pyx":1451
+  /* "rankfm/_rankfm.pyx":1481
  * 
  *     scores = np.full(N, np.nan, dtype=np.float32)
  *     if N == 0 or u_emb.shape[0] == 0 or item_bias.shape[0] == 0:             # <<<<<<<<<<<<<<
@@ -34703,7 +34698,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   if (__pyx_t_9) {
 
 
-    /* "rankfm/_rankfm.pyx":1452
+    /* "rankfm/_rankfm.pyx":1482
  *     scores = np.full(N, np.nan, dtype=np.float32)
  *     if N == 0 or u_emb.shape[0] == 0 or item_bias.shape[0] == 0:
  *         return scores             # <<<<<<<<<<<<<<
@@ -34721,7 +34716,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":1451
+    /* "rankfm/_rankfm.pyx":1481
  * 
  *     scores = np.full(N, np.nan, dtype=np.float32)
  *     if N == 0 or u_emb.shape[0] == 0 or item_bias.shape[0] == 0:             # <<<<<<<<<<<<<<
@@ -34730,19 +34725,19 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1454
+  /* "rankfm/_rankfm.pyx":1484
  *         return scores
  * 
  *     cdef float[::1] scores_mv = scores             # <<<<<<<<<<<<<<
  *     cdef PredictCtx ctx
  *     ctx.u_ptr = &u_idx[0]
 */
-  __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dc_float(__pyx_v_scores, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 1454, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dc_float(__pyx_v_scores, PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 1484, __pyx_L1_error)
   __pyx_v_scores_mv = __pyx_t_11;
   __pyx_t_11.memview = NULL;
   __pyx_t_11.data = NULL;
 
-  /* "rankfm/_rankfm.pyx":1456
+  /* "rankfm/_rankfm.pyx":1486
  *     cdef float[::1] scores_mv = scores
  *     cdef PredictCtx ctx
  *     ctx.u_ptr = &u_idx[0]             # <<<<<<<<<<<<<<
@@ -34752,7 +34747,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   __pyx_t_12 = 0;
   __pyx_v_ctx.u_ptr = (&(*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_u_idx.data) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":1457
+  /* "rankfm/_rankfm.pyx":1487
  *     cdef PredictCtx ctx
  *     ctx.u_ptr = &u_idx[0]
  *     ctx.i_ptr = &i_idx[0]             # <<<<<<<<<<<<<<
@@ -34762,7 +34757,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   __pyx_t_12 = 0;
   __pyx_v_ctx.i_ptr = (&(*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_i_idx.data) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":1458
+  /* "rankfm/_rankfm.pyx":1488
  *     ctx.u_ptr = &u_idx[0]
  *     ctx.i_ptr = &i_idx[0]
  *     ctx.u_emb_ptr = &u_emb[0, 0]             # <<<<<<<<<<<<<<
@@ -34773,7 +34768,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   __pyx_t_13 = 0;
   __pyx_v_ctx.u_emb_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_u_emb.data + __pyx_t_12 * __pyx_v_u_emb.strides[0]) )) + __pyx_t_13)) ))));
 
-  /* "rankfm/_rankfm.pyx":1459
+  /* "rankfm/_rankfm.pyx":1489
  *     ctx.i_ptr = &i_idx[0]
  *     ctx.u_emb_ptr = &u_emb[0, 0]
  *     ctx.item_bias_ptr = &item_bias[0]             # <<<<<<<<<<<<<<
@@ -34783,7 +34778,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   __pyx_t_13 = 0;
   __pyx_v_ctx.item_bias_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_item_bias.data) + __pyx_t_13)) ))));
 
-  /* "rankfm/_rankfm.pyx":1460
+  /* "rankfm/_rankfm.pyx":1490
  *     ctx.u_emb_ptr = &u_emb[0, 0]
  *     ctx.item_bias_ptr = &item_bias[0]
  *     ctx.v_i_eff_ptr = &v_i_eff[0, 0]             # <<<<<<<<<<<<<<
@@ -34794,7 +34789,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   __pyx_t_12 = 0;
   __pyx_v_ctx.v_i_eff_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_v_i_eff.data + __pyx_t_13 * __pyx_v_v_i_eff.strides[0]) )) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":1461
+  /* "rankfm/_rankfm.pyx":1491
  *     ctx.item_bias_ptr = &item_bias[0]
  *     ctx.v_i_eff_ptr = &v_i_eff[0, 0]
  *     ctx.scores_ptr = &scores_mv[0]             # <<<<<<<<<<<<<<
@@ -34804,7 +34799,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   __pyx_t_12 = 0;
   __pyx_v_ctx.scores_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_scores_mv.data) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":1462
+  /* "rankfm/_rankfm.pyx":1492
  *     ctx.v_i_eff_ptr = &v_i_eff[0, 0]
  *     ctx.scores_ptr = &scores_mv[0]
  *     ctx.N = N             # <<<<<<<<<<<<<<
@@ -34813,7 +34808,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.N = __pyx_v_N;
 
-  /* "rankfm/_rankfm.pyx":1463
+  /* "rankfm/_rankfm.pyx":1493
  *     ctx.scores_ptr = &scores_mv[0]
  *     ctx.N = N
  *     ctx.F = F             # <<<<<<<<<<<<<<
@@ -34822,7 +34817,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_ctx.F = __pyx_v_F;
 
-  /* "rankfm/_rankfm.pyx":1465
+  /* "rankfm/_rankfm.pyx":1495
  *     ctx.F = F
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 8192) else 1             # <<<<<<<<<<<<<<
@@ -34855,7 +34850,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
 
   __pyx_v_eff_threads = __pyx_t_14;
 
-  /* "rankfm/_rankfm.pyx":1466
+  /* "rankfm/_rankfm.pyx":1496
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 8192) else 1
  *     cdef rfm_pool_t *pool = NULL             # <<<<<<<<<<<<<<
@@ -34864,7 +34859,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
 */
   __pyx_v_pool = NULL;
 
-  /* "rankfm/_rankfm.pyx":1468
+  /* "rankfm/_rankfm.pyx":1498
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -34877,7 +34872,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "rankfm/_rankfm.pyx":1469
+        /* "rankfm/_rankfm.pyx":1499
  * 
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)             # <<<<<<<<<<<<<<
@@ -34886,7 +34881,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
 */
         __pyx_v_pool = rfm_pool_create(__pyx_v_eff_threads);
 
-        /* "rankfm/_rankfm.pyx":1470
+        /* "rankfm/_rankfm.pyx":1500
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _predict_worker, &ctx)             # <<<<<<<<<<<<<<
@@ -34895,7 +34890,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
 */
         rfm_pool_run(__pyx_v_pool, __pyx_f_6rankfm_7_rankfm__predict_worker, (&__pyx_v_ctx));
 
-        /* "rankfm/_rankfm.pyx":1471
+        /* "rankfm/_rankfm.pyx":1501
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _predict_worker, &ctx)
  *         rfm_pool_destroy(pool)             # <<<<<<<<<<<<<<
@@ -34905,7 +34900,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
         rfm_pool_destroy(__pyx_v_pool);
       }
 
-      /* "rankfm/_rankfm.pyx":1468
+      /* "rankfm/_rankfm.pyx":1498
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -34922,7 +34917,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
       }
   }
 
-  /* "rankfm/_rankfm.pyx":1473
+  /* "rankfm/_rankfm.pyx":1503
  *         rfm_pool_destroy(pool)
  * 
  *     return scores             # <<<<<<<<<<<<<<
@@ -34940,7 +34935,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   }
   goto __pyx_L0;
 
-  /* "rankfm/_rankfm.pyx":1437
+  /* "rankfm/_rankfm.pyx":1467
  * 
  * 
  * def _predict(             # <<<<<<<<<<<<<<
@@ -34973,7 +34968,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_16_predict(CYTHON_UNUSED PyObject *__
   return __pyx_r;
 }
 
-/* "rankfm/_rankfm.pyx":1476
+/* "rankfm/_rankfm.pyx":1506
  * 
  * 
  * def _select_topk_chunk(             # <<<<<<<<<<<<<<
@@ -35029,97 +35024,97 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_scores_chunk,&__pyx_mstate_global->__pyx_n_u_item_bias,&__pyx_mstate_global->__pyx_n_u_chunk_u_idx,&__pyx_mstate_global->__pyx_n_u_ui_indptr_arr,&__pyx_mstate_global->__pyx_n_u_ui_indices,&__pyx_mstate_global->__pyx_n_u_n_items,&__pyx_mstate_global->__pyx_n_u_filter_previous,&__pyx_mstate_global->__pyx_n_u_out_items,&__pyx_mstate_global->__pyx_n_u_n_threads,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1476, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1506, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  9:
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  7:
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_select_topk_chunk", 0) < (0)) __PYX_ERR(0, 1476, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_select_topk_chunk", 0) < (0)) __PYX_ERR(0, 1506, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 8; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_select_topk_chunk", 0, 8, 9, i); __PYX_ERR(0, 1476, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_select_topk_chunk", 0, 8, 9, i); __PYX_ERR(0, 1506, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case  9:
         values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 1506, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 1506, __pyx_L3_error)
         values[6] = __Pyx_ArgRef_FASTCALL(__pyx_args, 6);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[6])) __PYX_ERR(0, 1506, __pyx_L3_error)
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 1506, __pyx_L3_error)
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 1506, __pyx_L3_error)
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 1506, __pyx_L3_error)
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 1506, __pyx_L3_error)
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1506, __pyx_L3_error)
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1476, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1506, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_scores_chunk = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_scores_chunk.memview)) __PYX_ERR(0, 1477, __pyx_L3_error)
-    __pyx_v_item_bias = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_item_bias.memview)) __PYX_ERR(0, 1478, __pyx_L3_error)
-    __pyx_v_chunk_u_idx = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_chunk_u_idx.memview)) __PYX_ERR(0, 1479, __pyx_L3_error)
+    __pyx_v_scores_chunk = __Pyx_PyObject_to_MemoryviewSlice_d_dc_float(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_scores_chunk.memview)) __PYX_ERR(0, 1507, __pyx_L3_error)
+    __pyx_v_item_bias = __Pyx_PyObject_to_MemoryviewSlice_dc_float(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_item_bias.memview)) __PYX_ERR(0, 1508, __pyx_L3_error)
+    __pyx_v_chunk_u_idx = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_chunk_u_idx.memview)) __PYX_ERR(0, 1509, __pyx_L3_error)
     __pyx_v_ui_indptr_arr = values[3];
-    __pyx_v_ui_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ui_indices.memview)) __PYX_ERR(0, 1481, __pyx_L3_error)
-    __pyx_v_n_items = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_n_items == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1482, __pyx_L3_error)
-    __pyx_v_filter_previous = __Pyx_PyObject_IsTrue(values[6]); if (unlikely((__pyx_v_filter_previous == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1483, __pyx_L3_error)
-    __pyx_v_out_items = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn_int32_t(values[7], PyBUF_WRITABLE); if (unlikely(!__pyx_v_out_items.memview)) __PYX_ERR(0, 1484, __pyx_L3_error)
+    __pyx_v_ui_indices = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int32_t(values[4], PyBUF_WRITABLE); if (unlikely(!__pyx_v_ui_indices.memview)) __PYX_ERR(0, 1511, __pyx_L3_error)
+    __pyx_v_n_items = __Pyx_PyLong_As_int(values[5]); if (unlikely((__pyx_v_n_items == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1512, __pyx_L3_error)
+    __pyx_v_filter_previous = __Pyx_PyObject_IsTrue(values[6]); if (unlikely((__pyx_v_filter_previous == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1513, __pyx_L3_error)
+    __pyx_v_out_items = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn_int32_t(values[7], PyBUF_WRITABLE); if (unlikely(!__pyx_v_out_items.memview)) __PYX_ERR(0, 1514, __pyx_L3_error)
     if (values[8]) {
-      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[8]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1485, __pyx_L3_error)
+      __pyx_v_n_threads = __Pyx_PyLong_As_int(values[8]); if (unlikely((__pyx_v_n_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1515, __pyx_L3_error)
     } else {
       __pyx_v_n_threads = ((int)((int)1));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_select_topk_chunk", 0, 8, 9, __pyx_nargs); __PYX_ERR(0, 1476, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_select_topk_chunk", 0, 8, 9, __pyx_nargs); __PYX_ERR(0, 1506, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -35186,7 +35181,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_select_topk_chunk", 0);
 
-  /* "rankfm/_rankfm.pyx":1489
+  /* "rankfm/_rankfm.pyx":1519
  *     """select sorted top-K item indices per row from a BLAS score chunk using parallel nogil size-K min-heaps"""
  * 
  *     cdef int64_t B = scores_chunk.shape[0]             # <<<<<<<<<<<<<<
@@ -35195,7 +35190,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   __pyx_v_B = (__pyx_v_scores_chunk.shape[0]);
 
-  /* "rankfm/_rankfm.pyx":1490
+  /* "rankfm/_rankfm.pyx":1520
  * 
  *     cdef int64_t B = scores_chunk.shape[0]
  *     cdef int32_t I = <int32_t>scores_chunk.shape[1]             # <<<<<<<<<<<<<<
@@ -35204,7 +35199,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   __pyx_v_I = ((int32_t)(__pyx_v_scores_chunk.shape[1]));
 
-  /* "rankfm/_rankfm.pyx":1491
+  /* "rankfm/_rankfm.pyx":1521
  *     cdef int64_t B = scores_chunk.shape[0]
  *     cdef int32_t I = <int32_t>scores_chunk.shape[1]
  *     cdef int32_t K = <int32_t>n_items             # <<<<<<<<<<<<<<
@@ -35213,7 +35208,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   __pyx_v_K = ((int32_t)__pyx_v_n_items);
 
-  /* "rankfm/_rankfm.pyx":1492
+  /* "rankfm/_rankfm.pyx":1522
  *     cdef int32_t I = <int32_t>scores_chunk.shape[1]
  *     cdef int32_t K = <int32_t>n_items
  *     if B == 0 or K <= 0:             # <<<<<<<<<<<<<<
@@ -35239,7 +35234,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1493
+    /* "rankfm/_rankfm.pyx":1523
  *     cdef int32_t K = <int32_t>n_items
  *     if B == 0 or K <= 0:
  *         return             # <<<<<<<<<<<<<<
@@ -35256,7 +35251,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
     }
     goto __pyx_L0;
 
-    /* "rankfm/_rankfm.pyx":1492
+    /* "rankfm/_rankfm.pyx":1522
  *     cdef int32_t I = <int32_t>scores_chunk.shape[1]
  *     cdef int32_t K = <int32_t>n_items
  *     if B == 0 or K <= 0:             # <<<<<<<<<<<<<<
@@ -35265,7 +35260,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1496
+  /* "rankfm/_rankfm.pyx":1526
  * 
  *     cdef int64_t[::1] ui_indptr
  *     if filter_previous:             # <<<<<<<<<<<<<<
@@ -35274,7 +35269,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   if (__pyx_v_filter_previous) {
 
-    /* "rankfm/_rankfm.pyx":1497
+    /* "rankfm/_rankfm.pyx":1527
  *     cdef int64_t[::1] ui_indptr
  *     if filter_previous:
  *         ui_indptr_i64 = np.ascontiguousarray(ui_indptr_arr, dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -35282,14 +35277,14 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
  * 
 */
     __pyx_t_4 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1497, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1527, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1497, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_ascontiguousarray); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 1527, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1497, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1527, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1497, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 1527, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     #if CYTHON_VECTORCALL
@@ -35310,13 +35305,13 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
       PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_v_ui_indptr_arr, __pyx_t_7};
       #if CYTHON_VECTORCALL
       __pyx_t_5 = __pyx_mstate_global->__pyx_tuple[2];
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1497, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1527, __pyx_L1_error)
       __Pyx_INCREF(__pyx_t_5);
       #else
       {
         PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
         __pyx_t_5 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1497, __pyx_L1_error)
+        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1527, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
       }
       #endif
@@ -35327,25 +35322,25 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1497, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1527, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __pyx_v_ui_indptr_i64 = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "rankfm/_rankfm.pyx":1498
+    /* "rankfm/_rankfm.pyx":1528
  *     if filter_previous:
  *         ui_indptr_i64 = np.ascontiguousarray(ui_indptr_arr, dtype=np.int64)
  *         ui_indptr = ui_indptr_i64             # <<<<<<<<<<<<<<
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and B >= 32) else 1
 */
-    __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_ui_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1498, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn_int64_t(__pyx_v_ui_indptr_i64, PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 1528, __pyx_L1_error)
     __pyx_v_ui_indptr = __pyx_t_9;
     __pyx_t_9.memview = NULL;
     __pyx_t_9.data = NULL;
 
-    /* "rankfm/_rankfm.pyx":1496
+    /* "rankfm/_rankfm.pyx":1526
  * 
  *     cdef int64_t[::1] ui_indptr
  *     if filter_previous:             # <<<<<<<<<<<<<<
@@ -35354,7 +35349,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1500
+  /* "rankfm/_rankfm.pyx":1530
  *         ui_indptr = ui_indptr_i64
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and B >= 32) else 1             # <<<<<<<<<<<<<<
@@ -35387,7 +35382,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 
   __pyx_v_eff_threads = __pyx_t_10;
 
-  /* "rankfm/_rankfm.pyx":1501
+  /* "rankfm/_rankfm.pyx":1531
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and B >= 32) else 1
  *     if eff_threads > B:             # <<<<<<<<<<<<<<
@@ -35399,7 +35394,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   if (__pyx_t_1) {
 
 
-    /* "rankfm/_rankfm.pyx":1502
+    /* "rankfm/_rankfm.pyx":1532
  *     cdef int eff_threads = n_threads if (n_threads > 1 and B >= 32) else 1
  *     if eff_threads > B:
  *         eff_threads = <int>B             # <<<<<<<<<<<<<<
@@ -35408,7 +35403,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
     __pyx_v_eff_threads = ((int)__pyx_v_B);
 
-    /* "rankfm/_rankfm.pyx":1501
+    /* "rankfm/_rankfm.pyx":1531
  * 
  *     cdef int eff_threads = n_threads if (n_threads > 1 and B >= 32) else 1
  *     if eff_threads > B:             # <<<<<<<<<<<<<<
@@ -35417,7 +35412,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   }
 
-  /* "rankfm/_rankfm.pyx":1505
+  /* "rankfm/_rankfm.pyx":1535
  * 
  *     cdef TopKChunkCtx ctx
  *     ctx.scores_ptr = &scores_chunk[0, 0]             # <<<<<<<<<<<<<<
@@ -35428,7 +35423,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   __pyx_t_12 = 0;
   __pyx_v_ctx.scores_ptr = (&(*((float *) ( /* dim=1 */ ((char *) (((float *) ( /* dim=0 */ (__pyx_v_scores_chunk.data + __pyx_t_11 * __pyx_v_scores_chunk.strides[0]) )) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":1506
+  /* "rankfm/_rankfm.pyx":1536
  *     cdef TopKChunkCtx ctx
  *     ctx.scores_ptr = &scores_chunk[0, 0]
  *     ctx.bias_ptr = &item_bias[0]             # <<<<<<<<<<<<<<
@@ -35438,7 +35433,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   __pyx_t_12 = 0;
   __pyx_v_ctx.bias_ptr = (&(*((float *) ( /* dim=0 */ ((char *) (((float *) __pyx_v_item_bias.data) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":1507
+  /* "rankfm/_rankfm.pyx":1537
  *     ctx.scores_ptr = &scores_chunk[0, 0]
  *     ctx.bias_ptr = &item_bias[0]
  *     ctx.u_ptr = &chunk_u_idx[0]             # <<<<<<<<<<<<<<
@@ -35448,7 +35443,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   __pyx_t_12 = 0;
   __pyx_v_ctx.u_ptr = (&(*((int32_t *) ( /* dim=0 */ ((char *) (((int32_t *) __pyx_v_chunk_u_idx.data) + __pyx_t_12)) ))));
 
-  /* "rankfm/_rankfm.pyx":1508
+  /* "rankfm/_rankfm.pyx":1538
  *     ctx.bias_ptr = &item_bias[0]
  *     ctx.u_ptr = &chunk_u_idx[0]
  *     ctx.indptr_ptr = &ui_indptr[0] if filter_previous else NULL             # <<<<<<<<<<<<<<
@@ -35456,7 +35451,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
  *     ctx.out_ptr = &out_items[0, 0]
 */
   if (__pyx_v_filter_previous) {
-    if (unlikely(!__pyx_v_ui_indptr.memview)) { __Pyx_RaiseUnboundLocalError("ui_indptr"); __PYX_ERR(0, 1508, __pyx_L1_error) }
+    if (unlikely(!__pyx_v_ui_indptr.memview)) { __Pyx_RaiseUnboundLocalError("ui_indptr"); __PYX_ERR(0, 1538, __pyx_L1_error) }
     __pyx_t_12 = 0;
 
     __pyx_t_13 = (&(*((int64_t *) ( /* dim=0 */ ((char *) (((int64_t *) __pyx_v_ui_indptr.data) + __pyx_t_12)) ))));
@@ -35466,7 +35461,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   }
   __pyx_v_ctx.indptr_ptr = __pyx_t_13;
 
-  /* "rankfm/_rankfm.pyx":1509
+  /* "rankfm/_rankfm.pyx":1539
  *     ctx.u_ptr = &chunk_u_idx[0]
  *     ctx.indptr_ptr = &ui_indptr[0] if filter_previous else NULL
  *     ctx.indices_ptr = &ui_indices[0] if (filter_previous and ui_indices.shape[0] > 0) else NULL             # <<<<<<<<<<<<<<
@@ -35496,7 +35491,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 
   __pyx_v_ctx.indices_ptr = __pyx_t_14;
 
-  /* "rankfm/_rankfm.pyx":1510
+  /* "rankfm/_rankfm.pyx":1540
  *     ctx.indptr_ptr = &ui_indptr[0] if filter_previous else NULL
  *     ctx.indices_ptr = &ui_indices[0] if (filter_previous and ui_indices.shape[0] > 0) else NULL
  *     ctx.out_ptr = &out_items[0, 0]             # <<<<<<<<<<<<<<
@@ -35507,7 +35502,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   __pyx_t_11 = 0;
   __pyx_v_ctx.out_ptr = (&(*((int32_t *) ( /* dim=1 */ ((char *) (((int32_t *) ( /* dim=0 */ (__pyx_v_out_items.data + __pyx_t_12 * __pyx_v_out_items.strides[0]) )) + __pyx_t_11)) ))));
 
-  /* "rankfm/_rankfm.pyx":1511
+  /* "rankfm/_rankfm.pyx":1541
  *     ctx.indices_ptr = &ui_indices[0] if (filter_previous and ui_indices.shape[0] > 0) else NULL
  *     ctx.out_ptr = &out_items[0, 0]
  *     ctx.B = B             # <<<<<<<<<<<<<<
@@ -35516,7 +35511,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   __pyx_v_ctx.B = __pyx_v_B;
 
-  /* "rankfm/_rankfm.pyx":1512
+  /* "rankfm/_rankfm.pyx":1542
  *     ctx.out_ptr = &out_items[0, 0]
  *     ctx.B = B
  *     ctx.cursor = 0             # <<<<<<<<<<<<<<
@@ -35525,7 +35520,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   __pyx_v_ctx.cursor = 0;
 
-  /* "rankfm/_rankfm.pyx":1513
+  /* "rankfm/_rankfm.pyx":1543
  *     ctx.B = B
  *     ctx.cursor = 0
  *     ctx.grain = max(<int64_t>8, min(<int64_t>64, B // max(<int64_t>1, <int64_t>(eff_threads * 4))))             # <<<<<<<<<<<<<<
@@ -35579,7 +35574,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   __pyx_v_ctx.grain = __pyx_t_17;
 
 
-  /* "rankfm/_rankfm.pyx":1514
+  /* "rankfm/_rankfm.pyx":1544
  *     ctx.cursor = 0
  *     ctx.grain = max(<int64_t>8, min(<int64_t>64, B // max(<int64_t>1, <int64_t>(eff_threads * 4))))
  *     ctx.I = I             # <<<<<<<<<<<<<<
@@ -35588,7 +35583,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   __pyx_v_ctx.I = __pyx_v_I;
 
-  /* "rankfm/_rankfm.pyx":1515
+  /* "rankfm/_rankfm.pyx":1545
  *     ctx.grain = max(<int64_t>8, min(<int64_t>64, B // max(<int64_t>1, <int64_t>(eff_threads * 4))))
  *     ctx.I = I
  *     ctx.K = K             # <<<<<<<<<<<<<<
@@ -35597,7 +35592,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   __pyx_v_ctx.K = __pyx_v_K;
 
-  /* "rankfm/_rankfm.pyx":1516
+  /* "rankfm/_rankfm.pyx":1546
  *     ctx.I = I
  *     ctx.K = K
  *     ctx.filter_previous = 1 if filter_previous else 0             # <<<<<<<<<<<<<<
@@ -35613,7 +35608,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
   }
   __pyx_v_ctx.filter_previous = __pyx_t_10;
 
-  /* "rankfm/_rankfm.pyx":1518
+  /* "rankfm/_rankfm.pyx":1548
  *     ctx.filter_previous = 1 if filter_previous else 0
  * 
  *     cdef rfm_pool_t *pool = NULL             # <<<<<<<<<<<<<<
@@ -35622,7 +35617,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
   __pyx_v_pool = NULL;
 
-  /* "rankfm/_rankfm.pyx":1520
+  /* "rankfm/_rankfm.pyx":1550
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -35635,7 +35630,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
       __Pyx_FastGIL_Remember();
       /*try:*/ {
 
-        /* "rankfm/_rankfm.pyx":1521
+        /* "rankfm/_rankfm.pyx":1551
  * 
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)             # <<<<<<<<<<<<<<
@@ -35644,7 +35639,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
         __pyx_v_pool = rfm_pool_create(__pyx_v_eff_threads);
 
-        /* "rankfm/_rankfm.pyx":1522
+        /* "rankfm/_rankfm.pyx":1552
  *     with nogil:
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _select_topk_worker, &ctx)             # <<<<<<<<<<<<<<
@@ -35652,7 +35647,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
 */
         rfm_pool_run(__pyx_v_pool, __pyx_f_6rankfm_7_rankfm__select_topk_worker, (&__pyx_v_ctx));
 
-        /* "rankfm/_rankfm.pyx":1523
+        /* "rankfm/_rankfm.pyx":1553
  *         pool = rfm_pool_create(eff_threads)
  *         rfm_pool_run(pool, _select_topk_worker, &ctx)
  *         rfm_pool_destroy(pool)             # <<<<<<<<<<<<<<
@@ -35660,7 +35655,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
         rfm_pool_destroy(__pyx_v_pool);
       }
 
-      /* "rankfm/_rankfm.pyx":1520
+      /* "rankfm/_rankfm.pyx":1550
  *     cdef rfm_pool_t *pool = NULL
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -35677,7 +35672,7 @@ static PyObject *__pyx_pf_6rankfm_7_rankfm_18_select_topk_chunk(CYTHON_UNUSED Py
       }
   }
 
-  /* "rankfm/_rankfm.pyx":1476
+  /* "rankfm/_rankfm.pyx":1506
  * 
  * 
  * def _select_topk_chunk(             # <<<<<<<<<<<<<<
@@ -37864,52 +37859,65 @@ __Pyx_RefNannySetupContext("PyInit__rankfm", 0);
   /* "rankfm/_rankfm.pyx":13
  * from libc.string cimport memcpy, memset
  * 
+ * import warnings             # <<<<<<<<<<<<<<
+ * 
+ * import numpy as np
+*/
+  __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_warnings, 0, 0, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_4 = __pyx_t_1;
+  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_warnings, __pyx_t_4) < (0)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "rankfm/_rankfm.pyx":15
+ * import warnings
+ * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * 
  * cdef extern from "fast_ops.h":
 */
-  __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_numpy, 0, 0, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_numpy, 0, 0, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
   __pyx_t_4 = __pyx_t_1;
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_np, __pyx_t_4) < (0)) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_np, __pyx_t_4) < (0)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "rankfm/_rankfm.pyx":834
+  /* "rankfm/_rankfm.pyx":836
  * # -------------------------
  * 
  * def dense_to_csr(float[:, ::1] mat, int n_threads=1):             # <<<<<<<<<<<<<<
  *     """convert a 2D float32 feature matrix into (int64 indptr, int32 indices, float32 data, has_any) via 2-pass C scan"""
  * 
 */
-  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 834, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 836, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   {
     PyObject* __pyx_temp[1] = {__pyx_t_4};
-    __pyx_t_5 = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 834, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 836, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_1dense_to_csr, 0, __pyx_mstate_global->__pyx_n_u_dense_to_csr, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 834, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_1dense_to_csr, 0, __pyx_mstate_global->__pyx_n_u_dense_to_csr, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 836, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_dense_to_csr, __pyx_t_4) < (0)) __PYX_ERR(0, 834, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_dense_to_csr, __pyx_t_4) < (0)) __PYX_ERR(0, 836, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "rankfm/_rankfm.pyx":890
+  /* "rankfm/_rankfm.pyx":892
  *     float[:, ::1] rhs,
  *     base=None,
  *     int n_threads=1             # <<<<<<<<<<<<<<
  * ):
  *     """compute [base + CSR @ rhs] in parallel nogil C without materializing a dense feature matrix"""
 */
-  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 890, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 892, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "rankfm/_rankfm.pyx":884
+  /* "rankfm/_rankfm.pyx":886
  * 
  * 
  * def _csr_dense_matmul(             # <<<<<<<<<<<<<<
@@ -37918,31 +37926,31 @@ __Pyx_RefNannySetupContext("PyInit__rankfm", 0);
 */
   {
     PyObject* __pyx_temp[2] = {Py_None, __pyx_t_4};
-    __pyx_t_5 = __Pyx_PyTuple_FromArray(__pyx_temp, 2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 884, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyTuple_FromArray(__pyx_temp, 2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 886, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_3_csr_dense_matmul, 0, __pyx_mstate_global->__pyx_n_u_csr_dense_matmul, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 884, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_3_csr_dense_matmul, 0, __pyx_mstate_global->__pyx_n_u_csr_dense_matmul, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 886, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_csr_dense_matmul, __pyx_t_4) < (0)) __PYX_ERR(0, 884, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_csr_dense_matmul, __pyx_t_4) < (0)) __PYX_ERR(0, 886, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "rankfm/_rankfm.pyx":936
+  /* "rankfm/_rankfm.pyx":938
  *     float[::1] vec,
  *     base=None,
  *     int n_threads=1             # <<<<<<<<<<<<<<
  * ):
  *     """compute [base + CSR @ vec] in parallel nogil C"""
 */
-  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 936, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 938, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "rankfm/_rankfm.pyx":930
+  /* "rankfm/_rankfm.pyx":932
  * 
  * 
  * def _csr_matvec(             # <<<<<<<<<<<<<<
@@ -37951,91 +37959,91 @@ __Pyx_RefNannySetupContext("PyInit__rankfm", 0);
 */
   {
     PyObject* __pyx_temp[2] = {Py_None, __pyx_t_4};
-    __pyx_t_5 = __Pyx_PyTuple_FromArray(__pyx_temp, 2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 930, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyTuple_FromArray(__pyx_temp, 2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 932, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_5_csr_matvec, 0, __pyx_mstate_global->__pyx_n_u_csr_matvec, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 930, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_5_csr_matvec, 0, __pyx_mstate_global->__pyx_n_u_csr_matvec, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 932, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_csr_matvec, __pyx_t_4) < (0)) __PYX_ERR(0, 930, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_csr_matvec, __pyx_t_4) < (0)) __PYX_ERR(0, 932, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "rankfm/_rankfm.pyx":974
+  /* "rankfm/_rankfm.pyx":976
  * 
  * 
  * def assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if):             # <<<<<<<<<<<<<<
- *     """assert all model weights are finite"""
+ *     """raise AssertionError unless all model weights are finite
  * 
 */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_7assert_finite, 0, __pyx_mstate_global->__pyx_n_u_assert_finite, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 974, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_7assert_finite, 0, __pyx_mstate_global->__pyx_n_u_assert_finite, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 976, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_assert_finite, __pyx_t_4) < (0)) __PYX_ERR(0, 974, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_assert_finite, __pyx_t_4) < (0)) __PYX_ERR(0, 976, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "rankfm/_rankfm.pyx":985
+  /* "rankfm/_rankfm.pyx":994
  * 
  * 
  * def reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if):             # <<<<<<<<<<<<<<
  *     """calculate the total regularization penalty for all model weights without allocating temporary full-size arrays"""
  * 
 */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_9reg_penalty, 0, __pyx_mstate_global->__pyx_n_u_reg_penalty, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 985, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_9reg_penalty, 0, __pyx_mstate_global->__pyx_n_u_reg_penalty, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 994, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_reg_penalty, __pyx_t_4) < (0)) __PYX_ERR(0, 985, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_reg_penalty, __pyx_t_4) < (0)) __PYX_ERR(0, 994, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "rankfm/_rankfm.pyx":1029
+  /* "rankfm/_rankfm.pyx":1038
  *     int epochs,
  *     bint verbose,
  *     float user_dropout=0.0,             # <<<<<<<<<<<<<<
  *     int seed=1492,
  *     int n_threads=1,
 */
-  __pyx_t_4 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1029, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1038, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "rankfm/_rankfm.pyx":1030
+  /* "rankfm/_rankfm.pyx":1039
  *     bint verbose,
  *     float user_dropout=0.0,
  *     int seed=1492,             # <<<<<<<<<<<<<<
  *     int n_threads=1,
  *     bint uniform_feature_reg=False
 */
-  __pyx_t_5 = __Pyx_PyLong_From_int(((int)0x5D4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1030, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_From_int(((int)0x5D4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1039, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "rankfm/_rankfm.pyx":1031
+  /* "rankfm/_rankfm.pyx":1040
  *     float user_dropout=0.0,
  *     int seed=1492,
  *     int n_threads=1,             # <<<<<<<<<<<<<<
  *     bint uniform_feature_reg=False
  * ):
 */
-  __pyx_t_9 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1031, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1040, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
 
-  /* "rankfm/_rankfm.pyx":1032
+  /* "rankfm/_rankfm.pyx":1041
  *     int seed=1492,
  *     int n_threads=1,
  *     bint uniform_feature_reg=False             # <<<<<<<<<<<<<<
  * ):
  *     """learn model weights via multi-threaded nogil BPR/WARP SGD with materialized effective item cache and native CSR features"""
 */
-  __pyx_t_10 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1032, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1041, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
 
-  /* "rankfm/_rankfm.pyx":1002
+  /* "rankfm/_rankfm.pyx":1011
  * # --------------------------------
  * 
  * def _fit_csr(             # <<<<<<<<<<<<<<
@@ -38044,64 +38052,64 @@ __Pyx_RefNannySetupContext("PyInit__rankfm", 0);
 */
   {
     PyObject* __pyx_temp[4] = {__pyx_t_4, __pyx_t_5, __pyx_t_9, __pyx_t_10};
-    __pyx_t_11 = __Pyx_PyTuple_FromArray(__pyx_temp, 4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 1002, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyTuple_FromArray(__pyx_temp, 4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 1011, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_11_fit_csr, 0, __pyx_mstate_global->__pyx_n_u_fit_csr, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[5])); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1002, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_11_fit_csr, 0, __pyx_mstate_global->__pyx_n_u_fit_csr, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[5])); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1011, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_10);
   #endif
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_10, __pyx_t_11);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_fit_csr, __pyx_t_10) < (0)) __PYX_ERR(0, 1002, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_fit_csr, __pyx_t_10) < (0)) __PYX_ERR(0, 1011, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "rankfm/_rankfm.pyx":1285
+  /* "rankfm/_rankfm.pyx":1308
  *     int epochs,
  *     bint verbose,
  *     float user_dropout=0.0,             # <<<<<<<<<<<<<<
  *     int seed=1492,
  *     int n_threads=1,
 */
-  __pyx_t_10 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1285, __pyx_L1_error)
+  __pyx_t_10 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1308, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
 
-  /* "rankfm/_rankfm.pyx":1286
+  /* "rankfm/_rankfm.pyx":1309
  *     bint verbose,
  *     float user_dropout=0.0,
  *     int seed=1492,             # <<<<<<<<<<<<<<
  *     int n_threads=1,
  *     bint uniform_feature_reg=False
 */
-  __pyx_t_11 = __Pyx_PyLong_From_int(((int)0x5D4)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 1286, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyLong_From_int(((int)0x5D4)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 1309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
 
-  /* "rankfm/_rankfm.pyx":1287
+  /* "rankfm/_rankfm.pyx":1310
  *     float user_dropout=0.0,
  *     int seed=1492,
  *     int n_threads=1,             # <<<<<<<<<<<<<<
  *     bint uniform_feature_reg=False
  * ):
 */
-  __pyx_t_9 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1287, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
 
-  /* "rankfm/_rankfm.pyx":1288
+  /* "rankfm/_rankfm.pyx":1311
  *     int seed=1492,
  *     int n_threads=1,
  *     bint uniform_feature_reg=False             # <<<<<<<<<<<<<<
  * ):
  *     """backwards-compatible dense-feature wrapper delegating to _fit_csr"""
 */
-  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1288, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "rankfm/_rankfm.pyx":1264
+  /* "rankfm/_rankfm.pyx":1287
  * 
  * 
  * def _fit(             # <<<<<<<<<<<<<<
@@ -38110,44 +38118,44 @@ __Pyx_RefNannySetupContext("PyInit__rankfm", 0);
 */
   {
     PyObject* __pyx_temp[4] = {__pyx_t_10, __pyx_t_11, __pyx_t_9, __pyx_t_5};
-    __pyx_t_4 = __Pyx_PyTuple_FromArray(__pyx_temp, 4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1264, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyTuple_FromArray(__pyx_temp, 4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1287, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_13_fit, 0, __pyx_mstate_global->__pyx_n_u_fit, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[6])); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1264, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_13_fit, 0, __pyx_mstate_global->__pyx_n_u_fit, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[6])); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1287, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_5);
   #endif
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_fit, __pyx_t_5) < (0)) __PYX_ERR(0, 1264, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_fit, __pyx_t_5) < (0)) __PYX_ERR(0, 1287, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "rankfm/_rankfm.pyx":1343
+  /* "rankfm/_rankfm.pyx":1366
  *     int max_samples,
  *     int epochs,
  *     int seed=1492,             # <<<<<<<<<<<<<<
  *     int n_threads=1
  * ):
 */
-  __pyx_t_5 = __Pyx_PyLong_From_int(((int)0x5D4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1343, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_From_int(((int)0x5D4)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "rankfm/_rankfm.pyx":1344
+  /* "rankfm/_rankfm.pyx":1367
  *     int epochs,
  *     int seed=1492,
  *     int n_threads=1             # <<<<<<<<<<<<<<
  * ):
  *     """learn or refine user latent factors [v_u] in multi-threaded nogil C while holding item/feature weights fixed"""
 */
-  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1344, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "rankfm/_rankfm.pyx":1328
+  /* "rankfm/_rankfm.pyx":1351
  * 
  * 
  * def _fold_in(             # <<<<<<<<<<<<<<
@@ -38156,32 +38164,32 @@ __Pyx_RefNannySetupContext("PyInit__rankfm", 0);
 */
   {
     PyObject* __pyx_temp[2] = {__pyx_t_5, __pyx_t_4};
-    __pyx_t_9 = __Pyx_PyTuple_FromArray(__pyx_temp, 2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1328, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyTuple_FromArray(__pyx_temp, 2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1351, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_15_fold_in, 0, __pyx_mstate_global->__pyx_n_u_fold_in, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[7])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1328, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_15_fold_in, 0, __pyx_mstate_global->__pyx_n_u_fold_in, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[7])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1351, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_9);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_fold_in, __pyx_t_4) < (0)) __PYX_ERR(0, 1328, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_fold_in, __pyx_t_4) < (0)) __PYX_ERR(0, 1351, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "rankfm/_rankfm.pyx":1443
+  /* "rankfm/_rankfm.pyx":1473
  *     float[::1] item_bias,
  *     float[:, ::1] v_i_eff,
  *     int n_threads=1             # <<<<<<<<<<<<<<
  * ):
  *     """score (user, item) pairs in multi-threaded nogil C using integer indices (-1 indicates missing)"""
 */
-  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1443, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1473, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "rankfm/_rankfm.pyx":1437
+  /* "rankfm/_rankfm.pyx":1467
  * 
  * 
  * def _predict(             # <<<<<<<<<<<<<<
@@ -38190,31 +38198,31 @@ __Pyx_RefNannySetupContext("PyInit__rankfm", 0);
 */
   {
     PyObject* __pyx_temp[1] = {__pyx_t_4};
-    __pyx_t_9 = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1437, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1467, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_17_predict, 0, __pyx_mstate_global->__pyx_n_u_predict, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[8])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1437, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_17_predict, 0, __pyx_mstate_global->__pyx_n_u_predict, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[8])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1467, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_9);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_predict, __pyx_t_4) < (0)) __PYX_ERR(0, 1437, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_predict, __pyx_t_4) < (0)) __PYX_ERR(0, 1467, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "rankfm/_rankfm.pyx":1485
+  /* "rankfm/_rankfm.pyx":1515
  *     bint filter_previous,
  *     int32_t[:, ::1] out_items,
  *     int n_threads=1             # <<<<<<<<<<<<<<
  * ):
  *     """select sorted top-K item indices per row from a BLAS score chunk using parallel nogil size-K min-heaps"""
 */
-  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1485, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyLong_From_int(((int)1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1515, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
 
-  /* "rankfm/_rankfm.pyx":1476
+  /* "rankfm/_rankfm.pyx":1506
  * 
  * 
  * def _select_topk_chunk(             # <<<<<<<<<<<<<<
@@ -38223,18 +38231,18 @@ __Pyx_RefNannySetupContext("PyInit__rankfm", 0);
 */
   {
     PyObject* __pyx_temp[1] = {__pyx_t_4};
-    __pyx_t_9 = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1476, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1506, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_19_select_topk_chunk, 0, __pyx_mstate_global->__pyx_n_u_select_topk_chunk, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[9])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1476, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_6rankfm_7_rankfm_19_select_topk_chunk, 0, __pyx_mstate_global->__pyx_n_u_select_topk_chunk, NULL, __pyx_mstate_global->__pyx_n_u_rankfm__rankfm, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[9])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1506, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_9);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_select_topk_chunk, __pyx_t_4) < (0)) __PYX_ERR(0, 1476, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_select_topk_chunk, __pyx_t_4) < (0)) __PYX_ERR(0, 1506, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "rankfm/_rankfm.pyx":1
@@ -38290,8 +38298,8 @@ static int __Pyx_InitCachedBuiltins(__pyx_mstatetype *__pyx_mstate) {
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   CYTHON_UNUSED_VAR(__pyx_mstate);
-  __pyx_builtin_round = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_round); if (!__pyx_builtin_round) __PYX_ERR(0, 1248, __pyx_L1_error)
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_print); if (!__pyx_builtin_print) __PYX_ERR(0, 1249, __pyx_L1_error)
+  __pyx_builtin_round = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_round); if (!__pyx_builtin_round) __PYX_ERR(0, 1271, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_print); if (!__pyx_builtin_print) __PYX_ERR(0, 1272, __pyx_L1_error)
   __pyx_builtin___import__ = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_import); if (!__pyx_builtin___import__) __PYX_ERR(1, 119, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 175, __pyx_L1_error)
   __pyx_builtin_Ellipsis = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_Ellipsis); if (!__pyx_builtin_Ellipsis) __PYX_ERR(1, 436, __pyx_L1_error)
@@ -38357,7 +38365,7 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   if (__Pyx_PyTuple_SET_ITEM(__pyx_mstate_global->__pyx_tuple[1], 0, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(1, 763, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
 
-  /* "rankfm/_rankfm.pyx":840
+  /* "rankfm/_rankfm.pyx":842
  *     cdef int64_t n_cols = mat.shape[1]
  * 
  *     indptr = np.zeros(n_rows + 1, dtype=np.int64)             # <<<<<<<<<<<<<<
@@ -38366,7 +38374,7 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 */
   {
     PyObject* __pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
-    __pyx_mstate_global->__pyx_tuple[2] = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 840, __pyx_L1_error)
+    __pyx_mstate_global->__pyx_tuple[2] = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 842, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
   }
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
@@ -38430,41 +38438,41 @@ static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   int __pyx_clineno = 0;
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } str_length_index[] = {{16},{6},{8},{1},{2},{15},{23},{25},{32},{20},{22},{1},{1},{37},{45},{22},{179},{8},{15},{7},{6},{46},{49},{50},{2},{5},{7},{9},{83},{92},{83},{92},{15},{50},{18},{30},{37},{27},{83},{92},{5},{1},{8},{1},{1},{1},{1},{4},{4},{8},{15},{20},{12},{9},{17},{8},{8},{12},{10},{8},{10},{8},{7},{14},{11},{10},{19},{14},{12},{10},{17},{13},{12},{12},{19},{8},{17},{11},{4},{8},{8},{13},{8},{18},{3},{15},{5},{6},{17},{13},{18},{11},{5},{7},{4},{7},{4},{1},{11},{18},{8},{5},{3},{7},{7},{4},{7},{11},{12},{5},{15},{11},{6},{5},{6},{9},{5},{6},{5},{3},{15},{5},{7},{7},{6},{7},{4},{8},{5},{2},{7},{10},{10},{9},{13},{13},{5},{7},{10},{6},{10},{10},{9},{5},{5},{12},{10},{8},{9},{5},{8},{12},{12},{9},{17},{13},{17},{8},{14},{3},{11},{7},{4},{8},{6},{7},{6},{9},{8},{4},{3},{4},{3},{2},{5},{3},{3},{9},{6},{5},{4},{7},{4},{3},{5},{5},{1},{14},{10},{7},{11},{8},{9},{3},{5},{5},{13},{13},{6},{12},{9},{12},{14},{4},{10},{5},{8},{13},{16},{4},{5},{4},{4},{6},{3},{13},{3},{5},{10},{5},{7},{10},{10},{9},{13},{13},{10},{9},{13},{13},{19},{6},{6},{12},{11},{3},{7},{4},{3},{4},{6},{3},{7},{3},{4},{1},{4},{8},{4},{8},{5}};
-    const struct { const unsigned int length: 12; } bytes_length_index[] = {{1},{154},{212},{354},{316},{262},{351},{843},{147},{2444},{426}};
+    const struct { const unsigned int length: 8; } str_length_index[] = {{16},{6},{8},{1},{2},{15},{23},{25},{32},{20},{22},{1},{1},{37},{45},{22},{179},{63},{8},{15},{7},{6},{46},{49},{50},{199},{2},{5},{7},{9},{18},{27},{18},{27},{15},{50},{18},{30},{37},{27},{18},{27},{67},{5},{1},{8},{1},{1},{1},{1},{4},{4},{8},{15},{20},{12},{9},{17},{8},{8},{12},{10},{8},{10},{8},{7},{14},{11},{10},{19},{14},{12},{10},{17},{13},{12},{12},{19},{8},{17},{11},{4},{8},{8},{13},{8},{18},{3},{15},{5},{6},{17},{13},{18},{11},{5},{7},{4},{7},{4},{1},{11},{18},{8},{5},{3},{7},{7},{4},{7},{11},{12},{5},{15},{11},{6},{5},{6},{9},{5},{6},{5},{3},{15},{5},{7},{7},{6},{7},{4},{8},{5},{2},{7},{10},{10},{9},{13},{13},{5},{7},{10},{6},{10},{10},{9},{5},{5},{12},{10},{8},{9},{5},{8},{5},{12},{12},{9},{17},{13},{17},{8},{14},{3},{11},{7},{4},{8},{6},{7},{6},{9},{8},{4},{3},{4},{3},{2},{5},{3},{3},{9},{6},{5},{4},{7},{4},{3},{5},{5},{1},{14},{10},{7},{11},{8},{9},{3},{5},{5},{13},{13},{6},{12},{9},{12},{14},{4},{10},{5},{8},{13},{16},{4},{5},{4},{4},{6},{3},{13},{3},{5},{10},{5},{7},{10},{10},{9},{13},{13},{10},{9},{13},{13},{19},{6},{6},{12},{11},{3},{7},{4},{3},{4},{6},{3},{7},{3},{4},{4},{8},{7},{1},{4},{8},{4},{8},{5}};
+    const struct { const unsigned int length: 12; } bytes_length_index[] = {{1},{212},{354},{316},{262},{90},{351},{890},{147},{2522},{426}};
     #ifndef CYTHON_COMPRESS_STRINGS
       #define CYTHON_COMPRESS_STRINGS 90
     #endif
-    #if (CYTHON_COMPRESS_STRINGS) == 1 /* compression: zlib (3851 bytes) */
-static const char cstring[] = "x\332\275X\313\177\323\306\026&!@ \271\020\047!<oQ\002\004($\255\023\010\217R\372s\200\264\351\353\342\204\204g\253;\226e[ K\266\036N\002\264t\351\245\226Zj\251\245\226Zj\351\245\226Y\372O\350\237p\2773\262\035\047\004n\333Ko~\2614\322\314\2349\363\235\357<F\207,\203)\232\242\025\005\271\242K\245[\002\263\204\317\327\005=\367B\226\254;\323\267\204\333?\310e\335\330XU\3445A/\010\267%]\263\224\242\255\333\246\300\264\274\220W\014\032\270\363\265\242\265;L\313P\362r\276k\260\240\033\037\354\337\376\2563\362\316Ww\231\246\351\226\300LS)j\202\245\013\206\314\362S\272\246n\010e\256d\rJ.j5\246*y\241\254\347\345+\202\274^\301\\\210\272 ]\240u/\024t\003;\326.\\\021\212\020\325\036l\226XE\306R\002[WL\341G\335\222\005\253\004$\356nX%]\023\360./\253JN6\230%c5\322\017R\r\032\244\t\017\356?\230\272z\343*\327\326\220\t7S0\355\234\244BQ\331$\320r\266\242Z\220nmTdsZX,\010\033\272-h2\364\302.*\030\327=\301*\311\232`\312\0265\204\013|\317\314RtM\304t\030\352B\013&\245&\323\354\005\246\232\3624\313\347E\214\223%]U\251O\327\314i\226\223\362\212\311r\252,kt-0EMVd\252\252K\330\212\260\304\264\227\013?\010r\241\320\022\250XrY\220\230T\372\300\350\202\256\346\247\260\033S\002\034R\t\273\303t\303|\377\204\016\305v\314(J\312\025e\352\216\362\342\212\362\00273Q3\317u(0\311\322\rSxV\023\225\237\004f\310\002\231\276\0009\220;\005\221\0330\211\004\002\230$\270 3\3136\344\317LV\256\250\262\270&+\305\222%\224Y\021\303\355\274l&\"\223AB\322\013\321k\242R\370H\262\273e~\034\221Smu\273\221\370\010\352\252zQP\225\227\240sI\327\363\2674\035\223\013\314V-A\024\r9oK\262(\ny\233sK\323\265)P\275\2460\025\275\022\255\210A0j\241\374Y\353>]\331X\267\271\335\266Y\236\031\006\203Z\314b\323\273\364&\356F\376\222x\272\211A/5}M\023\236\25123\210+\242\t\016\346mU\376\3116\341h] \330\377;\006$r7|\355\217\200of\371\356\342\342\374}UU*\246b.,~\367\343\003\330\355\001d/\313U[\326$\231B\351\364VT\025\305\007\033\353\370\335CH\021\177\224\327\255%\271 \212-\267\2071\000<\005\206\255FQ\266\210 \364\"Os\360W\2605\211\356""\3502\333\263\224r\005\261\216Ze\270\037\277\353\004(\2654VN\356\264\274(\302\206\"\340\226^\232v9yjI\241&\005\255\244ek\025Ez\t\t\367\265\366\270\232E\306%\031U\233\251m\261m\036uZ\022\217\243]/\344uz@\220\353\250bv\251\336io\315\263d\223\366\"\231\206\230\2275S\306\246\254\262\255\362\027h\326dI,\200\235\364\243W\024\243D\354Z1EI7t\033\321W\026+X\234\0003e\212\221\242\245W^b\333\240\036\"e\233\233b\022\233\230Z)1\006\212\027a\366\255\334\306iMQ\332\240\245\210 \314\334\320$E\237\356\254b\346D\204S\221\313CS\313\347\010L\303\3121S\246\237X\256\345d\213I|a\321\026\225\374\272\244\222v\320\026\201R\302 \351%V\304$\315\222t\033\027k=\017\334\212\"Kn9r+\372A\024\260\320\313\"|Z\\L`\261t\332\177\236\214\306/\204@\222\314I+\253D)\323\224\025\r\226\226\313\025k\003\204D\242\224aP\236\334x\021\300/\330\243\241\033\320\264\200\334%\033\004^M\001\004\005\225\025q\321\2315;\303osW\221Sa\202Vf-\330\252Zb\246H{UhwJ^)\210\244.\335\240\243bm\240Ei]B\244\343\255\n\242@\273!\002\343\255\007e\356*Z\362z{xr\303\306[\263\266\246t\217\247\026\r\201\212\270\320+\354\200%iQ\321j&\254\rWV\314\304\204\334\231r\n\343a\267uy%\303\325\300\024K\256\300{\267\3326\332\2576DlF\355D*\324\030\272&kV\347\005\257\022v\3061U\025\021{-\212\277\342V\374%\0263\270\033\017&&LB%\014\225.\340\266%\252\266\245\201\277\252\t\"\223Z\232h\350k\270\266\314\250\201>\374\005\\HC\300\310+eM{\245U`\314\312\006\214\016B\342?\231J\215r\255B\006\251\200`\025LP\301\017]W+z\245\002\370\254*\365\031\255\250\336\212\356\006[\023\271\221M\003A\tD$\376\265\346\242\251\000\023\303\000z\204\215i\224L\370\200\2267I\320\266\360\330\306\200\"\220\014w2d3\271&\356\327j\227k\255\372\200s\247\335ne\010\324J\210\n\255T\305\363\207Y\262\013\242\241\025\351^P\311\177\300\223m\017$\021\226\344\356\3075\204\307C\234\215\002\315.\223\337\212\234\030(\001\001\222-\312\345\234-RxOZ\330\204\235\020\327\356\020\327\356\020\327nS\324\356&\256\335M\\[\351\014V\332\203\225\356\301J\367`M!7\022[\351\205\034\035\341\026\226\262+PA\246\214%\346""\r\275\002;\326\266\002\014J\002\374\3233\025\007H`\224\303\260\037[6\021\021k\262\221\323M\204x\205*\235\365u\272\340\207\334B\301\274@?j\277\222\r\335\374\327o=\277\357\337\263o\260>S\177\3420\307pG\335\254+{s\376\260\177;\250n\366\rl\353(x\013\376\204\377}\330\263\263\343\2753\376\274\250NG\242\331\221:\333\354;R\267\235\214\363\310\235\207\274\2647\357\025\375\254\257\004vx?\032\213\214Fj\367\001/\303\243\241\034\3155\206\033\351?<`\325\235qW\274qo\306{\344g\374\047A!\\\210&\033\275\215\361\335\007<\013\367\207\205h\2411\321\310\374\201\001\003\3654\366th\317\276\375\233}\373~\357\337\263o\330\031\216G\316{YO\r&\303\336\020\213Lx\270\234t/\001\265\224\177\326_\362\201[\312\031q\026\334q7\335\354;T\237\250/8\023\3167\356=o\277\227\363\001\336\201\337\326\352\2223\354\314:9w\257\233\336\354?R\2576\373\004\257\247\331w\334\335\347>\36224\246\272\331?\354L\304\243\223\036\363j\376j0\023d\t\334\376\337~u\262\216\342V=.\351-\214\260\3462\267\006\335\027\202\361`6\310\205\007\302*u\275q\322\316=\267\307\035s\255\216nk\001\243\256\327\3168Vg\216\351Nz{wv\322\274\257\335\264{\027B\177\016\322\355\361sn\312=\353f\351\361\225\223\242\233]\3174\373N\271w\374\223Pn)\260\302\353\321D4\037I\215\323\361\312\352f\337i7\323<x\210v\367\026\nb;\243\204u|j\nvd\233\375\307\241Z\252\371\327\020n\303:\356\334p\347\274a/\335\0065\325\002\363\237n\366\377\016f\315]\206\205\231g\302\027\276NpkC\271\340M\007=\335@\216\267`\334\211\337\331\350Y\374 \373\347\260\033\004v\004\334\230\263\002s\366x)\342\337QG\0062)o\274\331\367\217\372\022\247\371\262\333\213\376\016\007\215\372H}\036\220\035u\nn\006\252\357\005\377\227\375\203\301XP\r\367\206\263!\353\346\345\201\3376\234\036\014e\016Gc\333\303/\220\275\002\262\317\272\004G|\200\224;\001wJwCjz|\313\333\340\006\177v\245\321L\270\034\r\220\203\277\017\205+p\323\354\016\024\206;(<\367\306\274*\355\361\250\363\304U\375\311\240\047H%\017\254{\337\344\177\330\343\301\204\007U\022\327\033\237$\321\"\"\310D\224\341\313\275\253\331\301F*1\355\214\003""\035\306\200sz\213J*\366=\353u\334h\021\301\221\265\001;\005\230\263\335 \354\217\047\277\010;(\275\202\265.\304\227n\206\243\341\323\250\326\3106\2448\273\034/?\213\237=o3\347&7T7v-OL\326z\344-\372\017\203\341\340zx)\232\215^\304\017\236\307\317\177\216\177\026\267c\315mt\322=\037\237\271\032`{\357\303\370s\016[\2021\340\375d\313Aw \\\364V\375\264\237IH\047\301A\252\ta\272q\2468w\335;\353e\333x\307\007N\270#n\206\313\337<x\212s\207\332\315\376\303\365\027\211YG\235\371x\354\242\337\343\237A@\316E=<\016\360\327N\021\260J\320\301\360\261\373K~\352=\364I\214\264\344X\210\357\313\336\240?O\256s\202\207\261UNv\3509\341]\362g\340\313f0\021\334\017\2071\371q\004#\235ro\306\347\346\002\026lD\203\215\371\226)\036n\366\235q7\342\213\267\302\361\360Ft\273a\304\331\177\307\377\316\3059)\241*\267\363^\347\0326\373\245\277\327O\267\320\353\334\016\327_\222\353\023\000g\240\177\312\273\350\303)\006\353\231\372\212\203F\177\375 w*\323\275\302}\264\177\010\2449\341^$\334<\3057`Y\nH\375\321\001J\240\t\347\310\360\337\303\347G\2746\035\234\251\266{\241/\036=\347e\274\354;nI\360\247\334O\321\267\352\337\nV\303tx74\242c\215\2366=_td~\330\237\267\022\3118\037{\214\207\204\255;\226\351b_B\323\307\336\023_\206\255\036\205\213\321r\343P\274\004\216\002G\366\016Mi\261$\300|\347\276\362S\tnyo\302\003\324\204M\312\371\024I\352\215\217,\273o\363\037\2077\007G\234\257\270\236\203C\316A\367(\247\363\320\210s\207\357d\364\244;\336\304e\332\357\365/\004#A&x\2024?\037\345\033\027\343\245\345&\306]\307\036\370\360Qo\311\263\300\212,=\336r\351\026\217\\\002\277\346@\220\333\004~sh\234bk|v6H\007\367\020.\323afs\010\034pW\343\263p\253 \333$}Ns\217\337\306\002\270\322\247\211+%\377\344PC\3657\356M\357;\377\r\304,D\274n\331\361\002\034\201\347\374M\377Pin\247J;|\\j?t\371\370&\362k\0372\033\047F\247\371\367x\376\177\177\323L\252\204\366\345#\307\t\322\374\023\367\t\334\262\327\347\013\\F\310\260\203y\356\216=\315\277\022.\276\365\n\274\\U\221j\356\221\343}B\231\202_\306)\205\363\313.Q\345Z\2607\270\tw""\255\356\214.\024G\262\235 \323L\212\2361G\211\317\244\203Tp1\234\010\347)\247\357xS\212r\274V\356\037\250\337\206\027\237\207c_\361%D\376\026y\3337\356o;_\016;\227)\301\265\326\032\250\337D\211\264\317]\202\333\r\236r\277\340\033|L\321\345C}\037)\032\036\242hh\325\323-^\r\324gq\010\351?\205\332k\321{\210\343\314\254\317\232\255\307\247(\334\224\360u\343R\274\374$~B\366\210\245B\\Pb\345Er\256\372\"\th\250\314\373\010\225*\270\3153\367@\247\207\227:[}<\047\017\304\003\004\313\023T\200U\376\204\032\324}\001\206\216\371\257\302\261\260\032\355\215f\242G\311\241\342+\310\270\016w\231\363\217\005\373A\033\023\266\370:\342\353}\351\366t\335\2569\355\333\337\026\357\377Dfx\177}\374Q\204t\262\311\266\212;\365n\236\331\371\330\036Jq\345\335\307_\234\177yw@\370\263A6`;_Ha\352C\211\013\242v\351\336=M%c\333\267\327\316y\347\027\257\325_\210O\177\036\364\005\337\203\0037\032\335\022;\271\r1w\334;\350\217\370\213\3012\"\032#@\210@%p\275\032\014\204s\321\321\250\324P\342G\240\254\034\313Z\254U\343\352\353\337\367\354y\323\363m/n\337\366~\327\233\314\240\004\371\r\304d\203|8\031\355\213\0367\226(\364\374\024\377\224\220\334\304h\253g\236&\315\367\336\355\245\230\203)\361\271k\301C\2447\356\217\251\235\311\265]\0356\021e\026y\261\217${\244\376+g\376\320\230\303\232\270h\374\214\276\214\272\361\004\026\356\215\316Aa\326\304\2605\340\303G?\304Q\355*\217\306\357>\232\3168\317\263\223\\\306>\260\346jhF\027\033\347\032\271\370\301\343\3701\213Y1.\232\261\271\026\257m@\367W][\370\353\363\234/q\356I\363\342\000\231a\304\377\206\027\201\351\367\3674\223\265XkM\276\277*\207\000\005\374\010\n\360\347\0305\3133Rjxs\2272\2419t\222\352\2141\247\344\346\000\336\350i\367\033\340\3066G\217\341\000I\341\3618\035\270F\211\036\307\311\231W\343\313\013\021\213\252\364\352m2\216h\205\033\016\014t{\343\245\261\354c^\316\320W\213\305x\005u?8R\212KFl\374\212\315\276\355\311\320\2363\275\363\275\230\021\037\233\362\237\006\265p)|\323\230id7G\261\2407\026_\240<\225n\216\"\005Q5D\207#\276\326]\204\263\343""\247\0217W\374q\324\264\247/\"\007\362\217=\360\234\323g@\336a\274\025\256\340\310;\213H\266\036\232\361<\222\337J\274\002\306\375\274)\320\211U\nN\205\231\344\350\324\230\214\037,\305K\374T\3631\304\237\365n\"\223<\r\252\037Z\2519H\361\350<B\316\212\177\336\257\241:K\254F9vh\024\047\364k\374\330<:\351\225|\346[\364u`\023f\272\214LS\364W\203kpH9\272\326\330\337`4\347(\"\374[\004\255\203\021f\037u\262\361\330e\250\230\264.\3612\365\360\221]k\277N\216\336\365%\277\305{`sr\301S\274\370HS\0009\331n&G\371\032\312\363\"\230bz\223I5\262\3659\251\310\375\021\316\272\356\030\274H\333\313?\345\335D\241R\340\260\354G\266\037@e\322Lj\244w\002\351\316\257!]\361\254u\322\334\345\233\305D\364uc\266\241\306O\237\361\202\005\332\037\032x\357yr\260~\277\365\345\000&x\r\337\232\301Vj\250\261\006\340\"\031*_\244\344\240L\332Y<\213wU\322\177dg\207\3539g?V\260Q\220Nx\231\344[\345*R\302}L4\250\252:KI\352\223\244ni\237\274\307\273?\327$\047\342\226\342\237!\376\366t}l\270\201c8J\335\377\000\203\242Q/";
-    PyObject *data = __Pyx_DecompressString(cstring, 3851, 1);
+    #if (CYTHON_COMPRESS_STRINGS) == 1 /* compression: zlib (4070 bytes) */
+static const char cstring[] = "x\332\305XK{\323\326\272&!\201\204\244\200\223\020.\341\024%@\002%I\353$\204K\013}\034 4mw7NH\200\002\325\226e\331\026\221%[\027\347\302\255C\0175\324PC\r5\324PC\0175\364\320?\241?a\277\337\222\355\230\0208\335}\272\317\311\023k-\255\353\267\336\357\375.K\307L]\220UY\315sRI\023\013\2679\301\344\276\331\346\264\314+I4\357\316\336\346\276\373\207T\324\364\235\rY\332\342\264\034\367\235\250\251\246\234\2674\313\340\0045\313ee\235\006\356o\226\325V\207a\352rV\312v\014\3464\375\263\375\037\266\265G\336\375\376\236\240\252\232\311\t\206!\347U\316\3248]\022\2623\232\252\354pE&d\005B\256\250\025A\221\263\\Q\313J\323\234\264]\302\\,5%N\321\276S9M\307\211\325\251i.\217\245Z\203\215\202P\222\260\025\047l\313\006\367\213fJ\234Y\000\022\367v\314\202\246rh\313J\212\234\221t\301\224\260\033\311\207Uu\032\244r\217\036<\232Y\270\271\300\244\325%\302\315\340\014+#*\020T2\010\264\214%+&V7wJ\2221\313\255\344\270\035\315\342T\tr\341\024%\214\353\234`\026$\2253$\223*\334\024;\263`\312\232\312c:\0245\325\204I\256H4{YP\014ivUP7\227\377\201UJ%\034\320 -\0265\303\344\346\246\223\0137\246\027n\316O/.\334\300\001!\264 \322b\006W\202\3749\331\344DAQ\204l\226\3076\222\250)\212\024\367\317\n\0311+\033BF\221$\225\2369AVb\2011A\023\201\004\327\334U\312\345\232\362\310\246T\304\202b\3413\243s\232\222\235\001\030\206\0104\305\002\300\301t\335\370\364\2046C\367\317\220\004\323\322%^\227\362w\246,U\206j\213S\320\200\"\023\352*\035p\2469\006\032\223J\234\250Y\004\200\021\353V@3\343N\223\002\330A\221f\314\002\221J\312~\273\267-\226z\375\226\213;\014\316\"\025M\031&\214E0L\031\264j\355\0019,E\320\345]\246-\200\215M\205,w\205T\251\362\257\264\214q\047I\347\333\224 K[\340\253yQ\236\226g\356\312\257\246\345W(\214\030\355,\2032\007ei\020\370y\205\227_\306-\315\315\266$9_\200\242\237o\361r.\356\352lb-\355\323w.\223{\251hyN\2217\201SA\323\262\267U\r\344\316\t\226br<\260\314Z\242\304\363\\\326b\354R5u\006d\257\310\202\202^\021\200\230\030\004\275\344\212_7\313\331\322\316\266\305d\376@y\202\256\013;\\V0\205\331""\003zc\203#\213\211m\335\300\240MU\333R\271\347\212$\350\204;o\200FYK\221^\002r\275\363\014\026k9\350tV\356%TE\232%G\221#q%n\006\252\204$\222\010\005\222\226[\030~m\010\305\222\"\3611n\\Q\310c\270\005YRk\367VV\226\036(\212\\2dcy\345\247_\036\001\267GX}M*[\222*J\344\rg\367\034#\317?\332\331\306\357>\274\002\377\213\264m\256J9\236oZ.\320\004rd\333{\225\274d\222\202\250!Ks\360\227\263T\221Jt\031\255Yr\221\254\231jEp\221\225\032!B5U(\306%m\317\363P\002\017\274\304M\303*\306o\315U\250J~\047\256YjI\0267\261\302\003\2655\256b\222vh\215\262%(\255e[Dh\327D\346\n;\032\244mz\001\271\333\242\030\035\242\267\353{\363L\311\240\263\210\206\316g%\325\220p(\263h)\254\001\325\212$\362\360G\354GM\344\047x\234Z6xQ\3235\013\016T\342K\330\234\0003$\362S\274\251\2256qlp\007\336\252E.>\366\017\202R*\010\0028\232\207\332\367\302\023\343%9Z\235\266\"\202\010\306\216*\312\332l{\027#\303\303\245\361l=T\325l\206\300\324\315\214`H\364\343\213\225\214d\n\"\333\230\267x9\273-*$\035\244\205\327\0201H\334\304\216\230\244\232\314\351\210\346v\226\374\024/\304E\206\354\202~X\nXhE\036F\311\257\304\260\230\032\235?KJc\017B \216\307$U\323\017Ip/\026\242^\311\334\001!\021\353$(\224\305\047\026\307\331\003g\3245\035\222\346\020~$\235\300\253\310\200 \247\010y<4\301\234\237c\305\342\002\271\"\301l\006\307\234\245(pn<\235U\246\323\311Y9\307\223\270T@F\331\334A\215\"\263(\031q\255\0043nUx`\274\367\"/.\240&m\267\206\307\005\016\336\234\2657\245s<\325h\010D\304\203\232\366B\227\254V\014h\033\246,\033\261\n\2311ed\2307*\315\307\256\244\010\031\t\261\r\254#\367\017\023\336\253[\250\357\356\3608\221\322\3667\310\0254UR\315v\003\213\366\373\275\221\242\360\206\242\231\006)l\317\213\022\225\005\330\034\363(\006\364B\251\010\245  \270\311+\226\251\202\304\212\0016\223l*\257k[x6u\251\202C\254\001v\244\302kd\345\242\252\356\252%h\264\264\003\315\203\225\370\217\247R\245X)\221VJ`Y\t\023\024\220D\323\224\222V*\001C\263L}z\32377}\264.l\361L\323\206\016\317\0046\022\t\233sQ\225\201\211\256\003B\302\306\320\013\006\014A""\315\032\264\320\007>\262\205\001\271!\t6\245KF\374\214m\260Y/V\232\201\232\021\250Uo\372y\344<p\r\315\200\303\242\200Q\260r\274\256\346\251\314)dD \313\007/\264\"\324\311l\220I\010\263\307r\026\022-\253H\306\3133v \216\003$\213\227\212\031\213\047\037\037\327p\010+f\257\325f\257\325f\257\325\342\251\325\311^\253\223\275\226\334\036,\267\006\313\235\203\345\316\301qX\347;\222\023\370\\h\312*A\004\211\002\027\237\325\265\022\364X\331\3632\210\313\370\247w\212\320\210c\024\312p\036K2\340\026+\222\236\321\014\370y\231\202\375\026\010\271\025\223\322h\252e{\033\355\364C\314!\047\237\243\037\325w%]3\376\371{\327\037G\016\365\236\250\n\365\236\023U\313N\331O\234%Gr\223\356\222\233\367\322\236\354[\301\203p4\324k\211\203\007l\006\247\002)\\\254\r\325\222\177z\300\2063\347\254\273\343\356\234\373\304Ky\317\374\\\260\034N\326\272k\343\007\017x\036\034\tr\341rm\242\226\372\023\003\006\252I\234\351\330\241\336#\365\236\336?\372\016\365\016\331C\321\360e7\355*\376d\320\035`\223\t\027\217s\316Uw\321Kx\027\275U\257\\\357I\330\303\366\2623\356$\033=\307\252\023\325e{\302\376\301\271\357\036q3^W\275\347\350\357[U\321\036\262\347\355\214s\330I\326\373NT\313\215\036\316\355j\364\234qz\235\047n\212\306\224\353}C\366D42\351\nn\305\333\360\347\3744\201\333\367\373;;m\313N\331e+\275\267\005{\313\021\234\nd_\366\307\375y?\023\034\r\312\324\365\306N\332\367\235.g\3241\333\262m\371\002u\275\266\307\261\273`\033\316\244{x\177\047\315{\350$\235{X\3647?\331\032\277\350$\234\213N\232^w\355\004\025V5\325\350\031s\356z\347 \334\252o\0067\302\211p)\024k\347\243\365\215z\317y\047\325\350?F\247{\017\001q\234\021\302:\032\233\201\036\205z\337\031\210\226h\3745\204[\260\216\3337\235Ew\310M\266@M4\301\374\037\047\375\177\016f\305Y\203\206\005\327\360&\274\2071n-(\227\335Y\277\253\023\310\361&\214\373\361\273\030>\217\036\245\3773\354\006\201\035\0017j\257C\235]n\202\370w\312\226\200L\302\035o\364|Q]e4_s\272\321\337\346\240^\035\256.\001\262Sv\316IA\364\303\340\377\232\327\357\217\372\345\340p0\037\010""\235\274<\372\373\216\335\205\241\202\315\320\370\340\345-\326^\007\331\347\035\202#:J\302\235\2059%;!5\\v\344\017\340\006\177\016\244\321\\\260\026\016\220\201\177\n\205i\230i\372c\024\372\253G\253\257\001m_\177\324\177\001\303\373\257\340\244qm\357\025\217F\337@u\241\252\333g!\364\234\363\030(]\365\026\375!\250lp\310\236u\273\242\361\\\224+FE5R5\254<\324\306\367\205;\352\226\t\275S\3663G\361&\375.?\021\277\010\235\210\222e\003\275\376\230ae\022\264;:GB\363\360M\023a\212\035\344\3433\367\327\0221i\346l\234n\024\032L\356\221T\001\242\363n\333@W\234t\274)\251b\014\nLw\302{$\232\3746h\343\277\213\023NEWo\005#\301\257a\245\226\256\211Qz-Z{\036=\177\321\342\344-F\201N\2554m<\336\353\211\273\342=\006B7\202\253\341|\370*z\364\"z\361[\364\033\377\241\026\231\366\3179\227\243\013\013>\216\367)\355}\303`\213\265\007x\277\3343\375}\010\347\335\r/\351\245b:\2130\275rL\305N\234\311\203\336p/\272i\302\273\217\300\322\253CU\370\324\343\325W\264A\013\320U[\307\013@\315\300\n\306\031\254\321\321\263\316\260\223b\222\324\373\307\030\177\251\336h\315m\364\214\330K\321(\030\343]@P\310\204]\314\027\261f;\017\005\210\220V\367\260\307U/\361\t\n\267v7\301\2645w\320[\"\363=\313\\\351\00638\234h\002\374\233\203?1\374\t\377A0\204\311OC\250s\314\271\025]Z\364\005\177\047\034\254-5\225\366\270\336s\301\331\211\256\334\016\306\203\233\341w5=J\377+\372W&\312\210\261\2710F\034\266\257\003\226;\336a/\331\304\271]\034\257n\222\373!\000.@\376\204{\305\203a\016VS\325u\033\225\276j?3l\303\231f~\242\357$\350u\326\271B\010\273\262\247\203\003\344\024\373\302\243\024\304cv\022E~\206\337\031v[\304\261gZ&\216\276h\344\222\233r\323\037\271\006\202?\341|\205\276\r\357\266\277\021$\203{\201\036\236\256u\265\210\374\252\275\346\347}\312^0\033gcO3\267\264W\236u\022\035<\215\t\375\324}\346I\320\325\223`%\\\253\035\213V\301f\340(|Dh\332,vr?9\273^\"\306-\353N\270\200\232\260I\330_!P\276\361\020\351{\353_\034\257\017\016\333\33739\007O\332\375\316)F\374\223\303\366]v\222\221s\316x\003\217Y\257\333\233\362\207\375""\224\377\014\251\306R\230\255]\211V\327\032\030w\003g`\303G\334U\327\004+\322\364z\333\241\"\032\376\312\273\006\240\346\202\307\341px\277\326\207H\32189NN>\2728\357\047\375\373\360\333\311 U?\t\"8\033\321EX\241\237n\220P\347\231\203\370\200\n\260\274\257b\313\213\377\311xNV\3378\267\334\237\2747Xf9d\t\324\276\006\020\005\206\366_\372\207H\213\373E\332\347\022\304\326K\207K\250#\320\367 \3042v\264\253\377\337\216\342\177oi\304\211M\353\3617\273\025\222\374K\347\031\254\270\333c\033\\\203\207\261\374%f\275]\215\277\342]~ts,\303V\020\303\356\223\235~I!\210=\306)\353`\217\003\234\320u\377\260\177\013\326]\336\357\214\310\355\244\333>\251\021\347i\243\266\034]H\372\t\377J0\021,Q\032\262\257\245\020fXz\217(\376\035\214\3762\374\300\264\047\"\2444i\336*\230y\356o\034\262\257Q\344l\3565P\275\205\254\256\327Y\205\225\016\2169\337\262\003>%g\364\271\276\277\311y\036#\022\232\325d\223W\003\325y\334\233\372\306\220.\256\270\217\275!o\336\023\032\315\327_\221k\312\301\353\332\325h\355Y\364\214\364\021\211\310Q\344H~E\302\014V\277\215\375\037.\023=\204J\031V\300R\202\201v\017\313\316\366\372X\260\037\210\006\010\226gHZ\313\354\ri\263\363\n\014\035\365v\203\321\240\034\036\016\347\302\047\361=\350{\254q\003\206\265\350\235\366\217\2006\006t\3610d\373\335q\272:\212\353v\253\370\257\205\207\377 \220|:\245\377[\026i\007\237\017.\t\211\217\303\322\376\327\326P\362+\037\277\276\265\377\351\336\005\341/\372i_\330\337 \006\211\317\3059,u@\367\301Q-\036\333*^\333\227\355\267n\263?\027\235\377\306\357\361\177\006\007n\326\342\025\307\234\005D:\212I`v/r\324\301/\352\225\267\321\333w\321\273\367\2507:vk\205K8\332q\267\337\033\366V\3745x=\201@#\222\025`\017e\177 X\014O\205\205\232\034=\001\255\245HB\306]\216\312\257\3778t\350M\327\217\335(~\354\376\251;\236A1\367\007,\223\366\263\301d\330\033>\255\255\222{z\031\275\214\r\301\300h\263k\211&-u\337\353&\277\204)\321\245\353\376c\244T\314f\023\373\343u+5m\300\023\255\260;\014\342\366\211\352;f\035\047Gm\241\201\207\312>=\254!i=\213\215\273\303K""\020Xh`\330\0260d\243\037\343\006\272\300<\366\307\257\206=\316B\367$[\243\027\314Z\010\214\360J\355R-\023=z\032=\025\"!\037\345\215\310\330\212\266v \373n\307\021\376\372<\373\016\256sI\226o z\014{?\260\2742\371\351\236F\274\227\320\334\223\235\257\314 \300\355a\030\331\377\013\214\232gQ+1T? \351h\234<G\251\313\250]p2\000o\344\274\363\003p\023\352#\247q/&\027z\206\356\221#D\2173d\360\033\321\265\345P\010\313\324\364>\036G\324C\201\333\n\025o\334$\266}\3122$\372\030\263\022\255\343\322\001\216\024\242\202\036\351\357p\330\367]):s\252{\251\033\313D\247g\330\267\233L\330\023\336\013\313\365\021l\350\216FS\024\313\222\215\021\204)J\260\350f\306\366\272\007\227w\346<|\353\2727\2164\371\374\025\304\311\t\357\347\240\013\326u\376\002\310;\204Vn\0327\371yx\273\355\300\210\226\020 \327\243u0\356\267:G\027q\321\037\013R\361\275\2556\031=Z\215V\331\225\352\357X\376\242{\013\321\346W\277\374\271\235\032\203\344\263.\303-\255{\227\275\nr\275Xk\024\207O\216\330\017\235\353\354k\300\310\244[\360\004\317\244\217\036u\250\351\032\242Q\336\333\360\257\003,)\274^;R\023h\316)D\201\367pl\375!f\237\262\323\321\3505\210\030\327\256\262\314\367\370\211\0033\311v\034?\260\221\025\321!\350\234Lp\214%(Ir2\347Z\325\370\013E\005\031\177\036L1\334\3118c\331\373J\226g\366\010c\335FnF)\037}\262\032\362n!\231\3111X\216 #\030@\366\322\210\363\250\217\234\355\376\217<\035>\257y\315=\340S\314D\370\2606_S\242_\237\263\244\006\322\037\033\370\344ev\260\372\240\371A\004*x\315\276+\254B/k\336\000L$E)\216\030\337\322I:\223E\372\216\274\374\317\234\354x5c\037\301\016\026\322\333\t\227\205\344\271\352\006\302\306\003L\324)\363\272H\201\354\3138\267i]\373\307;\277B\305\327\361\246\340_\303\377vu|C\271i\337\242\304\371\337\030\313RM";
+    PyObject *data = __Pyx_DecompressString(cstring, 4070, 1);
     #define __Pyx_DecompressString_LZSS_UNUSED
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) > 0 && (CYTHON_COMPRESS_STRINGS) <= 90 /* compression: lzss (5230 bytes) */
-static const char cstring[] = "\377\ntrainin\377g epoch:\377 at 0x o\377bject>.:\377 <Memory\377View of \377<contigu\377ous and gdir%\001\007\rin\021\005\177strided\"\010o or \004\031><(\t\376A\006>?Canno\377t assign\377 to read\177-only m\240\002\375v\242\000Invali\377d mode, \347exp\305\000|\000\047c\047\336t\001\047for\357\000n\047\347, gH\000%\005sha\373pe\222\000 axis\377 Note th\376\207 Cython \376\021\000deliber\347atek\000\320\001cte\375r!\001n PEP-\267484\212\"re\264!s\277 subcl\246\000e\375s\261!builti\376\260\000ypes. I\377f you ne\344\224 \303\000p\316\000%\tthe\337n set\200\000e \375\047\357\002ation_\327typ\246@\047\355$iv\376\242\000o False\337.add_\231 ec\347oll\266@+\000s.a\377bcdisabl\367een\002\001fail\276l\003alloc\310\000 \377RankFM e\363ff1\001N\000item\277 cache\024\027foold-\313\000sc\214 \337ch bu<\000rs\370E\027\332f#\014gci,i\177->ij,ij\004\000\365s\241\003d\177\002fact\377ors [v_i\277] are \367Af\373in\237\000 - tr_y dec\376@s\270\204\001\377feature/\377sample_w\377eight ma=g,\000udesM\003\037\003y \030\003X\000w_if\025D\224H\tiC-\315\004 \376\tl@l\377og likel\377ihood:no\376\305 fault _\377_reduce_\357_ du\327bnon\377-trivial\342\033\000c\371!\"\000\261`fm/\373_r\003\002.pyxux\332b\215\206\001\320farra\237@\017ata.\013\020\351\205\003\273\207\001\230\207\003\375s\"\000known \337[lear\213\210\001_s\373ch\213\000le]us\213er\371\tu\315\202?O\001\3141u\376\314\202@ASCIIBE\377llipsisF\357IKNP\344`P_u\377fSequenc\365e\307\211\001.\314\211\007__Py\375x\001\000Dict_N\377extRef__l\360\206\004\212@__\305\207\002__\001\005\047get\243\206\001\r\001d0\001\027\000\317func\035\001\030\000st\373at1\002impor\275t3\001main\003\002owdulM\002nam\002\003\363ewT\001\301@_che\177cksum__\n\001\274?\004\025\001type\017\003u\377npickle_\233En \005vt\334\207\001\230\001qGualO\005\300e\311fc\303\211\002\354\277\001\334dex\314\001set\035_\203\005set\262\006\003\006.\007\367tes\310\001csr_\377dense_ma\237tmul_\r\001\010\000v?ec_fit\000\001\016\002\372\240\210\001_\363\000is_co\377routine_\267pre""\254\"se\240\211\001_\357topk\364\000unk\327abc\213\211\005_\310\210\003al\377phaarang\007eas\351\214\007\322\204\002\323\212\001\326 \206\210\003\377asyncio.\376]\006sb_eff_\274\336\211\002\010\000ndb_\220@r\337tbase\000\001_m\377vbetacch\376v\000_u_idxcyl\232\001\241@trac\"\000\337ckcon\305@nt\367cou\002\000txd_\337reg_a\001\003bd\307ata\000\001H\000\211 om\277_log_I\221#t%o\217!d\261A\000\002_\377\000\307\216\003\366\222\001th\257\215\001sein\376\347@emptyen\037codee\316@\330\214\002\200\217\002~\205\217\002serror\247\000\277filter\271!v\377iousflag\376\002\000oat32fl>\004\00064for\213@\323\215\004\377fullhas_\372\354\001i\332\001idif_8\257\001\003\001\270@ity\016\000\235\217\001wces\004\003ptr\000\006\367_ar\002\010i64i\357ndex\047\005ndi\0343\000\301 ind2\001\001\002.\002\340\004\003*\003M\000\036\002\240\000int\346?\001te\330 \301\215\001sin\373vs\353@ingis\234\311\213\003\310\205\002bia\241\213\002\246\213\002s\337izela\356`st_ep_if\002\007u\374\000\177zy_tail\241\210\006\377exponent\370\262\210\006\241\217\002\270\210\rll_sl\233ot\001\000g_\366\211\007\302\204\001a{x_\262\214\003smem\277\220\001\376\267\220\001mult_lu\377tn_colsn9_\225\216\001\004\000row\n\000\300D\371n\274`\014\002amena\377nndimnnz\377npnumpyo\377bjoutout\3545\003\005\001mv\312\000dxp\377ackpenal\377typoolpoWppr\244 q\207\204\001r\317\212\004\336\327\212\004raw_\340Bsr?ef_ctx\203\204\0015\004\353re\277 t\243`em_\376\244!srhsrouGnds\320\204\001\375\215\n\304\212\005_\221\222\001\213sc\324`s\000\003\371\205\003\005\004m\341v\313\217\004\267b\004\005\233\213\004eed\237setde\246\214\002\252\222\002s\177huf_rng\004\001Ofle_\243b\000\n_O\000\370\307@\372\205\002\235\002topst\177ructsum\264\206\001\335_\233`erv\207 _i\177u_embu_\306\217\001\036\004\003idxu\263\204\003\003\001\263\204\003\350o\000\262\204\004\004\003pK\000f_i\374\375f\r\006_i64ui5_%\005i\035\004ui!\t\004\006\226)\001ni\303\205\001_\303\220\004\354\206\001u\375n\246Aupdate\376\201\215\001_dropou\373tv\327\207\007v_iv_\375i\355\207""\001v_ifv_\375u\000\000fvalue\377svecverb\277osew_i\346\220\001x\357x_if\000\001_an\217yx_u\t\000\276 \t\000z\377erosO\200\001\360\377\006\000\005\014\2102\210Y\377\220a\220r\230\024\230Q\377\230e\2406\250\022\250<\337\260q\330\004\013\014\nf\240\177F\250\"\250L\270\001\t\r\360\031\026\031/[\006\224\003\017\210a\330\377\004\017\210u\220A\220W\373\230B\230\0001\240B\240g\377\250Q\250i\260u\270E\277\300\026\300r\310\021\013\023k\377\270\025\270e\3006\310\022\363\3101\000\036[\005V\2302\230\377U\240!\2402\240W\250\377A\250Y\260f\270F\300\337&\310\002\310!\013\023[\270\377\006\270f\300F\310\"\310\351A\000\036\310!1\353 \n\000\005\377\006\330\004\005\360\010\000\005\377\022\220\022\320\023%\240Q\177\240l\260&\270\002\270b\000\273\"\240g\000\032\230)\376 \021\337\250#\250R\250\200@\021\220\377\023\220F\230!\2301\340\377\004\n\210\"\210F\220\"\377\220H\230D\240\006\240b\375\250\205@\007\200w\210c\220\377\022\2203\220b\230\003\230\3771\330\010\017\210q\340\004\377 \240\001\340\004\030\230\005\367\230W\240\227\000\007\200q\330\377\010\022\220\"\320\024&\240\377a\240v\250V\2602\260\375Q\363A\010\200~\220Q\220\257i\230q\240E\002\177\377@w\357\230a\230v\373\000F\260!\177\2603\260b\270\007\270\203`\377\007\200|\2201\220D\230\337\001\230\026\230t\223\006w\260\276\230@\007\200{\220!{\000a?\220s\230&\240\003\r\r4\001\337G\2301\230CR\000^\260\374\206@*\0036\230\021\230#\230\177Q\330\004\007\200z\220\275@\377\007\200u\210A\340\004\033\357\230>\250\032\232\000R\260t\377\2707\300\"\300B\300c\377\310\034\320UV\330\004\034_\230A\340\t\n\332\001\177\236\000z\314\000\024\216`V\320\033-\207`\357a\330\010\030\230\000\021\340\004\363\013\210\257\2010\317%!\2208\230O6\240\022\240\240\002\321!\021\306$w\035\230Q\334\200nv\230S\337@\177a\240s\250\"\250G\262#\036\303%F\240.\260\364B\365!\305!\371!\300$\260-#\300[\320P\275Q\216\201+\014\000\005\006\227\204\001\026\373\220U\314@\001\240\021\330\004\337\021\220\025\220e\227 \021\240\277!\340\004\r\210R\207\206\002S\363\230\002\354@\373fr\210\023""\210wB\210c\047\000f\230A\270\000\377\003\2402\240S\250\t\260\377\026\260q\270\003\2703\270}a\214\204\t\007\200y\220\001R\000sa\220\326b\000\n}\220Aw\000o!\2303\230\330a\320\007\325A\247\031\240!\217C\230\204\005s\242\205\001\007\360\256\204\013\275`\312a\266n2\270S\300\371\013\376\206\001\252u,\250A\250Q\372\263l\022\375\006\\\240\026\240q\376\344\205\001\025\220Y\230l\250&?\260\001\260\021\330\004\t\001\367\204\002\274\360\005\374\205\001a\330\010\t\317\205\003q\356\215\204\001\002\320\032W\001_\270F\377\300\"\300A\330\010\024\220d\322\204\014\226\001\t\271\210\001\332\205\0012\220\201\000\365\026\345 1\216\206\007l\240!\240s3\240\337\205\002\373\205\001I\230Q\220\"\342\271\"\033\344 \272\205\002\271\206\005\006\320&\363;\270\333\205\002\302\206\001z\240\021\240\377\047\320)9\270\024\270Z\377\300v\310Q\310c\320Q\177S\320S[\320[\\\360\205\001\212\257\206\0019\244B\001\256$\377\205\010f\003W\377\240I\250T\260\022\2607\377\270)\3003\300j\320P\177\\\320\\^\320^_%\010\376\355#\320\007\032\230%\320\037/4\260A\340\215\206\0260\262\"\240\206\003o\200\001\360\036\371\210\007\026\220\325*\177g\240V\2501\250A\357c\367c\230\026\226\210\001\340\004\007\200|\334)\344\210\0017\240#\240Q\350%\177\320\007\031\230\023\230A\201\207\002\347\330\t\033\267b\216\207\001\340\010\016\373\210j\223\207\003\024\220B\320\026\377(\250\001\250\037\270\006\270?b\300\001\330\004\"\312\204\001\024\000\277\220g\230Q\230c\343@r\177\250\021\330\004)\250\021\370\207\013\374\266f\237CR\220t\2302\230\377S\240\014\250B\250a\330k\010\031\302\210\002V\350\204\002\001\340Q\000\377)\2502\250R\250s\260\377\"\260E\270\022\2702\270\377X\300Q\330\004\033\2309\377\320$6\260a\260y\300\367\014\310B\204DT\330\004\037\377\230y\320(:\270!\270\3778\300<\310r\320Q`\277\320`b\320bc\347\210\003\004\376\242\205\001\003\2205\230\003\230=O\250\003\2501\335\210\004\344\210\004\330\330\000_k\230\021\230!\271\216\001\037\275\000\377\021\240(\250!\330\004\014\377\210A\210U\220!\330\004w\010\210\t\335\205\002s\230,\243\213\002""\377\010\020\220\001\220\031\230(\236\264!\240i\250r\327@\332\212\001\010\343\300\007\275\215\001\206\213\003\340\212\001L\240\001\373\240\023\256\213\003z\220\021\220-\376\223\213\005|\2201\320\024$\240\315A\363 \004\007\211\206\013\373!\021\230\375*\031\000V\250:\260V\270\3771\270C\270r\300\027\310\204\230\214\002\334\213\001jK\006\262\206\033\277\213\007\316\210\001\320\203\007\027\233\207\002\000\005b\002\243\204\010\215\205\003X\377\240Y\250e\2602\260W\377\270I\300S\310\n\320R\327^\320^\305 a\226\204\016\200\177\375\220\251\214\002}\220K\230z\250\375\021\262#d\240\"\240A\340\375\004\230!\021\220*\230C\230\377|\2501\340\004\005\330\r\277\016\330\014\023\220?\363\207\002\014\337\020\220\t\230\025\360\213\002\020\023\373\220>\231\"\024\032\230!\340\376\002\000.\250\002\250\047\260\023\377\260A\260Y\270f\300B\377\300d\310(\320RS\340\336%\0007\230!\330*\002\024\240\327R\240t\223`Q\013\001:\230\376\003\001\320\023)\250\032\2606\372\236`<\272\220\001\340\020!\240\021\377\240!\320#3\2601\260\367D\270\003\276 A\330\020\034\177\230A\230V\320#4Y\000\323Q\340\214\001\r\001Q\370K\200\001\313\360*\310\217\003\330\262\000\316\217\003\020\210\177|\2309\240K\250|\205@\343F\300\263\220\002\002\014\241`\330\010\t\301\330\000\000\000\003\000\t\000\025\007&\200\001\023\3606\203\r\325\206\014c\313\211\005\325\213\001\335\206\004\177\330\004\030\230\004\230F\343\212\003\000\002\006\244\206S\372\206\017\216\207\r\306\206\001\205\222\005\326\206O\354\225\001\237\036\230Y\240b\272`\356\222\002+\377\250R\250u\260B\260b\337\270\010\300\001\340\373\2061J\240}f\252\224\002l\300\"\300D\365\205\0011\036\273\215\001\000\002\331`\330\004\000\002\277\221\001\376\307\207\0145\260\003\2609\270C\223\270q\316\207\r\304\207\001Q\334\207\006\376\211\001q\377\330\010\026\220i\320\0371\377\260\021\260(\270\"\270B\334\320\216\001\003\014h\300b\247\225\002\010\013\377\210<\220s\230%\230s\377\240,\250c\260\021\330\014\344\267\204\003\000\004\014\353\205\002\005\r\022\220+\374\335\214\001e\004\013\2109\220D""\230\377\005\230R\230q\330\014\033k\230;\334\002X\332\207\001\330\010\002\027\376\307\210D\n\000\005\010\200t\210\376\356\211\003\330\t\013\2103\210a\377\330\010\033\2301\230I\240\377T\250\022\2503\250a\340\376\010\004Z\250w\260i\270{\177\310)\320SY\320Y\273\212\001\377\320cf\320fi\320i\355j\322\231\003;\220\226\225\001!\2301\276\310\231\001<\220q\230\004\264\216\003\013\241\210\022\005\346\220\002\256!\026\003S\210\226\001\013{\320\013\375\206\001Y\240a\240\201\232\001\377\320\013\035\230Q\230j\250\377\001\250\026\250z\270\026\270\177q\300\003\3002\300W\362\227\001\377\013\210?\230!\2307\240\377!\2406\250\027\260\006\260\267a\260s\233@G\300k\002=\031\230\245\232\002\000\0045\220\263\232\002\004\000\227\212V\240\357\212(\323\227\027\000B\216\230\006\262\230\n\021\366\220\0053 \221C\000\014\214\230\001\342\230\005\316\217\001\004\357\230\007\010\004\377}\220O\240>\260\021\260g#\260Q\370\230\003\005\tc\270\307\230\001&\240\214\026|\220\374\230\001\310\214\r\200\260\224\007\213\231\001\364\240\214\004&\003\200\000\004{\220%\220\375}\304\232\003\177\220f\320\0340o\260\004\260L\201`8\310F\t\375\200\324\214\005\010\000\005!\240\t\377\250\023\250I\260S\270\006\363\270a\277\232\001\275ah\240i\250\377q\260\013\2706\300\025\300\377h\310i\320WY\320Y\377e\320en\320nq\320\377q{\360\000\000|\001J\375\002\004\000J\002K\002\330\004\364\357a\235\215\001HD\000Q\260d\270\177&\300\005\300X\310R\246\220\001\327]\320]\337\204\003s2\000t\001\335B1\001B\002C2\000\036\230\377d\240\"\320$5\260T\367\270\022\270\307\224\002\021\220\001\220\356\320\215\n\010\017\210\277\232\002\340\010\014\373\210I\350\226\0021\330\014\017\210\373~\230\366\204\001\020\026\220a\340\372\002\000n\341\236\002S\260\001\260\031nv\000\002\300$\256\000a\340$\000\367w\220a(\003T\240\022\240c4\240\262\222\0018\002\002\ns\220\372\215\001\377\320\023&\240g\250S\260\377\005\260V\2704\270s\300\377(\310$\310b\320PX\377\320Xa\320ag\320g\177s\320sw\320wy\365\000\355z\270\010\020\023\0005\220=\240o\003\2401\330\231\217\001\230>""\373 \245H\200\223\0021\204\217\001\004\023\340f\003a\331\330\001\004\334\001q\330\377\001\220z\377\240\023\240I\250\\\270\022{\2703\254\224\001\340\021\022\330\224\217\020\367\340\020\032\344\217\001\026\220h\230\377b\240\001\330\024\034\230H\377\240B\240a\330\024\027\220\345v\266\211\002\030\205\237\001\013\000q\330\030\376\271\222\001V\320+F\300a\300\213q\340\036\000\177\"\003\323a,\000z\373\240\0212\001|\2401\240I\363\250X\312\220\002\323\240\001I\320U\\\373\320\\\241`h\320hr\320\273r~\241`\177\001A\240aA\367\002B\002e\000\320\027-\250\377Z\260v\270R\270|\310\3772\310Q\330\024 \240\001\357\240\026\320\047\323\224\0011\340\024\313\036\230\313@\023\233\237\001\220\001}\240\373C\240\207\000\034\230I\240U\377\250!\2501\330\034(\250\375\002\313\243\003\270\021\330\034\037\230\377z\250\022\2501\330 ,\377\250G\2603\260a\260x\377\270s\320BS\320SU\273\320U\357`^\330 \352\236\001c\377\260\033\270A\270S\300\t\377\310\021\310&\320PR\320\361R\321\230\002\360\000\036>#\2409\250\265A\314\000qN\031\340\014\362\226\001%\373\230v\301\000%\250v\260Q\374\257D\345\215\001\020\024\220G\2305\375\240\263\235\001\024&\240h\250a\353\250t\347\241\001\330\244@+\240Q\377\240g\250V\2605\270\006\177\270e\3005\310\006\310\364@\377!\240\025\240a\240\177\260\377b\270\t\300\021\330\020\025\177\220Q\320\026+\2501\003\004\r)\242\224\002\016\017\267\215\005\340\240\003\200\227\006\235\216\004\370\366\240\002\005\r\273\216\002\320\000$\240A\276\332\246\001\033\230#\230V\327@A\347\330\004\032\003\005\305\236\003v\220Q\377\220g\230R\230s\240&\364\210\220\003\305\243\007g\213\206\002\010\017\210x\363\220r\204\232\002\330\242\001\022\2509\260\367B\260f\374\"\006\300b\310\017\013\320ST\251\221\002\241\232\001\262\226\013\312\243\016\334\326\211\004\351\242\010z\220\021\342\242\017G\310\2773\310l\320Z[\357\242\002\360\317\006\000\n\013\344\242\017\311\233\004\014\210\375E\300\237\004\014\017\210{\230!\377\2302\230R\230v\240S\277\250\013\2601\260A\240\231\001c\211\220\244\235\002\277\233\001t\301\216\002""\277\225\010\266\200!\016\377\210b\220\006\220a\220u\363\230F\247\227\001\212\251\003V\2201\220_E\230\026\230r\232\241\001#\254\243\001.\343\204\001\004\007\200\362\235\005!\300\213\005\366\244\001|\262\244\003\250\244\004/\250q\260\001\244\244\010\0078\2209\362\224\001";
-    PyObject *data = __Pyx_DecompressString_LZSS(cstring, 5230, 8590);
+    #elif (CYTHON_COMPRESS_STRINGS) > 0 && (CYTHON_COMPRESS_STRINGS) <= 90 /* compression: lzss (5548 bytes) */
+static const char cstring[] = "\377\ntrainin\377g epoch:\377 at 0x o\377bject>.:\377 <Memory\377View of \377<contigu\377ous and gdir%\001\007\rin\021\005\177strided\"\010o or \004\031><(\t\376A\006>?Canno\377t assign\377 to read\177-only m\240\002\375v\242\000Invali\377d mode, \347exp\305\000|\000\047c\047\336t\001\047for\357\000n\047\347, gH\000%\005sha\373pe\222\000 axis\377 Note th\376\207 Cython \376\021\000deliber\347atek\000\320\001cte\375r!\001n PEP-\267484\212\"re\264!s\277 subcl\246\000e\375s\261!builti\376\260\000ypes. I\377f you ne\344\224 \303\000p\316\000%\tthe\337n set\200\000e \375\047\357\002ation_\327typ\246@\047\355$iv\376\242\000o False\177.RankFMt\000\323pp\336\000\230@t\376\000st\377 2,147,4?83,647\363 \262\000\273acI\001s p\275\000f\377it calla\367dd_\330 ecol\373le\032\003.abcd\377isableen\236\002\001fail\253\003.\000ouc\207  o\004eff1\001\336\215\000itemN\000ch}e\024\027fold-\212 \373sc\313 ch bu\306<\000rsE\027\231\204\006\"\rea\377ture_reg\337=\047uni\330@m\047\326\221`li\362!n\335\001-f\376\036\003 step c\327oun\263@s\326Car\363e \267b\252csing\337le-th\321aeds; \220\205\006\376@{} \023\003\357s us\321@\047st\177ochasti\324`\374\\\005\205\000ulariz\356\251B inr\000ad \375(\307An_jobs\233=1\262\204\001ke\211\000\250\006)\377gci,i->i\257j,ij\004\000s\350#d\372\306\"f\252@ors [\317v_i]\014\003\312\004we\357ight\027\000w_i\301f\025\003\007\t(\002\365\006;\tf]\377log like\377lihood:n\367o d\254@ult \375_\311 duce__\367 du\331bnon-\177trivial\033\000\237cinit\"\000\352`f\357m/_r\003\002.py\343xu\235b\217\206\001\223farr\377ay data.\320\013\020\353\205\003\275\207\001\232\207\003s\"\000kn\377own [lea\355r\215\210\001_s\304`dul[e]\360 r \200(u\r\002\216\312\021uf]\250@\326A\245\207\001f\316\253\001e -\310@\207\000ec\327rea\342A \216d/s\277ample_\305# \367mag\333\000udes\377ASCIIBEl\377lipsisFI\367KNP\342 P_uf\377Sequence\372\212\211\001.\217\211\007__Pyx\376\001\000Dict_Ne\177xtRef__\263\206\004\266\313 __\210\207\002__\001\005g\223et\247\205\001\r\001d0\001\027\000f\347unc""\035\001\030\000sta\315t1\002im\312\206\0013\001ma\313in\003\002o\216!E\001na\235mU\002newT\001\202@_\377checksum\343__\n\001?\004\025\001typ\375e\017\003unpick6\362\000En \005vt\340\206\001\230\001oqualO\005re\203cb\212fc\206\211\002\277\001\024\004ex\314\001\357set_\203\005set\270\262\006\003\006.\007tes\272`_\377csr_dens\377e_matmul|\014\002\010\000vec_f\334`\350\000\001 \001\244\207\001_\363\000is_\377coroutinge_p\225\000\341!se\244\210\001\337_topk\364\000un\257kabc\217\210\005_\314\207\003a\377lphaaran\341g\364@\254\214\007\223\204\002\226\212\001rt_\376\233casyncio\375.]\006sb_effy_\342\210\002\010\000ndb_\220@\277rtbase\000\001_\377mvbetacc\375hv\000_u_idx\363cl\232\001\241@trac\276\"\000ckcon\305@n\275t\360\207\002ctxd\244\210\001_\205a\001\003b\224\205\001\230\205\001H\000\211 o\177m_log_I\221#Kto\240!d\261A\000\002_\377\000\270\212\216\003\222\001\201\210\004ein\347@e\377mptyenco\207dee\316@\233\214\002\303\216\002\310\216\002s\337error\247\000fi\357lter\271!vio\277usflag\002\000o\277at32fl\004\0006\3554\270\211\001at\226\215\004ful_lhas_\354\001i\332\001\037idif_\307\206\001\003\001\270@\347ity\016\000\340\216\001ces\356\004\003ptr\000\006_ar\376\002\010i64inde\235x\047\005ndi3\000\301 i\003nd2\001\001\002.\002\004\003*\003M\000\234\036\002\240\000int?\001\261\214\007i\337nvsca\357 giys\336\206\003\310\205\002bias\375\213\001\376\000\002sizelab\317ella\363`\373\212\001_i\365f\002\007u\201 zy_t\367ail\347\207\006expo\217nent\370\207\006\351\216\002\376\207\rl\277l_slot\001\000g\271_\274\211\007\307\204\001ax_\314\207\003s\347mem\207\220\001\377\217\001mul\377t_lutn_c\337olsn_\234\002n_\047row\n\000\315\213\004n\301`\014\002\377amenannd\377imnnznpn\377umpyobjo\237utout5\003\005\001m\373vp\360apackp\377enaltypo\177olpoppr\251 \345q\214\204\001r\225\212\004\235\212\004raw\375_\345Bsref_c\277txreg_5\004rue\304 t\250`em_\243\215\001\377srhsroun\243ds\325\204\001\227\211\n\212\212\005_\331\221\001s\305c\331`s\000\003\376\205\003\005\004mv\360\324\216\004\274b""\004\005\341\212\004eeds\363et\352\213\004\362\221\002shuf\357_rng\004\001fle\t_\250b\000\n_O\000\314@\377\205\002\235\002\377topstruc\257tsum\271\206\001_\240`e\373rv\207 _iu_e\317mbu_\365\216\001\004\003id\003xu\270\204\003\003\001\270\204\003o\000\267\204\004\004\003\235pK\000f_i\202\204\006\r\006_\277i64ui_%\005i\206\035\004ui!\t\004\006)\001\202\220\003_\355f\223\220\007un\246Aupd\367ate\307\214\001_dro\337poutv\334\207\007v_\357iv_i\362\207\001v_i\357fv_u\000\000fva\377luesvecv\377erbosew_}i\351\216\001warnw\235\215\003}s\377\216\004xx_if\000\001\177_anyx_u\t\000\374\321 \t\000zerosO\377\200\001\360\006\000\005\017\210\377a\330\004\017\210u\220A\377\220W\230B\230e\2401\377\240B\240g\250Q\250i\377\260u\270E\300\026\300r\373\310\021\013\023k\270\025\270e?\3006\310\022\3101\000\036[\005\377V\2302\230U\240!\240\3772\240W\250A\250Y\260\377f\270F\300&\310\002\310\375!\013\023[\270\006\270f\300\337F\310\"\310A\000\036\330\004\367\013\2101\321\000\n\000\005\006\377\330\004\005\360\010\000\005\022\377\220\022\320\023%\240Q\240\277l\260&\270\002\270b\000\"\375\240g\000\032\230)\2406\250\377\021\250#\250R\250q\330\377\004\021\220\023\220F\230!\377\2301\340\004\n\210\"\210\377F\220\"\220H\230D\240\377\006\240b\250\001\330\004\007\377\200w\210c\220\022\2203\377\220b\230\003\2301\330\010\377\017\210q\340\004 \240\001\377\340\004\030\230\005\230W\240\376\227\000\007\200q\330\010\022\220\377\"\320\024&\240a\240v\277\250V\2602\260Q\331!\010\377\200~\220Q\220i\230q\375\240E\002\177\220a\220w\230\367a\230v\373\000F\260!\260\2773\260b\270\007\270\200\000\007\377\200|\2201\220D\230\001o\230\026\230t\223\006w\260\230@\337\007\200{\220!{\000a\220\237s\230&\240\003\r\r4\001Go\2301\230CR\000^\260\206@\376*\0036\230\021\230#\230Q\366\273\001z\220\275@\007\200u\210\377A\340\004\033\230>\250\032\376\232\000R\260t\2707\300\"\377\300B\300c\310\034\320U\377V\330\004\034\230A\340\t\245\n\332\001\177\236\000\314\000\024\216`V\367\320\033-\207`a\330\010\030\346\230\000\021\340\254\2013\317%!""\2208\277\2306\240\022\2401\315%\021\356\306$\035\230Q\334\200nv\230S\376\337@a\240s\250\"\250G<\262#\303%F\240.\260\364B\365!\362\305!!\300$\260-#\300[\320{PQ\216\201+\014\000\005\006\227\204\001w\026\220U\314@\001\240\021\374a\367\025\220e\227 \021\240!\340\357\004\r\210R\207\206\002S\230\002\374\354@\373fr\210\023\210B\210\177c\220\025\220f\230A\270\000\377\003\2402\240S\250\t\260\377\026\260q\270\003\2703\270}a\214\204\t\007\200y\220\001(\000sa\220\326b\000\n}\220Aw\000o!\2303\230\330a\320\007\325A\247\031\240!\217C\230\204\005s\242\205\001\007\360\256\204\013\275`\211\205\001\266n2\270S\300\371\013\376\206\001\252u,\250A\250Q\374\263l\203 \t\210\007\210{\230\377!\330\010\t\320\t\037\230\177q\330\t(\250\001\330\004\003\374\005\007\021\000\340\010\013\2104\210\377r\220\031\230!\2302\230\377T\240\021\240)\2506\260\377\022\2601\330\014\022\220.\377\240\001\320!f\320fm\377\320mn\320no\200\001\373\360\022\327&\\\240\026\240q\376\276\206\001\025\220Y\230l\250&?\260\001\260\021\330\004\t\001\321\205\002\244\312%\326\206\001a\203\000\251\206\003q\347\204\001\002\373\320\032\261\001_\270F\300\"?\300A\330\010\024\220\254\205\014\360\001Y\t\223\211\001\264\206\0012\220\333\000\026\277@\3751\350\206\007l\240!\2403\240\234\271\206\002\325\206\001I\230Q\352\"\223B\033\370\276@\224\206\002\223\207\005\006\320&;\270\364\265\206\002\234\207\001z\337\000\047\320)9\377\270\024\270Z\300v\310Q\377\310c\320QS\320S[\247\320[\\\211\210\001\211\207\0019\376B\001\370\210D\331\206\010f\003W\240I\250T\376\237 7\270)\3003\300j\377\320P\\\320\\^\320^\371_%\010\307C\320\007\032\230%\277\320\0374\260A\340\347\206\0260\274\262\"\372\206\003\200\001\360\036\323\211\007\026\375\220\325*g\240V\2501\250\335A\311\204\003c\230\026\360\210\001\340\004\363\007\200\334)\276\211\0017\240#\240\352\214`\t\234\212\001\010\033\000\022\2101\237\330\010\016\210j\335\207\001\352\211\001|\377\2202\220R\220r\230\021\377\330\010\026\220b\230\002\230\375!\304\211\002\320\007\031\230\023\230\235A\205\210\002\330""\t\033\273\204\002\222\210\001\340\3764\005\340\004\024\220B\320\026\376\303`\250\037\270\006\270b\300\317\001\330\004\"\316\205\001\024\000\220g\372\376 c\215`r\250\021\330\004\307)\250\021\374\210\013\272\204\006\311CR\220\377t\2302\230S\240\014\250\277B\250a\330\010\031\306\211\002V\366\354\205\002\001\340Q\000)\2502\250\377R\250s\260\"\260E\270\377\022\2702\270X\300Q\330\377\004\033\2309\320$6\260\177a\260y\300\014\310B\256D\377T\330\004\037\230y\320(\377:\270!\2708\300<\310\377r\320Q`\320`b\320\353bc\353\211\003\004\246\206\001\003\2205\377\230\003\230=\250\003\2501\270\341\211\004\350\211\004\223!k\230\021\373\003\037\377\230c\240\021\240(\250!\377\330\004\014\210A\210U\220\277!\330\004\010\210\t\341\206\002s\373\230,\247\214\002\010\020\220\001\220\367\031\230(\336!\240i\250r;\260\022\335\213\002\010\300\007\301\216\001\212\214\003\276\344\213\001L\240\001\240\023\262\214\003z\357\220\021\220-\227\214\005|\2201\337\320\024$\240A\235@\004\007\334\215\207\013\373!\021\230*\031\000V\250\377:\260V\2701\270C\270Or\300\027\310\234\215\002\340\214\001jK\0068\266\207\033\303\214\007\322\211\001\320\007\027\237\210\002\000\005\370b\002\315\204\010\267\205\003X\240Y\250e\377\2602\260W\270I\300S\177\310\n\320R^\320^\305 \335a\300\204\016\200\177\220\255\215\002}\220\337K\230z\250\021\333\220\001\037\230\177d\240\"\240A\340\004\230!\377\021\220*\230C\230|\250\3771\340\004\005\330\r\016\330\357\014\023\220?\367\210\002\014\020\220\367\t\230\025\364\214\002\020\023\220>\276\231\"\024\032\230!\340\002\000.\377\250\002\250\047\260\023\260A\377\260Y\270f\300B\300d\277\310(\320RS\340%\0007\367\230!\330*\002\024\240R\240\265t\223`Q\013\001:\230\003\001\320\357\023*\250+\246 2\270T\377\300\023\300D\310\010\320P\377Q\340\020!\240\021\240!\377\320#3\2601\260D\270\375\003\303 A\330\020\034\230A\337\230V\320#4^\000Q\340\364\221\001\r\001Q\375K\200\001\360*\362\321\220\003\330\267\000\327\220\003\020\210|\230\3379\240K\250|\212@F\300x\274\221\002\002\014\246`\330\010\t\330\000\000""\360\000\003\000\t\000\025\007&\200\001\3606\364\203\r\204\207\014c\372\211\005\021\220\025\220\376\214\207\004\330\004\030\230\004\230F\000\354\213\003\002\006\251\206}\251\207\017\275\207\r\365\206\001\270\223\005\205\207O>\205\226\001\036\230Y\240b\351`\241\224\002\377+\250R\250u\260B\260\277b\270\010\300\001\340\252\2071J\273\240f\335\225\002l\300\"\374`\001\047\330\004\036\356\216\001\000\002!\362\217\001\000\002\374\362\222\001\366\207\0145\260\003\2609\270\047C\270q\375\207\r\363\207\001Q\213\210\006\327\212\001\375q\237\212\001i\320\0371\260\021\277\260(\270\"\270B\203\220\001\026\335\220\005\nh\300b\332\226\002\010\013\377\210<\220s\230%\230s\377\240,\250c\260\021\330\014\344\341\204\003\000\004\014\232\206\002\005\r\022\220+\374\266\215\001e\004\013\2109\220D\230\377\005\230R\230q\330\014\033k\230;\334\002X\211\210\001\330\010\002\027\374\377\206\003\374\210>\n\000\005\010\200t\375\210\235\212\003\330\t\013\2103\210\377a\330\010\033\2301\230I\377\240T\250\022\2503\250a\375\340\010\004Z\250w\260i\270\377{\310)\320SY\320Y\376\352\212\001\320cf\320fi\320{ij\355\231\001\014\210;\220\311\226\001\367!\2301\257\230\001<\220q\230\205\004\215\217\003\013\021\006\231\222\002\256!\026\003S\356\273\227\001\013\320\013\247\207\001Y\240a\357\240q\330\004\013\000\035\230Q\377\230j\250\001\250\026\250z\377\270\026\270q\300\003\3002\373\300W\245\231\001\013\210?\230!\377\2307\240!\2406\250\027\277\260\006\260a\260s\233@G\235\300k\002=\230\001\246\231\001\000\0045\001\220\t\002\004\000\306\212V\236\213(\206\231\027\000B\301\231\006\n\345\231\n\021\317\221\0053\221C\000\014\216\220\003\227\232\003\362\375\217\001\004\242\232\007\010\004}\220O\240\177>\260\021\260#\260Q\253\232\003f\005\tc\270\372\231\001\317\214\026|\220\257\232\001B\367\214\r\200\343\225\007\375\233\001\317\214\004&\003\200\000\004\337{\220%\220}\367\233\003\177\220\377f\320\0340\260\004\260L\366\201`8\310L\003\033\2304\230\375|\217\214\002\010\020\220\005\220Q\377\330\014\r\330v}\320}/~\320~\177\t\000\340""\336\216\001\367\215\003\375\200\247\215\005\010\000\005!\240\t\377\250\023\250I\260S\270\006\363\270a\226\234\001\341ah\240i\250\377q\260\013\2706\300\025\300\377h\310i\320WY\320Y\377e\320en\320nq\320\377q{\360\000\000|\001J\375\002\004\000J\002K\002\330\004\364\223\204\001\360\215\001HD\000Q\260d\270\177&\300\005\300X\310R\371\220\001\327]\320]\203\205\003s2\000t\001]B1\001B\002C2\000\036\243\216\001\377\320$5\260T\270\022\270\336\304\225\002\021\220\001\220\243\216\n\010\017}\210\226\234\002\340\010\014\210I\277\230\002\1771\330\014\017\210~\230\232\205\001_\020\026\220a\340\002\000n\270\240\002\337S\260\001\260\031v\000\002\300\355$\256\000a\340$\000w\220a~(\003T\240\022\2404\240\205\223\001\3548\002\002\ns\220\315\216\001\320\023&\377\240g\250S\260\005\260V\377\2704\270s\300(\310$\377\310b\320PX\320Xa\377\320ag\320gs\320s\257w\320wy\365\000z\270\010\020\375\023\0005\220=\240\003\2401\255\330\354\217\001\230>\373 H\323\223\00214\327\217\001\004\023\340f\003a\330\001\004\334\001\373q\330\377\001\220z\240\023\240\177I\250\\\270\022\2703\377\224\001\357\340\021\022\330\342\217\020\340\020\032\376\267\220\001\026\220h\230b\240\001\377\330\024\034\230H\240B\240\277a\330\024\027\220v\332\211\002\030\334\334\240\001\013\000q\330\030\214\223\001V\320\177+F\300a\300q\340\036\000q\177\"\003\367a,\000z\240\0212\001\177|\2401\240I\250X\235\221\002~\252\242\001I\320U\\\320\\\241`\177h\320hr\320r~\241`\367\177\001A\240aA\002B\002\336D\000\320\027-\250\331\242\001b\300\377\004\300C\300q\330\024 \277\240\001\240\026\320\047\246\225\0011/\340\024\036\230\313@\023\362\240\001\220\001\357}\240C\240\207\000\034\230I\377\240U\250!\2501\330\034\377(\250\002\250\"\250L\270\377\001\270\021\330\034\037\230z\377\250\022\2501\330 ,\250\377G\2603\260a\260x\270\377s\320BS\320SU\320\335U\357`^\330 \301\240\001c\260\377\033\270A\270S\300\t\310\377\021\310&\320PR\320R\370\316\231\002\360\000\036>#\2409\250Ao\250Z\260qN\031\340\014\305\227\001\367%\230v\301\000%\250v\260\371Q\257D\211\216\001""\020\024\220G\230\3735\240\212\237\001\024&\240h\250\327a\250t\276\243\001\330\244@+\240\377Q\240g\250V\2605\270\377\006\270e\3005\310\006\310\376\364@!\240\025\240a\240\177\377\260b\270\t\300\021\330\020\377\025\220Q\320\026+\2501\032\003\004)\365\224\002\016\017\333\215\005\267\242\003\323\227\006\360\301\216\004\315\242\002\005\r\337\216\002\320\000$\240\375A\227\247\001\033\230#\230V\240\3451\336\244\001\032\003\005\234\240\003v\220Q\377\220g\230R\230s\240&\364\254\220\003\234\245\007g\213\206\002\010\017\210x\363\220r\201\233\002\257\244\001\022\2509\260\367B\260f\374\"\006\300b\310\017\013\320ST\315\221\002\236\233\001\205\227\013\241\245\016\334\372\211\004\300\244\010z\220\021\271\244\017G\310\2773\310l\320Z[\306\244\002\360\317\006\000\n\013\273\244\017\306\234\004\014\210\355E\227\241\004\014\017\200\240\001\2302\230\377R\230v\240S\250\013\26071\260A\212\234\001c\220\241\236\002\274\234\001\361t\345\216\002\215\226\010\266\200!\016\210b\220\177\006\220a\220u\230F\372\227\001\376\227\250\0012\210V\2201\220E/\230\026\230r\361\242\001#\203\245\001\343\204\001\027\004\007\200\357\236\005!\344\213\005\315\246\001\211\246\003\276\377\245\004/\250q\260\001\373\245\0108\003\2209\300\225\001";
+    PyObject *data = __Pyx_DecompressString_LZSS(cstring, 5548, 8614);
     #define __Pyx_DecompressString_UNUSED
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (8590 bytes) */
-static const char bytes[] = "\ntraining epoch: at 0x object>.: <MemoryView of <contiguous and direct><contiguous and indirect><strided and direct or indirect><strided and direct><strided and indirect>>?Cannot assign to read-only memoryviewInvalid mode, expected \047c\047 or \047fortran\047, got Invalid shape in axis Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the \047annotation_typing\047 directive to False.add_notecollections.abcdisableenablefailed to allocate RankFM effective item cachefailed to allocate RankFM fold-in scratch buffersfailed to allocate RankFM training scratch buffersgci,i->ij,ij->isenableditem factors [v_i] are not finite - try decreasing feature/sample_weight magnitudesitem feature weights [w_if] are not finite - try decreasing feature/sample_weight magnitudesitem weights [w_i] are not finite - try decreasing feature/sample_weight magnitudesitem-feature factors [v_if] are not finite - try decreasing feature/sample_weight magnitudeslog likelihood:no default __reduce__ due to non-trivial __cinit__rankfm/_rankfm.pyxunable to allocate array data.unable to allocate shape and strides.unknown [learning_schedule]user factors [v_u] are not finite - try decreasing feature/sample_weight magnitudesuser-feature factors [v_uf] are not finite - try decreasing feature/sample_weight magnitudesASCIIBEllipsisFIKNP_ifP_ufSequenceView.MemoryView__Pyx_PyDict_NextRef__annotate____class____class_getitem____dict____func____getstate____import____main____module____name____new____pyx_checksum__pyx_state__pyx_type__pyx_unpickle_Enum__pyx_vtable____qualname____reduce____reduce_cython____reduce_ex____set_name____setstate____setstate_cython____test___csr_dense_matmul_csr_matvec_fit_fit_csr_fold_in_is_coroutine_predict_select_topk_chunkabcallocate_bufferalphaarangeascontiguousarrayassert_finiteasyncio.coroutinesb_eff_allocb_endb_startbasebase_mvbetacchunk_u_idxcline_in_tracebackconstantcountctxd_reg_ad_reg_bdatadata_""mvdenom_log_Idense_to_csrdtypedtype_is_objecteff_threadseinsumemptyencodeenumerateepochepochserroretafilter_previousflagsfloat32float64formatfortranfullhas_basei_idxidif_dataif_densityif_indicesif_indptrif_indptr_arrif_indptr_i64indexindicesindices_mvindptrindptr_arrindptr_i64indptr_mvint32int64interactionsinvscalingisfiniteitem_biasitemsitemsizelast_step_iflast_step_uflazy_taillearning_exponentlearning_ratelearning_schedulell_slotslog_likelihoodmatmax_samplesmemviewmodemult_lutn_colsn_itemsn_rowsn_threadsn_u_rowsnamenanndimnnznpnumpyobjoutout_itemsout_mvp_idxpackpenaltypoolpopprintq_idxrrankfm._rankfmraw_floatsref_ctxreg_penaltyregisterrem_stepsrhsrounds_idxsample_weightschedule_modescoresscores_chunkscores_mvscratch_basescratch_strideseedsetdefaultshapeshuf_rngshuffle_indexshuffle_index_mvsizestartstepstopstructsumsync_intervalt_iu_embu_feat_embu_idxuf_datauf_densityuf_indicesuf_indptruf_indptr_arruf_indptr_i64ui_indicesui_indptrui_indptr_arrui_indptr_i64uniform_feature_regunpackupdateuser_dropoutv_eff_allocv_iv_i_effv_ifv_uv_ufvaluesvecverbosew_iw_ifxx_ifx_if_anyx_ufx_uf_anyzerosO\200\001\360\006\000\005\014\2102\210Y\220a\220r\230\024\230Q\230e\2406\250\022\250<\260q\330\004\013\2102\210Y\220a\220r\230\024\230Q\230f\240F\250\"\250L\270\001\330\004\013\2102\210Y\220a\220r\230\024\230Q\230e\2406\250\022\250<\260q\330\004\013\2102\210Y\220a\220r\230\024\230Q\230e\2406\250\022\250<\260q\330\004\013\2102\210Y\220a\220r\230\024\230Q\230f\240F\250\"\250L\270\001\330\004\013\2102\210Y\220a\220r\230\024\230Q\230f\240F\250\"\250L\270\001\200\001\360\006\000\005\017\210a\330\004\017\210u\220A\220W\230B\230e\2401\240B\240g\250Q\250i\260u\270E\300\026\300r\310\021\330\004\017\210u\220A\220W\230B\230e\2401\240B\240g\250Q\250k\270\025\270e\3006\310\022\3101\330\004\017\210u\220A\220W\230B\230e\2401\240B\240g\250Q\250k\270\025\270e\3006\310\022\3101\330\004\017\210u\220A\220V\2302\230U\240!\2402\240W\250A\250Y\260f\270F\300&\310\002\310!\330\004\017\210u\220A\220V\2302\230U""\240!\2402\240W\250A\250[\270\006\270f\300F\310\"\310A\330\004\017\210u\220A\220V\2302\230U\240!\2402\240W\250A\250[\270\006\270f\300F\310\"\310A\330\004\013\2101\200\001\360\n\000\005\006\330\004\005\360\010\000\005\022\220\022\320\023%\240Q\240l\260&\270\002\270!\330\004\"\240!\330\004\032\230)\2406\250\021\250#\250R\250q\330\004\021\220\023\220F\230!\2301\340\004\n\210\"\210F\220\"\220H\230D\240\006\240b\250\001\330\004\007\200w\210c\220\022\2203\220b\230\003\2301\330\010\017\210q\340\004 \240\001\340\004\030\230\005\230W\240A\330\004\007\200q\330\010\022\220\"\320\024&\240a\240v\250V\2602\260Q\360\006\000\005\010\200~\220Q\220i\230q\240\001\330\004\007\200\177\220a\220w\230a\230v\240W\250F\260!\2603\260b\270\007\270q\330\004\007\200|\2201\220D\230\001\230\026\230t\2406\250\021\250#\250R\250w\260a\330\004\007\200{\220!\2203\220a\220s\230&\240\003\2406\250\021\250#\250R\250w\260a\330\004\007\200|\2201\220G\2301\230C\230v\240^\2601\330\004\007\200{\220!\2206\230\021\230#\230Q\330\004\007\200z\220\021\330\004\007\200u\210A\340\004\033\230>\250\032\2602\260R\260t\2707\300\"\300B\300c\310\034\320UV\330\004\034\230A\340\t\n\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\033-\250Q\250a\330\010\030\230\001\230\021\340\004\013\2101\200\001\360\n\000\005\006\330\004\005\360\010\000\005\022\220\022\320\023%\240Q\240l\260&\270\002\270!\330\004\"\240!\330\004\032\230)\2406\250\021\250#\250R\250q\340\004\n\210\"\210F\220!\2208\2306\240\022\2401\330\004\007\200w\210c\220\021\330\010\017\210q\340\004\035\230Q\340\004\030\230\005\230W\240A\330\004\007\200q\330\010\022\220\"\320\024&\240a\240v\250V\2602\260Q\360\006\000\005\010\200~\220Q\220i\230q\240\001\330\004\007\200\177\220a\220w\230a\230v\240W\250F\260!\2603\260b\270\007\270q\330\004\007\200|\2201\220D\230\001\230\026\230t\2406\250\021\250#\250R\250w\260a\330\004\007\200{\220!\2203\220a\220v\230S\240\006\240a\240s\250\"\250G\2601\330\004\007\200|\2201\220G\2301\230F\240.\260\001\330\004\007\200{\220!\2206\230\021""\230!\330\004\007\200z\220\021\340\004\033\230>\250\032\2602\260R\260t\2707\300#\300[\320PQ\330\004\034\230A\340\t\n\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\033-\250Q\250a\330\010\030\230\001\230\021\340\004\013\2101\200\001\360\014\000\005\006\360\010\000\005\026\220U\230&\240\001\240\021\330\004\021\220\025\220e\2306\240\021\240!\340\004\r\210R\210u\220A\220S\230\002\230&\240\006\240b\250\001\330\004\007\200r\210\023\210B\210c\220\025\220f\230A\230S\240\003\2402\240S\250\t\260\026\260q\270\003\2703\270a\330\010\017\210q\340\004 \240\001\340\004\007\200y\220\001\220\025\220a\220q\330\004\007\200y\220\001\220\025\220a\220q\330\004\007\200}\220A\220U\230!\2303\230a\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\200\177\220a\220w\230a\230s\240!\330\004\007\200~\220Q\220i\230q\240\001\330\004\007\200u\210A\330\004\007\200u\210A\340\004\033\230>\250\032\2602\260R\260t\2702\270S\300\013\3101\330\004\034\230A\340\t\n\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\033,\250A\250Q\330\010\030\230\001\230\021\340\004\013\2101\200\001\360\022\000\005\006\360\010\000\005\026\220\\\240\026\240q\250\001\330\004\025\220Y\230l\250&\260\001\260\021\330\004\025\220Y\230a\330\004\007\200r\210\023\210B\210c\220\022\2203\220a\330\010\t\360\006\000\005\010\200q\330\010\030\230\002\320\032,\250A\250_\270F\300\"\300A\330\010\024\220A\340\004\033\230>\250\032\2602\260R\260t\2702\270S\300\t\310\021\330\004\007\200|\2202\220Q\330\010\026\220e\2301\360\006\000\005\010\200~\220Q\220l\240!\2403\240a\330\004\007\200|\2201\220I\230Q\230a\330\004\007\200y\220\001\220\033\230A\230Q\330\004\007\200~\220Q\220i\230q\240\006\320&;\2701\330\004\007\200\177\220a\220z\240\021\240\047\320)9\270\024\270Z\300v\310Q\310c\320QS\320S[\320[\\\330\004\007\200{\220!\2209\230A\230S\240\001\330\004\007\200u\210A\330\004\007\200z\220\021\330\004\007\200|\2201\220I\230W\240I\250T\260\022\2607\270)\3003\300j\320P\\\320\\^\320^_\330\004\007\200u\210A\330\004\007\200u\210A\330\004""\007\320\007\032\230%\320\0374\260A\340\004\034\230A\340\t\n\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\0330\260\001\260\021\330\010\030\230\001\230\021\200\001\360\036\000\005\006\330\004\005\360\010\000\005\026\220\\\240\026\240q\250\001\330\004\025\220Y\230g\240V\2501\250A\330\004\021\220\025\220c\230\026\230q\240\001\340\004\007\200r\210\023\210B\210c\220\022\2203\220b\230\003\2307\240#\240Q\330\010\t\360\006\000\005\010\320\007\031\230\023\230A\330\010\030\230\001\330\t\033\2303\230a\330\010\030\230\001\340\010\016\210j\230\001\230\021\340\004\024\220B\320\026(\250\001\250\037\270\006\270b\300\001\330\004\"\240!\340\004\024\220B\220g\230Q\230c\240\026\240r\250\021\330\004)\250\021\340\004\033\230>\250\032\2602\260R\260t\2702\270S\300\013\3101\330\004\007\200|\2202\220R\220t\2302\230S\240\014\250B\250a\330\010\031\230\021\230#\230V\2402\240S\250\001\340\004\"\240)\2502\250R\250s\260\"\260E\270\022\2702\270X\300Q\330\004\033\2309\320$6\260a\260y\300\014\310B\310c\320QS\320ST\330\004\037\230y\320(:\270!\2708\300<\310r\320Q`\320`b\320bc\330\004\034\230A\340\004\007\200y\220\003\2205\230\003\230=\250\003\2501\330\010\030\230\001\230\021\330\010\030\230\001\230\021\330\010\016\210k\230\021\230!\360\006\000\005\037\230c\240\021\240(\250!\330\004\014\210A\210U\220!\330\004\010\210\t\220\025\220a\220s\230,\240b\250\001\330\010\020\220\001\220\031\230(\240#\240Q\240i\250r\260\022\2603\260b\270\010\300\007\300r\310\021\360\006\000\005\010\200|\2201\220L\240\001\240\023\240A\330\004\007\200z\220\021\220-\230q\240\001\330\004\007\200|\2201\320\024$\240A\240Q\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\320\007\031\230\021\230*\240A\240V\250:\260V\2701\270C\270r\300\027\310\001\330\004\007\200~\220Q\220j\240\001\240\023\240A\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\200\177\220a\220w\230a\230s\240!\330\004\007\200{\220!\2203\220a\220s\230!\330\004\007\320\007\027\220q\330\004\007\320\007\027\220q\330\004\007\320\007\031\230""\021\330\004\007\200u\210A\330\004\007\200|\2201\220I\230X\240Y\250e\2602\260W\270I\300S\310\n\320R^\320^`\320`a\330\004\007\200u\210A\330\004\007\200u\210A\330\004\007\200\177\220a\330\004\007\200}\220K\230z\250\021\360\006\000\005\037\230d\240\"\240A\340\004\020\220\001\220\021\220*\230C\230|\2501\340\004\005\330\r\016\330\014\023\220?\240!\2401\330\014\020\220\t\230\025\230a\230q\330\020\023\220>\240\023\240A\330\024\032\230!\340\024\032\230.\250\002\250\047\260\023\260A\260Y\270f\300B\300d\310(\320RS\340\020\023\2207\230!\330\020\023\220>\240\024\240R\240t\2502\250Q\330\020\023\220:\230Q\330\020\023\320\023)\250\032\2606\270\022\270<\300r\310\021\340\020!\240\021\240!\320#3\2601\260D\270\003\2701\270A\330\020\034\230A\230V\320#4\260A\260Q\340\r\016\330\014\034\230A\230Q\330\010\030\230\001\230\021\330\010\030\230\001\230\021\200\001\360*\000\005\006\330\004\005\330\004\005\330\004\005\360\010\000\005\020\210|\2309\240K\250|\2701\270F\300!\330\004\017\210|\2309\240K\250|\2701\270F\300!\330\004\014\210A\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\200\001\3606\000\005\006\330\004\005\330\004\005\330\004\005\360\010\000\005\026\220\\\240\026\240q\250\001\330\004\025\220Y\230c\240\026\240q\250\001\330\004\021\220\025\220c\230\026\230q\240\001\330\004\030\230\004\230F\240!\2401\330\004\030\230\004\230F\240!\2401\340\004\007\200r\210\023\210B\210c\220\022\2203\220b\230\003\2307\240#\240Q\330\010\t\360\006\000\005\010\320\007\031\230\023\230A\330\010\030\230\001\330\t\033\2303\230a\330\010\030\230\001\340\010\016\210j\230\001\230\021\340\004\024\220B\320\026(\250\001\250\037\270\006\270b\300\001\330\004\024\220B\320\026(\250\001\250\037\270\006\270b\300\001\330\004\024\220B\320\026(\250\001\250\037\270\006\270b\300""\001\340\004\"\240!\330\004\"\240!\330\004\"\240!\340\004\024\220B\220g\230Q\230c\240\026\240r\250\021\330\004)\250\021\340\004\033\230>\250\032\2602\260R\260t\2702\270S\300\013\3101\330\004\007\200|\2202\220R\220t\2302\230S\240\014\250B\250a\330\010\031\230\021\230#\230V\2402\240S\250\001\360\006\000\005\036\230Y\240b\250\002\250!\330\004\"\240+\250R\250u\260B\260b\270\010\300\001\340\004\033\2309\320$6\260a\260y\300\014\310B\310c\320QS\320ST\330\004\037\230y\320(:\270!\2708\300<\310r\320Q`\320`b\320bc\330\004\034\230J\240f\250A\250Y\260l\300\"\300D\310\001\330\004\036\230a\330\004\036\230a\330\004!\240\021\330\004!\240\021\330\004\034\230A\340\004\007\200y\220\003\2205\230\003\230=\250\003\2505\260\003\2609\270C\270q\330\010\030\230\001\230\021\330\010\030\230\001\230\021\330\010\014\210A\210Q\330\010\016\210k\230\021\230!\340\004\007\200q\330\010\026\220i\320\0371\260\021\260(\270\"\270B\270a\330\010\026\220i\320\0371\260\021\260(\270\"\270B\270h\300b\310\002\310!\330\010\013\210<\220s\230%\230s\240,\250c\260\021\330\014\034\230A\230Q\330\014\034\230A\230Q\330\014\020\220\001\220\021\330\014\034\230A\230Q\330\014\034\230A\230Q\330\014\022\220+\230Q\230a\340\004\007\200q\330\010\013\2109\220D\230\005\230R\230q\330\014\033\230;\240f\250A\250X\260V\2701\330\010\013\2109\220D\230\005\230R\230q\330\014\033\230;\240f\250A\250X\260V\2701\360\006\000\005\037\230c\240\021\240(\250!\330\004\014\210A\210U\220!\330\004\010\210\t\220\025\220a\220s\230,\240b\250\001\330\010\020\220\001\220\031\230(\240#\240Q\240i\250r\260\022\2603\260b\270\010\300\007\300r\310\021\360\n\000\005\010\200t\2101\330\010\030\230\001\330\t\013\2103\210a\330\010\033\2301\230I\240T\250\022\2503\250a\340\010\033\2301\230I\240Z\250w\260i\270{\310)\320SY\320Yb\320bc\320cf\320fi\320ij\360\006\000\005\014\210;\220a\220s\230!\2301\330\004\013\210<\220q\230\004\230A\230Q\330\004\013\210;\220a\220s\230!\2303\230a\330\004\013\210<\220q\230\004\230A\230S\240\001\330\004\013\320\013\034\230A\230Y\240a\240q\330""\004\013\320\013\035\230Q\230j\250\001\250\026\250z\270\026\270q\300\003\3002\300W\310A\330\004\013\210?\230!\2307\240!\2406\250\027\260\006\260a\260s\270\"\270G\3001\330\004\013\210=\230\001\330\004\013\210=\230\001\330\004\013\2105\220\001\330\004\013\2105\220\001\360\006\000\005\010\200|\2201\220L\240\001\240\023\240A\330\004\007\200z\220\021\220-\230q\240\001\330\004\007\200|\2201\320\024$\240A\240Q\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\320\007\031\230\021\230*\240A\240V\250:\260V\2701\270C\270r\300\027\310\001\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\320\007\031\230\021\230*\240A\240V\250:\260V\2701\270C\270r\300\027\310\001\330\004\007\200\177\220a\220w\230a\230v\240W\250F\260!\2603\260b\270\007\270q\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\320\007\031\230\021\230*\240A\240V\250:\260V\2701\270C\270r\300\027\310\001\330\004\007\200\177\220a\220w\230a\230v\240W\250F\260!\2603\260b\270\007\270q\330\004\007\200{\220!\2203\220a\220q\330\004\007\200|\2201\220D\230\001\230\021\330\004\007\200{\220!\2203\220a\220s\230!\330\004\007\200{\220!\2203\220a\220s\230!\330\004\007\200|\2201\220D\230\001\230\023\230A\330\004\007\200|\2201\220D\230\001\230\023\230A\330\004\007\200}\220O\240>\260\021\260#\260Q\260a\330\004\007\200}\220O\240>\260\021\260#\260Q\260c\270\021\330\004\007\320\007\027\220q\330\004\007\320\007\027\220q\330\004\007\320\007\031\230\021\330\004\007\200|\2201\330\004\007\320\007\027\220q\330\004\007\320\007\027\220q\330\004\007\200u\210A\330\004\007\200u\210A\330\004\007\200\177\220a\330\004\007\200|\2201\330\004\007\200|\2201\330\004\007\200{\220%\220}\240A\330\004\007\200\177\220f\320\0340\260\004\260L\300\003\3008\3101\330\004\007\320\007\027\220q\330\004\007\200}\220K\230z\250\021\360\010\000\005!\240\t\250\023\250I\260S\270\006\270a\270q\330\004\035\230Q\230h\240i\250q\260\013\2706\300\025\300h\310i\320WY\320Ye\320en\320nq\320q{\360\000\000|\001J\002\360\000\000J\002K\002\330\004\035""\230Q\230d\240\"\240H\250I\260Q\260d\270&\300\005\300X\310R\310r\320Q]\320]f\320fi\320is\360\000\000t\001B\002\360\000\000B\002C\002\330\004\036\230d\240\"\320$5\260T\270\022\2701\360\006\000\005\021\220\001\220\021\220*\230C\230|\2501\340\004\005\330\010\017\210\177\230a\230q\340\010\014\210I\220U\230!\2301\330\014\017\210~\230S\240\001\330\020\026\220a\340\020\026\220n\240B\240g\250S\260\001\260\031\270&\300\002\300$\300h\310a\340\014\017\210w\220a\330\014\017\210~\230T\240\022\2404\240r\250\021\330\014\017\210~\230T\240\022\2404\240r\250\021\330\014\017\210s\220!\330\020\023\320\023&\240g\250S\260\005\260V\2704\270s\300(\310$\310b\320PX\320Xa\320ag\320gs\320sw\320wy\360\000\000z\001B\002\360\000\000B\002C\002\330\020\023\320\023&\240g\250S\260\005\260V\2704\270s\300(\310$\310b\320PX\320Xa\320ag\320gs\320sw\320wy\360\000\000z\001B\002\360\000\000B\002C\002\330\020\023\220=\240\003\2401\330\024\032\230!\230>\250\023\250H\260E\270\022\2701\330\020\023\220=\240\003\2401\330\024\032\230!\230>\250\023\250H\260E\270\022\2701\340\020\023\320\023&\240a\330\020\023\320\023&\240a\340\014\017\210q\330\020\026\220a\220z\240\023\240I\250\\\270\022\2703\270b\300\001\340\021\022\330\020!\240\021\240!\320#3\2601\260D\270\003\2701\270A\340\020\032\230!\330\020\026\220h\230b\240\001\330\024\034\230H\240B\240a\330\024\027\220v\230R\230q\330\030 \240\001\340\024\027\220q\330\030$\240A\240V\320+F\300a\300q\340\024\027\220\177\240a\330\024\027\220}\240A\330\024\027\220z\240\021\330\024\027\220|\2401\240I\250X\260Y\270f\300F\310\"\310I\320U\\\320\\e\320eh\320hr\320r~\360\000\000\177\001A\002\360\000\000A\002B\002\330\024\027\320\027-\250Z\260v\270R\270|\3102\310Q\330\024 \240\001\240\026\320\047:\270!\2701\340\024\036\230a\340\020\023\2203\220a\330\024\027\220}\240C\240q\330\030\034\230I\240U\250!\2501\330\034(\250\002\250\"\250L\270\001\270\021\330\034\037\230z\250\022\2501\330 ,\250G\2603\260a\260x\270s\320BS\320SU\320U]\320]^\330 -\250Q\250c\260\033\270A\270S\300\t\310\021\310&\320PR""\320R[\320[\\\330\024\027\220}\240C\240q\330\030\034\230I\240U\250!\2501\330\034(\250\002\250\"\250L\270\001\270\021\330\034\037\230z\250\022\2501\330 ,\250G\2603\260a\260x\270s\320BS\320SU\320U]\320]^\330 #\2409\250A\250Z\260q\330 -\250Q\250c\260\033\270A\270S\300\t\310\021\310&\320PR\320R[\320[\\\340\014\031\230\021\230%\230v\240U\250%\250v\260Q\340\014\017\210q\330\020!\240\021\330\020\024\220G\2305\240\001\240\021\330\024&\240h\250a\250t\2602\260Q\330\020\032\230+\240Q\240g\250V\2605\270\006\270e\3005\310\006\310a\330\020!\240\025\240a\240\177\260b\270\t\300\021\330\020\025\220Q\320\026+\2501\330\020\025\220Q\320\026)\250\021\360\006\000\016\017\330\014\034\230A\230Q\330\010\030\230\001\230\021\330\010\030\230\001\230\021\330\010\014\210A\210Q\330\010\030\230\001\230\021\330\010\030\230\001\230\021\330\010\014\210A\210Q\330\010\014\210A\210Q\320\000$\240A\360\006\000\005\033\230#\230V\2401\240A\330\004\032\230#\230V\2401\240A\340\004\r\210R\210v\220Q\220g\230R\230s\240&\250\002\250!\330\004\007\200w\210c\220\022\2203\220g\230S\240\001\330\010\017\210x\220r\230\026\230q\240\003\2406\250\022\2509\260B\260f\270A\270S\300\006\300b\310\013\320ST\340\004\"\240!\340\004\007\200{\220!\2203\220a\220s\230!\330\004\007\200~\220Q\220i\230q\240\001\330\004\007\200\177\220a\330\004\007\200|\2201\330\004\007\200z\220\021\330\004\007\200z\220\021\340\004\033\230>\250\032\2602\260R\260t\2707\300\"\300G\3103\310l\320Z[\330\004\034\230A\360\006\000\n\013\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\0330\260\001\260\021\330\010\014\210E\220\025\220a\220q\330\014\017\210{\230!\2302\230R\230v\240S\250\013\2601\260A\330\010\016\210c\220\033\230A\230Q\340\004\007\200t\2103\210a\330\r\016\330\014\034\230A\230Q\330\010\017\210x\220r\230\026\230q\240\003\2406\250\022\2509\260B\260f\270A\270S\300\006\300b\310\013\320ST\340\004\016\210b\220\006\220a\220u\230F\240\"\240A\330\004\013\2102\210V\2201\220E\230\026\230r\240\021\330\004#\2401\330\004\036\230a\340\004\007\200\177\220a""\220z\240\021\240!\330\004\007\200|\2201\220G\2301\230A\340\t\n\330\010\024\220A\220V\320\033/\250q\260\001\330\010\030\230\001\230\021\340\004\013\2108\2209\230F\240!";
+    #else /* compression: none (8614 bytes) */
+static const char bytes[] = "\ntraining epoch: at 0x object>.: <MemoryView of <contiguous and direct><contiguous and indirect><strided and direct or indirect><strided and direct><strided and indirect>>?Cannot assign to read-only memoryviewInvalid mode, expected \047c\047 or \047fortran\047, got Invalid shape in axis Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the \047annotation_typing\047 directive to False.RankFM supports at most 2,147,483,647 interactions per fit calladd_notecollections.abcdisableenablefailed to allocate RankFM effective item cachefailed to allocate RankFM fold-in scratch buffersfailed to allocate RankFM training scratch buffersfeature_reg=\047uniform\047 relies on per-feature step counters that are only valid single-threaded; training on {} threads uses \047stochastic\047 feature regularization instead (set n_jobs=1 to keep \047uniform\047)gci,i->ij,ij->isenableditem factors [v_i]item feature weights [w_if]item weights [w_i]item-feature factors [v_if]log likelihood:no default __reduce__ due to non-trivial __cinit__rankfm/_rankfm.pyxunable to allocate array data.unable to allocate shape and strides.unknown [learning_schedule]user factors [v_u]user-feature factors [v_uf]{} are not finite - try decreasing feature/sample_weight magnitudesASCIIBEllipsisFIKNP_ifP_ufSequenceView.MemoryView__Pyx_PyDict_NextRef__annotate____class____class_getitem____dict____func____getstate____import____main____module____name____new____pyx_checksum__pyx_state__pyx_type__pyx_unpickle_Enum__pyx_vtable____qualname____reduce____reduce_cython____reduce_ex____set_name____setstate____setstate_cython____test___csr_dense_matmul_csr_matvec_fit_fit_csr_fold_in_is_coroutine_predict_select_topk_chunkabcallocate_bufferalphaarangeascontiguousarrayassert_finiteasyncio.coroutinesb_eff_allocb_endb_startbasebase_mvbetacchunk_u_idxcline_in_tracebackconstantcountctxd_reg_ad_reg_bdatadata_mvdenom_log_Idense_to_csrdtypedtype_is_obje""cteff_threadseinsumemptyencodeenumerateepochepochserroretafilter_previousflagsfloat32float64formatfortranfullhas_basei_idxidif_dataif_densityif_indicesif_indptrif_indptr_arrif_indptr_i64indexindicesindices_mvindptrindptr_arrindptr_i64indptr_mvint32int64interactionsinvscalingisfiniteitem_biasitemsitemsizelabellast_step_iflast_step_uflazy_taillearning_exponentlearning_ratelearning_schedulell_slotslog_likelihoodmatmax_samplesmemviewmodemult_lutn_colsn_itemsn_rowsn_threadsn_u_rowsnamenanndimnnznpnumpyobjoutout_itemsout_mvp_idxpackpenaltypoolpopprintq_idxrrankfm._rankfmraw_floatsref_ctxreg_penaltyregisterrem_stepsrhsrounds_idxsample_weightschedule_modescoresscores_chunkscores_mvscratch_basescratch_strideseedsetdefaultshapeshuf_rngshuffle_indexshuffle_index_mvsizestartstepstopstructsumsync_intervalt_iu_embu_feat_embu_idxuf_datauf_densityuf_indicesuf_indptruf_indptr_arruf_indptr_i64ui_indicesui_indptrui_indptr_arrui_indptr_i64uniform_feature_regunpackupdateuser_dropoutv_eff_allocv_iv_i_effv_ifv_uv_ufvaluesvecverbosew_iw_ifwarnwarningsweightsxx_ifx_if_anyx_ufx_uf_anyzerosO\200\001\360\006\000\005\017\210a\330\004\017\210u\220A\220W\230B\230e\2401\240B\240g\250Q\250i\260u\270E\300\026\300r\310\021\330\004\017\210u\220A\220W\230B\230e\2401\240B\240g\250Q\250k\270\025\270e\3006\310\022\3101\330\004\017\210u\220A\220W\230B\230e\2401\240B\240g\250Q\250k\270\025\270e\3006\310\022\3101\330\004\017\210u\220A\220V\2302\230U\240!\2402\240W\250A\250Y\260f\270F\300&\310\002\310!\330\004\017\210u\220A\220V\2302\230U\240!\2402\240W\250A\250[\270\006\270f\300F\310\"\310A\330\004\017\210u\220A\220V\2302\230U\240!\2402\240W\250A\250[\270\006\270f\300F\310\"\310A\330\004\013\2101\200\001\360\n\000\005\006\330\004\005\360\010\000\005\022\220\022\320\023%\240Q\240l\260&\270\002\270!\330\004\"\240!\330\004\032\230)\2406\250\021\250#\250R\250q\330\004\021\220\023\220F\230!\2301\340\004\n\210\"\210F\220\"\220H\230D\240\006\240b\250\001\330\004\007\200w\210c\220\022\2203\220b\230\003\2301\330\010""\017\210q\340\004 \240\001\340\004\030\230\005\230W\240A\330\004\007\200q\330\010\022\220\"\320\024&\240a\240v\250V\2602\260Q\360\006\000\005\010\200~\220Q\220i\230q\240\001\330\004\007\200\177\220a\220w\230a\230v\240W\250F\260!\2603\260b\270\007\270q\330\004\007\200|\2201\220D\230\001\230\026\230t\2406\250\021\250#\250R\250w\260a\330\004\007\200{\220!\2203\220a\220s\230&\240\003\2406\250\021\250#\250R\250w\260a\330\004\007\200|\2201\220G\2301\230C\230v\240^\2601\330\004\007\200{\220!\2206\230\021\230#\230Q\330\004\007\200z\220\021\330\004\007\200u\210A\340\004\033\230>\250\032\2602\260R\260t\2707\300\"\300B\300c\310\034\320UV\330\004\034\230A\340\t\n\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\033-\250Q\250a\330\010\030\230\001\230\021\340\004\013\2101\200\001\360\n\000\005\006\330\004\005\360\010\000\005\022\220\022\320\023%\240Q\240l\260&\270\002\270!\330\004\"\240!\330\004\032\230)\2406\250\021\250#\250R\250q\340\004\n\210\"\210F\220!\2208\2306\240\022\2401\330\004\007\200w\210c\220\021\330\010\017\210q\340\004\035\230Q\340\004\030\230\005\230W\240A\330\004\007\200q\330\010\022\220\"\320\024&\240a\240v\250V\2602\260Q\360\006\000\005\010\200~\220Q\220i\230q\240\001\330\004\007\200\177\220a\220w\230a\230v\240W\250F\260!\2603\260b\270\007\270q\330\004\007\200|\2201\220D\230\001\230\026\230t\2406\250\021\250#\250R\250w\260a\330\004\007\200{\220!\2203\220a\220v\230S\240\006\240a\240s\250\"\250G\2601\330\004\007\200|\2201\220G\2301\230F\240.\260\001\330\004\007\200{\220!\2206\230\021\230!\330\004\007\200z\220\021\340\004\033\230>\250\032\2602\260R\260t\2707\300#\300[\320PQ\330\004\034\230A\340\t\n\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\033-\250Q\250a\330\010\030\230\001\230\021\340\004\013\2101\200\001\360\014\000\005\006\360\010\000\005\026\220U\230&\240\001\240\021\330\004\021\220\025\220e\2306\240\021\240!\340\004\r\210R\210u\220A\220S\230\002\230&\240\006\240b\250\001\330\004\007\200r\210\023\210B\210c\220\025\220f\230A\230S\240\003""\2402\240S\250\t\260\026\260q\270\003\2703\270a\330\010\017\210q\340\004 \240\001\340\004\007\200y\220\001\220\025\220a\220q\330\004\007\200y\220\001\220\025\220a\220q\330\004\007\200}\220A\220U\230!\2303\230a\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\200\177\220a\220w\230a\230s\240!\330\004\007\200~\220Q\220i\230q\240\001\330\004\007\200u\210A\330\004\007\200u\210A\340\004\033\230>\250\032\2602\260R\260t\2702\270S\300\013\3101\330\004\034\230A\340\t\n\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\033,\250A\250Q\330\010\030\230\001\230\021\340\004\013\2101\200\001\360\014\000\005\t\210\007\210{\230!\330\010\t\320\t\037\230q\330\t(\250\001\330\t\037\230q\330\t\037\230q\330\t(\250\001\330\t(\250\001\340\010\013\2104\210r\220\031\230!\2302\230T\240\021\240)\2506\260\022\2601\330\014\022\220.\240\001\320!f\320fm\320mn\320no\200\001\360\022\000\005\006\360\010\000\005\026\220\\\240\026\240q\250\001\330\004\025\220Y\230l\250&\260\001\260\021\330\004\025\220Y\230a\330\004\007\200r\210\023\210B\210c\220\022\2203\220a\330\010\t\360\006\000\005\010\200q\330\010\030\230\002\320\032,\250A\250_\270F\300\"\300A\330\010\024\220A\340\004\033\230>\250\032\2602\260R\260t\2702\270S\300\t\310\021\330\004\007\200|\2202\220Q\330\010\026\220e\2301\360\006\000\005\010\200~\220Q\220l\240!\2403\240a\330\004\007\200|\2201\220I\230Q\230a\330\004\007\200y\220\001\220\033\230A\230Q\330\004\007\200~\220Q\220i\230q\240\006\320&;\2701\330\004\007\200\177\220a\220z\240\021\240\047\320)9\270\024\270Z\300v\310Q\310c\320QS\320S[\320[\\\330\004\007\200{\220!\2209\230A\230S\240\001\330\004\007\200u\210A\330\004\007\200z\220\021\330\004\007\200|\2201\220I\230W\240I\250T\260\022\2607\270)\3003\300j\320P\\\320\\^\320^_\330\004\007\200u\210A\330\004\007\200u\210A\330\004\007\320\007\032\230%\320\0374\260A\340\004\034\230A\340\t\n\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\0330\260\001\260\021\330\010\030\230\001\230\021\200\001\360\036\000\005\006\330\004\005\360""\010\000\005\026\220\\\240\026\240q\250\001\330\004\025\220Y\230g\240V\2501\250A\330\004\021\220\025\220c\230\026\230q\240\001\340\004\007\200r\210\023\210B\210c\220\022\2203\220b\230\003\2307\240#\240Q\330\010\t\360\010\000\005\010\200r\210\022\2101\330\010\016\210j\230\001\230\021\330\004\007\200|\2202\220R\220r\230\021\330\010\026\220b\230\002\230!\360\006\000\005\010\320\007\031\230\023\230A\330\010\030\230\001\330\t\033\2303\230a\330\010\030\230\001\340\010\016\210j\230\001\230\021\340\004\024\220B\320\026(\250\001\250\037\270\006\270b\300\001\330\004\"\240!\340\004\024\220B\220g\230Q\230c\240\026\240r\250\021\330\004)\250\021\340\004\033\230>\250\032\2602\260R\260t\2702\270S\300\013\3101\330\004\007\200|\2202\220R\220t\2302\230S\240\014\250B\250a\330\010\031\230\021\230#\230V\2402\240S\250\001\340\004\"\240)\2502\250R\250s\260\"\260E\270\022\2702\270X\300Q\330\004\033\2309\320$6\260a\260y\300\014\310B\310c\320QS\320ST\330\004\037\230y\320(:\270!\2708\300<\310r\320Q`\320`b\320bc\330\004\034\230A\340\004\007\200y\220\003\2205\230\003\230=\250\003\2501\330\010\030\230\001\230\021\330\010\030\230\001\230\021\330\010\016\210k\230\021\230!\360\006\000\005\037\230c\240\021\240(\250!\330\004\014\210A\210U\220!\330\004\010\210\t\220\025\220a\220s\230,\240b\250\001\330\010\020\220\001\220\031\230(\240#\240Q\240i\250r\260\022\2603\260b\270\010\300\007\300r\310\021\360\006\000\005\010\200|\2201\220L\240\001\240\023\240A\330\004\007\200z\220\021\220-\230q\240\001\330\004\007\200|\2201\320\024$\240A\240Q\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\320\007\031\230\021\230*\240A\240V\250:\260V\2701\270C\270r\300\027\310\001\330\004\007\200~\220Q\220j\240\001\240\023\240A\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\200\177\220a\220w\230a\230s\240!\330\004\007\200{\220!\2203\220a\220s\230!\330\004\007\320\007\027\220q\330\004\007\320\007\027\220q\330\004\007\320\007\031\230\021\330\004\007\200u\210A\330\004\007\200|\2201\220I\230X\240Y\250e""\2602\260W\270I\300S\310\n\320R^\320^`\320`a\330\004\007\200u\210A\330\004\007\200u\210A\330\004\007\200\177\220a\330\004\007\200}\220K\230z\250\021\360\006\000\005\037\230d\240\"\240A\340\004\020\220\001\220\021\220*\230C\230|\2501\340\004\005\330\r\016\330\014\023\220?\240!\2401\330\014\020\220\t\230\025\230a\230q\330\020\023\220>\240\023\240A\330\024\032\230!\340\024\032\230.\250\002\250\047\260\023\260A\260Y\270f\300B\300d\310(\320RS\340\020\023\2207\230!\330\020\023\220>\240\024\240R\240t\2502\250Q\330\020\023\220:\230Q\330\020\023\320\023*\250+\260V\2702\270T\300\023\300D\310\010\320PQ\340\020!\240\021\240!\320#3\2601\260D\270\003\2701\270A\330\020\034\230A\230V\320#4\260A\260Q\340\r\016\330\014\034\230A\230Q\330\010\030\230\001\230\021\330\010\030\230\001\230\021\200\001\360*\000\005\006\330\004\005\330\004\005\330\004\005\360\010\000\005\020\210|\2309\240K\250|\2701\270F\300!\330\004\017\210|\2309\240K\250|\2701\270F\300!\330\004\014\210A\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\330\010\t\200\001\3606\000\005\006\330\004\005\330\004\005\330\004\005\360\010\000\005\026\220\\\240\026\240q\250\001\330\004\025\220Y\230c\240\026\240q\250\001\330\004\021\220\025\220c\230\026\230q\240\001\330\004\030\230\004\230F\240!\2401\330\004\030\230\004\230F\240!\2401\340\004\007\200r\210\023\210B\210c\220\022\2203\220b\230\003\2307\240#\240Q\330\010\t\360\010\000\005\010\200r\210\022\2101\330\010\016\210j\230\001\230\021\330\004\007\200|\2202\220R\220r\230\021\330\010\026\220b\230\002\230!\360\006\000\005\010\320\007\031\230\023\230A\330\010\030\230\001\330\t\033\2303\230a\330\010\030\230\001\340\010\016\210j\230\001\230\021\340\004\024\220B\320\026(\250\001\250\037\270\006\270b\300\001\330\004\024\220B\320\026(\250\001\250\037""\270\006\270b\300\001\330\004\024\220B\320\026(\250\001\250\037\270\006\270b\300\001\340\004\"\240!\330\004\"\240!\330\004\"\240!\340\004\024\220B\220g\230Q\230c\240\026\240r\250\021\330\004)\250\021\340\004\033\230>\250\032\2602\260R\260t\2702\270S\300\013\3101\330\004\007\200|\2202\220R\220t\2302\230S\240\014\250B\250a\330\010\031\230\021\230#\230V\2402\240S\250\001\360\006\000\005\036\230Y\240b\250\002\250!\330\004\"\240+\250R\250u\260B\260b\270\010\300\001\340\004\033\2309\320$6\260a\260y\300\014\310B\310c\320QS\320ST\330\004\037\230y\320(:\270!\2708\300<\310r\320Q`\320`b\320bc\330\004\034\230J\240f\250A\250Y\260l\300\"\300D\310\001\330\004\036\230a\330\004\036\230a\330\004!\240\021\330\004!\240\021\330\004\034\230A\340\004\007\200y\220\003\2205\230\003\230=\250\003\2505\260\003\2609\270C\270q\330\010\030\230\001\230\021\330\010\030\230\001\230\021\330\010\014\210A\210Q\330\010\016\210k\230\021\230!\340\004\007\200q\330\010\026\220i\320\0371\260\021\260(\270\"\270B\270a\330\010\026\220i\320\0371\260\021\260(\270\"\270B\270h\300b\310\002\310!\330\010\013\210<\220s\230%\230s\240,\250c\260\021\330\014\034\230A\230Q\330\014\034\230A\230Q\330\014\020\220\001\220\021\330\014\034\230A\230Q\330\014\034\230A\230Q\330\014\022\220+\230Q\230a\340\004\007\200q\330\010\013\2109\220D\230\005\230R\230q\330\014\033\230;\240f\250A\250X\260V\2701\330\010\013\2109\220D\230\005\230R\230q\330\014\033\230;\240f\250A\250X\260V\2701\360\006\000\005\037\230c\240\021\240(\250!\330\004\014\210A\210U\220!\330\004\010\210\t\220\025\220a\220s\230,\240b\250\001\330\010\020\220\001\220\031\230(\240#\240Q\240i\250r\260\022\2603\260b\270\010\300\007\300r\310\021\360\n\000\005\010\200t\2101\330\010\030\230\001\330\t\013\2103\210a\330\010\033\2301\230I\240T\250\022\2503\250a\340\010\033\2301\230I\240Z\250w\260i\270{\310)\320SY\320Yb\320bc\320cf\320fi\320ij\360\006\000\005\014\210;\220a\220s\230!\2301\330\004\013\210<\220q\230\004\230A\230Q\330\004\013\210;\220a\220s\230!\2303\230a\330\004\013\210<""\220q\230\004\230A\230S\240\001\330\004\013\320\013\034\230A\230Y\240a\240q\330\004\013\320\013\035\230Q\230j\250\001\250\026\250z\270\026\270q\300\003\3002\300W\310A\330\004\013\210?\230!\2307\240!\2406\250\027\260\006\260a\260s\270\"\270G\3001\330\004\013\210=\230\001\330\004\013\210=\230\001\330\004\013\2105\220\001\330\004\013\2105\220\001\360\006\000\005\010\200|\2201\220L\240\001\240\023\240A\330\004\007\200z\220\021\220-\230q\240\001\330\004\007\200|\2201\320\024$\240A\240Q\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\320\007\031\230\021\230*\240A\240V\250:\260V\2701\270C\270r\300\027\310\001\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\320\007\031\230\021\230*\240A\240V\250:\260V\2701\270C\270r\300\027\310\001\330\004\007\200\177\220a\220w\230a\230v\240W\250F\260!\2603\260b\270\007\270q\330\004\007\320\007\030\230\001\230\031\240!\2401\330\004\007\320\007\031\230\021\230*\240A\240V\250:\260V\2701\270C\270r\300\027\310\001\330\004\007\200\177\220a\220w\230a\230v\240W\250F\260!\2603\260b\270\007\270q\330\004\007\200{\220!\2203\220a\220q\330\004\007\200|\2201\220D\230\001\230\021\330\004\007\200{\220!\2203\220a\220s\230!\330\004\007\200{\220!\2203\220a\220s\230!\330\004\007\200|\2201\220D\230\001\230\023\230A\330\004\007\200|\2201\220D\230\001\230\023\230A\330\004\007\200}\220O\240>\260\021\260#\260Q\260a\330\004\007\200}\220O\240>\260\021\260#\260Q\260c\270\021\330\004\007\320\007\027\220q\330\004\007\320\007\027\220q\330\004\007\320\007\031\230\021\330\004\007\200|\2201\330\004\007\320\007\027\220q\330\004\007\320\007\027\220q\330\004\007\200u\210A\330\004\007\200u\210A\330\004\007\200\177\220a\330\004\007\200|\2201\330\004\007\200|\2201\330\004\007\200{\220%\220}\240A\330\004\007\200\177\220f\320\0340\260\004\260L\300\003\3008\3101\330\004\007\320\007\033\2304\230|\2502\250Q\330\010\020\220\005\220Q\330\014\r\330v}\320}~\320~\177\330\014\r\340\004\007\320\007\027\220q\330\004\007\200}\220K\230z\250\021\360\010\000\005!\240""\t\250\023\250I\260S\270\006\270a\270q\330\004\035\230Q\230h\240i\250q\260\013\2706\300\025\300h\310i\320WY\320Ye\320en\320nq\320q{\360\000\000|\001J\002\360\000\000J\002K\002\330\004\035\230Q\230d\240\"\240H\250I\260Q\260d\270&\300\005\300X\310R\310r\320Q]\320]f\320fi\320is\360\000\000t\001B\002\360\000\000B\002C\002\330\004\036\230d\240\"\320$5\260T\270\022\2701\360\006\000\005\021\220\001\220\021\220*\230C\230|\2501\340\004\005\330\010\017\210\177\230a\230q\340\010\014\210I\220U\230!\2301\330\014\017\210~\230S\240\001\330\020\026\220a\340\020\026\220n\240B\240g\250S\260\001\260\031\270&\300\002\300$\300h\310a\340\014\017\210w\220a\330\014\017\210~\230T\240\022\2404\240r\250\021\330\014\017\210~\230T\240\022\2404\240r\250\021\330\014\017\210s\220!\330\020\023\320\023&\240g\250S\260\005\260V\2704\270s\300(\310$\310b\320PX\320Xa\320ag\320gs\320sw\320wy\360\000\000z\001B\002\360\000\000B\002C\002\330\020\023\320\023&\240g\250S\260\005\260V\2704\270s\300(\310$\310b\320PX\320Xa\320ag\320gs\320sw\320wy\360\000\000z\001B\002\360\000\000B\002C\002\330\020\023\220=\240\003\2401\330\024\032\230!\230>\250\023\250H\260E\270\022\2701\330\020\023\220=\240\003\2401\330\024\032\230!\230>\250\023\250H\260E\270\022\2701\340\020\023\320\023&\240a\330\020\023\320\023&\240a\340\014\017\210q\330\020\026\220a\220z\240\023\240I\250\\\270\022\2703\270b\300\001\340\021\022\330\020!\240\021\240!\320#3\2601\260D\270\003\2701\270A\340\020\032\230!\330\020\026\220h\230b\240\001\330\024\034\230H\240B\240a\330\024\027\220v\230R\230q\330\030 \240\001\340\024\027\220q\330\030$\240A\240V\320+F\300a\300q\340\024\027\220\177\240a\330\024\027\220}\240A\330\024\027\220z\240\021\330\024\027\220|\2401\240I\250X\260Y\270f\300F\310\"\310I\320U\\\320\\e\320eh\320hr\320r~\360\000\000\177\001A\002\360\000\000A\002B\002\340\024\027\320\027-\250[\270\006\270b\300\004\300C\300q\330\024 \240\001\240\026\320\047:\270!\2701\340\024\036\230a\340\020\023\2203\220a\330\024\027\220}\240C\240q\330\030\034\230I\240U\250!""\2501\330\034(\250\002\250\"\250L\270\001\270\021\330\034\037\230z\250\022\2501\330 ,\250G\2603\260a\260x\270s\320BS\320SU\320U]\320]^\330 -\250Q\250c\260\033\270A\270S\300\t\310\021\310&\320PR\320R[\320[\\\330\024\027\220}\240C\240q\330\030\034\230I\240U\250!\2501\330\034(\250\002\250\"\250L\270\001\270\021\330\034\037\230z\250\022\2501\330 ,\250G\2603\260a\260x\270s\320BS\320SU\320U]\320]^\330 #\2409\250A\250Z\260q\330 -\250Q\250c\260\033\270A\270S\300\t\310\021\310&\320PR\320R[\320[\\\340\014\031\230\021\230%\230v\240U\250%\250v\260Q\340\014\017\210q\330\020!\240\021\330\020\024\220G\2305\240\001\240\021\330\024&\240h\250a\250t\2602\260Q\330\020\032\230+\240Q\240g\250V\2605\270\006\270e\3005\310\006\310a\330\020!\240\025\240a\240\177\260b\270\t\300\021\330\020\025\220Q\320\026+\2501\330\020\025\220Q\320\026)\250\021\360\006\000\016\017\330\014\034\230A\230Q\330\010\030\230\001\230\021\330\010\030\230\001\230\021\330\010\014\210A\210Q\330\010\030\230\001\230\021\330\010\030\230\001\230\021\330\010\014\210A\210Q\330\010\014\210A\210Q\320\000$\240A\360\006\000\005\033\230#\230V\2401\240A\330\004\032\230#\230V\2401\240A\340\004\r\210R\210v\220Q\220g\230R\230s\240&\250\002\250!\330\004\007\200w\210c\220\022\2203\220g\230S\240\001\330\010\017\210x\220r\230\026\230q\240\003\2406\250\022\2509\260B\260f\270A\270S\300\006\300b\310\013\320ST\340\004\"\240!\340\004\007\200{\220!\2203\220a\220s\230!\330\004\007\200~\220Q\220i\230q\240\001\330\004\007\200\177\220a\330\004\007\200|\2201\330\004\007\200z\220\021\330\004\007\200z\220\021\340\004\033\230>\250\032\2602\260R\260t\2707\300\"\300G\3103\310l\320Z[\330\004\034\230A\360\006\000\n\013\330\010\017\210\177\230a\230q\330\010\024\220A\220V\320\0330\260\001\260\021\330\010\014\210E\220\025\220a\220q\330\014\017\210{\230!\2302\230R\230v\240S\250\013\2601\260A\330\010\016\210c\220\033\230A\230Q\340\004\007\200t\2103\210a\330\r\016\330\014\034\230A\230Q\330\010\017\210x\220r\230\026\230q\240\003\2406\250\022\2509\260B\260f\270A""\270S\300\006\300b\310\013\320ST\340\004\016\210b\220\006\220a\220u\230F\240\"\240A\330\004\013\2102\210V\2201\220E\230\026\230r\240\021\330\004#\2401\330\004\036\230a\340\004\007\200\177\220a\220z\240\021\240!\330\004\007\200|\2201\220G\2301\230A\340\t\n\330\010\024\220A\220V\320\033/\250q\260\001\330\010\030\230\001\230\021\340\004\013\2108\2209\230F\240!";
     PyObject *data = NULL;
     #define __Pyx_DecompressString_UNUSED
     #define __Pyx_DecompressString_LZSS_UNUSED
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 251; i++) {
+    for (int i = 0; i < 258; i++) {
       Py_ssize_t bytes_length = str_length_index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
-      if (likely(string) && i >= 40) PyUnicode_InternInPlace(&string);
+      if (likely(string) && i >= 43) PyUnicode_InternInPlace(&string);
       if (unlikely(!string)) {
         Py_XDECREF(data);
         __PYX_ERR(0, 1, __pyx_L1_error)
@@ -38472,8 +38480,8 @@ static const char bytes[] = "\ntraining epoch: at 0x object>.: <MemoryView of <c
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 251; i < 262; i++) {
-      Py_ssize_t bytes_length = bytes_length_index[i-251].length;
+    for (int i = 258; i < 269; i++) {
+      Py_ssize_t bytes_length = bytes_length_index[i-258].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
       pos += bytes_length;
@@ -38483,14 +38491,14 @@ static const char bytes[] = "\ntraining epoch: at 0x object>.: <MemoryView of <c
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 262; i++) {
+    for (Py_ssize_t i = 0; i < 269; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 251;
+      PyObject **table = stringtab + 258;
       for (Py_ssize_t i=0; i<11; ++i) {
         #if PY_VERSION_HEX >= 0x030F0000
         PyUnstable_SetImmortal(table[i]);
@@ -38578,52 +38586,52 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 15, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 834};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 15, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 836};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_mat, __pyx_mstate->__pyx_n_u_n_threads, __pyx_mstate->__pyx_n_u_n_rows, __pyx_mstate->__pyx_n_u_n_cols, __pyx_mstate->__pyx_n_u_indptr, __pyx_mstate->__pyx_n_u_indptr_mv, __pyx_mstate->__pyx_n_u_ctx, __pyx_mstate->__pyx_n_u_eff_threads, __pyx_mstate->__pyx_n_u_pool, __pyx_mstate->__pyx_n_u_r, __pyx_mstate->__pyx_n_u_nnz, __pyx_mstate->__pyx_n_u_indices, __pyx_mstate->__pyx_n_u_data, __pyx_mstate->__pyx_n_u_indices_mv, __pyx_mstate->__pyx_n_u_data_mv};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_dense_to_csr, __pyx_mstate->__pyx_kp_b_iso88591_A_V1A_V1A_RvQgRs_wc_3gS_xr_q_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 17, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 884};
+    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 17, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 886};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_indptr_arr, __pyx_mstate->__pyx_n_u_indices, __pyx_mstate->__pyx_n_u_data, __pyx_mstate->__pyx_n_u_rhs, __pyx_mstate->__pyx_n_u_base, __pyx_mstate->__pyx_n_u_n_threads, __pyx_mstate->__pyx_n_u_indptr_i64, __pyx_mstate->__pyx_n_u_indptr_mv, __pyx_mstate->__pyx_n_u_n_rows, __pyx_mstate->__pyx_n_u_F, __pyx_mstate->__pyx_n_u_out, __pyx_mstate->__pyx_n_u_out_mv, __pyx_mstate->__pyx_n_u_base_mv, __pyx_mstate->__pyx_n_u_has_base, __pyx_mstate->__pyx_n_u_ctx, __pyx_mstate->__pyx_n_u_eff_threads, __pyx_mstate->__pyx_n_u_pool};
     __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_csr_dense_matmul, __pyx_mstate->__pyx_kp_b_iso88591_Ql_6_Rq_F_1_F_HD_b_wc_3b_1_q_WA, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 16, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 930};
+    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 16, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 932};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_indptr_arr, __pyx_mstate->__pyx_n_u_indices, __pyx_mstate->__pyx_n_u_data, __pyx_mstate->__pyx_n_u_vec, __pyx_mstate->__pyx_n_u_base, __pyx_mstate->__pyx_n_u_n_threads, __pyx_mstate->__pyx_n_u_indptr_i64, __pyx_mstate->__pyx_n_u_indptr_mv, __pyx_mstate->__pyx_n_u_n_rows, __pyx_mstate->__pyx_n_u_out, __pyx_mstate->__pyx_n_u_out_mv, __pyx_mstate->__pyx_n_u_base_mv, __pyx_mstate->__pyx_n_u_has_base, __pyx_mstate->__pyx_n_u_ctx, __pyx_mstate->__pyx_n_u_eff_threads, __pyx_mstate->__pyx_n_u_pool};
     __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_csr_matvec, __pyx_mstate->__pyx_kp_b_iso88591_Ql_6_Rq_F_86_1_wc_q_Q_WA_q_avV2, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 6, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 974};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_w_i, __pyx_mstate->__pyx_n_u_w_if, __pyx_mstate->__pyx_n_u_v_u, __pyx_mstate->__pyx_n_u_v_i, __pyx_mstate->__pyx_n_u_v_uf, __pyx_mstate->__pyx_n_u_v_if};
-    __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_assert_finite, __pyx_mstate->__pyx_kp_b_iso88591_2Yar_Qe6_q_2Yar_QfF_L_2Yar_Qe6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
+    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 8, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 976};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_w_i, __pyx_mstate->__pyx_n_u_w_if, __pyx_mstate->__pyx_n_u_v_u, __pyx_mstate->__pyx_n_u_v_i, __pyx_mstate->__pyx_n_u_v_uf, __pyx_mstate->__pyx_n_u_v_if, __pyx_mstate->__pyx_n_u_label, __pyx_mstate->__pyx_n_u_weights};
+    __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_assert_finite, __pyx_mstate->__pyx_kp_b_iso88591_q_q_q_4r_2T_6_1_ffmmnno, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {8, 0, 0, 9, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 985};
+    const __Pyx_PyCode_New_function_description descr = {8, 0, 0, 9, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 994};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_alpha, __pyx_mstate->__pyx_n_u_beta, __pyx_mstate->__pyx_n_u_w_i, __pyx_mstate->__pyx_n_u_w_if, __pyx_mstate->__pyx_n_u_v_u, __pyx_mstate->__pyx_n_u_v_i, __pyx_mstate->__pyx_n_u_v_uf, __pyx_mstate->__pyx_n_u_v_if, __pyx_mstate->__pyx_n_u_penalty};
     __pyx_mstate_global->__pyx_codeobj_tab[4] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_reg_penalty, __pyx_mstate->__pyx_kp_b_iso88591_a_uAWBe1BgQiuE_r_uAWBe1BgQk_e6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[4])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {30, 0, 0, 77, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1002};
+    const __Pyx_PyCode_New_function_description descr = {30, 0, 0, 77, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1011};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_interactions, __pyx_mstate->__pyx_n_u_sample_weight, __pyx_mstate->__pyx_n_u_ui_indptr_arr, __pyx_mstate->__pyx_n_u_ui_indices, __pyx_mstate->__pyx_n_u_uf_indptr_arr, __pyx_mstate->__pyx_n_u_uf_indices, __pyx_mstate->__pyx_n_u_uf_data, __pyx_mstate->__pyx_n_u_x_uf_any, __pyx_mstate->__pyx_n_u_if_indptr_arr, __pyx_mstate->__pyx_n_u_if_indices, __pyx_mstate->__pyx_n_u_if_data, __pyx_mstate->__pyx_n_u_x_if_any, __pyx_mstate->__pyx_n_u_w_i, __pyx_mstate->__pyx_n_u_w_if, __pyx_mstate->__pyx_n_u_v_u, __pyx_mstate->__pyx_n_u_v_i, __pyx_mstate->__pyx_n_u_v_uf, __pyx_mstate->__pyx_n_u_v_if, __pyx_mstate->__pyx_n_u_alpha, __pyx_mstate->__pyx_n_u_beta, __pyx_mstate->__pyx_n_u_learning_rate, __pyx_mstate->__pyx_n_u_learning_schedule, __pyx_mstate->__pyx_n_u_learning_exponent, __pyx_mstate->__pyx_n_u_max_samples, __pyx_mstate->__pyx_n_u_epochs, __pyx_mstate->__pyx_n_u_verbose, __pyx_mstate->__pyx_n_u_user_dropout, __pyx_mstate->__pyx_n_u_seed, __pyx_mstate->__pyx_n_u_n_threads, __pyx_mstate->__pyx_n_u_uniform_feature_reg, __pyx_mstate->__pyx_n_u_N, __pyx_mstate->__pyx_n_u_I, __pyx_mstate->__pyx_n_u_F, __pyx_mstate->__pyx_n_u_P_uf, __pyx_mstate->__pyx_n_u_P_if, __pyx_mstate->__pyx_n_u_schedule_mode, __pyx_mstate->__pyx_n_u_ui_indptr_i64, __pyx_mstate->__pyx_n_u_uf_indptr_i64, __pyx_mstate->__pyx_n_u_if_indptr_i64, __pyx_mstate->__pyx_n_u_ui_indptr, __pyx_mstate->__pyx_n_u_uf_indptr, __pyx_mstate->__pyx_n_u_if_indptr, __pyx_mstate->__pyx_n_u_shuffle_index, __pyx_mstate->__pyx_n_u_shuffle_index_mv, __pyx_mstate->__pyx_n_u_eff_threads, __pyx_mstate->__pyx_n_u_raw_floats, __pyx_mstate->__pyx_n_u_scratch_stride, __pyx_mstate->__pyx_n_u_mult_lut, __pyx_mstate->__pyx_n_u_scratch_base, __pyx_mstate->__pyx_n_u_ll_slots, __pyx_mstate->__pyx_n_u_b_eff_alloc, __pyx_mstate->__pyx_n_u_v_eff_alloc, __pyx_mstate->__pyx_n_u_last_step_uf, __pyx_mstate->__pyx_n_u_last_step_if, __pyx_mstate->__pyx_n_u_pool, __pyx_mstate->__pyx_n_u_s_idx, __pyx_mstate->__pyx_n_u_denom_log_I, __pyx_mstate->__pyx_n_u_sync_interval, __pyx_mstate->__pyx_n_u_ref_ctx, __pyx_mstate->__pyx_n_u_ctx, __pyx_mstate->__pyx_n_u_epoch, __pyx_mstate->__pyx_n_u_t_i, __pyx_mstate->__pyx_n_u_b_start, __pyx_mstate->__pyx_n_u_b_end, __pyx_mstate->__pyx_n_u_p_idx, __pyx_mstate->__pyx_n_u_q_idx, __pyx_mstate->__pyx_n_u_rem_steps, __pyx_mstate->__pyx_n_u_n_u_rows, __pyx_mstate->__pyx_n_u_uf_density, __pyx_mstate->__pyx_n_u_if_density, __pyx_mstate->__pyx_n_u_eta, __pyx_mstate->__pyx_n_u_d_reg_a, __pyx_mstate->__pyx_n_u_d_reg_b, __pyx_mstate->__pyx_n_u_lazy_tail, __pyx_mstate->__pyx_n_u_log_likelihood_2, __pyx_mstate->__pyx_n_u_shuf_rng, __pyx_mstate->__pyx_n_u_penalty};
     __pyx_mstate_global->__pyx_codeobj_tab[5] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_fit_csr, __pyx_mstate->__pyx_kp_b_iso88591_6_q_Yc_q_c_q_F_1_F_1_r_Bc_3b_7, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[5])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {24, 0, 0, 32, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1264};
+    const __Pyx_PyCode_New_function_description descr = {24, 0, 0, 32, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1287};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_interactions, __pyx_mstate->__pyx_n_u_sample_weight, __pyx_mstate->__pyx_n_u_ui_indptr, __pyx_mstate->__pyx_n_u_ui_indices, __pyx_mstate->__pyx_n_u_x_uf, __pyx_mstate->__pyx_n_u_x_if, __pyx_mstate->__pyx_n_u_w_i, __pyx_mstate->__pyx_n_u_w_if, __pyx_mstate->__pyx_n_u_v_u, __pyx_mstate->__pyx_n_u_v_i, __pyx_mstate->__pyx_n_u_v_uf, __pyx_mstate->__pyx_n_u_v_if, __pyx_mstate->__pyx_n_u_alpha, __pyx_mstate->__pyx_n_u_beta, __pyx_mstate->__pyx_n_u_learning_rate, __pyx_mstate->__pyx_n_u_learning_schedule, __pyx_mstate->__pyx_n_u_learning_exponent, __pyx_mstate->__pyx_n_u_max_samples, __pyx_mstate->__pyx_n_u_epochs, __pyx_mstate->__pyx_n_u_verbose, __pyx_mstate->__pyx_n_u_user_dropout, __pyx_mstate->__pyx_n_u_seed, __pyx_mstate->__pyx_n_u_n_threads, __pyx_mstate->__pyx_n_u_uniform_feature_reg, __pyx_mstate->__pyx_n_u_uf_indptr, __pyx_mstate->__pyx_n_u_uf_indices, __pyx_mstate->__pyx_n_u_uf_data, __pyx_mstate->__pyx_n_u_x_uf_any, __pyx_mstate->__pyx_n_u_if_indptr, __pyx_mstate->__pyx_n_u_if_indices, __pyx_mstate->__pyx_n_u_if_data, __pyx_mstate->__pyx_n_u_x_if_any};
     __pyx_mstate_global->__pyx_codeobj_tab[6] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_fit, __pyx_mstate->__pyx_kp_b_iso88591_9K_1F_9K_1F_A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[6])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {16, 0, 0, 36, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1328};
+    const __Pyx_PyCode_New_function_description descr = {16, 0, 0, 36, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1351};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_interactions, __pyx_mstate->__pyx_n_u_sample_weight, __pyx_mstate->__pyx_n_u_ui_indptr_arr, __pyx_mstate->__pyx_n_u_ui_indices, __pyx_mstate->__pyx_n_u_u_feat_emb, __pyx_mstate->__pyx_n_u_item_bias, __pyx_mstate->__pyx_n_u_v_i_eff, __pyx_mstate->__pyx_n_u_v_u, __pyx_mstate->__pyx_n_u_alpha, __pyx_mstate->__pyx_n_u_learning_rate, __pyx_mstate->__pyx_n_u_learning_schedule, __pyx_mstate->__pyx_n_u_learning_exponent, __pyx_mstate->__pyx_n_u_max_samples, __pyx_mstate->__pyx_n_u_epochs, __pyx_mstate->__pyx_n_u_seed, __pyx_mstate->__pyx_n_u_n_threads, __pyx_mstate->__pyx_n_u_N, __pyx_mstate->__pyx_n_u_I, __pyx_mstate->__pyx_n_u_F, __pyx_mstate->__pyx_n_u_schedule_mode, __pyx_mstate->__pyx_n_u_ui_indptr_i64, __pyx_mstate->__pyx_n_u_ui_indptr, __pyx_mstate->__pyx_n_u_shuffle_index, __pyx_mstate->__pyx_n_u_shuffle_index_mv, __pyx_mstate->__pyx_n_u_eff_threads, __pyx_mstate->__pyx_n_u_scratch_stride, __pyx_mstate->__pyx_n_u_mult_lut, __pyx_mstate->__pyx_n_u_scratch_base, __pyx_mstate->__pyx_n_u_pool, __pyx_mstate->__pyx_n_u_s_idx, __pyx_mstate->__pyx_n_u_denom_log_I, __pyx_mstate->__pyx_n_u_ctx, __pyx_mstate->__pyx_n_u_epoch, __pyx_mstate->__pyx_n_u_eta, __pyx_mstate->__pyx_n_u_d_reg_a, __pyx_mstate->__pyx_n_u_shuf_rng};
-    __pyx_mstate_global->__pyx_codeobj_tab[7] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_fold_in, __pyx_mstate->__pyx_kp_b_iso88591_q_YgV1A_c_q_r_Bc_3b_7_Q_A_3a_j, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[7])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[7] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_fold_in, __pyx_mstate->__pyx_kp_b_iso88591_q_YgV1A_c_q_r_Bc_3b_7_Q_r_1_j_2, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[7])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 13, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1437};
+    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 13, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1467};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_u_idx, __pyx_mstate->__pyx_n_u_i_idx, __pyx_mstate->__pyx_n_u_u_emb, __pyx_mstate->__pyx_n_u_item_bias, __pyx_mstate->__pyx_n_u_v_i_eff, __pyx_mstate->__pyx_n_u_n_threads, __pyx_mstate->__pyx_n_u_N, __pyx_mstate->__pyx_n_u_F, __pyx_mstate->__pyx_n_u_scores, __pyx_mstate->__pyx_n_u_scores_mv, __pyx_mstate->__pyx_n_u_ctx, __pyx_mstate->__pyx_n_u_eff_threads, __pyx_mstate->__pyx_n_u_pool};
     __pyx_mstate_global->__pyx_codeobj_tab[8] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_predict, __pyx_mstate->__pyx_kp_b_iso88591_U_e6_RuAS_b_r_Bc_fAS_2S_q_3a_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[8])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {9, 0, 0, 17, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1476};
+    const __Pyx_PyCode_New_function_description descr = {9, 0, 0, 17, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1506};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_scores_chunk, __pyx_mstate->__pyx_n_u_item_bias, __pyx_mstate->__pyx_n_u_chunk_u_idx, __pyx_mstate->__pyx_n_u_ui_indptr_arr, __pyx_mstate->__pyx_n_u_ui_indices, __pyx_mstate->__pyx_n_u_n_items, __pyx_mstate->__pyx_n_u_filter_previous, __pyx_mstate->__pyx_n_u_out_items, __pyx_mstate->__pyx_n_u_n_threads, __pyx_mstate->__pyx_n_u_B, __pyx_mstate->__pyx_n_u_I, __pyx_mstate->__pyx_n_u_K, __pyx_mstate->__pyx_n_u_ui_indptr, __pyx_mstate->__pyx_n_u_ui_indptr_i64, __pyx_mstate->__pyx_n_u_eff_threads, __pyx_mstate->__pyx_n_u_ctx, __pyx_mstate->__pyx_n_u_pool};
     __pyx_mstate_global->__pyx_codeobj_tab[9] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_rankfm__rankfm_pyx, __pyx_mstate->__pyx_n_u_select_topk_chunk, __pyx_mstate->__pyx_kp_b_iso88591_q_Yl_Ya_r_Bc_3a_q_A_F_A_A_2Rt2S, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[9])) goto bad;
   }

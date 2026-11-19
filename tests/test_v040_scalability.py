@@ -66,7 +66,7 @@ def test_native_scipy_sparse_fit_predict_recommend_and_cold_start():
         max_samples=30,
         alpha=0.005,
         beta=0.01,
-        learning_rate=0.12,
+        learning_rate=0.03,
         user_dropout=0.15,
         n_jobs=4,
     )
@@ -191,7 +191,7 @@ def test_recommend_batches_and_export_mips_embeddings_exact_parity():
     """recommend_batches matches recommend() bit-for-bit and export_mips_embeddings matches predict() to float32 precision"""
 
     ui_csr, uf_csr, if_csr, _, _ = _make_rich_sparse_dataset(n_users=250, n_items=80, seed=31)
-    model = RankFM(factors=20, loss='warp', max_samples=20, n_jobs=2).fit(
+    model = RankFM(factors=20, loss='warp', max_samples=20, learning_rate=0.03, n_jobs=2).fit(
         ui_csr, user_features=uf_csr, item_features=if_csr, epochs=8, seed=31
     )
 
