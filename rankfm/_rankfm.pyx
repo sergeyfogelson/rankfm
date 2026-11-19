@@ -25,6 +25,7 @@ cdef extern from "fast_ops.h":
     void *rfm_aligned_malloc(size_t nbytes) noexcept nogil
     void rfm_aligned_free(void *ptr) noexcept nogil
     int64_t rfm_atomic_fetch_add_i64(int64_t *ptr, int64_t val) noexcept nogil
+    int rfm_atomic_cas_i64(int64_t *ptr, int64_t expected, int64_t desired) noexcept nogil
 
     void rfm_rng_seed(rfm_rng_t *rng, uint64_t seed, uint64_t stream) noexcept nogil
     uint32_t rfm_rng_bounded(rfm_rng_t *rng, uint32_t bound) noexcept nogil
@@ -138,6 +139,39 @@ cdef inline void compute_user_embedding_csr(
             p = uf_indices[idx]
             val = uf_data[idx]
             rfm_vec_axpy(F, val, &v_uf_ptr[<int64_t>p * <int64_t>F], out_u_emb)
+
+
+cdef inline float sparse_sq_distance(
+    const int64_t *indptr,
+    const int32_t *indices,
+    const float *data,
+    int32_t a,
+    int32_t b
+) noexcept nogil:
+    """squared euclidean distance between CSR rows [a] and [b] via a two-pointer merge over their sorted columns"""
+
+    cdef int64_t ia = indptr[a], ea = indptr[a + 1], ib = indptr[b], eb = indptr[b + 1]
+    cdef float d, total = 0.0
+
+    while ia < ea and ib < eb:
+        if indices[ia] < indices[ib]:
+            total += data[ia] * data[ia]
+            ia += 1
+        elif indices[ib] < indices[ia]:
+            total += data[ib] * data[ib]
+            ib += 1
+        else:
+            d = data[ia] - data[ib]
+            total += d * d
+            ia += 1
+            ib += 1
+    while ia < ea:
+        total += data[ia] * data[ia]
+        ia += 1
+    while ib < eb:
+        total += data[ib] * data[ib]
+        ib += 1
+    return total
 
 
 cdef inline void heap_sift_down(float *hs, int32_t *hi, int size, int pos) noexcept nogil:
@@ -345,6 +379,7 @@ cdef struct FitBlockCtx:
     float *b_eff_ptr
     float *v_eff_ptr
     const float *mult_lut_ptr
+    const float *uf_step_scale_ptr
     float *scratch_base
     size_t scratch_stride
     double *ll_slots
@@ -361,6 +396,7 @@ cdef struct FitBlockCtx:
     int x_if_any
     int verbose
     int uniform_reg
+    int normalize_steps
     float eta
     float reg_a_keep
     float reg_b_keep
@@ -399,11 +435,12 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
     cdef float *diff_ij = &my_scratch[3 * F]
 
     cdef rfm_rng_t rng
-    cdef int64_t c_start, c_end, r, row, n_seen_u, idx, idx_i, end_i, idx_j, end_j, delta_steps
+    cdef int64_t c_start, c_end, r, row, n_seen_u, idx, idx_i, end_i, idx_j, end_j, last_step
     cdef int32_t u, i, j, p, q, min_index
     cdef int sampled, u_has_uf, use_v_u
     cdef float sw, ut_ui, ut_uj, pairwise_utility, min_pairwise_utility
-    cdef float d_outer, scale_step, old_wi, new_wi, old_wj, new_wj, diff_x_if, step_if, lazy_keep
+    cdef float d_outer, scale_step, step_u, step_i, old_wi, new_wi, old_wj, new_wj, diff_x_if, step_if, lazy_keep
+    cdef int normalize_steps = ctx.normalize_steps
     cdef const int32_t *u_seen_ptr
     cdef double local_ll = 0.0
 
@@ -438,15 +475,17 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
             else:
                 use_v_u = 1
 
-            # Lazy catch-up on user features before reading u_emb when uniform_reg is enabled
+            # Lazy catch-up on user features before reading u_emb when uniform_reg is enabled.
+            # Each feature remembers the step it was last decayed at. A thread decays it only after winning a
+            # compare-and-swap that moves that marker forward, so with several threads every interval of steps is
+            # applied exactly once, and a thread working on an earlier chunk than the marker simply skips.
             if u_has_uf and uniform_reg:
                 for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
                     p = ctx.uf_indices_ptr[idx]
-                    delta_steps = r - ctx.last_step_uf[p]
-                    if delta_steps > 0:
-                        lazy_keep = <float>exp(<double>log_reg_uf_lazy * <double>delta_steps)
+                    last_step = ctx.last_step_uf[p]
+                    if r > last_step and rfm_atomic_cas_i64(&ctx.last_step_uf[p], last_step, r):
+                        lazy_keep = <float>exp(<double>log_reg_uf_lazy * <double>(r - last_step))
                         rfm_vec_scale(F, lazy_keep, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F])
-                        ctx.last_step_uf[p] = r
 
             compute_user_embedding_csr(
                 F, u, ctx.v_u_ptr, ctx.v_uf_ptr,
@@ -487,13 +526,24 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
             d_outer = safe_sigmoid_neg(pairwise_utility)
             scale_step = eta * sw * ctx.mult_lut_ptr[sampled] * d_outer
 
+            # One step moves the pairwise utility by about step * (|u|^2 * (2 + |x_i - x_j|^2) + |v_i - v_j|^2 * (1 + |x_u|^2)):
+            # every active feature adds to the effective learning rate. Dividing each side's step by its feature mass
+            # keeps the movement at the feature-free level, step * (2 * |u|^2 + |v_i - v_j|^2), whatever the row density.
+            step_u = scale_step
+            step_i = scale_step
+            if normalize_steps:
+                if u_has_uf:
+                    step_u = scale_step * ctx.uf_step_scale_ptr[u]
+                if x_if_any:
+                    step_i = scale_step * 2.0 / (2.0 + sparse_sq_distance(ctx.if_indptr_ptr, ctx.if_indices_ptr, ctx.if_data_ptr, i, j))
+
             # Update item scalar biases (+ immediate b_eff delta when x_if_any)
             old_wi = ctx.w_i_ptr[i]
-            new_wi = old_wi * reg_a_keep + scale_step
+            new_wi = old_wi * reg_a_keep + step_i
             ctx.w_i_ptr[i] = new_wi
 
             old_wj = ctx.w_i_ptr[j]
-            new_wj = old_wj * reg_a_keep - scale_step
+            new_wj = old_wj * reg_a_keep - step_i
             ctx.w_i_ptr[j] = new_wj
 
             if x_if_any:
@@ -504,12 +554,12 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
             rfm_vec_sub(F, i_emb, j_emb, diff_ij)
 
             if use_v_u:
-                rfm_vec_reg_axpy(F, reg_a_keep, scale_step, diff_ij, &ctx.v_u_ptr[<int64_t>u * <int64_t>F])
+                rfm_vec_reg_axpy(F, reg_a_keep, step_u, diff_ij, &ctx.v_u_ptr[<int64_t>u * <int64_t>F])
 
             rfm_dual_item_update(
                 F,
                 reg_a_keep,
-                scale_step,
+                step_i,
                 u_emb,
                 &ctx.v_i_ptr[<int64_t>i * <int64_t>F],
                 &ctx.v_i_ptr[<int64_t>j * <int64_t>F],
@@ -523,12 +573,12 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
                 if uniform_reg:
                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
                         p = ctx.uf_indices_ptr[idx]
-                        rfm_vec_axpy(F, scale_step * ctx.uf_data_ptr[idx], diff_ij, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F])
+                        rfm_vec_axpy(F, step_u * ctx.uf_data_ptr[idx], diff_ij, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F])
                 else:
                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
                         p = ctx.uf_indices_ptr[idx]
                         rfm_vec_reg_axpy(
-                            F, reg_b_keep, scale_step * ctx.uf_data_ptr[idx],
+                            F, reg_b_keep, step_u * ctx.uf_data_ptr[idx],
                             diff_ij, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F]
                         )
 
@@ -555,19 +605,18 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
                         idx_j += 1
 
                     if uniform_reg:
-                        delta_steps = (r + 1) - ctx.last_step_if[q]
-                        if delta_steps > 0:
-                            lazy_keep = <float>exp(<double>log_reg_if_lazy * <double>delta_steps)
+                        last_step = ctx.last_step_if[q]
+                        if r + 1 > last_step and rfm_atomic_cas_i64(&ctx.last_step_if[q], last_step, r + 1):
+                            lazy_keep = <float>exp(<double>log_reg_if_lazy * <double>(r + 1 - last_step))
                             ctx.w_if_ptr[q] *= lazy_keep
                             rfm_vec_scale(F, lazy_keep, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
-                            ctx.last_step_if[q] = r + 1
                         if diff_x_if != 0.0:
-                            step_if = scale_step * diff_x_if
+                            step_if = step_i * diff_x_if
                             ctx.w_if_ptr[q] += step_if
                             rfm_vec_axpy(F, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
                     else:
                         if diff_x_if != 0.0:
-                            step_if = scale_step * diff_x_if
+                            step_if = step_i * diff_x_if
                             ctx.w_if_ptr[q] = ctx.w_if_ptr[q] * reg_b_keep + step_if
                             rfm_vec_reg_axpy(F, reg_b_keep, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
                         else:
@@ -735,6 +784,11 @@ cdef struct TopKChunkCtx:
     const int64_t *indptr_ptr
     const int32_t *indices_ptr
     int32_t *out_ptr
+    float *heap_s_base
+    int32_t *heap_i_base
+    int64_t *seen_base
+    size_t heap_stride
+    size_t seen_stride
     int64_t B
     int64_t cursor
     int64_t grain
@@ -754,15 +808,10 @@ cdef void _select_topk_worker(int tid, int n_threads, void *raw_ctx) noexcept no
     cdef int filter_previous = ctx.filter_previous
     cdef int64_t grain = ctx.grain
 
-    cdef float *heap_s = <float *>rfm_aligned_malloc(<size_t>K * sizeof(float))
-    cdef int32_t *heap_i = <int32_t *>rfm_aligned_malloc(<size_t>K * sizeof(int32_t))
-    cdef int64_t *seen_tag = <int64_t *>rfm_aligned_malloc(<size_t>I * sizeof(int64_t)) if filter_previous else NULL
-
-    if heap_s == NULL or heap_i == NULL or (filter_previous and seen_tag == NULL):
-        rfm_aligned_free(heap_s)
-        rfm_aligned_free(heap_i)
-        rfm_aligned_free(seen_tag)
-        return
+    # per-thread scratch comes from the caller, which has already verified the allocation succeeded
+    cdef float *heap_s = &ctx.heap_s_base[<size_t>tid * ctx.heap_stride]
+    cdef int32_t *heap_i = &ctx.heap_i_base[<size_t>tid * ctx.heap_stride]
+    cdef int64_t *seen_tag = &ctx.seen_base[<size_t>tid * ctx.seen_stride] if filter_previous else NULL
 
     cdef int64_t c_start, c_end, b, idx
     cdef int32_t u, i, h_size, k_idx
@@ -824,14 +873,51 @@ cdef void _select_topk_worker(int tid, int n_threads, void *raw_ctx) noexcept no
         if n_threads <= 1:
             break
 
-    rfm_aligned_free(heap_s)
-    rfm_aligned_free(heap_i)
-    rfm_aligned_free(seen_tag)
-
 
 # -------------------------
 # [Python] helper functions
 # -------------------------
+
+def _locate_pairs_in_csr(
+    const int64_t[::1] indptr,
+    const int32_t[::1] indices,
+    const int32_t[::1] rows,
+    const int32_t[::1] cols
+):
+    """for each (row, col) pair return where [col] sits, or would be inserted, in that row of a sorted CSR
+
+    returns (positions int64[n] into [indices], present bool[n]). each lookup is a binary search inside one row,
+    so the cost depends on the number of pairs and not on the size of the matrix.
+    """
+
+    cdef int64_t n = rows.shape[0]
+    positions = np.empty(n, dtype=np.int64)
+    present = np.zeros(n, dtype=np.bool_)
+    if n == 0:
+        return positions, present
+
+    cdef int64_t[::1] positions_mv = positions
+    cdef unsigned char[::1] present_mv = present.view(np.uint8)
+    cdef int64_t k, lo, hi, md
+    cdef int32_t col
+
+    with nogil:
+        for k in range(n):
+            lo = indptr[rows[k]]
+            hi = indptr[rows[k] + 1]
+            col = cols[k]
+            while lo < hi:
+                md = lo + ((hi - lo) >> 1)
+                if indices[md] < col:
+                    lo = md + 1
+                else:
+                    hi = md
+            positions_mv[k] = lo
+            if lo < indptr[rows[k] + 1] and indices[lo] == col:
+                present_mv[k] = 1
+
+    return positions, present
+
 
 def dense_to_csr(float[:, ::1] mat, int n_threads=1):
     """convert a 2D float32 feature matrix into (int64 indptr, int32 indices, float32 data, has_any) via 2-pass C scan"""
@@ -973,30 +1059,16 @@ def _csr_matvec(
     return out
 
 
-def assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if):
-    """raise AssertionError unless all model weights are finite
-
-    raised explicitly rather than with [assert] statements, which `python -O` removes: a diverged model must never be returned silently
-    """
-
-    for label, weights in (
-        ("item weights [w_i]", w_i),
-        ("item feature weights [w_if]", w_if),
-        ("user factors [v_u]", v_u),
-        ("item factors [v_i]", v_i),
-        ("user-feature factors [v_uf]", v_uf),
-        ("item-feature factors [v_if]", v_if),
-    ):
-        if not np.isfinite(np.sum(weights, dtype=np.float64)):
-            raise AssertionError("{} are not finite - try decreasing feature/sample_weight magnitudes".format(label))
-
-
 # healthy factors stay within a few units of zero; past this magnitude training is running away
 LARGE_WEIGHT_THRESHOLD = 1.0e3
 
 
-def largest_weight(w_i, w_if, v_u, v_i, v_uf, v_if):
-    """return (name, magnitude) of the largest absolute model weight without allocating full-size temporaries"""
+def check_weights(w_i, w_if, v_u, v_i, v_uf, v_if):
+    """raise AssertionError if any model weight is NaN or infinite, else return (name, magnitude) of the largest one
+
+    the error is raised explicitly rather than with [assert], which `python -O` removes. finiteness is read off each
+    array's max and min (NaN and infinity both propagate through them), so every array is scanned twice and never copied.
+    """
 
     worst_label, worst_value = "", 0.0
     for label, weights in (
@@ -1010,6 +1082,8 @@ def largest_weight(w_i, w_if, v_u, v_i, v_uf, v_if):
         if weights.size == 0:
             continue
         value = max(float(np.max(weights)), -float(np.min(weights)))
+        if not np.isfinite(value):
+            raise AssertionError("{} are not finite - try decreasing feature/sample_weight magnitudes".format(label))
         if value > worst_value:
             worst_label, worst_value = label, value
     return worst_label, worst_value
@@ -1062,7 +1136,8 @@ def _fit_csr(
     float user_dropout=0.0,
     int seed=1492,
     int n_threads=1,
-    bint uniform_feature_reg=False
+    bint uniform_feature_reg=False,
+    bint normalize_steps=True
 ):
     """learn model weights via multi-threaded nogil BPR/WARP SGD with materialized effective item cache and native CSR features"""
 
@@ -1104,6 +1179,15 @@ def _fit_csr(
     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
     if eff_threads > 1 and N // eff_threads < 256:
         eff_threads = max(1, <int>(N // 256))
+
+    # per-user step scale 1 / (1 + |x_u|^2), computed once (see the step normalization note in the worker)
+    cdef float[::1] uf_step_scale_mv
+    cdef bint scale_user_steps = normalize_steps and x_uf_any
+    if scale_user_steps:
+        uf_row_ids = np.repeat(np.arange(uf_indptr.shape[0] - 1, dtype=np.int64), np.diff(uf_indptr_i64))
+        uf_values = np.asarray(uf_data, dtype=np.float64)
+        uf_sq_norm = np.bincount(uf_row_ids, weights=uf_values * uf_values, minlength=uf_indptr.shape[0] - 1)
+        uf_step_scale_mv = np.ascontiguousarray(1.0 / (1.0 + uf_sq_norm), dtype=np.float32)
 
     # Pad per-thread scratch stride (4 * F floats) to 64-byte cache lines (16 floats)
     cdef size_t raw_floats = <size_t>(4 * F)
@@ -1191,6 +1275,8 @@ def _fit_csr(
     ctx.b_eff_ptr = b_eff_alloc if x_if_any else &w_i[0]
     ctx.v_eff_ptr = v_eff_alloc if x_if_any else &v_i[0, 0]
     ctx.mult_lut_ptr = mult_lut
+    ctx.uf_step_scale_ptr = &uf_step_scale_mv[0] if scale_user_steps else NULL
+    ctx.normalize_steps = 1 if normalize_steps else 0
     ctx.scratch_base = scratch_base
     ctx.scratch_stride = scratch_stride
     ctx.ll_slots = ll_slots
@@ -1202,13 +1288,7 @@ def _fit_csr(
     ctx.x_uf_any = x_uf_any
     ctx.x_if_any = x_if_any
     ctx.verbose = 1 if verbose else 0
-    ctx.uniform_reg = 1 if (uniform_feature_reg and eff_threads == 1) else 0
-    if uniform_feature_reg and eff_threads > 1:
-        warnings.warn(
-            "feature_reg='uniform' relies on per-feature step counters that are only valid single-threaded; "
-            "training on {} threads uses 'stochastic' feature regularization instead (set n_jobs=1 to keep 'uniform')".format(eff_threads),
-            RuntimeWarning
-        )
+    ctx.uniform_reg = 1 if uniform_feature_reg else 0
     ctx.user_dropout = user_dropout
     ctx.base_seed = <uint64_t>(<uint32_t>seed)
 
@@ -1286,11 +1366,9 @@ def _fit_csr(
                                 ctx.w_if_ptr[q_idx] *= lazy_tail
                                 rfm_vec_scale(F, lazy_tail, &ctx.v_if_ptr[q_idx * <int64_t>F])
 
-            assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if)
-
-            # weights can explode by many orders of magnitude while staying finite, which the check above cannot see
+            # weights can also explode by many orders of magnitude while staying finite, hence the magnitude warning
+            large_label, large_value = check_weights(w_i, w_if, v_u, v_i, v_uf, v_if)
             if not warned_large:
-                large_label, large_value = largest_weight(w_i, w_if, v_u, v_i, v_uf, v_if)
                 if large_value > LARGE_WEIGHT_THRESHOLD:
                     warned_large = True
                     warnings.warn(
@@ -1346,7 +1424,8 @@ def _fit(
     float user_dropout=0.0,
     int seed=1492,
     int n_threads=1,
-    bint uniform_feature_reg=False
+    bint uniform_feature_reg=False,
+    bint normalize_steps=True
 ):
     """backwards-compatible dense-feature wrapper delegating to _fit_csr"""
 
@@ -1382,7 +1461,8 @@ def _fit(
         user_dropout,
         seed,
         n_threads,
-        uniform_feature_reg
+        uniform_feature_reg,
+        normalize_steps
     )
 
 
@@ -1583,9 +1663,22 @@ def _select_topk_chunk(
     ctx.K = K
     ctx.filter_previous = 1 if filter_previous else 0
 
-    cdef rfm_pool_t *pool = NULL
+    # heap slots padded to whole cache lines (16 four-byte entries) so neighbouring threads never share one
+    ctx.heap_stride = (<size_t>K + 15u) & ~(<size_t>15u)
+    ctx.seen_stride = (<size_t>I + 7u) & ~(<size_t>7u)
+    ctx.heap_s_base = <float *>rfm_aligned_malloc(<size_t>eff_threads * ctx.heap_stride * sizeof(float))
+    ctx.heap_i_base = <int32_t *>rfm_aligned_malloc(<size_t>eff_threads * ctx.heap_stride * sizeof(int32_t))
+    ctx.seen_base = <int64_t *>rfm_aligned_malloc(<size_t>eff_threads * ctx.seen_stride * sizeof(int64_t)) if filter_previous else NULL
 
-    with nogil:
-        pool = rfm_pool_create(eff_threads)
-        rfm_pool_run(pool, _select_topk_worker, &ctx)
-        rfm_pool_destroy(pool)
+    cdef rfm_pool_t *pool = NULL
+    try:
+        if ctx.heap_s_base == NULL or ctx.heap_i_base == NULL or (filter_previous and ctx.seen_base == NULL):
+            raise MemoryError("failed to allocate RankFM top-K selection buffers")
+        with nogil:
+            pool = rfm_pool_create(eff_threads)
+            rfm_pool_run(pool, _select_topk_worker, &ctx)
+            rfm_pool_destroy(pool)
+    finally:
+        rfm_aligned_free(ctx.heap_s_base)
+        rfm_aligned_free(ctx.heap_i_base)
+        rfm_aligned_free(ctx.seen_base)
