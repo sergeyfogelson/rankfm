@@ -281,6 +281,7 @@ typedef struct {
     void *ctx;
     int tid;
     int n_threads;
+    int started;
 } rfm_win_arg_t;
 
 static unsigned __stdcall rfm_win_entry(void *raw) {
@@ -318,9 +319,15 @@ static inline void rfm_pool_run(rfm_pool_t *pool, rfm_worker_fn fn, void *ctx) {
         args[t - 1].tid = t;
         args[t - 1].n_threads = nt;
         uintptr_t h = _beginthreadex(NULL, 0, rfm_win_entry, &args[t - 1], 0, NULL);
+        args[t - 1].started = (h != 0);
         if (h != 0) handles[spawned++] = (HANDLE)h;
     }
     fn(0, nt, ctx);
+    /* Workers split the input by thread id, so a thread that failed to start would leave its share
+       unprocessed. Run those shares here on the calling thread instead. */
+    for (int t = 1; t < nt; t++) {
+        if (!args[t - 1].started) fn(t, nt, ctx);
+    }
     if (spawned > 0) {
         WaitForMultipleObjects((DWORD)spawned, handles, TRUE, INFINITE);
         for (int i = 0; i < spawned; i++) CloseHandle(handles[i]);

@@ -18,7 +18,9 @@ In addition to the familiar `fit()`, `predict()`, `recommend()` methods, RankFM 
 
 ---
 ### Dependencies
-* Python 3.6+
+* Python 3.9+
+* Cython >= 3.0 (build time only)
+* threadpoolctl (optional - keeps BLAS threads within the CPUs available to the process)
 * numpy >= 1.15
 * pandas >= 0.24
 
@@ -45,14 +47,20 @@ gcc --version
 
 #### Package Installation
 
-You can install the latest published version from PyPI using `pip`:
+Install this fork directly from GitHub:
 ```
-pip install rankfm
+pip install git+https://github.com/sergeyfogelson/rankfm.git#egg=rankfm
 ```
-Or alternatively install the current development build directly from GitHub:
-```
-pip install git+https://github.com/etlundquist/rankfm.git#egg=rankfm
-```
+`pip install rankfm` installs the original upstream package from PyPI, which does not include the multi-threaded training, sparse feature, unseen-user, or streaming inference work in this repository.
+
+#### Performance and Deployment Notes
+
+* **Threads in containers**: `n_jobs=-1` uses the CPUs actually available to the process (CPU affinity and cgroup quota), not the host core count, so it is safe under a Kubernetes / Cloud Run CPU limit. With `threadpoolctl` installed, the BLAS call inside `recommend()` is held to the same limit; without it, set `OPENBLAS_NUM_THREADS` / `MKL_NUM_THREADS` yourself.
+* **Instruction set**: build with `RANKFM_MARCH=x86-64-v3 pip install .` to enable AVX2 + FMA on any x86 CPU from roughly 2015 onward. Avoid `RANKFM_ARCH_NATIVE=1` when building an image or wheel on one machine to run on another: it targets the build machine's CPU and fails with an illegal-instruction error elsewhere.
+* **Reproducibility**: `fit(seed=...)` fixes both weight initialization and sampling. Results are bit-identical with `n_jobs=1`; multi-threaded training is lock-free, so repeated runs differ slightly.
+* **Dense feature columns**: a feature that is non-zero for most users (or most items) is written by every thread on nearly every step. Model quality is unaffected, but training stops getting faster beyond about 4-8 threads. One-hot or bucketed features scale to all cores.
+* **Learning rate with side features**: many active features per row raise the effective step size. If training warns that it appears to be diverging, lower `learning_rate` or scale the feature values down.
+* **Size limits**: a single `fit()` call accepts up to 2,147,483,647 interactions and holds roughly 20 bytes per interaction in memory.
 
 It's highly recommended that you use an [Anaconda](https://www.anaconda.com/) base environment to ensure that all core numpy C extensions and linear algebra libraries have been installed and configured correctly. Anaconda: it just works.
 

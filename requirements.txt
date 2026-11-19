@@ -2,8 +2,14 @@
 numpy>=1.15
 pandas>=0.24
 
+# build requirements
+Cython>=3.0
+setuptools>=61.0
+
+# optional: lets recommend() keep BLAS threads within the CPUs available to the process
+threadpoolctl>=3.0
+
 # additional development/testing requirements
+scipy>=1.8
 flake8>=3.5
 pytest>=5.3
-
-

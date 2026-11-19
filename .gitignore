@@ -7,6 +7,7 @@ examples/ignore/
 
 # cython generated files
 *.so
+rankfm/_rankfm.c
 *.html
 
 # system files
