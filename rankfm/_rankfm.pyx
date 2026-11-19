@@ -991,6 +991,30 @@ def assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if):
             raise AssertionError("{} are not finite - try decreasing feature/sample_weight magnitudes".format(label))
 
 
+# healthy factors stay within a few units of zero; past this magnitude training is running away
+LARGE_WEIGHT_THRESHOLD = 1.0e3
+
+
+def largest_weight(w_i, w_if, v_u, v_i, v_uf, v_if):
+    """return (name, magnitude) of the largest absolute model weight without allocating full-size temporaries"""
+
+    worst_label, worst_value = "", 0.0
+    for label, weights in (
+        ("item weights [w_i]", w_i),
+        ("item feature weights [w_if]", w_if),
+        ("user factors [v_u]", v_u),
+        ("item factors [v_i]", v_i),
+        ("user-feature factors [v_uf]", v_uf),
+        ("item-feature factors [v_if]", v_if),
+    ):
+        if weights.size == 0:
+            continue
+        value = max(float(np.max(weights)), -float(np.min(weights)))
+        if value > worst_value:
+            worst_label, worst_value = label, value
+    return worst_label, worst_value
+
+
 def reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if):
     """calculate the total regularization penalty for all model weights without allocating temporary full-size arrays"""
 
@@ -1189,6 +1213,7 @@ def _fit_csr(
     ctx.base_seed = <uint64_t>(<uint32_t>seed)
 
     cdef int epoch, t_i
+    cdef bint warned_large = False
     cdef int64_t b_start, b_end, p_idx, q_idx, rem_steps
     cdef int64_t n_u_rows = max(<int64_t>1, <int64_t>v_u.shape[0])
     cdef double uf_density = (<double>uf_indptr[n_u_rows]) / max(1.0, <double>n_u_rows * <double>max(<int64_t>1, P_uf)) if x_uf_any else 0.0
@@ -1262,6 +1287,19 @@ def _fit_csr(
                                 rfm_vec_scale(F, lazy_tail, &ctx.v_if_ptr[q_idx * <int64_t>F])
 
             assert_finite(w_i, w_if, v_u, v_i, v_uf, v_if)
+
+            # weights can explode by many orders of magnitude while staying finite, which the check above cannot see
+            if not warned_large:
+                large_label, large_value = largest_weight(w_i, w_if, v_u, v_i, v_uf, v_if)
+                if large_value > LARGE_WEIGHT_THRESHOLD:
+                    warned_large = True
+                    warnings.warn(
+                        "training appears to be diverging: {} reached magnitude {:.3g} after epoch {}. "
+                        "lower [learning_rate], scale down feature/sample_weight values, or raise [alpha]/[beta]".format(
+                            large_label, large_value, epoch + 1
+                        ),
+                        RuntimeWarning
+                    )
 
             if verbose:
                 log_likelihood = 0.0

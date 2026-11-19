@@ -117,3 +117,57 @@ def test_recommend_batches_matches_recommend_for_unseen_users():
             'sample_weight': new_weights[new_interactions['user_id'].isin(batch.index).to_numpy()],
         })
         pd.testing.assert_frame_equal(batch, expected)
+
+
+def test_invalid_input_raises_value_error_and_assertion_error():
+    """validation raises an error that is both a ValueError and (for older callers) an AssertionError"""
+
+    with pytest.raises(ValueError):
+        RankFM(factors=-3)
+    with pytest.raises(AssertionError):
+        RankFM(loss='hinge')
+    with pytest.raises(ValueError):
+        RankFM().recommend([1, 2, 3])
+
+
+def test_diverging_training_warns():
+    """weights that explode while staying finite are reported instead of being returned silently"""
+
+    rng = np.random.default_rng(4)
+    n_users, n_items, n_feats = 300, 80, 60
+    interactions = _make_interactions(n_users=n_users, n_items=n_items, per_user=8, seed=4)
+    feature_values = rng.uniform(0.5, 1.0, size=(n_items, n_feats)) * (rng.random((n_items, n_feats)) < 0.4)
+    item_features = (np.arange(n_items), feature_values.astype(np.float32))
+
+    with pytest.warns(RuntimeWarning, match="diverging"):
+        RankFM(factors=16, loss='warp', alpha=0.001, beta=0.001, learning_rate=0.5).fit(
+            interactions, item_features=item_features, epochs=15, seed=1, n_jobs=1
+        )
+
+    with warnings.catch_warnings():
+        warnings.simplefilter('error')
+        RankFM(factors=16, loss='warp', learning_rate=0.02).fit(
+            interactions, item_features=item_features, epochs=15, seed=1, n_jobs=1
+        )
+
+
+def test_merge_pairs_into_csr_matches_full_rebuild():
+    """splicing new pairs into the stored history gives the same CSR as rebuilding it from all pairs"""
+
+    rng = np.random.default_rng(6)
+    n_items = 37
+    for old_users, new_users, n_old, n_new in ((50, 50, 400, 60), (50, 65, 400, 200), (8, 8, 30, 0), (20, 30, 0, 40)):
+        old_u = rng.integers(0, old_users, n_old).astype(np.int32)
+        old_i = rng.integers(0, n_items, n_old).astype(np.int32)
+        new_u = rng.integers(0, new_users, n_new).astype(np.int32)
+        new_i = rng.integers(0, n_items, n_new).astype(np.int32)
+
+        indptr, indices = RankFM._pairs_to_csr(old_u, old_i, old_users, n_items)
+        merged_ptr, merged_idx = RankFM._merge_pairs_into_csr(indptr, indices, new_u, new_i, new_users, n_items)
+        full_ptr, full_idx = RankFM._pairs_to_csr(
+            np.concatenate([old_u, new_u]), np.concatenate([old_i, new_i]), new_users, n_items
+        )
+
+        assert merged_ptr.dtype == np.int64 and merged_idx.dtype == np.int32
+        assert np.array_equal(merged_ptr, full_ptr)
+        assert np.array_equal(merged_idx, full_idx)

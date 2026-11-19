@@ -133,7 +133,7 @@ def test_multithreaded_convergence_and_determinism(loss, n_jobs):
         max_samples=25,
         alpha=0.005,
         beta=0.01,
-        learning_rate=0.10,
+        learning_rate=0.03,
         learning_schedule='invscaling',
         user_dropout=0.1,
         n_jobs=n_jobs,
@@ -166,7 +166,7 @@ def test_uniform_lazy_feature_regularization():
         max_samples=20,
         alpha=0.005,
         beta=0.01,
-        learning_rate=0.12,
+        learning_rate=0.03,
         n_jobs=1,
         feature_reg='uniform',
     )
