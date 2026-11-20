@@ -3,7 +3,7 @@ import sys
 from setuptools import Extension, setup
 
 NAME = 'rankfm'
-VERSION = '0.4.0'
+VERSION = '0.4.1'
 
 # define the extension packages to include
 # ----------------------------------------

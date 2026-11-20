@@ -62,6 +62,15 @@ RFM_INLINE int64_t rfm_atomic_fetch_add_i64(int64_t *ptr, int64_t val) {
 #endif
 }
 
+/* Set *ptr to desired only if it still holds expected; returns 1 when this caller made the change. */
+RFM_INLINE int rfm_atomic_cas_i64(int64_t *ptr, int64_t expected, int64_t desired) {
+#ifdef _WIN32
+    return InterlockedCompareExchange64((volatile LONG64 *)ptr, (LONG64)desired, (LONG64)expected) == (LONG64)expected;
+#else
+    return __atomic_compare_exchange_n(ptr, &expected, desired, 0, __ATOMIC_RELAXED, __ATOMIC_RELAXED);
+#endif
+}
+
 /* ---------------------------------------------------------
  * 2. Thread-Local Lock-Free xoshiro256** PRNG + Lemire Draw
  * --------------------------------------------------------- */
