@@ -102,6 +102,31 @@ def _append_zero_rows(arr, n_extra):
     return out
 
 
+def _is_sorted_unique_pairs(u_arr, i_arr, chunk=1 << 24):
+    """True when the (user, item) pairs are strictly increasing, i.e. already sorted by user then item with no repeats
+
+    checked in chunks so the temporaries stay small however many pairs there are
+    """
+
+    n = len(u_arr)
+    for start in range(0, n - 1, chunk):
+        stop = min(start + chunk, n - 1)
+        u_step = np.diff(u_arr[start:stop + 1])
+        increasing = (u_step > 0) | ((u_step == 0) & (np.diff(i_arr[start:stop + 1]) > 0))
+        if not increasing.all():
+            return False
+    return True
+
+
+def _own_int32(arr, inputs):
+    """contiguous int32 version of [arr] that is guaranteed not to share memory with any of the caller's [inputs]"""
+
+    out = np.ascontiguousarray(arr, dtype=np.int32)
+    if any(isinstance(src, np.ndarray) and np.may_share_memory(out, src) for src in inputs):
+        out = out.copy()
+    return out
+
+
 def _is_scipy_sparse(obj):
     """detect scipy.sparse matrices/arrays without importing scipy unless needed"""
     return hasattr(obj, 'tocsr') and hasattr(obj, 'tocoo') and hasattr(obj, 'shape')
@@ -289,7 +314,8 @@ class RankFM():
         user_dropout=0.0,
         n_jobs=1,
         feature_reg='stochastic',
-        normalize_steps=True
+        normalize_steps=True,
+        dense_updates='lockfree'
     ):
         """store hyperparameters and initialize internal model state
 
@@ -309,6 +335,12 @@ class RankFM():
         :param normalize_steps: scale each SGD step by the feature mass of the rows it touches, so that adding side features
                                 does not raise the effective learning rate. with False the raw [learning_rate] is applied to
                                 every weight, which diverges once rows carry more than a few active features
+        :param dense_updates: how weights of densely used feature columns (non-zero on at least 1/16 of rows) are updated:
+                              'lockfree' writes them on every step like all other weights, which stops scaling beyond
+                              a few threads because every thread keeps writing the same rows. 'batched' has each thread
+                              collect those updates and apply them once every 64 steps, scaled down when
+                              learning_rate * threads * 64 exceeds a stability limit, which restores scaling across
+                              threads. not available with feature_reg='uniform'
         :return: None
         """
 
@@ -325,6 +357,8 @@ class RankFM():
         require(isinstance(n_jobs, int) and n_jobs != 0, "[n_jobs] must be a non-zero integer (e.g. 1, 4, -1)")
         require(isinstance(feature_reg, str) and feature_reg in ('stochastic', 'uniform'), "[feature_reg] must be in ('stochastic', 'uniform')")
         require(isinstance(normalize_steps, bool), "[normalize_steps] must be a boolean value")
+        require(isinstance(dense_updates, str) and dense_updates in ('lockfree', 'batched'), "[dense_updates] must be in ('lockfree', 'batched')")
+        require(not (dense_updates == 'batched' and feature_reg == 'uniform'), "[dense_updates]='batched' cannot be combined with [feature_reg]='uniform'")
 
         self.factors = factors
         self.loss = loss
@@ -339,6 +373,7 @@ class RankFM():
         self.n_jobs = n_jobs
         self.feature_reg = feature_reg
         self.normalize_steps = normalize_steps
+        self.dense_updates = dense_updates
 
         self._reset_state()
 
@@ -380,8 +415,10 @@ class RankFM():
         self.user_idx = None
         self.item_idx = None
 
-        # user/item interactions and importance weights
-        self.interactions = None
+        # [user_idx] and [item_idx] of the interactions used by the most recent fit call, and their importance
+        # weights (None means every interaction weighs 1)
+        self._intx_u = None
+        self._intx_i = None
         self.sample_weight = None
 
         # CSR representation of observed items per user
@@ -476,6 +513,18 @@ class RankFM():
                 index=self._item_index,
             )
         return self._item_to_index_series
+
+
+    @property
+    def interactions(self):
+        """(N, 2) int32 array of the [user_idx, item_idx] pairs used by the most recent fit call, built on request
+
+        the pairs are stored as two parallel arrays (the item array doubles as the seen-items index when the
+        input allows it), so this stacked view is a copy and is not kept
+        """
+        if self._intx_u is None:
+            return None
+        return np.column_stack([self._intx_u, self._intx_i])
 
 
     @property
@@ -769,12 +818,13 @@ class RankFM():
                 require(isinstance(sample_weight, (np.ndarray, pd.Series)), "[sample_weight] must be np.ndarray or pd.series")
                 require(sample_weight.ndim == 1 and len(sample_weight) == len(u_arr), "[sample_weight] must match sparse nnz")
                 self.sample_weight = np.array(get_data(sample_weight), dtype=np.float32)
+            elif len(coo.data) > 0 and coo.data.min() == 1 and coo.data.max() == 1:
+                self.sample_weight = None  # a binary matrix: no per-interaction weights to store
             else:
                 self.sample_weight = np.array(coo.data, dtype=np.float32)
 
-            self._ui_indptr, self._ui_indices = self._pairs_to_csr(u_arr, i_arr, n_u, n_i)
-            self._user_items_cache = None
-            self.interactions = np.ascontiguousarray(np.column_stack([u_arr, i_arr]), dtype=np.int32)
+            caller_arrays = (coo.row, coo.col, getattr(interactions, 'indices', None))
+            self._index_initial_pairs(u_arr, i_arr, n_u, n_i, caller_arrays)
         else:
             u_col, i_col = self._extract_interaction_columns(interactions)
             self._user_index, u_mapped = _fast_unique_and_map(u_col)
@@ -788,16 +838,42 @@ class RankFM():
                 require(len(sample_weight) == len(u_col), "[sample_weight] must have the same length as [interactions]")
                 self.sample_weight = np.array(get_data(sample_weight), dtype=np.float32)
             else:
-                self.sample_weight = np.ones(len(u_mapped), dtype=np.float32)
+                self.sample_weight = None
 
-            self._ui_indptr, self._ui_indices = self._pairs_to_csr(
-                u_mapped, i_mapped, len(self.user_idx), len(self.item_idx)
-            )
-            self._user_items_cache = None
-            self.interactions = np.ascontiguousarray(np.column_stack([u_mapped, i_mapped]), dtype=np.int32)
+            self._index_initial_pairs(u_mapped, i_mapped, len(self.user_idx), len(self.item_idx), (u_col, i_col))
 
         self._init_features(user_features, item_features, n_threads=n_threads)
         self._init_weights(user_features, item_features, seed=seed)
+
+
+    def _index_initial_pairs(self, u_arr, i_arr, n_users, n_items, caller_arrays):
+        """build the seen-items CSR for a fresh fit and choose the arrays training reads, sharing storage where possible
+
+        three layouts, cheapest first (bytes per interaction, before optional weights):
+          8   pairs already sorted by (user, item) with no repeats: the item column is used as the CSR index as is
+          8   unique pairs in any order and no weights: training reads the sorted index, the input order is dropped
+          12  anything else (repeats, or unsorted pairs with weights): the index plus the pairs in their input order
+        repeats are kept as separate training rows in the last layout, so their effect on training is unchanged.
+        """
+
+        self._user_items_cache = None
+
+        if _is_sorted_unique_pairs(u_arr, i_arr):
+            indptr = np.zeros(n_users + 1, dtype=np.int64)
+            np.cumsum(np.bincount(u_arr, minlength=n_users), out=indptr[1:])
+            self._ui_indptr = indptr
+            self._ui_indices = _own_int32(i_arr, caller_arrays)
+            self._intx_u = _own_int32(u_arr, caller_arrays)
+            self._intx_i = self._ui_indices
+            return
+
+        self._ui_indptr, self._ui_indices = self._pairs_to_csr(u_arr, i_arr, n_users, n_items)
+        if self.sample_weight is None and len(self._ui_indices) == len(u_arr):
+            self._intx_u = np.repeat(np.arange(n_users, dtype=np.int32), np.diff(self._ui_indptr))
+            self._intx_i = self._ui_indices
+        else:
+            self._intx_u = _own_int32(u_arr, caller_arrays)
+            self._intx_i = _own_int32(i_arr, caller_arrays)
 
 
     def _expand_users_for_partial(self, u_col, i_col, freeze_items=False, seed=1492):
@@ -874,7 +950,7 @@ class RankFM():
             sw_raw = np.asarray(get_data(sample_weight), dtype=np.float32)
             self.sample_weight = np.array(sw_raw[valid_mask] if not valid_mask.all() else sw_raw, dtype=np.float32)
         else:
-            self.sample_weight = np.ones(len(u_arr), dtype=np.float32)
+            self.sample_weight = None
 
         n_users = len(self.user_idx)
         n_items = len(self.item_idx)
@@ -887,7 +963,8 @@ class RankFM():
             self._ui_indptr, self._ui_indices = self._pairs_to_csr(u_arr, i_arr, n_users, n_items)
 
         self._user_items_cache = None
-        self.interactions = np.ascontiguousarray(np.column_stack([u_arr, i_arr]), dtype=np.int32)
+        self._intx_u = np.ascontiguousarray(u_arr, dtype=np.int32)
+        self._intx_i = np.ascontiguousarray(i_arr, dtype=np.int32)
 
 
     def _init_features(self, user_features=None, item_features=None, n_threads=1):
@@ -1212,7 +1289,7 @@ class RankFM():
                     hist_u_parts.append(u_arr)
                     hist_i_parts.append(i_arr)
                     if fold_in_epochs > 0:
-                        fold_pairs = np.ascontiguousarray(np.column_stack([u_arr, i_arr]), dtype=np.int32)
+                        fold_pairs = (np.ascontiguousarray(u_arr), np.ascontiguousarray(i_arr))
                         fold_sw = np.ascontiguousarray(sw_arr[valid] if not valid.all() else sw_arr, dtype=np.float32)
 
             if hist_u_parts:
@@ -1222,7 +1299,8 @@ class RankFM():
 
             if fold_pairs is not None:
                 _fold_in(
-                    fold_pairs,
+                    fold_pairs[0],
+                    fold_pairs[1],
                     fold_sw,
                     ui_indptr,
                     ui_indices,
@@ -1307,7 +1385,8 @@ class RankFM():
         else:
             self._init_all(interactions, user_features, item_features, sample_weight, n_threads=eff_threads, seed=int(seed))
 
-        require(np.isfinite(self.sample_weight.sum(dtype=np.float64)), "[sample_weight] contains NaN or infinite values")
+        if self.sample_weight is not None:
+            require(np.isfinite(self.sample_weight.sum(dtype=np.float64)), "[sample_weight] contains NaN or infinite values")
         max_samples = self._max_samples_for_loss()
 
         if freeze_items:
@@ -1320,7 +1399,8 @@ class RankFM():
                 u_feat_emb = np.zeros((len(self.user_idx), self.factors), dtype=np.float32)
 
             _fold_in(
-                self.interactions,
+                self._intx_u,
+                self._intx_i,
                 self.sample_weight,
                 self._ui_indptr,
                 self._ui_indices,
@@ -1340,7 +1420,8 @@ class RankFM():
             self._cached_train_u_emb = None
         else:
             _fit_csr(
-                self.interactions,
+                self._intx_u,
+                self._intx_i,
                 self.sample_weight,
                 self._ui_indptr,
                 self._ui_indices,
@@ -1370,7 +1451,8 @@ class RankFM():
                 int(seed),
                 eff_threads,
                 self.feature_reg == 'uniform',
-                self.normalize_steps
+                self.normalize_steps,
+                self.dense_updates == 'batched'
             )
             self._invalidate_caches()
 

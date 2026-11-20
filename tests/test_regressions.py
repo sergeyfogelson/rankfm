@@ -275,3 +275,158 @@ def test_merge_pairs_into_csr_matches_full_rebuild():
         assert merged_ptr.dtype == np.int64 and merged_idx.dtype == np.int32
         assert np.array_equal(merged_ptr, full_ptr)
         assert np.array_equal(merged_idx, full_idx)
+
+
+def test_shuffle_permutation_visits_every_row_exactly_once():
+    """the computed per-epoch shuffle is a true permutation, including past the 32-bit row limit"""
+
+    from rankfm._rankfm import _permutation_sample
+
+    for n in list(range(1, 40)) + [1000, 4097, 65536, 100003]:
+        order = _permutation_sample(n, 11, np.arange(n))
+        assert np.array_equal(np.sort(order), np.arange(n, dtype=np.uint64))
+
+    assert not np.array_equal(_permutation_sample(1000, 1, np.arange(1000)), _permutation_sample(1000, 2, np.arange(1000)))
+
+    n_rows = 6_000_000_000
+    positions = np.concatenate([np.arange(50_000), np.arange(n_rows - 50_000, n_rows)])
+    order = _permutation_sample(n_rows, 5, positions)
+    assert (order < n_rows).all() and len(np.unique(order)) == len(order)
+    assert (order >= 2 ** 32).any()
+
+
+def test_interaction_storage_layouts():
+    """training reads the seen-items index directly when it can, and keeps repeated rows separate when it cannot"""
+
+    rng = np.random.default_rng(8)
+    n_users, n_items, per_user = 60, 30, 6
+    users = np.repeat(np.arange(n_users), per_user)
+    items = np.concatenate([np.sort(rng.choice(n_items, per_user, replace=False)) for _ in range(n_users)])
+    sorted_pairs = pd.DataFrame({'user_id': users, 'item_id': items})
+    weights = rng.uniform(0.5, 1.5, len(users)).astype(np.float32)
+
+    # sorted, unique: the item column is the index, with or without weights (which keep their input order)
+    model = RankFM(factors=4).fit(sorted_pairs, epochs=1, seed=1)
+    assert model._intx_i is model._ui_indices and model.sample_weight is None
+    assert np.array_equal(model.interactions, sorted_pairs.to_numpy())
+    reference_index = (model._ui_indptr.copy(), model._ui_indices.copy())
+
+    weighted = RankFM(factors=4).fit(sorted_pairs, sample_weight=weights, epochs=1, seed=1)
+    assert weighted._intx_i is weighted._ui_indices
+    assert np.array_equal(weighted.sample_weight, weights)
+
+    # unique but shuffled, no weights: training still reads the sorted index
+    order = rng.permutation(len(users))
+    shuffled = RankFM(factors=4).fit(sorted_pairs.iloc[order], epochs=1, seed=1)
+    assert shuffled._intx_i is shuffled._ui_indices
+    assert np.array_equal(shuffled._ui_indptr, reference_index[0]) and np.array_equal(shuffled._ui_indices, reference_index[1])
+    assert np.array_equal(shuffled.interactions, sorted_pairs.to_numpy())
+
+    # shuffled with weights: pairs and weights stay aligned in input order
+    shuffled_weighted = RankFM(factors=4).fit(sorted_pairs.iloc[order], sample_weight=weights[order], epochs=1, seed=1)
+    assert np.array_equal(shuffled_weighted.interactions, sorted_pairs.to_numpy()[order])
+    assert np.array_equal(shuffled_weighted.sample_weight, weights[order])
+    assert np.array_equal(shuffled_weighted._ui_indices, reference_index[1])
+
+    # repeated pairs remain separate training rows, while the index stays deduplicated
+    repeated = pd.concat([sorted_pairs, sorted_pairs.iloc[:50]])
+    with_repeats = RankFM(factors=4).fit(repeated, epochs=1, seed=1)
+    assert len(with_repeats.interactions) == len(repeated)
+    assert np.array_equal(with_repeats._ui_indices, reference_index[1])
+
+
+def test_model_does_not_alias_caller_interaction_arrays():
+    """changing the input arrays after fitting must not change the model's seen-items index"""
+
+    users = np.repeat(np.arange(20, dtype=np.int32), 3)
+    items = np.tile(np.array([1, 4, 7], dtype=np.int32), 20)
+    pairs = np.ascontiguousarray(np.column_stack([users, items]))
+
+    model = RankFM(factors=4).fit(pairs, epochs=1, seed=1)
+    index_before = model._ui_indices.copy()
+    pairs[:, 1] = 0
+    assert np.array_equal(model._ui_indices, index_before)
+
+    sp = pytest.importorskip("scipy.sparse")
+    matrix = sp.csr_matrix((np.ones(60, dtype=np.float32), (users, items)), shape=(20, 10))
+    sparse_model = RankFM(factors=4).fit(matrix, epochs=1, seed=1)
+    assert sparse_model.sample_weight is None
+    sparse_index_before = sparse_model._ui_indices.copy()
+    matrix.indices[:] = 0
+    assert np.array_equal(sparse_model._ui_indices, sparse_index_before)
+    assert sparse_index_before[:3].tolist() == [1, 4, 7]
+
+
+def _dense_feature_dataset(n_users=3000, n_items=200, n_clusters=8, per_user=10, n_dense=6, seed=12):
+    """clustered interactions plus a dense real-valued user feature block that identifies each user's cluster"""
+
+    rng = np.random.default_rng(seed)
+    u_cluster = rng.integers(0, n_clusters, n_users)
+    i_cluster = np.arange(n_items) % n_clusters
+    users = np.repeat(np.arange(n_users), per_user)
+    in_cluster = rng.integers(0, n_items // n_clusters, len(users)) * n_clusters + u_cluster[users]
+    items = np.where(rng.random(len(users)) < 0.85, in_cluster, rng.integers(0, n_items, len(users)))
+    centroids = rng.normal(0, 1, (n_clusters, n_dense))
+    dense = (centroids[u_cluster] + rng.normal(0, 0.3, (n_users, n_dense))).astype(np.float32)
+    dense /= np.abs(dense).max()
+    return pd.DataFrame({'user_id': users, 'item_id': items}), dense, u_cluster, i_cluster
+
+
+def test_hot_row_selection_picks_dense_columns_only():
+    """only columns present on at least 1/16 of rows are treated as densely used"""
+
+    from rankfm._rankfm import _select_hot_rows
+
+    column_of_each_entry = np.concatenate([np.full(900, 0), np.full(70, 1), np.full(10, 2), np.full(500, 4)]).astype(np.int32)
+    slots, hot = _select_hot_rows(column_of_each_entry, 5, 1000)
+    assert hot.tolist() == [0, 1, 4]
+    assert slots.tolist() == [0, 1, -1, -1, 2]
+
+
+@pytest.mark.parametrize("n_jobs", [1, 4])
+def test_batched_dense_updates_match_lockfree_quality(n_jobs):
+    """batched updates for dense feature columns learn the features as well as per-step updates do"""
+
+    interactions, dense, u_cluster, i_cluster = _dense_feature_dataset()
+    train_users = 2700
+    train = interactions[interactions['user_id'] < train_users]
+    cold_users = np.arange(train_users, 3000)
+
+    precision = {}
+    for mode in ('lockfree', 'batched'):
+        model = RankFM(factors=12, loss='warp', max_samples=10, learning_rate=0.1, beta=0.01, user_dropout=0.3, dense_updates=mode)
+        with warnings.catch_warnings():
+            warnings.simplefilter('error')
+            model.fit(train, user_features=(np.arange(train_users), dense[:train_users]), epochs=8, seed=1, n_jobs=n_jobs)
+        recs = model.recommend(cold_users, n_items=5, cold_start='estimate', user_features=(cold_users, dense[train_users:])).to_numpy()
+        precision[mode] = float((i_cluster[recs] == u_cluster[cold_users][:, None]).mean())
+
+    assert precision['lockfree'] > 0.6
+    assert precision['batched'] > precision['lockfree'] - 0.1
+
+
+def test_batched_dense_updates_stay_stable_at_high_learning_rate():
+    """the rate cap keeps batched updates bounded where an uncapped sum of concurrent batches would overshoot"""
+
+    interactions, dense, _, _ = _dense_feature_dataset()
+    model = RankFM(factors=12, loss='warp', learning_rate=0.5, beta=0.01, dense_updates='batched')
+    with warnings.catch_warnings():
+        warnings.simplefilter('error')
+        model.fit(interactions, user_features=(np.arange(3000), dense), epochs=6, seed=1, n_jobs=4)
+    assert np.abs(model.v_uf).max() < 10.0 and np.abs(model.v_u).max() < 10.0
+
+
+def test_batched_dense_updates_are_reproducible_and_validated():
+    """single-threaded batched training is deterministic, and the option rejects unsupported combinations"""
+
+    interactions, dense, _, _ = _dense_feature_dataset(n_users=600)
+    features = (np.arange(600), dense)
+    first = RankFM(factors=6, dense_updates='batched').fit(interactions, user_features=features, epochs=2, seed=3, n_jobs=1)
+    second = RankFM(factors=6, dense_updates='batched').fit(interactions, user_features=features, epochs=2, seed=3, n_jobs=1)
+    assert np.array_equal(first.v_uf, second.v_uf) and np.array_equal(first.v_u, second.v_u)
+    assert np.abs(first.v_uf).max() > 0.02  # the dense rows did learn
+
+    with pytest.raises(ValueError):
+        RankFM(dense_updates='batched', feature_reg='uniform')
+    with pytest.raises(ValueError):
+        RankFM(dense_updates='sometimes')

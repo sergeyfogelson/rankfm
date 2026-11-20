@@ -30,7 +30,11 @@ cdef extern from "fast_ops.h":
     void rfm_rng_seed(rfm_rng_t *rng, uint64_t seed, uint64_t stream) noexcept nogil
     uint32_t rfm_rng_bounded(rfm_rng_t *rng, uint32_t bound) noexcept nogil
     float rfm_rng_float01(rfm_rng_t *rng) noexcept nogil
-    void rfm_shuffle_int32(int32_t *arr, int64_t n, rfm_rng_t *rng) noexcept nogil
+
+    ctypedef struct rfm_perm_t:
+        uint64_t n
+    void rfm_perm_init(rfm_perm_t *perm, uint64_t n, uint64_t seed) noexcept nogil
+    uint64_t rfm_perm_at(const rfm_perm_t *perm, uint64_t x) noexcept nogil
 
     float rfm_dot(int F, const float *a, const float *b) noexcept nogil
     void rfm_vec_zero(int F, float *dst) noexcept nogil
@@ -386,10 +390,70 @@ cdef void _refresh_eff_items_worker(int tid, int n_threads, void *raw_ctx) noexc
         ctx.b_eff_ptr[m] = bias
 
 
+# Batched updates for densely used feature rows ("hot" rows).
+#
+# A feature column that is non-zero on a large share of rows has its weight row written by every thread on
+# nearly every step, so the cores spend their time taking those cache lines from one another and training
+# stops scaling. In batched mode a thread does not write a hot row per step. It adds the step's update to a
+# private accumulator and, every [batch_steps] of its own steps, applies the batch to the shared row once.
+# Between applications the shared hot rows are only read, so they stay in every core's cache. All other
+# weights keep their per-step lock-free updates.
+#
+# A batch is a sum of updates that were computed without seeing each other, across all threads at once. Such
+# a sum overshoots once learning_rate * threads * batch_steps passes a limit (measured at roughly 32), so the
+# batch is multiplied by [scale] = min(1, HOT_MAX_RATE / (learning_rate * threads * batch_steps)). The L2
+# decay accumulated with the batch is scaled by the same factor, keeping the regularization strength intact.
+#
+# Per-thread accumulator layout: [uf vectors | if vectors | if scalars | uf decay | if decay]
+cdef struct HotRows:
+    const int32_t *uf_slot      # feature column -> hot slot, or -1
+    const int32_t *uf_rows      # hot slot -> feature column
+    const int32_t *if_slot
+    const int32_t *if_rows
+    float *acc_base             # per-thread accumulators
+    size_t acc_stride
+    int32_t n_uf
+    int32_t n_if
+    int batch_steps
+    float scale
+
+
+cdef inline void hot_rows_apply(
+    HotRows *hot, int F, float *v_uf, float *v_if, float *w_if,
+    float *acc_uf, float *acc_if, float *acc_w_if, float *dec_uf, float *dec_if
+) noexcept nogil:
+    """apply and clear this thread's accumulated hot-row updates"""
+
+    cdef int32_t h
+    cdef float scale = hot.scale
+    cdef float keep
+
+    for h in range(hot.n_uf):
+        if dec_uf[h] > 0.0:
+            keep = 1.0 - scale * dec_uf[h]
+            if keep < 0.0:
+                keep = 0.0
+            rfm_vec_reg_axpy(F, keep, scale, &acc_uf[<int64_t>h * F], &v_uf[<int64_t>hot.uf_rows[h] * <int64_t>F])
+            rfm_vec_zero(F, &acc_uf[<int64_t>h * F])
+            dec_uf[h] = 0.0
+    for h in range(hot.n_if):
+        if dec_if[h] > 0.0:
+            keep = 1.0 - scale * dec_if[h]
+            if keep < 0.0:
+                keep = 0.0
+            rfm_vec_reg_axpy(F, keep, scale, &acc_if[<int64_t>h * F], &v_if[<int64_t>hot.if_rows[h] * <int64_t>F])
+            rfm_vec_zero(F, &acc_if[<int64_t>h * F])
+            w_if[hot.if_rows[h]] = w_if[hot.if_rows[h]] * keep + scale * acc_w_if[h]
+            acc_w_if[h] = 0.0
+            dec_if[h] = 0.0
+
+
 cdef struct FitBlockCtx:
-    const int32_t *intx_ptr
+    HotRows hot
+    const int32_t *u_ptr
+    const int32_t *i_ptr
     const float *sw_ptr
-    const int32_t *shuf_ptr
+    rfm_perm_t perm
     const int64_t *ui_indptr_ptr
     const int32_t *ui_indices_ptr
     const int64_t *uf_indptr_ptr
@@ -462,6 +526,25 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
     cdef float *j_emb = &my_scratch[2 * F]
     cdef float *diff_ij = &my_scratch[3 * F]
 
+    cdef HotRows *hot = &ctx.hot
+    cdef int use_hot = 1 if (hot.n_uf > 0 or hot.n_if > 0) else 0
+    cdef const int32_t *hot_uf_slot = hot.uf_slot if hot.n_uf > 0 else NULL
+    cdef const int32_t *hot_if_slot = hot.if_slot if hot.n_if > 0 else NULL
+    cdef int since_apply = 0
+    cdef int32_t h
+    cdef float *acc_uf = NULL
+    cdef float *acc_if = NULL
+    cdef float *acc_w_if = NULL
+    cdef float *dec_uf = NULL
+    cdef float *dec_if = NULL
+    if use_hot:
+        acc_uf = &hot.acc_base[<size_t>tid * hot.acc_stride]
+        acc_if = &acc_uf[<int64_t>hot.n_uf * F]
+        acc_w_if = &acc_if[<int64_t>hot.n_if * F]
+        dec_uf = &acc_w_if[hot.n_if]
+        dec_if = &dec_uf[hot.n_uf]
+        memset(acc_uf, 0, hot.acc_stride * sizeof(float))
+
     cdef rfm_rng_t rng
     cdef int64_t c_start, c_end, r, row, n_seen_u, idx, idx_i, end_i, idx_j, end_j, last_step
     cdef int32_t u, i, j, p, q, min_index
@@ -488,10 +571,10 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
         rfm_rng_seed(&rng, ctx.base_seed, ctx.stream_epoch_base + <uint64_t>c_start)
 
         for r in range(c_start, c_end):
-            row = ctx.shuf_ptr[r]
-            u = ctx.intx_ptr[row * 2]
-            i = ctx.intx_ptr[row * 2 + 1]
-            sw = ctx.sw_ptr[row]
+            row = <int64_t>rfm_perm_at(&ctx.perm, <uint64_t>r)
+            u = ctx.u_ptr[row]
+            i = ctx.i_ptr[row]
+            sw = ctx.sw_ptr[row] if ctx.sw_ptr != NULL else 1.0
 
             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]
             if n_seen_u >= I:
@@ -638,10 +721,15 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
                 else:
                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
                         p = ctx.uf_indices_ptr[idx]
-                        rfm_vec_reg_axpy(
-                            F, keep_u_b, step_u * ctx.uf_data_ptr[idx],
-                            diff_ij, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F]
-                        )
+                        if hot_uf_slot != NULL and hot_uf_slot[p] >= 0:
+                            h = hot_uf_slot[p]
+                            rfm_vec_axpy(F, step_u * ctx.uf_data_ptr[idx], diff_ij, &acc_uf[<int64_t>h * F])
+                            dec_uf[h] += 1.0 - keep_u_b
+                        else:
+                            rfm_vec_reg_axpy(
+                                F, keep_u_b, step_u * ctx.uf_data_ptr[idx],
+                                diff_ij, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F]
+                            )
 
             # Sparse 2-pointer merge over non-zero item features of (i, j)
             if x_if_any:
@@ -675,6 +763,13 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
                             step_if = step_i * diff_x_if
                             ctx.w_if_ptr[q] += step_if
                             rfm_vec_axpy(F, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
+                    elif hot_if_slot != NULL and hot_if_slot[q] >= 0:
+                        h = hot_if_slot[q]
+                        dec_if[h] += 1.0 - keep_i_b
+                        if diff_x_if != 0.0:
+                            step_if = step_i * diff_x_if
+                            acc_w_if[h] += step_if
+                            rfm_vec_axpy(F, step_if, u_emb, &acc_if[<int64_t>h * F])
                     else:
                         if diff_x_if != 0.0:
                             step_if = step_i * diff_x_if
@@ -684,6 +779,17 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
                             ctx.w_if_ptr[q] *= keep_i_b
                             rfm_vec_scale(F, keep_i_b, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
 
+            if use_hot:
+                since_apply += 1
+                if since_apply >= hot.batch_steps:
+                    hot_rows_apply(hot, F, ctx.v_uf_ptr, ctx.v_if_ptr, ctx.w_if_ptr, acc_uf, acc_if, acc_w_if, dec_uf, dec_if)
+                    since_apply = 0
+
+        # never carry a partial batch out of the chunk: the block-level cache refresh must see every update
+        if use_hot and since_apply > 0:
+            hot_rows_apply(hot, F, ctx.v_uf_ptr, ctx.v_if_ptr, ctx.w_if_ptr, acc_uf, acc_if, acc_w_if, dec_uf, dec_if)
+            since_apply = 0
+
         if n_threads <= 1:
             break
 
@@ -692,9 +798,10 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
 
 
 cdef struct FoldInCtx:
-    const int32_t *intx_ptr
+    const int32_t *u_ptr
+    const int32_t *i_ptr
     const float *sw_ptr
-    const int32_t *shuf_ptr
+    rfm_perm_t perm
     const int64_t *ui_indptr_ptr
     const int32_t *ui_indices_ptr
     const float *u_feat_ptr
@@ -759,10 +866,10 @@ cdef void _fold_in_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
         rfm_rng_seed(&rng, ctx.base_seed, ctx.stream_epoch_base + <uint64_t>c_start)
 
         for r in range(c_start, c_end):
-            row = ctx.shuf_ptr[r]
-            u = ctx.intx_ptr[row * 2]
-            i = ctx.intx_ptr[row * 2 + 1]
-            sw = ctx.sw_ptr[row]
+            row = <int64_t>rfm_perm_at(&ctx.perm, <uint64_t>r)
+            u = ctx.u_ptr[row]
+            i = ctx.i_ptr[row]
+            sw = ctx.sw_ptr[row] if ctx.sw_ptr != NULL else 1.0
 
             n_seen_u = ctx.ui_indptr_ptr[u + 1] - ctx.ui_indptr_ptr[u]
             if n_seen_u >= I:
@@ -980,6 +1087,21 @@ def _locate_pairs_in_csr(
     return positions, present
 
 
+def _permutation_sample(uint64_t n, uint64_t seed, positions):
+    """evaluate the per-epoch shuffle permutation of [0, n) at the given positions (exposed for tests)"""
+
+    cdef rfm_perm_t perm
+    rfm_perm_init(&perm, n, seed)
+    pos = np.ascontiguousarray(positions, dtype=np.uint64)
+    out = np.empty(len(pos), dtype=np.uint64)
+    cdef uint64_t[::1] pos_mv = pos
+    cdef uint64_t[::1] out_mv = out
+    cdef int64_t k
+    for k in range(pos_mv.shape[0]):
+        out_mv[k] = rfm_perm_at(&perm, pos_mv[k])
+    return out
+
+
 def dense_to_csr(float[:, ::1] mat, int n_threads=1):
     """convert a 2D float32 feature matrix into (int64 indptr, int32 indices, float32 data, has_any) via 2-pass C scan"""
 
@@ -1120,6 +1242,35 @@ def _csr_matvec(
     return out
 
 
+# a feature column is "hot" when it is non-zero on at least this share of rows; at most this many are batched,
+# densest first, and each thread applies its batch after this many of its own steps. HOT_MAX_RATE caps
+# learning_rate * threads * batch_steps, at half the level where summed batches were measured to overshoot.
+HOT_MIN_DENSITY = 1.0 / 16.0
+HOT_MAX_ROWS = 64
+HOT_BATCH_STEPS = 64
+HOT_MAX_RATE = 16.0
+
+
+def _select_hot_rows(indices, int64_t n_cols, int64_t n_rows):
+    """pick the feature columns dense enough that concurrent threads would keep colliding on their weight rows
+
+    returns (slot_of_column int32[n_cols] with -1 for ordinary columns, hot_columns int32[n_hot])
+    """
+
+    slots = np.full(max(n_cols, 1), -1, dtype=np.int32)
+    idx = np.asarray(indices)
+    if n_cols <= 0 or n_rows <= 0 or len(idx) == 0:
+        return slots, np.zeros(0, dtype=np.int32)
+
+    counts = np.bincount(idx, minlength=n_cols)[:n_cols]
+    hot = np.flatnonzero(counts >= max(2.0, n_rows * HOT_MIN_DENSITY))
+    if len(hot) > HOT_MAX_ROWS:
+        hot = np.sort(hot[np.argsort(-counts[hot], kind='stable')[:HOT_MAX_ROWS]])
+    hot = np.ascontiguousarray(hot, dtype=np.int32)
+    slots[hot] = np.arange(len(hot), dtype=np.int32)
+    return slots, hot
+
+
 # healthy factors stay within a few units of zero; past this magnitude training is running away
 LARGE_WEIGHT_THRESHOLD = 1.0e3
 
@@ -1168,8 +1319,9 @@ def reg_penalty(alpha, beta, w_i, w_if, v_u, v_i, v_uf, v_if):
 # --------------------------------
 
 def _fit_csr(
-    int32_t[:, ::1] interactions,
-    float[::1] sample_weight,
+    const int32_t[::1] u_idx,
+    const int32_t[::1] i_idx,
+    sample_weight,
     ui_indptr_arr,
     int32_t[::1] ui_indices,
     uf_indptr_arr,
@@ -1198,11 +1350,24 @@ def _fit_csr(
     int seed=1492,
     int n_threads=1,
     bint uniform_feature_reg=False,
-    bint normalize_steps=True
+    bint normalize_steps=True,
+    bint batched_dense=False
 ):
-    """learn model weights via multi-threaded nogil BPR/WARP SGD with materialized effective item cache and native CSR features"""
+    """learn model weights via multi-threaded nogil BPR/WARP SGD with materialized effective item cache and native CSR features
 
-    cdef int64_t N = interactions.shape[0]
+    interactions arrive as parallel arrays: [u_idx] and [i_idx] hold the user and item index of each one, and
+    [sample_weight] is either None (every interaction weighs 1) or a float32 array of the same length
+    """
+
+    cdef int64_t N = u_idx.shape[0]
+    if i_idx.shape[0] != N:
+        raise ValueError("[u_idx] and [i_idx] must have the same length")
+    cdef const float[::1] sw_mv
+    cdef bint has_weights = sample_weight is not None
+    if has_weights:
+        sw_mv = sample_weight
+        if sw_mv.shape[0] != N:
+            raise ValueError("[sample_weight] must have one entry per interaction")
     cdef int32_t I = <int32_t>v_i.shape[0]
     cdef int F = <int>v_u.shape[1]
     cdef int64_t P_uf = v_uf.shape[0]
@@ -1211,10 +1376,8 @@ def _fit_csr(
     if N == 0 or I <= 1 or epochs <= 0:
         return
 
-    # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
-    # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
-    if N > 2147483647:
-        raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+    # the WARP multiplier log((I - 1) / sampled) turns negative once sampled > I - 1, which would flip the
+    # gradient into ascent on catalogs smaller than [max_samples]
     if max_samples > I - 1:
         max_samples = I - 1
 
@@ -1234,12 +1397,30 @@ def _fit_csr(
     cdef int64_t[::1] uf_indptr = uf_indptr_i64
     cdef int64_t[::1] if_indptr = if_indptr_i64
 
-    shuffle_index = np.arange(N, dtype=np.int32)
-    cdef int32_t[::1] shuffle_index_mv = shuffle_index
-
     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
     if eff_threads > 1 and N // eff_threads < 256:
         eff_threads = max(1, <int>(N // 256))
+
+    # hot rows for batched dense updates: chosen here, before any C allocation, since NumPy may raise. the
+    # choice does not depend on the thread count, so a model trains the same way however many threads it gets.
+    cdef int32_t n_hot_uf = 0
+    cdef int32_t n_hot_if = 0
+    cdef int32_t[::1] hot_uf_slot_mv, hot_uf_rows_mv, hot_if_slot_mv, hot_if_rows_mv
+    cdef float *hot_acc_base = NULL
+    cdef size_t hot_acc_stride = 0
+    if batched_dense and not uniform_feature_reg:
+        if x_uf_any:
+            hot_uf_slot_arr, hot_uf_rows_arr = _select_hot_rows(uf_indices, P_uf, uf_indptr.shape[0] - 1)
+            n_hot_uf = <int32_t>len(hot_uf_rows_arr)
+            if n_hot_uf > 0:
+                hot_uf_slot_mv = hot_uf_slot_arr
+                hot_uf_rows_mv = hot_uf_rows_arr
+        if x_if_any:
+            hot_if_slot_arr, hot_if_rows_arr = _select_hot_rows(if_indices, P_if, I)
+            n_hot_if = <int32_t>len(hot_if_rows_arr)
+            if n_hot_if > 0:
+                hot_if_slot_mv = hot_if_slot_arr
+                hot_if_rows_mv = hot_if_rows_arr
 
     # per-user step scale 1 / (1 + |x_u|^2), computed once (see the step normalization note in the worker)
     cdef float[::1] uf_step_scale_mv
@@ -1280,6 +1461,18 @@ def _fit_csr(
             rfm_aligned_free(v_eff_alloc)
             raise MemoryError("failed to allocate RankFM effective item cache")
 
+    if n_hot_uf > 0 or n_hot_if > 0:
+        hot_acc_stride = <size_t>(<int64_t>n_hot_uf * (F + 1) + <int64_t>n_hot_if * (F + 2))
+        hot_acc_stride = (hot_acc_stride + 15u) & ~(<size_t>15u)
+        hot_acc_base = <float *>rfm_aligned_malloc(<size_t>eff_threads * hot_acc_stride * sizeof(float))
+        if hot_acc_base == NULL:
+            rfm_aligned_free(mult_lut)
+            rfm_aligned_free(scratch_base)
+            free(ll_slots)
+            rfm_aligned_free(b_eff_alloc)
+            rfm_aligned_free(v_eff_alloc)
+            raise MemoryError("failed to allocate RankFM batched-update buffers")
+
     if uniform_feature_reg:
         if x_uf_any and P_uf > 0:
             last_step_uf = <int64_t *>calloc(<size_t>P_uf, sizeof(int64_t))
@@ -1316,9 +1509,9 @@ def _fit_csr(
     ref_ctx.F = F
 
     cdef FitBlockCtx ctx
-    ctx.intx_ptr = &interactions[0, 0]
-    ctx.sw_ptr = &sample_weight[0]
-    ctx.shuf_ptr = &shuffle_index_mv[0]
+    ctx.u_ptr = &u_idx[0]
+    ctx.i_ptr = &i_idx[0]
+    ctx.sw_ptr = &sw_mv[0] if has_weights else NULL
     ctx.ui_indptr_ptr = &ui_indptr[0]
     ctx.ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL
     ctx.uf_indptr_ptr = &uf_indptr[0]
@@ -1343,6 +1536,20 @@ def _fit_csr(
     ctx.ll_slots = ll_slots
     ctx.last_step_uf = last_step_uf
     ctx.last_step_if = last_step_if
+    ctx.hot.uf_slot = &hot_uf_slot_mv[0] if n_hot_uf > 0 else NULL
+    ctx.hot.uf_rows = &hot_uf_rows_mv[0] if n_hot_uf > 0 else NULL
+    ctx.hot.if_slot = &hot_if_slot_mv[0] if n_hot_if > 0 else NULL
+    ctx.hot.if_rows = &hot_if_rows_mv[0] if n_hot_if > 0 else NULL
+    ctx.hot.acc_base = hot_acc_base
+    ctx.hot.acc_stride = hot_acc_stride
+    ctx.hot.n_uf = n_hot_uf
+    ctx.hot.n_if = n_hot_if
+    ctx.hot.batch_steps = HOT_BATCH_STEPS
+    ctx.hot.scale = 1.0
+    cdef double hot_max_rate = HOT_MAX_RATE
+    cdef double weight_scale = 1.0
+    if has_weights and (n_hot_uf > 0 or n_hot_if > 0):
+        weight_scale = max(1.0, float(np.mean(sample_weight, dtype=np.float64)))
     ctx.I = I
     ctx.F = F
     ctx.max_samples = max_samples
@@ -1361,8 +1568,6 @@ def _fit_csr(
     cdef double if_density = (2.0 * <double>if_indptr[I]) / max(1.0, <double>I * <double>max(<int64_t>1, P_if)) if x_if_any else 0.0
     cdef float eta, d_reg_a = 2.0 * alpha, d_reg_b = 2.0 * beta, lazy_tail
     cdef double log_likelihood
-    cdef rfm_rng_t shuf_rng
-    rfm_rng_seed(&shuf_rng, ctx.base_seed, 0xA5A5A5A5ULL)
 
     try:
         pool = rfm_pool_create(eff_threads)
@@ -1376,6 +1581,7 @@ def _fit_csr(
             ctx.eta = eta
             ctx.reg_a_keep = 1.0 - eta * d_reg_a
             ctx.reg_b_keep = 1.0 - eta * d_reg_b
+            ctx.hot.scale = <float>min(1.0, hot_max_rate / (<double>eta * weight_scale * <double>eff_threads * <double>ctx.hot.batch_steps))
             if ctx.uniform_reg:
                 ctx.log_reg_uf_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(uf_density, 1.0 / <double>N)))
                 ctx.log_reg_if_lazy = <float>log(max(1e-6, 1.0 - (<double>eta * <double>d_reg_b) * max(if_density, 1.0 / <double>N)))
@@ -1391,7 +1597,7 @@ def _fit_csr(
                 memset(ll_slots, 0, <size_t>(eff_threads * 8) * sizeof(double))
 
             with nogil:
-                rfm_shuffle_int32(&shuffle_index_mv[0], N, &shuf_rng)
+                rfm_perm_init(&ctx.perm, <uint64_t>N, ctx.base_seed ^ ((<uint64_t>(epoch + 1)) * 0x9E3779B97F4A7C15ULL))
 
                 b_start = 0
                 while b_start < N:
@@ -1459,6 +1665,7 @@ def _fit_csr(
         rfm_aligned_free(v_eff_alloc)
         free(last_step_uf)
         free(last_step_if)
+        rfm_aligned_free(hot_acc_base)
 
 
 def _fit(
@@ -1493,7 +1700,8 @@ def _fit(
     uf_indptr, uf_indices, uf_data, x_uf_any = dense_to_csr(x_uf, n_threads)
     if_indptr, if_indices, if_data, x_if_any = dense_to_csr(x_if, n_threads)
     _fit_csr(
-        interactions,
+        np.ascontiguousarray(interactions[:, 0]),
+        np.ascontiguousarray(interactions[:, 1]),
         sample_weight,
         ui_indptr,
         ui_indices,
@@ -1528,8 +1736,9 @@ def _fit(
 
 
 def _fold_in(
-    int32_t[:, ::1] interactions,
-    float[::1] sample_weight,
+    const int32_t[::1] u_idx,
+    const int32_t[::1] i_idx,
+    sample_weight,
     ui_indptr_arr,
     int32_t[::1] ui_indices,
     float[:, ::1] u_feat_emb,
@@ -1547,17 +1756,23 @@ def _fold_in(
 ):
     """learn or refine user latent factors [v_u] in multi-threaded nogil C while holding item/feature weights fixed"""
 
-    cdef int64_t N = interactions.shape[0]
+    cdef int64_t N = u_idx.shape[0]
+    if i_idx.shape[0] != N:
+        raise ValueError("[u_idx] and [i_idx] must have the same length")
+    cdef const float[::1] sw_mv
+    cdef bint has_weights = sample_weight is not None
+    if has_weights:
+        sw_mv = sample_weight
+        if sw_mv.shape[0] != N:
+            raise ValueError("[sample_weight] must have one entry per interaction")
     cdef int32_t I = <int32_t>v_i_eff.shape[0]
     cdef int F = <int>v_u.shape[1]
 
     if N == 0 or I <= 1 or epochs <= 0:
         return
 
-    # the shuffle index is int32, and the WARP multiplier log((I - 1) / sampled) turns negative once
-    # sampled > I - 1, which would flip the gradient into ascent on catalogs smaller than [max_samples]
-    if N > 2147483647:
-        raise ValueError("RankFM supports at most 2,147,483,647 interactions per fit call")
+    # the WARP multiplier log((I - 1) / sampled) turns negative once sampled > I - 1, which would flip the
+    # gradient into ascent on catalogs smaller than [max_samples]
     if max_samples > I - 1:
         max_samples = I - 1
 
@@ -1571,9 +1786,6 @@ def _fold_in(
 
     ui_indptr_i64 = np.ascontiguousarray(ui_indptr_arr, dtype=np.int64)
     cdef int64_t[::1] ui_indptr = ui_indptr_i64
-
-    shuffle_index = np.arange(N, dtype=np.int32)
-    cdef int32_t[::1] shuffle_index_mv = shuffle_index
 
     cdef int eff_threads = n_threads if (n_threads > 1 and N >= 1024) else 1
     if eff_threads > 1 and N // eff_threads < 256:
@@ -1596,9 +1808,9 @@ def _fold_in(
         mult_lut[s_idx] = <float>(log(<double>(I - 1) / <double>s_idx) / denom_log_I)
 
     cdef FoldInCtx ctx
-    ctx.intx_ptr = &interactions[0, 0]
-    ctx.sw_ptr = &sample_weight[0]
-    ctx.shuf_ptr = &shuffle_index_mv[0]
+    ctx.u_ptr = &u_idx[0]
+    ctx.i_ptr = &i_idx[0]
+    ctx.sw_ptr = &sw_mv[0] if has_weights else NULL
     ctx.ui_indptr_ptr = &ui_indptr[0]
     ctx.ui_indices_ptr = &ui_indices[0] if ui_indices.shape[0] > 0 else NULL
     ctx.u_feat_ptr = &u_feat_emb[0, 0]
@@ -1617,8 +1829,6 @@ def _fold_in(
 
     cdef int epoch
     cdef float eta, d_reg_a = 2.0 * alpha
-    cdef rfm_rng_t shuf_rng
-    rfm_rng_seed(&shuf_rng, ctx.base_seed, 0x5A5A5A5AULL)
 
     try:
         with nogil:
@@ -1634,7 +1844,7 @@ def _fold_in(
                 ctx.cursor = 0
                 ctx.stream_epoch_base = ((<uint64_t>(epoch + 1)) << 40) | (1ULL << 39)
 
-                rfm_shuffle_int32(&shuffle_index_mv[0], N, &shuf_rng)
+                rfm_perm_init(&ctx.perm, <uint64_t>N, (ctx.base_seed + 0x5A5A5A5AULL) ^ ((<uint64_t>(epoch + 1)) * 0x9E3779B97F4A7C15ULL))
                 rfm_pool_run(pool, _fold_in_worker, &ctx)
     finally:
         with nogil:
