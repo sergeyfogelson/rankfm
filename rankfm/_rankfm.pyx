@@ -141,6 +141,34 @@ cdef inline void compute_user_embedding_csr(
             rfm_vec_axpy(F, val, &v_uf_ptr[<int64_t>p * <int64_t>F], out_u_emb)
 
 
+cdef inline float compute_item_embedding_csr(
+    int F,
+    int32_t m,
+    const float *w_i_ptr,
+    const float *w_if_ptr,
+    const float *v_i_ptr,
+    const float *v_if_ptr,
+    const int64_t *if_indptr,
+    const int32_t *if_indices,
+    const float *if_data,
+    float *out_emb
+) noexcept nogil:
+    """write item [m]'s effective embedding (v_i + x_if @ v_if) to [out_emb] from the current weights and return its effective bias"""
+
+    cdef int64_t idx
+    cdef int32_t q
+    cdef float val
+    cdef float bias = w_i_ptr[m]
+
+    rfm_vec_copy(F, &v_i_ptr[<int64_t>m * <int64_t>F], out_emb)
+    for idx in range(if_indptr[m], if_indptr[m + 1]):
+        q = if_indices[idx]
+        val = if_data[idx]
+        bias += val * w_if_ptr[q]
+        rfm_vec_axpy(F, val, &v_if_ptr[<int64_t>q * <int64_t>F], out_emb)
+    return bias
+
+
 cdef inline float sparse_sq_distance(
     const int64_t *indptr,
     const int32_t *indices,
@@ -440,6 +468,7 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
     cdef int sampled, u_has_uf, use_v_u
     cdef float sw, ut_ui, ut_uj, pairwise_utility, min_pairwise_utility
     cdef float d_outer, scale_step, step_u, step_i, old_wi, new_wi, old_wj, new_wj, diff_x_if, step_if, lazy_keep
+    cdef float norm_u, norm_i, keep_u_a, keep_u_b, keep_i_a, keep_i_b, bias_i, bias_j
     cdef int normalize_steps = ctx.normalize_steps
     cdef const int32_t *u_seen_ptr
     cdef double local_ll = 0.0
@@ -493,9 +522,22 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
                 use_v_u, u_has_uf, u_emb
             )
 
-            # Effective item bias & vector come directly from materialized (b_eff, V_eff): O(F)
-            rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>i * <int64_t>F], i_emb)
-            ut_ui = ctx.b_eff_ptr[i] + rfm_dot(F, u_emb, i_emb)
+            # The materialized (b_eff, V_eff) cache makes scoring a candidate O(F), but with item features it is only
+            # rebuilt every [sync_interval] steps, so it lags behind the feature weights. That lag is harmless when
+            # searching for a negative, yet a gradient computed from lagging scores keeps pushing a pair that is
+            # already ranked correctly, and training runs away. So the positive item here, and the chosen negative
+            # below, are recomputed from the current weights (and written back, refreshing those two cache rows).
+            if x_if_any:
+                bias_i = compute_item_embedding_csr(
+                    F, i, ctx.w_i_ptr, ctx.w_if_ptr, ctx.v_i_ptr, ctx.v_if_ptr,
+                    ctx.if_indptr_ptr, ctx.if_indices_ptr, ctx.if_data_ptr, i_emb
+                )
+                ctx.b_eff_ptr[i] = bias_i
+                rfm_vec_copy(F, i_emb, &ctx.v_eff_ptr[<int64_t>i * <int64_t>F])
+            else:
+                bias_i = ctx.b_eff_ptr[i]
+                rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>i * <int64_t>F], i_emb)
+            ut_ui = bias_i + rfm_dot(F, u_emb, i_emb)
 
             min_index = -1
             min_pairwise_utility = 1e6
@@ -518,7 +560,16 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
 
             j = min_index
             pairwise_utility = min_pairwise_utility
-            rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F], j_emb)
+            if x_if_any:
+                bias_j = compute_item_embedding_csr(
+                    F, j, ctx.w_i_ptr, ctx.w_if_ptr, ctx.v_i_ptr, ctx.v_if_ptr,
+                    ctx.if_indptr_ptr, ctx.if_indices_ptr, ctx.if_data_ptr, j_emb
+                )
+                ctx.b_eff_ptr[j] = bias_j
+                rfm_vec_copy(F, j_emb, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F])
+                pairwise_utility = ut_ui - (bias_j + rfm_dot(F, u_emb, j_emb))
+            else:
+                rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F], j_emb)
 
             if ctx.verbose:
                 local_ll += <double>safe_log_sigmoid(pairwise_utility)
@@ -529,21 +580,31 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
             # One step moves the pairwise utility by about step * (|u|^2 * (2 + |x_i - x_j|^2) + |v_i - v_j|^2 * (1 + |x_u|^2)):
             # every active feature adds to the effective learning rate. Dividing each side's step by its feature mass
             # keeps the movement at the feature-free level, step * (2 * |u|^2 + |v_i - v_j|^2), whatever the row density.
-            step_u = scale_step
-            step_i = scale_step
+            #
+            # The scale multiplies the whole update, gradient and L2 decay alike: it is a per-sample learning rate.
+            # Scaling the gradient alone would leave the decay at full strength and so multiply the effective
+            # regularization on exactly the rows with the most features.
+            norm_u = 1.0
+            norm_i = 1.0
             if normalize_steps:
                 if u_has_uf:
-                    step_u = scale_step * ctx.uf_step_scale_ptr[u]
+                    norm_u = ctx.uf_step_scale_ptr[u]
                 if x_if_any:
-                    step_i = scale_step * 2.0 / (2.0 + sparse_sq_distance(ctx.if_indptr_ptr, ctx.if_indices_ptr, ctx.if_data_ptr, i, j))
+                    norm_i = 2.0 / (2.0 + sparse_sq_distance(ctx.if_indptr_ptr, ctx.if_indices_ptr, ctx.if_data_ptr, i, j))
+            step_u = scale_step * norm_u
+            step_i = scale_step * norm_i
+            keep_u_a = 1.0 - norm_u * (1.0 - reg_a_keep)
+            keep_u_b = 1.0 - norm_u * (1.0 - reg_b_keep)
+            keep_i_a = 1.0 - norm_i * (1.0 - reg_a_keep)
+            keep_i_b = 1.0 - norm_i * (1.0 - reg_b_keep)
 
             # Update item scalar biases (+ immediate b_eff delta when x_if_any)
             old_wi = ctx.w_i_ptr[i]
-            new_wi = old_wi * reg_a_keep + step_i
+            new_wi = old_wi * keep_i_a + step_i
             ctx.w_i_ptr[i] = new_wi
 
             old_wj = ctx.w_i_ptr[j]
-            new_wj = old_wj * reg_a_keep - step_i
+            new_wj = old_wj * keep_i_a - step_i
             ctx.w_i_ptr[j] = new_wj
 
             if x_if_any:
@@ -554,11 +615,11 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
             rfm_vec_sub(F, i_emb, j_emb, diff_ij)
 
             if use_v_u:
-                rfm_vec_reg_axpy(F, reg_a_keep, step_u, diff_ij, &ctx.v_u_ptr[<int64_t>u * <int64_t>F])
+                rfm_vec_reg_axpy(F, keep_u_a, step_u, diff_ij, &ctx.v_u_ptr[<int64_t>u * <int64_t>F])
 
             rfm_dual_item_update(
                 F,
-                reg_a_keep,
+                keep_i_a,
                 step_i,
                 u_emb,
                 &ctx.v_i_ptr[<int64_t>i * <int64_t>F],
@@ -578,7 +639,7 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
                     for idx in range(ctx.uf_indptr_ptr[u], ctx.uf_indptr_ptr[u + 1]):
                         p = ctx.uf_indices_ptr[idx]
                         rfm_vec_reg_axpy(
-                            F, reg_b_keep, step_u * ctx.uf_data_ptr[idx],
+                            F, keep_u_b, step_u * ctx.uf_data_ptr[idx],
                             diff_ij, &ctx.v_uf_ptr[<int64_t>p * <int64_t>F]
                         )
 
@@ -617,11 +678,11 @@ cdef void _fit_block_worker(int tid, int n_threads, void *raw_ctx) noexcept nogi
                     else:
                         if diff_x_if != 0.0:
                             step_if = step_i * diff_x_if
-                            ctx.w_if_ptr[q] = ctx.w_if_ptr[q] * reg_b_keep + step_if
-                            rfm_vec_reg_axpy(F, reg_b_keep, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
+                            ctx.w_if_ptr[q] = ctx.w_if_ptr[q] * keep_i_b + step_if
+                            rfm_vec_reg_axpy(F, keep_i_b, step_if, u_emb, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
                         else:
-                            ctx.w_if_ptr[q] *= reg_b_keep
-                            rfm_vec_scale(F, reg_b_keep, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
+                            ctx.w_if_ptr[q] *= keep_i_b
+                            rfm_vec_scale(F, keep_i_b, &ctx.v_if_ptr[<int64_t>q * <int64_t>F])
 
         if n_threads <= 1:
             break

@@ -3,7 +3,7 @@ import sys
 from setuptools import Extension, setup
 
 NAME = 'rankfm'
-VERSION = '0.4.1'
+VERSION = '0.4.2'
 
 # define the extension packages to include
 # ----------------------------------------
@@ -65,7 +65,7 @@ setup(
     packages=['rankfm'],
     ext_modules=extensions,
     zip_safe=False,
-    python_requires='>=3.9',
+    python_requires='>=3.10',
     install_requires=['numpy>=1.15', 'pandas>=0.24'],
     extras_require={'blas': ['threadpoolctl>=3.0']}
 )
