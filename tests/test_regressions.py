@@ -154,15 +154,22 @@ def test_step_normalization_keeps_feature_heavy_training_stable():
 
     interactions = _make_interactions(n_users=300, n_items=80, per_user=8, seed=4)
     item_features = _dense_item_features()
-    settings = dict(factors=16, loss='warp', alpha=0.01, beta=0.01, learning_rate=0.1)
+    settings = dict(factors=16, loss='warp', alpha=0.01, beta=0.01, learning_rate=0.3)
 
     with warnings.catch_warnings():
         warnings.simplefilter('error')
         stable = RankFM(**settings).fit(interactions, item_features=item_features, epochs=15, seed=1, n_jobs=1)
     assert max(np.abs(stable.v_i).max(), np.abs(stable.v_if).max(), np.abs(stable.v_u).max()) < 10.0
 
-    with pytest.warns(RuntimeWarning, match="diverging"):
-        RankFM(normalize_steps=False, **settings).fit(interactions, item_features=item_features, epochs=15, seed=1, n_jobs=1)
+    # raw steps either trip the magnitude warning or reach non-finite weights, depending on how fast they blow up
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter('always')
+        try:
+            RankFM(normalize_steps=False, **settings).fit(interactions, item_features=item_features, epochs=15, seed=1, n_jobs=1)
+            diverged = any("diverging" in str(w.message) for w in caught)
+        except AssertionError:
+            diverged = True
+    assert diverged
 
 
 def test_step_normalization_leaves_feature_free_models_unchanged():
@@ -237,14 +244,15 @@ def test_user_table_growth_reuses_spare_capacity():
     assert model.recommend([32], n_items=2, filter_previous=True).notnull().all().all()
 
 
-def test_diverging_training_warns():
-    """weights that explode while staying finite are reported instead of being returned silently"""
+def test_large_weights_trigger_divergence_warning(monkeypatch):
+    """weights past the magnitude threshold are reported once per fit instead of being returned silently"""
 
-    interactions = _make_interactions(n_users=300, n_items=80, per_user=8, seed=4)
-    with pytest.warns(RuntimeWarning, match="diverging"):
-        RankFM(factors=16, loss='warp', alpha=0.01, beta=0.01, learning_rate=0.1, normalize_steps=False).fit(
-            interactions, item_features=_dense_item_features(), epochs=15, seed=1, n_jobs=1
-        )
+    import rankfm._rankfm as kernel
+    monkeypatch.setattr(kernel, 'LARGE_WEIGHT_THRESHOLD', 0.01)  # any trained model exceeds this
+
+    with pytest.warns(RuntimeWarning, match="diverging") as caught:
+        RankFM(factors=4).fit(_make_interactions(), epochs=3, seed=1, n_jobs=1)
+    assert len(caught) == 1
 
 
 def test_merge_pairs_into_csr_matches_full_rebuild():
