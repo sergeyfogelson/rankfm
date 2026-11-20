@@ -27,6 +27,7 @@ This fork starts from the original's commit `c3e9395` and has been modified by S
 * **0.4.0** (November 2026): multi-threaded training, sparse (CSR) user and item features, inference for unseen users (cold-start estimation and fold-in), batched and streaming recommendation, export of embeddings for nearest-neighbour search
 * **0.4.1**: reproducible seeding, container-aware thread counts, step normalization for side features, multi-threaded `feature_reg='uniform'`, faster `fit_partial`, input validation that survives `python -O`
 * **0.4.2**: corrected regularization and gradient computation when training with side features, a Dockerfile, and continuous integration on Linux, Windows and macOS
+* **0.4.5**: no fixed limit on interactions per fit, about 8 bytes of memory per interaction instead of 20, and optional batched updates for densely used feature columns (`dense_updates='batched'`)
 
 The public API of the original (`RankFM.fit`, `fit_partial`, `predict`, `recommend`, `similar_items`, `similar_users`, and the `rankfm.evaluation` functions) is kept, with new optional arguments. Models trained with this fork are not numerically identical to models trained with the original.
 
