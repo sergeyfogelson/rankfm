@@ -1,9 +1,10 @@
 # RankFM
 
-[![PyPI version](https://badge.fury.io/py/rankfm.svg)](https://badge.fury.io/py/rankfm)
-[![CircleCI](https://circleci.com/gh/etlundquist/rankfm.svg?style=shield)](https://circleci.com/gh/etlundquist/rankfm)
-[![Documentation Status](https://readthedocs.org/projects/rankfm/badge/?version=latest)](https://rankfm.readthedocs.io/en/latest/?badge=latest)
+[![CI](https://github.com/sergeyfogelson/rankfm/actions/workflows/ci.yml/badge.svg)](https://github.com/sergeyfogelson/rankfm/actions/workflows/ci.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+> **This repository is a fork of [etlundquist/rankfm](https://github.com/etlundquist/rankfm), created and written by Eric Lundquist.**
+> The model, the original Cython implementation, the evaluation module, the examples and the documentation are his work, released under the GNU GPL v3. This fork is maintained by Sergey Fogelson and has been modified since 17 November 2026; see [Attribution and Changes from the Original](#attribution-and-changes-from-the-original). The `rankfm` package on PyPI and the Read the Docs site are the original project's, not this fork's.
 
 RankFM is a python implementation of the general [Factorization Machines](https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf) model class adapted for collaborative filtering recommendation/ranking problems with implicit feedback user/item interaction data. It uses [Bayesian Personalized Ranking (BPR)](https://arxiv.org/pdf/1205.2618.pdf) and a variant of [Weighted Approximate-Rank Pairwise (WARP)](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.587.3946&rep=rep1&type=pdf) loss to learn model weights via Stochastic Gradient Descent (SGD). It can (optionally) incorporate sample weights and user/item auxiliary features to augment the main interaction data.
 
@@ -13,8 +14,21 @@ In addition to the familiar `fit()`, `predict()`, `recommend()` methods, RankFM 
 
 * see the **Quickstart** section below to get started with the basic functionality
 * see the `/examples` folder for more in-depth jupyter notebook walkthroughs with several popular open-source data sets
-* see the [Online Documentation](https://rankfm.readthedocs.io/en/latest/) for more comprehensive documentation on the main model class and separate evaluation module
-* see the [Medium Article](https://towardsdatascience.com/factorization-machines-for-item-recommendation-with-implicit-feedback-data-5655a7c749db) for contextual motivation and a detailed mathematical description of the algorithm
+* see the original project's [Online Documentation](https://rankfm.readthedocs.io/en/latest/) for the main model class and separate evaluation module (it describes version 0.2.5 and does not cover the additions in this fork)
+* see Eric Lundquist's [Medium Article](https://towardsdatascience.com/factorization-machines-for-item-recommendation-with-implicit-feedback-data-5655a7c749db) for contextual motivation and a detailed mathematical description of the algorithm
+
+---
+### Attribution and Changes from the Original
+
+RankFM was created by **Eric Lundquist**. The original project lives at [github.com/etlundquist/rankfm](https://github.com/etlundquist/rankfm), is published on PyPI as [`rankfm`](https://pypi.org/project/rankfm/), and its last release is 0.2.5 (July 2020). Its complete commit history is preserved in this repository, and every file here remains under the GNU General Public License v3 (see `LICENSE`).
+
+This fork starts from the original's commit `c3e9395` and has been modified by Sergey Fogelson since 17 November 2026. The modifications, by release:
+
+* **0.4.0** (November 2026): multi-threaded training, sparse (CSR) user and item features, inference for unseen users (cold-start estimation and fold-in), batched and streaming recommendation, export of embeddings for nearest-neighbour search
+* **0.4.1**: reproducible seeding, container-aware thread counts, step normalization for side features, multi-threaded `feature_reg='uniform'`, faster `fit_partial`, input validation that survives `python -O`
+* **0.4.2**: corrected regularization and gradient computation when training with side features, a Dockerfile, and continuous integration on Linux, Windows and macOS
+
+The public API of the original (`RankFM.fit`, `fit_partial`, `predict`, `recommend`, `similar_items`, `similar_users`, and the `rankfm.evaluation` functions) is kept, with new optional arguments. Models trained with this fork are not numerically identical to models trained with the original.
 
 ---
 ### Dependencies
