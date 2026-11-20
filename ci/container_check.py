@@ -148,6 +148,21 @@ with warnings.catch_warnings():
     uniform.fit(interactions, user_features=user_features, item_features=item_features, epochs=EPOCHS, seed=2)
 check(precision(uniform, -1) > 0.9, "feature_reg='uniform' trains on all available threads")
 
+# ---- 6b. dense feature columns with batched updates on all threads
+dense_centroids = rng.normal(0, 1, (n_clusters, 8))
+dense_user_features = (dense_centroids[u_cluster] + rng.normal(0, 0.4, (n_users, 8))).astype(np.float32)
+dense_user_features /= np.abs(dense_user_features).max()
+with warnings.catch_warnings():
+    warnings.simplefilter('error')
+    for mode in ('lockfree', 'batched'):
+        dense_model = RankFM(factors=16, loss='warp', max_samples=10, learning_rate=0.1, beta=0.01, n_jobs=-1, dense_updates=mode)
+        dense_model.fit(interactions, user_features=(np.arange(n_users), dense_user_features), epochs=EPOCHS, seed=3)
+        rate = EPOCHS * n_samples / kernel_seconds['last'] / 1e6
+        quality = precision(dense_model, -1)
+        result['dense_{}_samples_per_sec_m'.format(mode)] = round(rate, 2)
+        print("dense features, dense_updates={}: {:.2f}M samples/s, in-cluster@10 {:.3f}".format(mode, rate, quality))
+        check(quality > 0.9, "dense_updates='{}' reaches in-cluster precision > 0.9".format(mode))
+
 # ---- 7. incremental fit with new users, then batched inference for them
 new_users = np.arange(n_users, n_users + 200)
 new_cluster = rng.integers(0, n_clusters, len(new_users))

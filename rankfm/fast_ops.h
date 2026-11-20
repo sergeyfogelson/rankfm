@@ -123,19 +123,61 @@ RFM_INLINE float rfm_rng_float01(rfm_rng_t *rng) {
     return (float)(rfm_rng_u32(rng) >> 8) * (1.0f / 16777216.0f);
 }
 
-static inline void rfm_shuffle_int32(int32_t *arr, int64_t n, rfm_rng_t *rng) {
-    int64_t i, j;
-    int32_t tmp;
-    for (i = n - 1; i > 0; i--) {
-        if (i < 0x7FFFFFFFLL) {
-            j = (int64_t)rfm_rng_bounded(rng, (uint32_t)(i + 1));
-        } else {
-            j = (int64_t)(rfm_rng_u64(rng) % (uint64_t)(i + 1));
-        }
-        tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
+/* ---------------------------------------------------------
+ * 2b. Computed Pseudo-Random Permutation of [0, n)
+ *
+ * A Feistel network is a bijection on [0, 2^bits) whatever its round function. Re-applying it
+ * until the value lands below n ("cycle walking") restricts it to a bijection on [0, n). Each
+ * epoch can therefore visit every row exactly once in shuffled order without storing the order,
+ * which would cost 4-8 bytes per row and tie the row count to the index width.
+ *
+ * [bits] is the smallest width covering n, so fewer than half the values are walked past. When
+ * [bits] is odd the two halves differ by one bit and trade places every round; four rounds
+ * bring them back to their starting widths.
+ * --------------------------------------------------------- */
+
+typedef struct {
+    uint64_t n;
+    uint64_t keys[4];
+    int left_bits;
+    int right_bits;
+} rfm_perm_t;
+
+static inline void rfm_perm_init(rfm_perm_t *perm, uint64_t n, uint64_t seed) {
+    int bits = 2;
+    while (bits < 63 && (1ULL << bits) < n) {
+        bits++;
     }
+    perm->n = n;
+    perm->left_bits = bits / 2;
+    perm->right_bits = bits - perm->left_bits;
+    uint64_t sm = seed ^ 0x6A09E667F3BCC909ULL;
+    for (int k = 0; k < 4; k++) {
+        perm->keys[k] = rfm_splitmix64(&sm);
+    }
+}
+
+RFM_INLINE uint64_t rfm_perm_at(const rfm_perm_t *perm, uint64_t x) {
+    do {
+        int lb = perm->left_bits;
+        int rb = perm->right_bits;
+        uint64_t left = x >> rb;
+        uint64_t right = x & ((1ULL << rb) - 1ULL);
+        for (int k = 0; k < 4; k++) {
+            uint64_t f = right ^ perm->keys[k];
+            f = (f ^ (f >> 30)) * 0xBF58476D1CE4E5B9ULL;
+            f = (f ^ (f >> 27)) * 0x94D049BB133111EBULL;
+            f = (f ^ (f >> 31)) & ((1ULL << lb) - 1ULL);
+            const uint64_t next = left ^ f;
+            const int swap = lb;
+            left = right;
+            right = next;
+            lb = rb;
+            rb = swap;
+        }
+        x = (left << rb) | right;
+    } while (x >= perm->n);
+    return x;
 }
 
 /* ---------------------------------------------------------
