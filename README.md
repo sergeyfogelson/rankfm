@@ -18,7 +18,7 @@ In addition to the familiar `fit()`, `predict()`, `recommend()` methods, RankFM 
 
 ---
 ### Dependencies
-* Python 3.9+
+* Python 3.10+
 * Cython >= 3.0 (build time only)
 * threadpoolctl (optional - keeps BLAS threads within the CPUs available to the process)
 * numpy >= 1.15
@@ -64,7 +64,7 @@ pip install git+https://github.com/sergeyfogelson/rankfm.git#egg=rankfm
 * **Feature regularization**: `feature_reg='uniform'` works with any number of threads.
 * **Incremental updates**: `fit_partial()` places new interactions by binary search and reuses spare capacity when users are added, so a small batch costs one block copy of the stored history and one scan of the weights, not a re-sort. Sequential integer user IDs keep constant-time lookups; with arbitrary IDs the ID index is rebuilt whenever a batch adds users.
 * **Input checks**: NaN or infinite feature values and sample weights are rejected before training starts. Sparse feature matrices are copied, never sorted in place or referenced afterwards.
-* **Containers and CI**: the `Dockerfile` builds a Linux image (`docker build --build-arg RANKFM_MARCH=x86-64-v3 -t rankfm .`), and `ci/container_check.py` is an end-to-end check meant to run under a CPU limit (`docker run --rm --cpus=2 -e EXPECT_CPUS=2 rankfm`). GitHub Actions runs the tests on Linux (Python 3.9-3.13), Windows and macOS, and the container check on x86 Linux.
+* **Containers and CI**: the `Dockerfile` builds a Linux image (`docker build --build-arg RANKFM_MARCH=x86-64-v3 -t rankfm .`), and `ci/container_check.py` is an end-to-end check meant to run under a CPU limit (`docker run --rm --cpus=2 -e EXPECT_CPUS=2 rankfm`). GitHub Actions runs the tests on Linux (Python 3.10-3.13), Windows and macOS, and the container check on x86 Linux.
 * **Size limits**: a single `fit()` call accepts up to 2,147,483,647 interactions and holds roughly 20 bytes per interaction in memory.
 
 It's highly recommended that you use an [Anaconda](https://www.anaconda.com/) base environment to ensure that all core numpy C extensions and linear algebra libraries have been installed and configured correctly. Anaconda: it just works.
