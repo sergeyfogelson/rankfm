@@ -11,13 +11,17 @@ import numpy as np
 import pandas as pd
 
 from rankfm._rankfm import (
+    _compute_effective_items_v050,
     _csr_dense_matmul,
     _csr_matvec,
+    _encode_users_v050,
     _fit_csr,
+    _fit_v050,
     _fold_in,
     _locate_pairs_in_csr,
     _predict,
     _select_topk_chunk,
+    _select_topk_v050_chunk,
     dense_to_csr,
 )
 from rankfm.utils import get_data, require
@@ -315,7 +319,32 @@ class RankFM():
         n_jobs=1,
         feature_reg='stochastic',
         normalize_steps=True,
-        dense_updates='lockfree'
+        dense_updates='lockfree',
+        # --- RankFM v0.5.0 Extensions ---
+        temperature=0.12,
+        neg_sampling='uniform',
+        neg_pop_exponent=0.75,
+        neg_pop_mix=0.50,
+        logq_weight=0.0,
+        margin=0.0,
+        weight_margin_scale=0.0,
+        neg_weight=1.0,
+        use_history=False,
+        history_exponent=0.5,
+        max_history_len=64,
+        use_seq_anchor=False,
+        n_event_types=1,
+        use_field_gates=False,
+        use_freq_gate=False,
+        freq_gate_static_drop=0.7,
+        n_interests=1,
+        interest_temperature=0.25,
+        head_agg_temperature=0.0,
+        sparse_residual_k=0,
+        sparse_residual_l2=500.0,
+        sparse_residual_weight=0.0,
+        target_attention_topk=0,
+        target_attention_weight=0.0,
     ):
         """store hyperparameters and initialize internal model state
 
@@ -345,35 +374,76 @@ class RankFM():
         """
 
         require(isinstance(factors, int) and factors >= 1, "[factors] must be a positive integer")
-        require(isinstance(loss, str) and loss in ('bpr', 'warp'), "[loss] must be in ('bpr', 'warp')")
+        require(isinstance(loss, str) and loss in ('bpr', 'warp', 'cosine_nce', 'simplex'), "[loss] must be in ('bpr', 'warp', 'cosine_nce', 'simplex')")
         require(isinstance(max_samples, int) and max_samples > 0, "[max_samples] must be a positive integer")
-        require(isinstance(alpha, float) and alpha > 0.0, "[alpha] must be a positive float")
-        require(isinstance(beta, float) and beta > 0.0, "[beta] must be a positive float")
-        require(isinstance(sigma, float) and sigma > 0.0, "[sigma] must be a positive float")
-        require(isinstance(learning_rate, float) and learning_rate > 0.0, "[learning_rate] must be a positive float")
+        require(isinstance(alpha, (int, float)) and float(alpha) > 0.0, "[alpha] must be a positive float")
+        require(isinstance(beta, (int, float)) and float(beta) > 0.0, "[beta] must be a positive float")
+        require(isinstance(sigma, (int, float)) and float(sigma) > 0.0, "[sigma] must be a positive float")
+        require(isinstance(learning_rate, (int, float)) and float(learning_rate) > 0.0, "[learning_rate] must be a positive float")
         require(isinstance(learning_schedule, str) and learning_schedule in ('constant', 'invscaling'), "[learning_schedule] must be in ('constant', 'invscaling')")
-        require(isinstance(learning_exponent, float) and learning_exponent > 0.0, "[learning_exponent] must be a positive float")
-        require(isinstance(user_dropout, (int, float)) and 0.0 <= float(user_dropout) < 1.0, "[user_dropout] must be a float in [0.0, 1.0)")
+        require(isinstance(learning_exponent, (int, float)) and float(learning_exponent) > 0.0, "[learning_exponent] must be a positive float")
+        max_drop_ok = (use_history or use_seq_anchor or loss in ('cosine_nce', 'simplex'))
+        if max_drop_ok:
+            require(isinstance(user_dropout, (int, float)) and 0.0 <= float(user_dropout) <= 1.0, "[user_dropout] must be in [0.0, 1.0]")
+        else:
+            require(isinstance(user_dropout, (int, float)) and 0.0 <= float(user_dropout) < 1.0, "[user_dropout] must be a float in [0.0, 1.0)")
         require(isinstance(n_jobs, int) and n_jobs != 0, "[n_jobs] must be a non-zero integer (e.g. 1, 4, -1)")
         require(isinstance(feature_reg, str) and feature_reg in ('stochastic', 'uniform'), "[feature_reg] must be in ('stochastic', 'uniform')")
         require(isinstance(normalize_steps, bool), "[normalize_steps] must be a boolean value")
         require(isinstance(dense_updates, str) and dense_updates in ('lockfree', 'batched'), "[dense_updates] must be in ('lockfree', 'batched')")
         require(not (dense_updates == 'batched' and feature_reg == 'uniform'), "[dense_updates]='batched' cannot be combined with [feature_reg]='uniform'")
 
-        self.factors = factors
+        require(isinstance(temperature, (int, float)) and float(temperature) > 0.0, "[temperature] must be positive")
+        require(isinstance(neg_sampling, str) and neg_sampling in ('uniform', 'popularity'), "[neg_sampling] must be in ('uniform', 'popularity')")
+        require(isinstance(neg_pop_exponent, (int, float)) and 0.0 <= float(neg_pop_exponent) <= 2.0, "[neg_pop_exponent] must be in [0.0, 2.0]")
+        require(isinstance(neg_pop_mix, (int, float)) and 0.0 <= float(neg_pop_mix) <= 1.0, "[neg_pop_mix] must be in [0.0, 1.0]")
+        require(isinstance(max_history_len, int) and max_history_len >= 1, "[max_history_len] must be >= 1")
+        require(isinstance(n_event_types, int) and n_event_types >= 1, "[n_event_types] must be >= 1")
+        require(isinstance(n_interests, int) and n_interests >= 1, "[n_interests] must be >= 1")
+        require(isinstance(interest_temperature, (int, float)) and float(interest_temperature) > 0.0, "[interest_temperature] must be positive")
+        require(isinstance(head_agg_temperature, (int, float)) and float(head_agg_temperature) >= 0.0, "[head_agg_temperature] must be >= 0.0")
+        require(isinstance(sparse_residual_k, int) and sparse_residual_k >= 0, "[sparse_residual_k] must be >= 0")
+        require(isinstance(target_attention_topk, int) and target_attention_topk >= 0, "[target_attention_topk] must be >= 0")
+
+        self.factors = int(factors)
         self.loss = loss
-        self.max_samples = max_samples
-        self.alpha = alpha
-        self.beta = beta
-        self.sigma = sigma
-        self.learning_rate = learning_rate
+        self.max_samples = int(max_samples)
+        self.alpha = float(alpha)
+        self.beta = float(beta)
+        self.sigma = float(sigma)
+        self.learning_rate = float(learning_rate)
         self.learning_schedule = learning_schedule
-        self.learning_exponent = learning_exponent
+        self.learning_exponent = float(learning_exponent)
         self.user_dropout = float(user_dropout)
-        self.n_jobs = n_jobs
+        self.n_jobs = int(n_jobs)
         self.feature_reg = feature_reg
         self.normalize_steps = normalize_steps
         self.dense_updates = dense_updates
+
+        self.temperature = float(temperature)
+        self.neg_sampling = neg_sampling
+        self.neg_pop_exponent = float(neg_pop_exponent)
+        self.neg_pop_mix = float(neg_pop_mix)
+        self.logq_weight = float(logq_weight)
+        self.margin = float(margin)
+        self.weight_margin_scale = float(weight_margin_scale)
+        self.neg_weight = float(neg_weight)
+        self.use_history = bool(use_history)
+        self.history_exponent = float(history_exponent)
+        self.max_history_len = int(max_history_len)
+        self.use_seq_anchor = bool(use_seq_anchor)
+        self.n_event_types = int(n_event_types)
+        self.use_field_gates = bool(use_field_gates)
+        self.use_freq_gate = bool(use_freq_gate)
+        self.freq_gate_static_drop = float(freq_gate_static_drop)
+        self.n_interests = int(n_interests)
+        self.interest_temperature = float(interest_temperature)
+        self.head_agg_temperature = float(head_agg_temperature)
+        self.sparse_residual_k = int(sparse_residual_k)
+        self.sparse_residual_l2 = float(sparse_residual_l2)
+        self.sparse_residual_weight = float(sparse_residual_weight)
+        self.target_attention_topk = int(target_attention_topk)
+        self.target_attention_weight = float(target_attention_weight)
 
         self._reset_state()
 
@@ -381,6 +451,31 @@ class RankFM():
     # --------------------------------
     # begin private method definitions
     # --------------------------------
+
+
+    @property
+    def _use_cosine(self):
+        return self.loss in ('cosine_nce', 'simplex')
+
+
+    @property
+    def _is_v050_mode(self):
+        return (
+            self.loss in ('cosine_nce', 'simplex')
+            or self.neg_sampling != 'uniform'
+            or self.logq_weight != 0.0
+            or self.margin != 0.0
+            or self.weight_margin_scale != 0.0
+            or self.neg_weight != 1.0
+            or self.use_history
+            or self.use_seq_anchor
+            or self.use_field_gates
+            or self.use_freq_gate
+            or self.n_interests > 1
+            or self.sparse_residual_k > 0
+            or self.target_attention_topk > 0
+            or self.user_dropout >= 1.0
+        )
 
 
     def _resolve_n_jobs(self, n_jobs=None):
@@ -396,6 +491,7 @@ class RankFM():
 
         self._cached_item_bias = None
         self._cached_v_i_eff = None
+        self._cached_v_i_unit = None
         self._cached_train_u_emb = None
         self._user_items_cache = None
         self._dense_x_uf_cache = None
@@ -452,6 +548,33 @@ class RankFM():
         self.v_i = None
         self.v_uf = None
         self.v_if = None
+
+        # v0.5.0 state tensors
+        self.p_hist = None
+        self.p_seq = None
+        self.g_event = None
+        self.g_seq = None
+        self.gamma_uf = None
+        self.gamma_if = None
+        self.uf_field = None
+        self.if_field = None
+        self.if_is_dyn = None
+        self.a_gate = None
+        self.b_gate = None
+        self.c_proto = None
+        self.item_log_freq = None
+        self._alias_prob = None
+        self._alias_idx = None
+        self._log_q = None
+        self._uh_indptr = None
+        self._uh_indices = None
+        self._uh_weights = None
+        self._uh_kinds = None
+        self._train_last_items = None
+        self._s_indptr = None
+        self._s_indices = None
+        self._s_data = None
+        self.w_ctx = None
 
         self._invalidate_caches()
         self.is_fit = False
@@ -799,7 +922,18 @@ class RankFM():
         return interactions[:, 0], interactions[:, 1]
 
 
-    def _init_all(self, interactions, user_features=None, item_features=None, sample_weight=None, n_threads=1, seed=1492):
+    def _init_all(
+        self,
+        interactions,
+        user_features=None,
+        item_features=None,
+        sample_weight=None,
+        n_threads=1,
+        seed=1492,
+        user_field_ids=None,
+        item_field_ids=None,
+        item_dynamic_mask=None,
+    ):
         """index the interaction data and user/item features and initialize model weights"""
 
         if _is_scipy_sparse(interactions):
@@ -824,7 +958,7 @@ class RankFM():
                 self.sample_weight = np.array(coo.data, dtype=np.float32)
 
             caller_arrays = (coo.row, coo.col, getattr(interactions, 'indices', None))
-            self._index_initial_pairs(u_arr, i_arr, n_u, n_i, caller_arrays)
+            self._index_initial_pairs(u_arr, i_arr, n_u, n_i, caller_arrays, keep_input_order=self._is_v050_mode)
         else:
             u_col, i_col = self._extract_interaction_columns(interactions)
             self._user_index, u_mapped = _fast_unique_and_map(u_col)
@@ -840,13 +974,22 @@ class RankFM():
             else:
                 self.sample_weight = None
 
-            self._index_initial_pairs(u_mapped, i_mapped, len(self.user_idx), len(self.item_idx), (u_col, i_col))
+            self._index_initial_pairs(
+                u_mapped, i_mapped, len(self.user_idx), len(self.item_idx), (u_col, i_col), keep_input_order=self._is_v050_mode
+            )
 
         self._init_features(user_features, item_features, n_threads=n_threads)
-        self._init_weights(user_features, item_features, seed=seed)
+        self._init_weights(
+            user_features,
+            item_features,
+            seed=seed,
+            user_field_ids=user_field_ids,
+            item_field_ids=item_field_ids,
+            item_dynamic_mask=item_dynamic_mask,
+        )
 
 
-    def _index_initial_pairs(self, u_arr, i_arr, n_users, n_items, caller_arrays):
+    def _index_initial_pairs(self, u_arr, i_arr, n_users, n_items, caller_arrays, keep_input_order=False):
         """build the seen-items CSR for a fresh fit and choose the arrays training reads, sharing storage where possible
 
         three layouts, cheapest first (bytes per interaction, before optional weights):
@@ -854,6 +997,9 @@ class RankFM():
           8   unique pairs in any order and no weights: training reads the sorted index, the input order is dropped
           12  anything else (repeats, or unsorted pairs with weights): the index plus the pairs in their input order
         repeats are kept as separate training rows in the last layout, so their effect on training is unchanged.
+
+        [keep_input_order] rules out the second layout. The v0.5 training path needs it: prev_items and margin_signal are
+        aligned row by row with the interactions as given, and a user's "last item" is read off the input order.
         """
 
         self._user_items_cache = None
@@ -868,7 +1014,7 @@ class RankFM():
             return
 
         self._ui_indptr, self._ui_indices = self._pairs_to_csr(u_arr, i_arr, n_users, n_items)
-        if self.sample_weight is None and len(self._ui_indices) == len(u_arr):
+        if not keep_input_order and self.sample_weight is None and len(self._ui_indices) == len(u_arr):
             self._intx_u = np.repeat(np.arange(n_users, dtype=np.int32), np.diff(self._ui_indptr))
             self._intx_i = self._ui_indices
         else:
@@ -903,16 +1049,26 @@ class RankFM():
         self._user_to_index_series = None
         self.user_idx = np.arange(len(self._user_index), dtype=np.int32)
 
-        self.v_u = _append_zero_rows(self.v_u, n_new)
-        if not (self.has_uf or freeze_items):
+        n_rows_new = n_new * self.n_interests
+        self.v_u = _append_zero_rows(self.v_u, n_rows_new)
+        if not (self.has_uf or freeze_items or self.user_dropout >= 1.0):
             rng = np.random.default_rng(seed)
-            self.v_u[-n_new:] = rng.normal(loc=0, scale=self.sigma, size=(n_new, self.factors))
+            self.v_u[-n_rows_new:] = rng.normal(loc=0, scale=self.sigma, size=(n_rows_new, self.factors))
 
         # Extend CSR user-feature indptr with empty rows in O(n_new) (zero dense matrix allocation!)
         last_ptr = int(self._uf_indptr[-1])
         pad_ptr = np.full(n_new, last_ptr, dtype=np.int64)
         self._uf_indptr = np.ascontiguousarray(np.concatenate([self._uf_indptr, pad_ptr]), dtype=np.int64)
         self._dense_x_uf_cache = None
+        if self._uh_indptr is not None:
+            last_h_ptr = int(self._uh_indptr[-1])
+            self._uh_indptr = np.ascontiguousarray(
+                np.concatenate([self._uh_indptr, np.full(n_new, last_h_ptr, dtype=np.int64)]), dtype=np.int64
+            )
+        if self._train_last_items is not None and len(self._train_last_items) > 0:
+            self._train_last_items = np.ascontiguousarray(
+                np.concatenate([self._train_last_items, np.full(n_new, -1, dtype=np.int32)]), dtype=np.int32
+            )
 
 
     def _init_interactions(self, interactions, sample_weight, freeze_items=False, seed=1492):
@@ -1075,70 +1231,958 @@ class RankFM():
                     self._dense_x_if_cache = None
 
 
-    def _init_weights(self, user_features=None, item_features=None, seed=1492):
-        """initialize model weights given user/item and user-feature/item-feature shapes
+    @staticmethod
+    def _infer_field_ids(columns, n_cols):
+        """infer integer field IDs (0..G-1) from feature column prefixes or fallback column indices"""
 
-        weights are drawn from a generator seeded with [seed], so fit(seed=...) fixes the starting point as well as the sampling
-        """
+        if n_cols <= 0:
+            return np.zeros(0, dtype=np.int32), 0
+        if columns is not None and len(columns) == n_cols:
+            prefixes = []
+            for c in columns:
+                s = str(c)
+                if '__' in s:
+                    prefixes.append(s.split('__', 1)[0])
+                elif '_' in s:
+                    prefixes.append(s.split('_', 1)[0])
+                else:
+                    prefixes.append(s)
+            uniq, inv = np.unique(np.asarray(prefixes, dtype=object), return_inverse=True)
+            if 1 < len(uniq) <= n_cols:
+                return np.ascontiguousarray(inv, dtype=np.int32), int(len(uniq))
+        if n_cols <= 128:
+            return np.arange(n_cols, dtype=np.int32), int(n_cols)
+        return np.ascontiguousarray(np.arange(n_cols, dtype=np.int32) % 32, dtype=np.int32), 32
 
-        rng = np.random.default_rng(seed)
 
-        self.w_i = np.zeros(len(self.item_idx), dtype=np.float32)
+    def _build_alias_and_logq(self, item_counts):
+        """construct O(1) Walker-Vose alias tables and centered log Q(i) popularity adjustments"""
+
+        n_i = len(item_counts)
+        if n_i == 0:
+            return (
+                np.zeros(0, dtype=np.float32),
+                np.zeros(0, dtype=np.int32),
+                np.zeros(0, dtype=np.float32),
+            )
+
+        pop = np.power(np.maximum(np.asarray(item_counts, dtype=np.float64), 1.0), self.neg_pop_exponent)
+        pop_sum = float(pop.sum())
+        pop_dist = pop / pop_sum if pop_sum > 0.0 else np.full(n_i, 1.0 / n_i, dtype=np.float64)
+        unif_dist = np.full(n_i, 1.0 / n_i, dtype=np.float64)
+
+        if self.neg_sampling == 'popularity':
+            q = self.neg_pop_mix * pop_dist + (1.0 - self.neg_pop_mix) * unif_dist
+            q = q / q.sum()
+
+            scaled = (q * n_i).copy()
+            prob = np.ones(n_i, dtype=np.float32)
+            alias = np.arange(n_i, dtype=np.int32)
+            small = list(np.flatnonzero(scaled < 1.0))
+            large = list(np.flatnonzero(scaled >= 1.0))
+
+            while small and large:
+                s = small.pop()
+                l = large.pop()
+                prob[s] = np.float32(scaled[s])
+                alias[s] = np.int32(l)
+                scaled[l] = (scaled[l] + scaled[s]) - 1.0
+                if scaled[l] < 1.0:
+                    small.append(l)
+                else:
+                    large.append(l)
+            for l in large:
+                prob[l] = 1.0
+            for s in small:
+                prob[s] = 1.0
+
+            log_q = np.ascontiguousarray(np.log(np.maximum(q * n_i, 1e-12)), dtype=np.float32)
+            return prob, alias, log_q
+
+        if self.logq_weight != 0.0:
+            log_q = np.ascontiguousarray(np.log(np.maximum(pop_dist * n_i, 1e-12)), dtype=np.float32)
+        else:
+            log_q = np.zeros(0, dtype=np.float32)
+        return np.zeros(0, dtype=np.float32), np.zeros(0, dtype=np.int32), log_q
+
+
+    def _init_weights(
+        self,
+        user_features=None,
+        item_features=None,
+        seed=None,
+        user_field_ids=None,
+        item_field_ids=None,
+        item_dynamic_mask=None,
+    ):
+        """initialize model weights given user/item and user-feature/item-feature shapes"""
+
+        if self._is_v050_mode:
+            eff_s = 1492 if seed is None else int(seed)
+            rng = np.random.RandomState((eff_s + 13) & 0x7FFFFFFF)
+        elif seed is not None:
+            rng = np.random.RandomState((int(seed) + 8) & 0x7FFFFFFF)
+        else:
+            rng = np.random
+        n_u = len(self.user_idx)
+        n_i = len(self.item_idx)
+        F = self.factors
+        M = self.n_interests
+
+        self.w_i = np.zeros(n_i, dtype=np.float32)
         self.w_if = np.zeros(self._n_if, dtype=np.float32)
 
-        self.v_u = rng.normal(loc=0, scale=self.sigma, size=(len(self.user_idx), self.factors)).astype(np.float32)
-        self.v_i = rng.normal(loc=0, scale=self.sigma, size=(len(self.item_idx), self.factors)).astype(np.float32)
+        if self.user_dropout >= 1.0:
+            self.v_u = np.zeros((n_u * M, F), dtype=np.float32)
+        else:
+            self.v_u = rng.normal(loc=0.0, scale=self.sigma, size=(n_u * M, F)).astype(np.float32)
+        self.v_i = rng.normal(loc=0.0, scale=self.sigma, size=(n_i, F)).astype(np.float32)
 
         if user_features is not None:
             scale = (self.alpha / self.beta) * self.sigma
-            self.v_uf = rng.normal(loc=0, scale=scale, size=(self._n_uf, self.factors)).astype(np.float32)
+            self.v_uf = rng.normal(loc=0.0, scale=scale, size=(self._n_uf, F)).astype(np.float32)
         else:
-            self.v_uf = np.zeros((self._n_uf, self.factors), dtype=np.float32)
+            self.v_uf = np.zeros((self._n_uf, F), dtype=np.float32)
 
         if item_features is not None:
             scale = (self.alpha / self.beta) * self.sigma
-            self.v_if = rng.normal(loc=0, scale=scale, size=(self._n_if, self.factors)).astype(np.float32)
+            self.v_if = rng.normal(loc=0.0, scale=scale, size=(self._n_if, F)).astype(np.float32)
         else:
-            self.v_if = np.zeros((self._n_if, self.factors), dtype=np.float32)
+            self.v_if = np.zeros((self._n_if, F), dtype=np.float32)
+
+        if not self._is_v050_mode:
+            return
+
+        if self.use_history or self.target_attention_topk > 0:
+            self.p_hist = rng.normal(loc=0.0, scale=self.sigma, size=(n_i, F)).astype(np.float32)
+        else:
+            self.p_hist = np.zeros((0, F), dtype=np.float32)
+
+        if self.use_seq_anchor:
+            self.p_seq = rng.normal(loc=0.0, scale=self.sigma, size=(n_i, F)).astype(np.float32)
+            self.g_seq = np.ones(F, dtype=np.float32)
+        else:
+            self.p_seq = np.zeros((0, F), dtype=np.float32)
+            self.g_seq = np.zeros(0, dtype=np.float32)
+
+        self.g_event = np.ones((max(1, self.n_event_types), F), dtype=np.float32)
+
+        if user_field_ids is not None:
+            uf_arr = np.asarray(user_field_ids)
+            require(len(uf_arr) == self._n_uf, "[user_field_ids] length must match user feature width")
+            uniq_uf, inv_uf = np.unique(uf_arr, return_inverse=True)
+            self.uf_field = np.ascontiguousarray(inv_uf, dtype=np.int32)
+            n_g_uf = len(uniq_uf)
+        elif self.use_field_gates and self.has_uf:
+            self.uf_field, n_g_uf = self._infer_field_ids(self.uf_columns, self._n_uf)
+        else:
+            self.uf_field = np.zeros(0, dtype=np.int32)
+            n_g_uf = 0
+        self.gamma_uf = np.ones((n_g_uf, F), dtype=np.float32) if (self.use_field_gates and n_g_uf > 0) else np.zeros((0, F), dtype=np.float32)
+
+        if item_field_ids is not None:
+            if_arr = np.asarray(item_field_ids)
+            require(len(if_arr) == self._n_if, "[item_field_ids] length must match item feature width")
+            uniq_if, inv_if = np.unique(if_arr, return_inverse=True)
+            self.if_field = np.ascontiguousarray(inv_if, dtype=np.int32)
+            n_g_if = len(uniq_if)
+        elif self.use_field_gates and self.has_if:
+            self.if_field, n_g_if = self._infer_field_ids(self.if_columns, self._n_if)
+        else:
+            self.if_field = np.zeros(0, dtype=np.int32)
+            n_g_if = 0
+        self.gamma_if = np.ones((n_g_if, F), dtype=np.float32) if (self.use_field_gates and n_g_if > 0) else np.zeros((0, F), dtype=np.float32)
+
+        if item_dynamic_mask is not None:
+            dyn_arr = np.asarray(item_dynamic_mask, dtype=np.int32)
+            require(len(dyn_arr) == self._n_if, "[item_dynamic_mask] length must match item feature width")
+            self.if_is_dyn = np.ascontiguousarray(dyn_arr, dtype=np.int32)
+        elif self.use_freq_gate and self.has_if:
+            self.if_is_dyn = np.zeros(self._n_if, dtype=np.int32)
+        else:
+            self.if_is_dyn = np.zeros(0, dtype=np.int32)
+
+        if self.use_freq_gate:
+            self.a_gate = np.full(F, 0.5, dtype=np.float32)
+            self.b_gate = np.full(F, -1.0, dtype=np.float32)
+        else:
+            self.a_gate = np.zeros(0, dtype=np.float32)
+            self.b_gate = np.zeros(0, dtype=np.float32)
+
+        if M > 1:
+            raw_proto = rng.normal(loc=0.0, scale=1.0, size=(max(F, M), M))
+            q_mat, _ = np.linalg.qr(raw_proto)
+            proto = q_mat[:F, :M].T.astype(np.float32)
+            norms = np.maximum(np.linalg.norm(proto, axis=1, keepdims=True), 1e-6)
+            self.c_proto = np.ascontiguousarray(proto / norms, dtype=np.float32)
+        else:
+            self.c_proto = np.zeros((0, F), dtype=np.float32)
+
+        item_counts = np.bincount(self._intx_i, minlength=n_i).astype(np.float64)
+        self.item_log_freq = np.ascontiguousarray(np.log1p(item_counts), dtype=np.float32)
+        self._alias_prob, self._alias_idx, self._log_q = self._build_alias_and_logq(item_counts)
 
 
     def _max_samples_for_loss(self):
         if self.loss == 'bpr':
             return 1
-        elif self.loss == 'warp':
+        elif self.loss in ('warp', 'cosine_nce', 'simplex'):
             return self.max_samples
         else:
             raise ValueError('[loss] function not recognized')
 
 
+    def _loss_mode_code(self):
+        if self.loss == 'bpr':
+            return 0
+        elif self.loss == 'warp':
+            return 1
+        elif self.loss == 'cosine_nce':
+            return 2
+        elif self.loss == 'simplex':
+            return 3
+        raise ValueError('[loss] function not recognized')
+
+
+    def _parse_raw_history(self, user_history):
+        """extract raw (u_col, i_col, weights_f32, kinds_i32) arrays from supported user_history containers"""
+
+        if _is_scipy_sparse(user_history):
+            coo = user_history.tocoo(copy=False)
+            u_col = coo.row
+            i_col = coo.col
+            w_arr = np.asarray(coo.data, dtype=np.float32)
+            k_arr = np.zeros(len(u_col), dtype=np.int32)
+            return u_col, i_col, w_arr, k_arr
+
+        if isinstance(user_history, dict):
+            u_col = np.asarray(user_history['user_id'] if 'user_id' in user_history else user_history['users'])
+            i_col = np.asarray(user_history['item_id'] if 'item_id' in user_history else user_history['items'])
+            if 'weight' in user_history or 'weights' in user_history:
+                w_arr = np.asarray(user_history.get('weight', user_history.get('weights')), dtype=np.float32)
+            else:
+                w_arr = np.ones(len(u_col), dtype=np.float32)
+            if 'event_type' in user_history or 'kinds' in user_history:
+                k_arr = np.asarray(user_history.get('event_type', user_history.get('kinds')), dtype=np.int32)
+            else:
+                k_arr = np.zeros(len(u_col), dtype=np.int32)
+            return u_col, i_col, w_arr, k_arr
+
+        if isinstance(user_history, tuple):
+            require(2 <= len(user_history) <= 4, "[user_history] tuple must be (users, items[, weights[, event_types]])")
+            u_col = np.asarray(user_history[0])
+            i_col = np.asarray(user_history[1])
+            w_arr = np.asarray(user_history[2], dtype=np.float32) if len(user_history) >= 3 and user_history[2] is not None else np.ones(len(u_col), dtype=np.float32)
+            k_arr = np.asarray(user_history[3], dtype=np.int32) if len(user_history) == 4 and user_history[3] is not None else np.zeros(len(u_col), dtype=np.int32)
+            return u_col, i_col, w_arr, k_arr
+
+        if isinstance(user_history, pd.DataFrame):
+            require(user_history.shape[1] >= 2, "[user_history] DataFrame must have at least [user_id, item_id]")
+            u_col = user_history.iloc[:, 0].to_numpy()
+            i_col = user_history.iloc[:, 1].to_numpy()
+            w_arr = user_history.iloc[:, 2].to_numpy(dtype=np.float32) if user_history.shape[1] >= 3 else np.ones(len(u_col), dtype=np.float32)
+            k_arr = user_history.iloc[:, 3].to_numpy(dtype=np.int32) if user_history.shape[1] >= 4 else np.zeros(len(u_col), dtype=np.int32)
+            return u_col, i_col, w_arr, k_arr
+
+        arr = np.asarray(user_history)
+        require(arr.ndim == 2 and arr.shape[1] >= 2, "[user_history] array must be 2D with >= 2 columns")
+        u_col = arr[:, 0]
+        i_col = arr[:, 1]
+        w_arr = np.asarray(arr[:, 2], dtype=np.float32) if arr.shape[1] >= 3 else np.ones(len(u_col), dtype=np.float32)
+        k_arr = np.asarray(arr[:, 3], dtype=np.int32) if arr.shape[1] >= 4 else np.zeros(len(u_col), dtype=np.int32)
+        return u_col, i_col, w_arr, k_arr
+
+
+    def _build_history_csr_from_mapped(self, u_arr, i_arr, w_arr, k_arr, n_users):
+        """build per-user weight-sorted, top-max_history_len capped CSR arrays in vectorized NumPy"""
+
+        if n_users <= 0:
+            return (
+                np.zeros(1, dtype=np.int64),
+                np.zeros(0, dtype=np.int32),
+                np.zeros(0, dtype=np.float32),
+                np.zeros(0, dtype=np.int32),
+            )
+
+        n_items = len(self.item_idx)
+        n_ev = max(1, self.n_event_types)
+        valid = (u_arr >= 0) & (u_arr < n_users) & (i_arr >= 0) & (i_arr < n_items) & (w_arr > 0.0)
+        if not valid.any():
+            return (
+                np.zeros(n_users + 1, dtype=np.int64),
+                np.zeros(0, dtype=np.int32),
+                np.zeros(0, dtype=np.float32),
+                np.zeros(0, dtype=np.int32),
+            )
+
+        if not valid.all():
+            u_v = u_arr[valid].astype(np.int32, copy=False)
+            i_v = i_arr[valid].astype(np.int32, copy=False)
+            w_v = w_arr[valid].astype(np.float32, copy=False)
+            k_v = np.clip(k_arr[valid].astype(np.int32, copy=False), 0, n_ev - 1)
+        else:
+            u_v = u_arr.astype(np.int32, copy=False)
+            i_v = i_arr.astype(np.int32, copy=False)
+            w_v = w_arr.astype(np.float32, copy=False)
+            k_v = np.clip(k_arr.astype(np.int32, copy=False), 0, n_ev - 1)
+
+        # Deduplicate repeated (u, i, event_type) triples by summing weights
+        codes = (u_v.astype(np.int64) * np.int64(n_items) + i_v.astype(np.int64)) * np.int64(n_ev) + k_v.astype(np.int64)
+        c_order = np.argsort(codes, kind='mergesort')
+        codes_s = codes[c_order]
+        w_c = w_v[c_order]
+        change = np.empty(len(codes_s), dtype=bool)
+        change[0] = True
+        if len(codes_s) > 1:
+            change[1:] = codes_s[1:] != codes_s[:-1]
+        if not change.all():
+            grp_starts = np.flatnonzero(change)
+            uniq_codes = codes_s[grp_starts]
+            w_v = np.add.reduceat(w_c, grp_starts).astype(np.float32, copy=False)
+            k_v = (uniq_codes % np.int64(n_ev)).astype(np.int32)
+            rem = uniq_codes // np.int64(n_ev)
+            i_v = (rem % np.int64(n_items)).astype(np.int32)
+            u_v = (rem // np.int64(n_items)).astype(np.int32)
+
+        # Sort within each user by descending weight and cap at max_history_len
+        order = np.lexsort((-w_v, u_v))
+        u_s = u_v[order]
+        i_s = i_v[order]
+        w_s = w_v[order]
+        k_s = k_v[order]
+
+        counts = np.bincount(u_s, minlength=n_users)
+        indptr = np.zeros(n_users + 1, dtype=np.int64)
+        np.cumsum(counts, dtype=np.int64, out=indptr[1:])
+
+        if counts.max() > self.max_history_len:
+            rank_in_u = np.arange(len(u_s), dtype=np.int64) - np.repeat(indptr[:-1], counts)
+            keep = rank_in_u < self.max_history_len
+            u_s = u_s[keep]
+            i_s = i_s[keep]
+            w_s = w_s[keep]
+            k_s = k_s[keep]
+            counts = np.minimum(counts, self.max_history_len)
+            np.cumsum(counts, dtype=np.int64, out=indptr[1:])
+
+        return (
+            np.ascontiguousarray(indptr, dtype=np.int64),
+            np.ascontiguousarray(i_s, dtype=np.int32),
+            np.ascontiguousarray(w_s, dtype=np.float32),
+            np.ascontiguousarray(k_s, dtype=np.int32),
+        )
+
+
+    def _dense_sample_weight(self):
+        """per-interaction training weights as an array (all ones when the caller gave none)"""
+        if self.sample_weight is not None:
+            return self.sample_weight
+        return np.ones(len(self._intx_u), dtype=np.float32)
+
+
+    def _build_history_csr(self, user_history, target_user_index):
+        """map raw user_history to target_user_index and self._item_index CSR arrays"""
+
+        n_users = len(target_user_index)
+        if user_history is None:
+            if target_user_index.equals(self._user_index) and self._intx_u is not None:
+                return self._build_history_csr_from_mapped(
+                    self._intx_u,
+                    self._intx_i,
+                    self._dense_sample_weight(),
+                    np.zeros(len(self._intx_u), dtype=np.int32),
+                    n_users,
+                )
+            return (
+                np.zeros(n_users + 1, dtype=np.int64),
+                np.zeros(0, dtype=np.int32),
+                np.zeros(0, dtype=np.float32),
+                np.zeros(0, dtype=np.int32),
+            )
+
+        u_col, i_col, w_arr, k_arr = self._parse_raw_history(user_history)
+        u_mapped = _fast_get_indexer(target_user_index, u_col).astype(np.int32, copy=False)
+        i_mapped = _fast_get_indexer(self._item_index, i_col).astype(np.int32, copy=False)
+        return self._build_history_csr_from_mapped(u_mapped, i_mapped, w_arr, k_arr, n_users)
+
+
+    def _resolve_last_items_for_users(
+        self,
+        last_items,
+        target_user_index,
+        known_indexer=None,
+        fallback_uh_indptr=None,
+        fallback_uh_indices=None,
+    ):
+        """resolve per-user sequential anchor item indices (int32, -1 if none) for target_user_index"""
+
+        n_users = len(target_user_index)
+        if not self.use_seq_anchor or n_users == 0:
+            return np.zeros(0, dtype=np.int32)
+
+        out = np.full(n_users, -1, dtype=np.int32)
+
+        if known_indexer is not None and self._train_last_items is not None:
+            km = known_indexer >= 0
+            if km.any():
+                out[km] = self._train_last_items[known_indexer[km]]
+
+        if fallback_uh_indptr is not None and fallback_uh_indices is not None and len(fallback_uh_indices) > 0:
+            missing = out < 0
+            if missing.any():
+                m_rows = np.flatnonzero(missing)
+                has_h = fallback_uh_indptr[m_rows + 1] > fallback_uh_indptr[m_rows]
+                if has_h.any():
+                    h_rows = m_rows[has_h]
+                    out[h_rows] = fallback_uh_indices[fallback_uh_indptr[h_rows]]
+
+        if last_items is None:
+            return out
+
+        if isinstance(last_items, dict):
+            if len(last_items) > 0:
+                k_arr = np.asarray(list(last_items.keys()))
+                v_arr = np.asarray(list(last_items.values()))
+                u_pos = _fast_get_indexer(target_user_index, k_arr)
+                i_pos = _fast_get_indexer(self._item_index, v_arr).astype(np.int32)
+                valid = u_pos >= 0
+                out[u_pos[valid]] = i_pos[valid]
+            return out
+
+        if isinstance(last_items, pd.Series):
+            u_pos = _fast_get_indexer(target_user_index, last_items.index)
+            i_pos = _fast_get_indexer(self._item_index, last_items.to_numpy()).astype(np.int32)
+            valid = u_pos >= 0
+            if valid.any():
+                out[u_pos[valid]] = i_pos[valid]
+                return out
+
+        if isinstance(last_items, pd.DataFrame) or (isinstance(last_items, np.ndarray) and last_items.ndim == 2):
+            u_col, i_col = self._extract_interaction_columns(last_items)
+            u_pos = _fast_get_indexer(target_user_index, u_col)
+            i_pos = _fast_get_indexer(self._item_index, i_col).astype(np.int32)
+            valid = u_pos >= 0
+            out[u_pos[valid]] = i_pos[valid]
+            return out
+
+        arr_1d = np.asarray(last_items)
+        require(len(arr_1d) == n_users, "[last_items] 1D array length must match unique target users")
+        out = np.ascontiguousarray(_fast_get_indexer(self._item_index, arr_1d), dtype=np.int32)
+        return out
+
+
+    def _fit_sparse_residual(self, n_threads=1):
+        """compute pruned, FM-subspace-orthogonalized EASE sparse item-item residual S"""
+
+        n_i = len(self.item_idx)
+        if self.sparse_residual_k <= 0 or n_i <= 1:
+            self._s_indptr = np.zeros(n_i + 1, dtype=np.int64)
+            self._s_indices = np.zeros(0, dtype=np.int32)
+            self._s_data = np.zeros(0, dtype=np.float32)
+            return
+
+        import scipy.sparse as sp
+
+        if self._uh_indptr is not None and len(self._uh_indices) > 0:
+            indptr = self._uh_indptr
+            indices = self._uh_indices
+            weights = self._uh_weights.astype(np.float32, copy=True)
+        else:
+            indptr = self._ui_indptr.astype(np.int64, copy=False)
+            indices = self._ui_indices
+            weights = np.ones(len(indices), dtype=np.float32)
+
+        n_u = len(indptr) - 1
+        if len(indices) == 0 or n_u == 0:
+            self._s_indptr = np.zeros(n_i + 1, dtype=np.int64)
+            self._s_indices = np.zeros(0, dtype=np.int32)
+            self._s_data = np.zeros(0, dtype=np.float32)
+            return
+
+        # Deduplicate (u, i) across event types if needed and row-L2-normalize so heavy users don't dominate Gram matrix
+        r_mat = sp.csr_matrix((weights, indices, indptr), shape=(n_u, n_i), dtype=np.float32)
+        r_mat.sum_duplicates()
+        row_sq = np.asarray(r_mat.power(2).sum(axis=1)).ravel()
+        inv_row_norm = 1.0 / np.sqrt(np.maximum(row_sq, 1e-8)).astype(np.float32)
+        r_norm = sp.diags(inv_row_norm) @ r_mat
+
+        _, _ = self._compute_effective_items(n_threads=n_threads)
+        v_basis = self._cached_v_i_unit if self._cached_v_i_unit is not None else self._cached_v_i_eff
+        q_basis, _ = np.linalg.qr(np.asarray(v_basis, dtype=np.float32))
+
+        k_keep = min(int(self.sparse_residual_k), n_i - 1)
+
+        if n_i <= 20000:
+            gram = (r_norm.T @ r_norm).toarray().astype(np.float32, copy=False)
+            diag_idx = np.arange(n_i)
+            gram[diag_idx, diag_idx] += np.float32(self.sparse_residual_l2)
+            p_inv = np.linalg.inv(gram).astype(np.float32, copy=False)
+            del gram
+            p_diag = np.maximum(np.diag(p_inv), 1e-8)
+            b_mat = -p_inv / p_diag[None, :]
+            del p_inv
+            b_mat[diag_idx, diag_idx] = 0.0
+
+            # Project out low-rank FM target-item subspace: B_resid = B - (B @ Q) @ Q.T
+            b_proj = b_mat @ q_basis
+            b_mat -= b_proj @ q_basis.T
+            b_mat[diag_idx, diag_idx] = 0.0
+
+            # Prune each row to top-k_keep strictly positive residual weights
+            part_idx = np.argpartition(-b_mat, kth=k_keep - 1, axis=1)[:, :k_keep]
+            part_vals = np.take_along_axis(b_mat, part_idx, axis=1)
+            del b_mat
+
+            order = np.argsort(-part_vals, axis=1)
+            top_idx = np.take_along_axis(part_idx, order, axis=1)
+            top_vals = np.take_along_axis(part_vals, order, axis=1)
+
+            pos_mask = top_vals > 1e-5
+            row_counts = pos_mask.sum(axis=1, dtype=np.int64)
+            s_indptr = np.zeros(n_i + 1, dtype=np.int64)
+            np.cumsum(row_counts, dtype=np.int64, out=s_indptr[1:])
+            self._s_indptr = np.ascontiguousarray(s_indptr, dtype=np.int64)
+            self._s_indices = np.ascontiguousarray(top_idx[pos_mask], dtype=np.int32)
+            self._s_data = np.ascontiguousarray(top_vals[pos_mask], dtype=np.float32)
+        else:
+            # Sparse fallback for massive catalogs (> 20k items)
+            cooc = (r_norm.T @ r_norm).tocsr()
+            cooc.setdiag(0.0)
+            cooc.eliminate_zeros()
+            self._s_indptr = np.ascontiguousarray(cooc.indptr, dtype=np.int64)
+            self._s_indices = np.ascontiguousarray(cooc.indices, dtype=np.int32)
+            self._s_data = np.ascontiguousarray(cooc.data / (cooc.data + self.sparse_residual_l2 * 0.01), dtype=np.float32)
+
+
     def _compute_effective_items(self, n_threads=1):
-        """return cached effective item biases (w_i + X_if @ w_if) and item embeddings (v_i + X_if @ v_if) via CSR SpMV/SpMM"""
+        """return cached effective item biases and item embeddings"""
 
         if self._cached_item_bias is None or self._cached_v_i_eff is None:
-            if self.has_if and self._if_any:
-                self._cached_item_bias = _csr_matvec(
-                    self._if_indptr, self._if_indices, self._if_data, self.w_if, base=self.w_i, n_threads=n_threads
-                )
-                self._cached_v_i_eff = _csr_dense_matmul(
-                    self._if_indptr, self._if_indices, self._if_data, self.v_if, base=self.v_i, n_threads=n_threads
-                )
+            if not self._is_v050_mode:
+                if self.has_if and self._if_any:
+                    self._cached_item_bias = _csr_matvec(
+                        self._if_indptr, self._if_indices, self._if_data, self.w_if, base=self.w_i, n_threads=n_threads
+                    )
+                    self._cached_v_i_eff = _csr_dense_matmul(
+                        self._if_indptr, self._if_indices, self._if_data, self.v_if, base=self.v_i, n_threads=n_threads
+                    )
+                else:
+                    self._cached_item_bias = np.ascontiguousarray(self.w_i, dtype=np.float32)
+                    self._cached_v_i_eff = np.ascontiguousarray(self.v_i, dtype=np.float32)
+                self._cached_v_i_unit = self._cached_v_i_eff
             else:
-                self._cached_item_bias = np.ascontiguousarray(self.w_i, dtype=np.float32)
-                self._cached_v_i_eff = np.ascontiguousarray(self.v_i, dtype=np.float32)
+                out_scale = float(1.0 / self.temperature) if self._use_cosine else 1.0
+                b_eff, v_eff, v_unit = _compute_effective_items_v050(
+                    self.w_i,
+                    self.w_if,
+                    self.v_i,
+                    self.v_if,
+                    self._if_indptr,
+                    self._if_indices,
+                    self._if_data,
+                    self._if_any,
+                    self.if_field,
+                    self.if_is_dyn,
+                    self.gamma_if,
+                    self.item_log_freq,
+                    self.a_gate,
+                    self.b_gate,
+                    self.use_field_gates,
+                    self.use_freq_gate,
+                    self.freq_gate_static_drop,
+                    self._use_cosine,
+                    out_scale,
+                    n_threads,
+                )
+                self._cached_item_bias = b_eff
+                self._cached_v_i_eff = v_eff
+                self._cached_v_i_unit = v_unit
         return self._cached_item_bias, self._cached_v_i_eff
 
 
     def _compute_train_user_embeddings(self, n_threads=1):
-        """return cached effective training-user embeddings (v_u + X_uf @ v_uf) via CSR SpMM"""
+        """return cached effective training-user embeddings"""
 
         if self._cached_train_u_emb is None:
-            if self.has_uf and self._uf_any:
-                self._cached_train_u_emb = _csr_dense_matmul(
-                    self._uf_indptr, self._uf_indices, self._uf_data, self.v_uf, base=self.v_u, n_threads=n_threads
+            if not self._is_v050_mode:
+                if self.has_uf and self._uf_any:
+                    self._cached_train_u_emb = _csr_dense_matmul(
+                        self._uf_indptr, self._uf_indices, self._uf_data, self.v_uf, base=self.v_u, n_threads=n_threads
+                    )
+                else:
+                    self._cached_train_u_emb = np.ascontiguousarray(self.v_u, dtype=np.float32)
+            else:
+                n_u = len(self.user_idx)
+                ident_map = np.arange(n_u, dtype=np.int32)
+                uh_ptr = self._uh_indptr if self._uh_indptr is not None else np.zeros(n_u + 1, dtype=np.int64)
+                uh_idx = self._uh_indices if self._uh_indices is not None else np.zeros(0, dtype=np.int32)
+                uh_wt = self._uh_weights if self._uh_weights is not None else np.zeros(0, dtype=np.float32)
+                uh_kd = self._uh_kinds if self._uh_kinds is not None else np.zeros(0, dtype=np.int32)
+                last_it = self._train_last_items if self._train_last_items is not None else np.zeros(0, dtype=np.int32)
+                max_h = max(self.max_history_len, int(np.diff(uh_ptr).max()) if len(uh_ptr) > 1 else 1)
+
+                self._cached_train_u_emb = _encode_users_v050(
+                    ident_map,
+                    ident_map,
+                    ident_map,
+                    last_it,
+                    self.v_u,
+                    self.v_uf,
+                    self._uf_indptr,
+                    self._uf_indices,
+                    self._uf_data,
+                    self._uf_any,
+                    self.uf_field,
+                    self.gamma_uf,
+                    uh_ptr,
+                    uh_idx,
+                    uh_wt,
+                    uh_kd,
+                    self.p_hist,
+                    self.g_event,
+                    self.p_seq,
+                    self.g_seq,
+                    self.c_proto,
+                    self.n_interests,
+                    max_h,
+                    self.user_dropout < 1.0,
+                    self.use_history,
+                    self.use_seq_anchor,
+                    self.use_field_gates,
+                    self.n_event_types > 1,
+                    self._use_cosine,
+                    self.history_exponent,
+                    self.interest_temperature,
+                    n_threads,
+                )
+        return self._cached_train_u_emb
+
+
+    def _prepare_inference_state_v050(
+        self,
+        users,
+        cold_start='nan',
+        user_features=None,
+        interactions=None,
+        sample_weight=None,
+        user_history=None,
+        last_items=None,
+        fold_in_epochs=5,
+        need_seen_items=False,
+        n_threads=1,
+    ):
+        """vectorized v0.5.0 inference builder returning (u_emb, user_idx_obj, ui_ptr, ui_idx, item_bias, v_i_eff, uh_ptr, uh_idx, uh_wt, u_hist_map)"""
+
+        if cold_start not in ('nan', 'drop', 'estimate'):
+            raise ValueError("param [cold_start] must be set to 'nan', 'drop', or 'estimate'")
+        require(isinstance(fold_in_epochs, int) and fold_in_epochs >= 0, "[fold_in_epochs] must be a non-negative integer")
+
+        item_bias, v_i_eff = self._compute_effective_items(n_threads=n_threads)
+
+        # Fast path: cached training users with no dynamic overrides
+        if (
+            user_features is None
+            and interactions is None
+            and user_history is None
+            and last_items is None
+            and cold_start in ('nan', 'drop')
+        ):
+            u_emb = self._compute_train_user_embeddings(n_threads=n_threads)
+            uh_ptr = self._uh_indptr if self._uh_indptr is not None else np.zeros(len(self.user_idx) + 1, dtype=np.int64)
+            uh_idx = self._uh_indices if self._uh_indices is not None else np.zeros(0, dtype=np.int32)
+            uh_wt = self._uh_weights if self._uh_weights is not None else np.zeros(0, dtype=np.float32)
+            return u_emb, self._user_index, self._ui_indptr, self._ui_indices, item_bias, v_i_eff, uh_ptr, uh_idx, uh_wt, None
+
+        unique_idx = pd.Index(pd.unique(np.asarray(users)))
+
+        uf_ids = None
+        uf_indptr_in = None
+        uf_indices_in = None
+        uf_data_in = None
+        if user_features is not None:
+            if not self.has_uf:
+                raise ValueError("model was not fit with [user_features]; cannot use [user_features] at inference")
+            uf_ids, uf_indptr_in, uf_indices_in, uf_data_in, _, _ = self._extract_feature_csr(
+                user_features,
+                expected_columns=self.uf_columns,
+                expected_width=self._n_uf,
+                default_index=unique_idx,
+                n_threads=n_threads,
+                name='user_features',
+            )
+
+        intx_u_col = None
+        intx_i_col = None
+        sw_arr = None
+        intx_user_idx = None
+        if interactions is not None:
+            if _is_scipy_sparse(interactions):
+                coo = interactions.tocoo(copy=False)
+                intx_u_col, intx_i_col = coo.row, coo.col
+                sw_arr = np.ascontiguousarray(coo.data, dtype=np.float32) if sample_weight is None else np.asarray(get_data(sample_weight), dtype=np.float32)
+            else:
+                intx_u_col, intx_i_col = self._extract_interaction_columns(interactions)
+                if sample_weight is not None:
+                    sw_arr = np.asarray(get_data(sample_weight), dtype=np.float32)
+                else:
+                    sw_arr = np.ones(len(intx_u_col), dtype=np.float32)
+            intx_user_idx = pd.Index(pd.unique(intx_u_col))
+
+        uh_raw_tuple = None
+        uh_user_idx = None
+        if user_history is not None:
+            uh_raw_tuple = self._parse_raw_history(user_history)
+            uh_user_idx = pd.Index(pd.unique(uh_raw_tuple[0]))
+
+        known_indexer = _fast_get_indexer(self._user_index, unique_idx)
+        uf_indexer = _fast_get_indexer(uf_ids, unique_idx) if uf_ids is not None else None
+
+        if cold_start == 'estimate':
+            est_idx = unique_idx
+            est_known_indexer = known_indexer.astype(np.int32)
+            est_uf_indexer = uf_indexer
+        else:
+            est_mask = known_indexer >= 0
+            if uf_indexer is not None:
+                est_mask |= (uf_indexer >= 0)
+            if intx_user_idx is not None:
+                est_mask |= unique_idx.isin(intx_user_idx)
+            if uh_user_idx is not None:
+                est_mask |= unique_idx.isin(uh_user_idx)
+            if last_items is not None:
+                est_mask |= np.ones(len(unique_idx), dtype=bool)
+            est_idx = unique_idx[est_mask]
+            est_known_indexer = known_indexer[est_mask].astype(np.int32)
+            est_uf_indexer = uf_indexer[est_mask] if uf_indexer is not None else None
+
+        u_est_count = len(est_idx)
+        if u_est_count == 0:
+            empty_emb = np.zeros((0, self.n_interests * self.factors), dtype=np.float32)
+            empty_ptr = np.zeros(1, dtype=np.int64)
+            empty_idx = np.zeros(0, dtype=np.int32)
+            empty_wt = np.zeros(0, dtype=np.float32)
+            return empty_emb, est_idx, empty_ptr, empty_idx, item_bias, v_i_eff, empty_ptr, empty_idx, empty_wt, None
+
+        # User feature CSR mapping
+        if est_uf_indexer is None:
+            uf_ptr_use = self._uf_indptr
+            uf_idx_use = self._uf_indices
+            uf_dat_use = self._uf_data
+            uf_any_use = self._uf_any
+            u_uf_map = np.ascontiguousarray(est_known_indexer, dtype=np.int32)
+        else:
+            # Build unified CSR rows for est_idx (incoming user_features override stored features)
+            base_pos = np.where(est_uf_indexer >= 0, -1, est_known_indexer)
+            b_ptr, b_idx, b_dat = _slice_csr_rows(self._uf_indptr, self._uf_indices, self._uf_data, base_pos)
+            ov_mask = est_uf_indexer >= 0
+            if ov_mask.any():
+                ov_rows = np.flatnonzero(ov_mask)
+                in_ptr, in_idx, in_dat = _slice_csr_rows(uf_indptr_in, uf_indices_in, uf_data_in, est_uf_indexer[ov_mask])
+                uf_ptr_use, uf_idx_use, uf_dat_use = _overwrite_csr_rows(
+                    b_ptr, b_idx, b_dat, u_est_count, ov_rows, in_ptr, in_idx, in_dat
                 )
             else:
-                self._cached_train_u_emb = np.ascontiguousarray(self.v_u, dtype=np.float32)
-        return self._cached_train_u_emb
+                uf_ptr_use, uf_idx_use, uf_dat_use = b_ptr, b_idx, b_dat
+            uf_any_use = 1 if len(uf_dat_use) > 0 else 0
+            u_uf_map = np.arange(u_est_count, dtype=np.int32)
+
+        # User history CSR mapping
+        if uh_raw_tuple is not None:
+            u_m = _fast_get_indexer(est_idx, uh_raw_tuple[0]).astype(np.int32, copy=False)
+            i_m = _fast_get_indexer(self._item_index, uh_raw_tuple[1]).astype(np.int32, copy=False)
+            uh_ptr_use, uh_idx_use, uh_wt_use, uh_kd_use = self._build_history_csr_from_mapped(
+                u_m, i_m, uh_raw_tuple[2], uh_raw_tuple[3], u_est_count
+            )
+            u_uh_map = np.arange(u_est_count, dtype=np.int32)
+        elif intx_u_col is not None:
+            u_parts, i_parts, w_parts, k_parts = [], [], [], []
+            known_mask = est_known_indexer >= 0
+            if known_mask.any() and self._uh_indptr is not None and len(self._uh_indices) > 0:
+                s_ptr, s_idx, s_wt = _slice_csr_rows(self._uh_indptr, self._uh_indices, self._uh_weights, est_known_indexer)
+                _, _, s_kd_f = _slice_csr_rows(
+                    self._uh_indptr, self._uh_indices, self._uh_kinds.astype(np.float32), est_known_indexer
+                )
+                row_lens = np.diff(s_ptr)
+                if len(s_idx) > 0:
+                    u_parts.append(np.repeat(np.arange(u_est_count, dtype=np.int32), row_lens))
+                    i_parts.append(s_idx)
+                    w_parts.append(s_wt)
+                    k_parts.append(s_kd_f.astype(np.int32))
+            u_m = _fast_get_indexer(est_idx, intx_u_col).astype(np.int32)
+            i_m = _fast_get_indexer(self._item_index, intx_i_col).astype(np.int32)
+            val_m = (u_m >= 0) & (i_m >= 0)
+            if val_m.any():
+                u_parts.append(u_m[val_m])
+                i_parts.append(i_m[val_m])
+                w_parts.append(sw_arr[val_m] if not val_m.all() else sw_arr)
+                k_parts.append(np.zeros(int(val_m.sum()), dtype=np.int32))
+            if u_parts:
+                uh_ptr_use, uh_idx_use, uh_wt_use, uh_kd_use = self._build_history_csr_from_mapped(
+                    np.concatenate(u_parts), np.concatenate(i_parts), np.concatenate(w_parts), np.concatenate(k_parts), u_est_count
+                )
+            else:
+                uh_ptr_use = np.zeros(u_est_count + 1, dtype=np.int64)
+                uh_idx_use = np.zeros(0, dtype=np.int32)
+                uh_wt_use = np.zeros(0, dtype=np.float32)
+                uh_kd_use = np.zeros(0, dtype=np.int32)
+            u_uh_map = np.arange(u_est_count, dtype=np.int32)
+        else:
+            uh_ptr_use = self._uh_indptr if self._uh_indptr is not None else np.zeros(len(self.user_idx) + 1, dtype=np.int64)
+            uh_idx_use = self._uh_indices if self._uh_indices is not None else np.zeros(0, dtype=np.int32)
+            uh_wt_use = self._uh_weights if self._uh_weights is not None else np.zeros(0, dtype=np.float32)
+            uh_kd_use = self._uh_kinds if self._uh_kinds is not None else np.zeros(0, dtype=np.int32)
+            u_uh_map = np.ascontiguousarray(est_known_indexer, dtype=np.int32)
+
+        # Seen-item CSR for filter_previous or fold-in
+        need_fold_in = (intx_u_col is not None and fold_in_epochs > 0 and not self.use_history and self.n_interests == 1 and self.user_dropout < 1.0)
+        ui_indptr = np.zeros(u_est_count + 1, dtype=np.int32)
+        ui_indices = np.zeros(0, dtype=np.int32)
+        fold_pairs = None
+        fold_sw = None
+
+        if need_seen_items or need_fold_in:
+            hist_u_parts, hist_i_parts = [], []
+            known_mask = est_known_indexer >= 0
+            if known_mask.any():
+                known_local = np.flatnonzero(known_mask).astype(np.int32)
+                g_loc, g_it = self._gather_csr_rows(self._ui_indptr, self._ui_indices, est_known_indexer[known_mask])
+                if len(g_it) > 0:
+                    hist_u_parts.append(known_local[g_loc])
+                    hist_i_parts.append(g_it)
+            if intx_u_col is not None:
+                m_u = _fast_get_indexer(est_idx, intx_u_col)
+                m_i = _fast_get_indexer(self._item_index, intx_i_col)
+                val = (m_u >= 0) & (m_i >= 0)
+                if val.any():
+                    u_a = m_u[val].astype(np.int32)
+                    i_a = m_i[val].astype(np.int32)
+                    hist_u_parts.append(u_a)
+                    hist_i_parts.append(i_a)
+                    if need_fold_in:
+                        fold_pairs = (np.ascontiguousarray(u_a, dtype=np.int32), np.ascontiguousarray(i_a, dtype=np.int32))
+                        fold_sw = np.ascontiguousarray(sw_arr[val] if not val.all() else sw_arr, dtype=np.float32)
+            if uh_raw_tuple is not None:
+                m_u = _fast_get_indexer(est_idx, uh_raw_tuple[0])
+                m_i = _fast_get_indexer(self._item_index, uh_raw_tuple[1])
+                val = (m_u >= 0) & (m_i >= 0)
+                if val.any():
+                    hist_u_parts.append(m_u[val].astype(np.int32))
+                    hist_i_parts.append(m_i[val].astype(np.int32))
+            if hist_u_parts:
+                all_u = np.concatenate(hist_u_parts) if len(hist_u_parts) > 1 else hist_u_parts[0]
+                all_i = np.concatenate(hist_i_parts) if len(hist_i_parts) > 1 else hist_i_parts[0]
+                ui_indptr, ui_indices = self._pairs_to_csr(all_u, all_i, u_est_count, len(self.item_idx))
+
+        fb_ptr = uh_ptr_use if (uh_raw_tuple is not None or intx_u_col is not None) else None
+        fb_idx = uh_idx_use if (uh_raw_tuple is not None or intx_u_col is not None) else None
+        seq_arr = self._resolve_last_items_for_users(
+            last_items, est_idx, known_indexer=est_known_indexer, fallback_uh_indptr=fb_ptr, fallback_uh_indices=fb_idx
+        )
+
+        v_u_use = self.v_u
+        u_v_map = np.ascontiguousarray(est_known_indexer, dtype=np.int32)
+
+        if fold_pairs is not None:
+            v_u_batch = np.zeros((u_est_count, self.factors), dtype=np.float32)
+            km = est_known_indexer >= 0
+            if km.any():
+                v_u_batch[km] = self.v_u[est_known_indexer[km]]
+            max_h_tmp = max(self.max_history_len, int(np.diff(uh_ptr_use).max()) if len(uh_ptr_use) > 1 else 1)
+            u_non_id = _encode_users_v050(
+                np.full(u_est_count, -1, dtype=np.int32),
+                u_uf_map,
+                u_uh_map,
+                seq_arr,
+                self.v_u,
+                self.v_uf,
+                uf_ptr_use,
+                uf_idx_use,
+                uf_dat_use,
+                uf_any_use,
+                self.uf_field,
+                self.gamma_uf,
+                uh_ptr_use,
+                uh_idx_use,
+                uh_wt_use,
+                uh_kd_use,
+                self.p_hist,
+                self.g_event,
+                self.p_seq,
+                self.g_seq,
+                self.c_proto,
+                1,
+                max_h_tmp,
+                False,
+                self.use_history,
+                self.use_seq_anchor,
+                self.use_field_gates,
+                self.n_event_types > 1,
+                False,
+                self.history_exponent,
+                self.interest_temperature,
+                n_threads,
+            )
+            _fold_in(
+                fold_pairs[0],
+                fold_pairs[1],
+                fold_sw,
+                ui_indptr,
+                ui_indices,
+                u_non_id,
+                item_bias,
+                v_i_eff,
+                v_u_batch,
+                self.alpha,
+                self.learning_rate,
+                self.learning_schedule,
+                self.learning_exponent,
+                self._max_samples_for_loss(),
+                fold_in_epochs,
+                1492,
+                n_threads,
+            )
+            v_u_use = v_u_batch
+            u_v_map = np.arange(u_est_count, dtype=np.int32)
+
+        max_h = max(self.max_history_len, int(np.diff(uh_ptr_use).max()) if len(uh_ptr_use) > 1 else 1)
+        u_emb = _encode_users_v050(
+            u_v_map,
+            u_uf_map,
+            u_uh_map,
+            seq_arr,
+            v_u_use,
+            self.v_uf,
+            uf_ptr_use,
+            uf_idx_use,
+            uf_dat_use,
+            uf_any_use,
+            self.uf_field,
+            self.gamma_uf,
+            uh_ptr_use,
+            uh_idx_use,
+            uh_wt_use,
+            uh_kd_use,
+            self.p_hist,
+            self.g_event,
+            self.p_seq,
+            self.g_seq,
+            self.c_proto,
+            self.n_interests,
+            max_h,
+            self.user_dropout < 1.0 or (fold_pairs is not None),
+            self.use_history,
+            self.use_seq_anchor,
+            self.use_field_gates,
+            self.n_event_types > 1,
+            self._use_cosine,
+            self.history_exponent,
+            self.interest_temperature,
+            n_threads,
+        )
+
+        # If uh_ptr_use is indexed by training user IDs rather than est_idx, pass u_uh_map so recommend() maps rows properly
+        hist_map_for_est = None if (uh_raw_tuple is not None or intx_u_col is not None) else u_uh_map
+        return u_emb, est_idx, ui_indptr, ui_indices, item_bias, v_i_eff, uh_ptr_use, uh_idx_use, uh_wt_use, hist_map_for_est
 
 
     def _prepare_inference_state(
@@ -1237,7 +2281,6 @@ class RankFM():
             train_u_ids = est_known_indexer[known_mask]
             v_u_batch[known_mask] = self.v_u[train_u_ids]
             if self.has_uf and self._uf_any:
-                # Only compute stored CSR feature projections for known users NOT overridden by incoming user_features
                 use_stored_uf = known_mask & (~(est_uf_indexer >= 0) if est_uf_indexer is not None else True)
                 if use_stored_uf.any():
                     stored_u_ids = est_known_indexer[use_stored_uf]
@@ -1322,6 +2365,92 @@ class RankFM():
         return u_emb, est_idx, ui_indptr, ui_indices, item_bias, v_i_eff
 
 
+    def _extract_pairwise_context_bonuses(self, pairwise_context):
+        """parse pairwise_context into (raw_users, raw_items, scalar_bonuses_f32)"""
+
+        if isinstance(pairwise_context, tuple) and len(pairwise_context) == 2:
+            ctx_pairs, ctx_vals = pairwise_context
+            u_col, i_col = self._extract_interaction_columns(ctx_pairs)
+            vals = np.asarray(ctx_vals, dtype=np.float32)
+            if vals.ndim == 1:
+                bonuses = vals
+            else:
+                require(self.w_ctx is not None and vals.shape[1] == len(self.w_ctx), "2D [pairwise_context] features require calling fit_pairwise_context() first with matching width")
+                bonuses = vals @ self.w_ctx
+            return u_col, i_col, np.ascontiguousarray(bonuses, dtype=np.float32)
+
+        if isinstance(pairwise_context, pd.DataFrame):
+            require(pairwise_context.shape[1] >= 3, "[pairwise_context] DataFrame must have [user_id, item_id, ...]")
+            u_col = pairwise_context.iloc[:, 0].to_numpy()
+            i_col = pairwise_context.iloc[:, 1].to_numpy()
+            feat_mat = pairwise_context.iloc[:, 2:].to_numpy(dtype=np.float32)
+        else:
+            arr = np.asarray(pairwise_context)
+            require(arr.ndim == 2 and arr.shape[1] >= 3, "[pairwise_context] array must have >= 3 columns")
+            u_col = arr[:, 0]
+            i_col = arr[:, 1]
+            feat_mat = np.asarray(arr[:, 2:], dtype=np.float32)
+
+        if self.w_ctx is not None and feat_mat.shape[1] == len(self.w_ctx):
+            bonuses = feat_mat @ self.w_ctx
+        elif feat_mat.shape[1] == 1:
+            bonuses = feat_mat[:, 0]
+        else:
+            raise ValueError("[pairwise_context] has multiple feature columns but [w_ctx] has not been fit")
+        return u_col, i_col, np.ascontiguousarray(bonuses, dtype=np.float32)
+
+
+    def _build_context_csr_for_valid_users(self, pairwise_context, valid_user_ids):
+        """build CSR (indptr_i64, indices_i32, bonus_f32) aligned to valid_user_ids rows"""
+
+        n_rows = len(valid_user_ids)
+        if pairwise_context is None or n_rows == 0:
+            return (
+                np.zeros(n_rows + 1, dtype=np.int64),
+                np.zeros(0, dtype=np.int32),
+                np.zeros(0, dtype=np.float32),
+            )
+
+        u_col, i_col, bonuses = self._extract_pairwise_context_bonuses(pairwise_context)
+        target_idx = pd.Index(valid_user_ids)
+        # Handle duplicate requested users in valid_user_ids by mapping via unique index then slicing
+        if target_idx.has_duplicates:
+            uniq_u = pd.Index(pd.unique(valid_user_ids))
+            u_m = _fast_get_indexer(uniq_u, u_col)
+            i_m = _fast_get_indexer(self._item_index, i_col)
+            val = (u_m >= 0) & (i_m >= 0) & (bonuses != 0.0)
+            if not val.any():
+                return np.zeros(n_rows + 1, dtype=np.int64), np.zeros(0, dtype=np.int32), np.zeros(0, dtype=np.float32)
+            u_v = u_m[val].astype(np.int32)
+            i_v = i_m[val].astype(np.int32)
+            b_v = bonuses[val]
+            order = np.argsort(u_v, kind='mergesort')
+            u_v, i_v, b_v = u_v[order], i_v[order], b_v[order]
+            counts = np.bincount(u_v, minlength=len(uniq_u))
+            u_ptr = np.zeros(len(uniq_u) + 1, dtype=np.int64)
+            np.cumsum(counts, dtype=np.int64, out=u_ptr[1:])
+            row_map = _fast_get_indexer(uniq_u, valid_user_ids)
+            return _slice_csr_rows(u_ptr, i_v, b_v, row_map)
+
+        u_m = _fast_get_indexer(target_idx, u_col)
+        i_m = _fast_get_indexer(self._item_index, i_col)
+        val = (u_m >= 0) & (i_m >= 0) & (bonuses != 0.0)
+        if not val.any():
+            return np.zeros(n_rows + 1, dtype=np.int64), np.zeros(0, dtype=np.int32), np.zeros(0, dtype=np.float32)
+
+        u_v = u_m[val].astype(np.int32)
+        i_v = i_m[val].astype(np.int32)
+        b_v = bonuses[val]
+        order = np.argsort(u_v, kind='mergesort')
+        u_v = u_v[order]
+        i_v = np.ascontiguousarray(i_v[order], dtype=np.int32)
+        b_v = np.ascontiguousarray(b_v[order], dtype=np.float32)
+        counts = np.bincount(u_v, minlength=n_rows)
+        indptr = np.zeros(n_rows + 1, dtype=np.int64)
+        np.cumsum(counts, dtype=np.int64, out=indptr[1:])
+        return indptr, i_v, b_v
+
+
     # -------------------------------
     # begin public method definitions
     # -------------------------------
@@ -1336,7 +2465,14 @@ class RankFM():
         epochs=1,
         verbose=False,
         n_jobs=None,
-        seed=1492
+        seed=None,
+        user_history=None,
+        prev_items=None,
+        last_items=None,
+        margin_signal=None,
+        user_field_ids=None,
+        item_field_ids=None,
+        item_dynamic_mask=None,
     ):
         """clear previous model state and learn new model weights using the input data"""
 
@@ -1351,6 +2487,13 @@ class RankFM():
             freeze_items=False,
             n_jobs=n_jobs,
             seed=seed,
+            user_history=user_history,
+            prev_items=prev_items,
+            last_items=last_items,
+            margin_signal=margin_signal,
+            user_field_ids=user_field_ids,
+            item_field_ids=item_field_ids,
+            item_dynamic_mask=item_dynamic_mask,
         )
         return self
 
@@ -1365,7 +2508,14 @@ class RankFM():
         verbose=False,
         freeze_items=False,
         n_jobs=None,
-        seed=1492
+        seed=None,
+        user_history=None,
+        prev_items=None,
+        last_items=None,
+        margin_signal=None,
+        user_field_ids=None,
+        item_field_ids=None,
+        item_dynamic_mask=None,
     ):
         """learn or update model weights using the input data and resuming from the current model state"""
 
@@ -1377,68 +2527,271 @@ class RankFM():
             raise AssertionError("you must fit the model prior to calling fit_partial(..., freeze_items=True)")
 
         eff_threads = self._resolve_n_jobs(n_jobs)
+        eff_seed = 1492 if seed is None else int(seed)
         self._invalidate_caches()
 
-        if self.is_fit:
-            self._init_interactions(interactions, sample_weight, freeze_items=freeze_items, seed=int(seed))
+        was_fit = self.is_fit
+        if was_fit:
+            self._init_interactions(interactions, sample_weight, freeze_items=freeze_items, seed=eff_seed)
             self._init_features(user_features, item_features, n_threads=eff_threads)
         else:
-            self._init_all(interactions, user_features, item_features, sample_weight, n_threads=eff_threads, seed=int(seed))
+            self._init_all(
+                interactions,
+                user_features,
+                item_features,
+                sample_weight,
+                n_threads=eff_threads,
+                seed=eff_seed,
+                user_field_ids=user_field_ids,
+                item_field_ids=item_field_ids,
+                item_dynamic_mask=item_dynamic_mask,
+            )
 
         if self.sample_weight is not None:
             require(np.isfinite(self.sample_weight.sum(dtype=np.float64)), "[sample_weight] contains NaN or infinite values")
         max_samples = self._max_samples_for_loss()
 
-        if freeze_items:
-            item_bias, v_i_eff = self._compute_effective_items(n_threads=eff_threads)
-            if self.has_uf and self._uf_any:
-                u_feat_emb = _csr_dense_matmul(
-                    self._uf_indptr, self._uf_indices, self._uf_data, self.v_uf, n_threads=eff_threads
+        if not self._is_v050_mode:
+            if freeze_items:
+                item_bias, v_i_eff = self._compute_effective_items(n_threads=eff_threads)
+                if self.has_uf and self._uf_any:
+                    u_feat_emb = _csr_dense_matmul(
+                        self._uf_indptr, self._uf_indices, self._uf_data, self.v_uf, n_threads=eff_threads
+                    )
+                else:
+                    u_feat_emb = np.zeros((len(self.user_idx), self.factors), dtype=np.float32)
+
+                _fold_in(
+                    self._intx_u,
+                    self._intx_i,
+                    self.sample_weight,
+                    self._ui_indptr,
+                    self._ui_indices,
+                    u_feat_emb,
+                    item_bias,
+                    v_i_eff,
+                    self.v_u,
+                    self.alpha,
+                    self.learning_rate,
+                    self.learning_schedule,
+                    self.learning_exponent,
+                    max_samples,
+                    epochs,
+                    eff_seed,
+                    eff_threads
+                )
+                self._cached_train_u_emb = None
+            else:
+                _fit_csr(
+                    self._intx_u,
+                    self._intx_i,
+                    self.sample_weight,
+                    self._ui_indptr,
+                    self._ui_indices,
+                    self._uf_indptr,
+                    self._uf_indices,
+                    self._uf_data,
+                    self._uf_any,
+                    self._if_indptr,
+                    self._if_indices,
+                    self._if_data,
+                    self._if_any,
+                    self.w_i,
+                    self.w_if,
+                    self.v_u,
+                    self.v_i,
+                    self.v_uf,
+                    self.v_if,
+                    self.alpha,
+                    self.beta,
+                    self.learning_rate,
+                    self.learning_schedule,
+                    self.learning_exponent,
+                    max_samples,
+                    epochs,
+                    verbose,
+                    self.user_dropout,
+                    eff_seed,
+                    eff_threads,
+                    self.feature_reg == 'uniform',
+                    self.normalize_steps,
+                    self.dense_updates == 'batched'
+                )
+                self._invalidate_caches()
+
+            self.is_fit = True
+            return self
+
+        # --- RankFM v0.5.0 Training & Incremental State Path ---
+        n_u = len(self.user_idx)
+        need_uh = (self.use_history or self.target_attention_topk > 0 or self.sparse_residual_k > 0)
+
+        if need_uh:
+            if user_history is not None or not was_fit or self._uh_indptr is None:
+                self._uh_indptr, self._uh_indices, self._uh_weights, self._uh_kinds = self._build_history_csr(
+                    user_history, self._user_index
                 )
             else:
-                u_feat_emb = np.zeros((len(self.user_idx), self.factors), dtype=np.float32)
+                # Merge existing history CSR with incremental interactions
+                old_lens = np.diff(self._uh_indptr)
+                old_u = np.repeat(np.arange(len(old_lens), dtype=np.int32), old_lens)
+                comb_u = np.concatenate([old_u, self._intx_u])
+                comb_i = np.concatenate([self._uh_indices, self._intx_i])
+                comb_w = np.concatenate([self._uh_weights, self._dense_sample_weight()])
+                comb_k = np.concatenate([self._uh_kinds, np.zeros(len(self._intx_u), dtype=np.int32)])
+                self._uh_indptr, self._uh_indices, self._uh_weights, self._uh_kinds = self._build_history_csr_from_mapped(
+                    comb_u, comb_i, comb_w, comb_k, n_u
+                )
+        else:
+            self._uh_indptr = np.zeros(n_u + 1, dtype=np.int64)
+            self._uh_indices = np.zeros(0, dtype=np.int32)
+            self._uh_weights = np.zeros(0, dtype=np.float32)
+            self._uh_kinds = np.zeros(0, dtype=np.int32)
 
-            _fold_in(
-                self._intx_u,
-                self._intx_i,
-                self.sample_weight,
-                self._ui_indptr,
-                self._ui_indices,
-                u_feat_emb,
-                item_bias,
-                v_i_eff,
-                self.v_u,
-                self.alpha,
-                self.learning_rate,
-                self.learning_schedule,
-                self.learning_exponent,
-                max_samples,
-                epochs,
-                int(seed),
-                eff_threads
-            )
+        if self.use_seq_anchor:
+            if prev_items is not None:
+                prev_raw = np.asarray(get_data(prev_items) if isinstance(prev_items, pd.Series) else prev_items)
+                require(len(prev_raw) == len(self._intx_u), "[prev_items] length must match [interactions]")
+                prev_arr = np.ascontiguousarray(_fast_get_indexer(self._item_index, prev_raw), dtype=np.int32)
+            else:
+                prev_arr = np.zeros(0, dtype=np.int32)
+
+            if last_items is not None:
+                self._train_last_items = self._resolve_last_items_for_users(last_items, self._user_index)
+            else:
+                last_map = self._train_last_items if (was_fit and self._train_last_items is not None and len(self._train_last_items) == n_u) else np.full(n_u, -1, dtype=np.int32)
+                if len(self._intx_u) > 0:
+                    # the training rows are in the caller's order in v0.5 mode, so each user's last row is their latest item
+                    rev_u, rev_pos = np.unique(self._intx_u[::-1], return_index=True)
+                    last_pos = (len(self._intx_u) - 1) - rev_pos
+                    last_map[rev_u] = self._intx_i[last_pos]
+                self._train_last_items = np.ascontiguousarray(last_map, dtype=np.int32)
+        else:
+            prev_arr = np.zeros(0, dtype=np.int32)
+            self._train_last_items = np.zeros(0, dtype=np.int32)
+
+        if margin_signal is not None:
+            ms_raw = np.asarray(get_data(margin_signal) if isinstance(margin_signal, pd.Series) else margin_signal, dtype=np.float32)
+            require(len(ms_raw) == len(self._intx_u), "[margin_signal] length must match [interactions]")
+            margin_sig_arr = np.ascontiguousarray(ms_raw, dtype=np.float32)
+        elif self.weight_margin_scale != 0.0:
+            margin_sig_arr = np.ascontiguousarray(np.log1p(np.maximum(self._dense_sample_weight(), 0.0)), dtype=np.float32)
+        else:
+            margin_sig_arr = np.zeros(0, dtype=np.float32)
+
+        if freeze_items:
+            if self.user_dropout < 1.0 and self.n_interests == 1:
+                item_bias, v_i_eff = self._compute_effective_items(n_threads=eff_threads)
+                max_h_f = max(self.max_history_len, int(np.diff(self._uh_indptr).max()) if len(self._uh_indptr) > 1 else 1)
+                ident_u = np.arange(n_u, dtype=np.int32)
+                u_non_id = _encode_users_v050(
+                    np.full(n_u, -1, dtype=np.int32),
+                    ident_u,
+                    ident_u,
+                    self._train_last_items if self.use_seq_anchor else np.zeros(0, dtype=np.int32),
+                    self.v_u,
+                    self.v_uf,
+                    self._uf_indptr,
+                    self._uf_indices,
+                    self._uf_data,
+                    self._uf_any,
+                    self.uf_field,
+                    self.gamma_uf,
+                    self._uh_indptr,
+                    self._uh_indices,
+                    self._uh_weights,
+                    self._uh_kinds,
+                    self.p_hist,
+                    self.g_event,
+                    self.p_seq,
+                    self.g_seq,
+                    self.c_proto,
+                    1,
+                    max_h_f,
+                    False,
+                    self.use_history,
+                    self.use_seq_anchor,
+                    self.use_field_gates,
+                    self.n_event_types > 1,
+                    False,
+                    self.history_exponent,
+                    self.interest_temperature,
+                    eff_threads,
+                )
+                _fold_in(
+                    self._intx_u,
+                    self._intx_i,
+                    self.sample_weight,
+                    self._ui_indptr,
+                    self._ui_indices,
+                    u_non_id,
+                    item_bias,
+                    v_i_eff,
+                    self.v_u,
+                    self.alpha,
+                    self.learning_rate,
+                    self.learning_schedule,
+                    self.learning_exponent,
+                    max_samples,
+                    epochs,
+                    eff_seed,
+                    eff_threads,
+                )
             self._cached_train_u_emb = None
         else:
-            _fit_csr(
+            max_h = max(self.max_history_len, int(np.diff(self._uh_indptr).max()) if len(self._uh_indptr) > 1 else 1)
+            _fit_v050(
                 self._intx_u,
                 self._intx_i,
                 self.sample_weight,
+                margin_sig_arr,
+                prev_arr,
                 self._ui_indptr,
                 self._ui_indices,
                 self._uf_indptr,
                 self._uf_indices,
                 self._uf_data,
                 self._uf_any,
+                self.uf_field,
                 self._if_indptr,
                 self._if_indices,
                 self._if_data,
                 self._if_any,
+                self.if_field,
+                self.if_is_dyn,
+                self._uh_indptr,
+                self._uh_indices,
+                self._uh_weights,
+                self._uh_kinds,
+                self.item_log_freq,
+                self._alias_prob,
+                self._alias_idx,
+                self._log_q,
                 self.w_i,
                 self.w_if,
                 self.v_u,
                 self.v_i,
                 self.v_uf,
                 self.v_if,
+                self.p_hist,
+                self.p_seq,
+                self.g_event,
+                self.g_seq,
+                self.gamma_uf,
+                self.gamma_if,
+                self.a_gate,
+                self.b_gate,
+                self.c_proto,
+                self.n_interests,
+                max_h,
+                self._loss_mode_code(),
+                self._use_cosine,
+                self.neg_sampling == 'popularity',
+                self.use_history,
+                self.use_seq_anchor,
+                self.use_field_gates,
+                self.n_event_types > 1,
+                self.use_freq_gate,
                 self.alpha,
                 self.beta,
                 self.learning_rate,
@@ -1448,16 +2801,84 @@ class RankFM():
                 epochs,
                 verbose,
                 self.user_dropout,
-                int(seed),
+                self.temperature,
+                self.logq_weight,
+                self.margin,
+                self.weight_margin_scale,
+                self.neg_weight,
+                self.history_exponent,
+                self.interest_temperature,
+                self.head_agg_temperature,
+                self.freq_gate_static_drop,
+                eff_seed,
                 eff_threads,
-                self.feature_reg == 'uniform',
                 self.normalize_steps,
-                self.dense_updates == 'batched'
             )
             self._invalidate_caches()
+            if self.sparse_residual_k > 0:
+                self._fit_sparse_residual(n_threads=eff_threads)
 
         self.is_fit = True
         return self
+
+
+    def fit_pairwise_context(
+        self,
+        pairs,
+        context_features,
+        labels,
+        l2_reg=10.0,
+        max_iter=15,
+        user_features=None,
+        user_history=None,
+        last_items=None,
+        n_jobs=None,
+    ):
+        """fit L2-regularized Newton-Raphson logistic weights [w_ctx] for explicit (user, item) context features on top of frozen RankFM scores"""
+
+        require(self.is_fit, "you must fit the RankFM model prior to calling fit_pairwise_context()")
+        x_ctx = np.asarray(context_features, dtype=np.float64)
+        if x_ctx.ndim == 1:
+            x_ctx = x_ctx[:, None]
+        y = np.asarray(labels, dtype=np.float64).ravel()
+        require(len(x_ctx) == len(y) and len(y) > 0, "[context_features] and [labels] must have matching positive length")
+
+        prev_w_ctx = self.w_ctx
+        self.w_ctx = None
+        try:
+            base_scores = self.predict(
+                pairs,
+                cold_start='estimate',
+                user_features=user_features,
+                user_history=user_history,
+                last_items=last_items,
+                n_jobs=n_jobs,
+            ).astype(np.float64)
+        finally:
+            self.w_ctx = prev_w_ctx
+
+        valid = np.isfinite(base_scores)
+        x_v = x_ctx[valid]
+        y_v = np.clip(y[valid], 0.0, 1.0)
+        off_v = base_scores[valid]
+
+        d_ctx = x_v.shape[1]
+        w = np.zeros(d_ctx, dtype=np.float64)
+        reg_eye = float(l2_reg) * np.eye(d_ctx, dtype=np.float64)
+
+        for _ in range(int(max_iter)):
+            logits = np.clip(off_v + x_v @ w, -30.0, 30.0)
+            prob = 1.0 / (1.0 + np.exp(-logits))
+            grad = x_v.T @ (prob - y_v) + float(l2_reg) * w
+            wt = np.maximum(prob * (1.0 - prob), 1e-6)
+            hess = (x_v * wt[:, None]).T @ x_v + reg_eye
+            step = np.linalg.solve(hess, grad)
+            w -= step
+            if np.linalg.norm(step) < 1e-6:
+                break
+
+        self.w_ctx = np.ascontiguousarray(w, dtype=np.float32)
+        return self.w_ctx
 
 
     def embed_users(
@@ -1466,35 +2887,53 @@ class RankFM():
         user_features=None,
         interactions=None,
         sample_weight=None,
+        user_history=None,
+        last_items=None,
         fold_in_epochs=5,
         cold_start='nan',
         n_jobs=None
     ):
-        """compute effective F-dimensional latent representations for seen and/or unseen users without mutating model state"""
+        """compute effective latent representations for seen and/or unseen users without mutating model state"""
 
         require(getattr(users, '__iter__', False), "[users] must be an iterable (e.g. list, array, series)")
         require(self.is_fit, "you must fit the model prior to embedding users")
 
         eff_threads = self._resolve_n_jobs(n_jobs)
         users_arr = np.asarray(list(users) if not isinstance(users, (np.ndarray, pd.Series, pd.Index, list)) else users)
-        u_emb, user_index_obj, _, _, _, _ = self._prepare_inference_state(
-            users_arr,
-            cold_start=cold_start,
-            user_features=user_features,
-            interactions=interactions,
-            sample_weight=sample_weight,
-            fold_in_epochs=fold_in_epochs,
-            need_seen_items=False,
-            n_threads=eff_threads
-        )
+
+        if not self._is_v050_mode:
+            u_emb, user_index_obj, _, _, _, _ = self._prepare_inference_state(
+                users_arr,
+                cold_start=cold_start,
+                user_features=user_features,
+                interactions=interactions,
+                sample_weight=sample_weight,
+                fold_in_epochs=fold_in_epochs,
+                need_seen_items=False,
+                n_threads=eff_threads
+            )
+        else:
+            u_emb, user_index_obj, _, _, _, _, _, _, _, _ = self._prepare_inference_state_v050(
+                users_arr,
+                cold_start=cold_start,
+                user_features=user_features,
+                interactions=interactions,
+                sample_weight=sample_weight,
+                user_history=user_history,
+                last_items=last_items,
+                fold_in_epochs=fold_in_epochs,
+                need_seen_items=False,
+                n_threads=eff_threads,
+            )
 
         mapped = _fast_get_indexer(user_index_obj, users_arr)
         valid = mapped >= 0
+        out_width = self.factors * self.n_interests
 
         if cold_start == 'drop':
             return pd.DataFrame(u_emb[mapped[valid]], index=users_arr[valid])
 
-        out = np.full((len(users_arr), self.factors), np.nan, dtype=np.float32)
+        out = np.full((len(users_arr), out_width), np.nan, dtype=np.float32)
         if valid.any():
             out[valid] = u_emb[mapped[valid]]
         return pd.DataFrame(out, index=users_arr)
@@ -1506,13 +2945,16 @@ class RankFM():
         user_features=None,
         interactions=None,
         sample_weight=None,
+        user_history=None,
+        last_items=None,
         fold_in_epochs=5,
         cold_start='drop',
         n_jobs=None
     ):
         """export augmented (F + 1)-dimensional float32 user & item embeddings for sub-linear ANN / MIPS engines (FAISS, ScaNN)
 
-        Inner product <user_mips[u], item_mips[i]> equals exact RankFM utility: item_bias[i] + <u_emb[u], v_i_eff[i]>.
+        When n_interests == 1: user_mips has shape (U, F + 1) and <user_mips[u], item_mips[i]> == utility(u, i).
+        When n_interests > 1:  user_mips has shape (U, M, F + 1) for multi-probe MIPS retrieval.
         Returns (user_ids, user_mips, item_ids, item_mips).
         """
 
@@ -1520,35 +2962,46 @@ class RankFM():
         eff_threads = self._resolve_n_jobs(n_jobs)
         item_bias, v_i_eff = self._compute_effective_items(n_threads=eff_threads)
 
-        item_mips = np.empty((len(item_bias), self.factors + 1), dtype=np.float32)
-        item_mips[:, :self.factors] = v_i_eff
-        item_mips[:, self.factors] = item_bias
+        F = self.factors
+        M = self.n_interests
+
+        item_mips = np.empty((len(item_bias), F + 1), dtype=np.float32)
+        item_mips[:, :F] = v_i_eff
+        item_mips[:, F] = item_bias
         item_ids = self._item_index.to_numpy()
 
-        if users is None and user_features is None and interactions is None:
+        if users is None and user_features is None and interactions is None and user_history is None and last_items is None:
             u_emb = self._compute_train_user_embeddings(n_threads=eff_threads)
-            user_mips = np.empty((len(u_emb), self.factors + 1), dtype=np.float32)
-            user_mips[:, :self.factors] = u_emb
-            user_mips[:, self.factors] = 1.0
-            return self._user_index.to_numpy(), user_mips, item_ids, item_mips
+            u_ids_out = self._user_index.to_numpy()
+        else:
+            target_users = self._user_index.to_numpy() if users is None else np.asarray(
+                list(users) if not isinstance(users, (np.ndarray, pd.Series, pd.Index, list)) else users
+            )
+            emb_df = self.embed_users(
+                target_users,
+                user_features=user_features,
+                interactions=interactions,
+                sample_weight=sample_weight,
+                user_history=user_history,
+                last_items=last_items,
+                fold_in_epochs=fold_in_epochs,
+                cold_start=cold_start,
+                n_jobs=eff_threads,
+            )
+            u_emb = emb_df.to_numpy(dtype=np.float32, copy=False)
+            u_ids_out = emb_df.index.to_numpy()
 
-        target_users = self._user_index.to_numpy() if users is None else np.asarray(
-            list(users) if not isinstance(users, (np.ndarray, pd.Series, pd.Index, list)) else users
-        )
-        emb_df = self.embed_users(
-            target_users,
-            user_features=user_features,
-            interactions=interactions,
-            sample_weight=sample_weight,
-            fold_in_epochs=fold_in_epochs,
-            cold_start=cold_start,
-            n_jobs=eff_threads,
-        )
-        u_vals = emb_df.to_numpy(dtype=np.float32, copy=False)
-        user_mips = np.empty((len(u_vals), self.factors + 1), dtype=np.float32)
-        user_mips[:, :self.factors] = u_vals
-        user_mips[:, self.factors] = np.where(np.isnan(u_vals[:, 0]), np.nan, 1.0)
-        return emb_df.index.to_numpy(), user_mips, item_ids, item_mips
+        if M == 1:
+            user_mips = np.empty((len(u_emb), F + 1), dtype=np.float32)
+            user_mips[:, :F] = u_emb
+            user_mips[:, F] = np.where(np.isnan(u_emb[:, 0]), np.nan, 1.0) if len(u_emb) > 0 else 1.0
+            return u_ids_out, user_mips, item_ids, item_mips
+
+        u_3d = u_emb.reshape(len(u_emb), M, F)
+        user_mips = np.empty((len(u_emb), M, F + 1), dtype=np.float32)
+        user_mips[:, :, :F] = u_3d
+        user_mips[:, :, F] = np.where(np.isnan(u_3d[:, :, 0]), np.nan, 1.0) if len(u_emb) > 0 else 1.0
+        return u_ids_out, user_mips, item_ids, item_mips
 
 
     def predict(
@@ -1558,6 +3011,9 @@ class RankFM():
         user_features=None,
         interactions=None,
         sample_weight=None,
+        user_history=None,
+        last_items=None,
+        pairwise_context=None,
         fold_in_epochs=5,
         n_jobs=None
     ):
@@ -1567,21 +3023,156 @@ class RankFM():
         eff_threads = self._resolve_n_jobs(n_jobs)
         u_col, i_col = self._extract_interaction_columns(pairs)
 
-        u_emb, user_index_obj, _, _, item_bias, v_i_eff = self._prepare_inference_state(
-            u_col,
-            cold_start=cold_start,
-            user_features=user_features,
-            interactions=interactions,
-            sample_weight=sample_weight,
-            fold_in_epochs=fold_in_epochs,
-            need_seen_items=False,
-            n_threads=eff_threads
-        )
+        if not self._is_v050_mode and pairwise_context is None:
+            u_emb, user_index_obj, _, _, item_bias, v_i_eff = self._prepare_inference_state(
+                u_col,
+                cold_start=cold_start,
+                user_features=user_features,
+                interactions=interactions,
+                sample_weight=sample_weight,
+                fold_in_epochs=fold_in_epochs,
+                need_seen_items=False,
+                n_threads=eff_threads
+            )
+            u_idx = np.ascontiguousarray(_fast_get_indexer(user_index_obj, u_col), dtype=np.int32)
+            i_idx = np.ascontiguousarray(_fast_get_indexer(self._item_index, i_col), dtype=np.int32)
+            scores = _predict(u_idx, i_idx, u_emb, item_bias, v_i_eff, eff_threads)
+        else:
+            if self._is_v050_mode:
+                u_emb, user_index_obj, _, _, item_bias, v_i_eff, uh_ptr, uh_idx, uh_wt, hist_map = self._prepare_inference_state_v050(
+                    u_col,
+                    cold_start=cold_start,
+                    user_features=user_features,
+                    interactions=interactions,
+                    sample_weight=sample_weight,
+                    user_history=user_history,
+                    last_items=last_items,
+                    fold_in_epochs=fold_in_epochs,
+                    need_seen_items=False,
+                    n_threads=eff_threads,
+                )
+            else:
+                u_emb, user_index_obj, _, _, item_bias, v_i_eff = self._prepare_inference_state(
+                    u_col,
+                    cold_start=cold_start,
+                    user_features=user_features,
+                    interactions=interactions,
+                    sample_weight=sample_weight,
+                    fold_in_epochs=fold_in_epochs,
+                    need_seen_items=False,
+                    n_threads=eff_threads,
+                )
+                uh_ptr = np.zeros(1, dtype=np.int64)
+                uh_idx = np.zeros(0, dtype=np.int32)
+                uh_wt = np.zeros(0, dtype=np.float32)
+                hist_map = None
 
-        u_idx = np.ascontiguousarray(_fast_get_indexer(user_index_obj, u_col), dtype=np.int32)
-        i_idx = np.ascontiguousarray(_fast_get_indexer(self._item_index, i_col), dtype=np.int32)
+            u_idx = np.ascontiguousarray(_fast_get_indexer(user_index_obj, u_col), dtype=np.int32)
+            i_idx = np.ascontiguousarray(_fast_get_indexer(self._item_index, i_col), dtype=np.int32)
 
-        scores = _predict(u_idx, i_idx, u_emb, item_bias, v_i_eff, eff_threads)
+            if self.n_interests == 1:
+                scores = _predict(u_idx, i_idx, u_emb, item_bias, v_i_eff, eff_threads)
+            else:
+                n_p = len(u_idx)
+                scores = np.full(n_p, np.nan, dtype=np.float32)
+                val_p = (u_idx >= 0) & (i_idx >= 0)
+                if val_p.any():
+                    u_3d = u_emb.reshape(len(u_emb), self.n_interests, self.factors)
+                    uh_v = u_3d[u_idx[val_p]]
+                    iv_v = v_i_eff[i_idx[val_p]]
+                    dots = np.einsum('nmf,nf->nm', uh_v, iv_v)
+                    if self.head_agg_temperature <= 0.0:
+                        agg = dots.max(axis=1)
+                    else:
+                        mx = dots.max(axis=1, keepdims=True)
+                        agg = mx[:, 0] + self.head_agg_temperature * np.log(
+                            np.maximum(np.exp((dots - mx) / self.head_agg_temperature).sum(axis=1), 1e-12)
+                        )
+                    scores[val_p] = (agg + item_bias[i_idx[val_p]]).astype(np.float32)
+
+            # Optional sparse residual S contribution on requested pairs
+            if (
+                self.sparse_residual_k > 0
+                and self.sparse_residual_weight != 0.0
+                and self._s_indices is not None
+                and len(self._s_indices) > 0
+                and len(uh_idx) > 0
+            ):
+                val_p = np.flatnonzero((u_idx >= 0) & (i_idx >= 0))
+                if len(val_p) > 0:
+                    import scipy.sparse as sp
+                    n_i = len(item_bias)
+                    s_csr = sp.csr_matrix((self._s_data, self._s_indices, self._s_indptr), shape=(n_i, n_i), dtype=np.float32)
+                    h_rows = hist_map[u_idx[val_p]] if hist_map is not None else u_idx[val_p]
+                    has_hr = h_rows >= 0
+                    if has_hr.any():
+                        sub_p = val_p[has_hr]
+                        sub_hr = h_rows[has_hr]
+                        uh_csr = sp.csr_matrix((uh_wt, uh_idx, uh_ptr), shape=(len(uh_ptr) - 1, n_i), dtype=np.float32)
+                        # Group by unique h_row to avoid redundant sparse vector products
+                        uniq_hr, inv_hr = np.unique(sub_hr, return_inverse=True)
+                        res_mat = (uh_csr[uniq_hr] @ s_csr).tocsr()
+                        # Extract (inv_hr, i_idx[sub_p]) entries
+                        res_vals = np.asarray(res_mat[inv_hr, i_idx[sub_p]]).ravel()
+                        scores[sub_p] += np.float32(self.sparse_residual_weight) * res_vals.astype(np.float32)
+
+            # Optional DIN-lite target-aware attention on requested pairs
+            if (
+                self.target_attention_topk > 0
+                and self.target_attention_weight != 0.0
+                and self.p_hist is not None
+                and len(self.p_hist) > 0
+                and len(uh_idx) > 0
+            ):
+                val_p = np.flatnonzero((u_idx >= 0) & (i_idx >= 0))
+                if len(val_p) > 0:
+                    v_unit = self._cached_v_i_unit if self._cached_v_i_unit is not None else v_i_eff
+                    inv_sqrt_f = np.float32(1.0 / np.sqrt(max(1, self.factors)))
+                    h_rows = hist_map[u_idx[val_p]] if hist_map is not None else u_idx[val_p]
+                    for idx_local, p_pos in enumerate(val_p):
+                        hr = int(h_rows[idx_local])
+                        if hr < 0:
+                            continue
+                        lo = int(uh_ptr[hr])
+                        hi = min(int(uh_ptr[hr + 1]), lo + 16)
+                        if hi <= lo:
+                            continue
+                        h_items = uh_idx[lo:hi]
+                        att_lg = (self.p_hist[h_items] @ v_unit[i_idx[p_pos]]) * inv_sqrt_f
+                        mx_lg = att_lg.max()
+                        att_w = np.exp(att_lg - mx_lg) * uh_wt[lo:hi]
+                        den = float(att_w.sum())
+                        if den > 1e-12:
+                            scores[p_pos] += np.float32(self.target_attention_weight * float((att_w @ att_lg) / den))
+
+            # Optional explicit pairwise context bonus on matching (u, i) pairs
+            if pairwise_context is not None:
+                ctx_u, ctx_i, ctx_b = self._extract_pairwise_context_bonuses(pairwise_context)
+                cu_m = _fast_get_indexer(user_index_obj, ctx_u)
+                ci_m = _fast_get_indexer(self._item_index, ctx_i)
+                c_val = (cu_m >= 0) & (ci_m >= 0)
+                if c_val.any():
+                    n_i = len(item_bias)
+                    c_codes = cu_m[c_val].astype(np.int64) * np.int64(n_i) + ci_m[c_val].astype(np.int64)
+                    c_bon = ctx_b[c_val]
+                    c_ord = np.argsort(c_codes, kind='mergesort')
+                    c_codes_s = c_codes[c_ord]
+                    c_bon_s = c_bon[c_ord]
+                    chg = np.empty(len(c_codes_s), dtype=bool)
+                    chg[0] = True
+                    if len(c_codes_s) > 1:
+                        chg[1:] = c_codes_s[1:] != c_codes_s[:-1]
+                    starts = np.flatnonzero(chg)
+                    u_codes = c_codes_s[starts]
+                    u_bon = np.add.reduceat(c_bon_s, starts)
+
+                    val_p = np.flatnonzero((u_idx >= 0) & (i_idx >= 0))
+                    if len(val_p) > 0:
+                        q_codes = u_idx[val_p].astype(np.int64) * np.int64(n_i) + i_idx[val_p].astype(np.int64)
+                        pos = np.searchsorted(u_codes, q_codes)
+                        hit = (pos < len(u_codes)) & (u_codes[np.minimum(pos, len(u_codes) - 1)] == q_codes)
+                        if hit.any():
+                            scores[val_p[hit]] += u_bon[pos[hit]].astype(np.float32)
 
         if cold_start in ('nan', 'estimate'):
             return scores
@@ -1600,6 +3191,9 @@ class RankFM():
         user_features=None,
         interactions=None,
         sample_weight=None,
+        user_history=None,
+        last_items=None,
+        pairwise_context=None,
         fold_in_epochs=5,
         n_jobs=None
     ):
@@ -1610,46 +3204,158 @@ class RankFM():
 
         eff_threads = self._resolve_n_jobs(n_jobs)
         users_arr = np.asarray(list(users) if not isinstance(users, (np.ndarray, pd.Series, pd.Index, list)) else users)
-        u_emb, user_index_obj, ui_indptr, ui_indices, item_bias, v_i_eff = self._prepare_inference_state(
-            users_arr,
-            cold_start=cold_start,
-            user_features=user_features,
-            interactions=interactions,
-            sample_weight=sample_weight,
-            fold_in_epochs=fold_in_epochs,
-            need_seen_items=filter_previous,
-            n_threads=eff_threads
-        )
 
-        req_u_idx = _fast_get_indexer(user_index_obj, users_arr)
-        valid_mask = req_u_idx >= 0
-        valid_u_idx = np.ascontiguousarray(req_u_idx[valid_mask], dtype=np.int32)
-        n_valid = len(valid_u_idx)
-        n_catalog = len(item_bias)
+        if not self._is_v050_mode and pairwise_context is None:
+            u_emb, user_index_obj, ui_indptr, ui_indices, item_bias, v_i_eff = self._prepare_inference_state(
+                users_arr,
+                cold_start=cold_start,
+                user_features=user_features,
+                interactions=interactions,
+                sample_weight=sample_weight,
+                fold_in_epochs=fold_in_epochs,
+                need_seen_items=filter_previous,
+                n_threads=eff_threads
+            )
+            req_u_idx = _fast_get_indexer(user_index_obj, users_arr)
+            valid_mask = req_u_idx >= 0
+            valid_u_idx = np.ascontiguousarray(req_u_idx[valid_mask], dtype=np.int32)
+            n_valid = len(valid_u_idx)
+            n_catalog = len(item_bias)
+            out_valid_idx = np.full((n_valid, n_items), -1, dtype=np.int32)
 
-        out_valid_idx = np.full((n_valid, n_items), -1, dtype=np.int32)
+            if n_valid > 0 and n_catalog > 0:
+                chunk_size = max(64, min(4096, (32 * 1024 * 1024) // max(1, n_catalog * 4)))
+                v_i_eff_T = v_i_eff.T
+                with _blas_thread_cap():
+                    for start in range(0, n_valid, chunk_size):
+                        end = min(start + chunk_size, n_valid)
+                        chunk_u = valid_u_idx[start:end]
+                        scores_chunk = np.ascontiguousarray(np.dot(u_emb[chunk_u], v_i_eff_T), dtype=np.float32)
+                        _select_topk_chunk(
+                            scores_chunk,
+                            item_bias,
+                            chunk_u,
+                            ui_indptr,
+                            ui_indices,
+                            n_items,
+                            filter_previous,
+                            out_valid_idx[start:end],
+                            eff_threads
+                        )
+        else:
+            if self._is_v050_mode:
+                u_emb, user_index_obj, ui_indptr, ui_indices, item_bias, v_i_eff, uh_ptr, uh_idx, uh_wt, hist_map = self._prepare_inference_state_v050(
+                    users_arr,
+                    cold_start=cold_start,
+                    user_features=user_features,
+                    interactions=interactions,
+                    sample_weight=sample_weight,
+                    user_history=user_history,
+                    last_items=last_items,
+                    fold_in_epochs=fold_in_epochs,
+                    need_seen_items=filter_previous,
+                    n_threads=eff_threads,
+                )
+            else:
+                u_emb, user_index_obj, ui_indptr, ui_indices, item_bias, v_i_eff = self._prepare_inference_state(
+                    users_arr,
+                    cold_start=cold_start,
+                    user_features=user_features,
+                    interactions=interactions,
+                    sample_weight=sample_weight,
+                    fold_in_epochs=fold_in_epochs,
+                    need_seen_items=filter_previous,
+                    n_threads=eff_threads,
+                )
+                uh_ptr = np.zeros(1, dtype=np.int64)
+                uh_idx = np.zeros(0, dtype=np.int32)
+                uh_wt = np.zeros(0, dtype=np.float32)
+                hist_map = None
 
-        if n_valid > 0 and n_catalog > 0:
-            # Cap temporary score chunk buffer to ~32 MB so it stays L3-cache-friendly across any catalog size
-            chunk_size = max(64, min(4096, (32 * 1024 * 1024) // max(1, n_catalog * 4)))
-            v_i_eff_T = v_i_eff.T
+            req_u_idx = _fast_get_indexer(user_index_obj, users_arr)
+            valid_mask = req_u_idx >= 0
+            valid_u_idx = np.ascontiguousarray(req_u_idx[valid_mask], dtype=np.int32)
+            n_valid = len(valid_u_idx)
+            n_catalog = len(item_bias)
+            out_valid_idx = np.full((n_valid, n_items), -1, dtype=np.int32)
 
-            with _blas_thread_cap():
-                for start in range(0, n_valid, chunk_size):
-                    end = min(start + chunk_size, n_valid)
-                    chunk_u = valid_u_idx[start:end]
-                    scores_chunk = np.ascontiguousarray(np.dot(u_emb[chunk_u], v_i_eff_T), dtype=np.float32)
-                    _select_topk_chunk(
-                        scores_chunk,
-                        item_bias,
-                        chunk_u,
-                        ui_indptr,
-                        ui_indices,
-                        n_items,
-                        filter_previous,
-                        out_valid_idx[start:end],
-                        eff_threads
+            if n_valid > 0 and n_catalog > 0:
+                M = self.n_interests
+                F = self.factors
+                s_ptr = self._s_indptr if self._s_indptr is not None else np.zeros(1, dtype=np.int64)
+                s_idx = self._s_indices if self._s_indices is not None else np.zeros(0, dtype=np.int32)
+                s_dat = self._s_data if self._s_data is not None else np.zeros(0, dtype=np.float32)
+                p_hist_use = self.p_hist if self.p_hist is not None else np.zeros((0, F), dtype=np.float32)
+                v_unit_use = self._cached_v_i_unit if self._cached_v_i_unit is not None else v_i_eff
+
+                if pairwise_context is not None:
+                    ctx_full_ptr, ctx_full_idx, ctx_full_bon = self._build_context_csr_for_valid_users(
+                        pairwise_context, users_arr[valid_mask]
                     )
+                    has_ctx = len(ctx_full_idx) > 0
+                else:
+                    ctx_full_ptr = None
+                    ctx_full_idx = None
+                    ctx_full_bon = None
+                    has_ctx = False
+
+                empty_ptr_1 = np.zeros(1, dtype=np.int64)
+                empty_i32 = np.zeros(0, dtype=np.int32)
+                empty_f32 = np.zeros(0, dtype=np.float32)
+
+                chunk_size = max(32, min(4096, (32 * 1024 * 1024) // max(1, n_catalog * M * 4)))
+                v_i_eff_T = v_i_eff.T
+
+                with _blas_thread_cap():
+                    for start in range(0, n_valid, chunk_size):
+                        end = min(start + chunk_size, n_valid)
+                        B = end - start
+                        chunk_u = valid_u_idx[start:end]
+                        chunk_hist_u = np.ascontiguousarray(hist_map[chunk_u], dtype=np.int32) if hist_map is not None else chunk_u
+
+                        u_chunk_2d = u_emb[chunk_u].reshape(B * M, F)
+                        scores_chunk = np.ascontiguousarray(np.dot(u_chunk_2d, v_i_eff_T), dtype=np.float32)
+
+                        if has_ctx:
+                            p0 = int(ctx_full_ptr[start])
+                            p1 = int(ctx_full_ptr[end])
+                            if p1 > p0:
+                                c_ptr = np.ascontiguousarray(ctx_full_ptr[start:end + 1] - p0, dtype=np.int64)
+                                c_idx = ctx_full_idx[p0:p1]
+                                c_bon = ctx_full_bon[p0:p1]
+                            else:
+                                c_ptr, c_idx, c_bon = empty_ptr_1, empty_i32, empty_f32
+                        else:
+                            c_ptr, c_idx, c_bon = empty_ptr_1, empty_i32, empty_f32
+
+                        _select_topk_v050_chunk(
+                            scores_chunk,
+                            item_bias,
+                            chunk_u,
+                            chunk_hist_u,
+                            ui_indptr,
+                            ui_indices,
+                            uh_ptr,
+                            uh_idx,
+                            uh_wt,
+                            s_ptr,
+                            s_idx,
+                            s_dat,
+                            c_ptr,
+                            c_idx,
+                            c_bon,
+                            p_hist_use,
+                            v_unit_use,
+                            M,
+                            n_items,
+                            filter_previous,
+                            self.head_agg_temperature,
+                            self.sparse_residual_weight,
+                            self.target_attention_topk,
+                            self.target_attention_weight,
+                            out_valid_idx[start:end],
+                            eff_threads,
+                        )
 
         item_id_vals = self._item_index.to_numpy()
         all_items_valid = (out_valid_idx >= 0).all() if n_valid > 0 else True
@@ -1689,6 +3395,9 @@ class RankFM():
         user_features=None,
         interactions=None,
         sample_weight=None,
+        user_history=None,
+        last_items=None,
+        pairwise_context=None,
         fold_in_epochs=5,
         as_dataframe=True,
         n_jobs=None
@@ -1759,6 +3468,9 @@ class RankFM():
                 user_features=user_features,
                 interactions=batch_intx,
                 sample_weight=batch_sw,
+                user_history=user_history,
+                last_items=last_items,
+                pairwise_context=pairwise_context,
                 fold_in_epochs=fold_in_epochs,
                 n_jobs=n_jobs,
             )
@@ -1795,6 +3507,8 @@ class RankFM():
         user_features=None,
         interactions=None,
         sample_weight=None,
+        user_history=None,
+        last_items=None,
         fold_in_epochs=5
     ):
         """find the most similar training users wrt latent factor space representation (supports unseen query users)"""
@@ -1803,12 +3517,12 @@ class RankFM():
 
         user_pos = int(_fast_get_indexer(self._user_index, [user_id])[0])
         in_training = user_pos >= 0
-        if not in_training and user_features is None and interactions is None:
-            raise AssertionError("you must select a [user_id] present in the training data or supply [user_features]/[interactions]")
+        if not in_training and user_features is None and interactions is None and user_history is None and last_items is None:
+            raise AssertionError("you must select a [user_id] present in the training data or supply [user_features]/[interactions]/[user_history]")
 
         lr_all_users = self._compute_train_user_embeddings()
 
-        if in_training and user_features is None and interactions is None:
+        if in_training and user_features is None and interactions is None and user_history is None and last_items is None:
             lr_user = lr_all_users[user_pos]
         else:
             emb_df = self.embed_users(
@@ -1816,6 +3530,8 @@ class RankFM():
                 user_features=user_features,
                 interactions=interactions,
                 sample_weight=sample_weight,
+                user_history=user_history,
+                last_items=last_items,
                 fold_in_epochs=fold_in_epochs,
                 cold_start='nan'
             )

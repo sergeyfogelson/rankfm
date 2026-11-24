@@ -123,6 +123,17 @@ RFM_INLINE float rfm_rng_float01(rfm_rng_t *rng) {
     return (float)(rfm_rng_u32(rng) >> 8) * (1.0f / 16777216.0f);
 }
 
+/* O(1) Walker-Vose alias table draw for arbitrary negative proposal Q(j) */
+RFM_INLINE int32_t rfm_alias_draw(
+    rfm_rng_t *rng,
+    uint32_t n,
+    const float * RFM_RESTRICT prob,
+    const int32_t * RFM_RESTRICT alias
+) {
+    const uint32_t col = rfm_rng_bounded(rng, n);
+    return (rfm_rng_float01(rng) < prob[col]) ? (int32_t)col : alias[col];
+}
+
 /* ---------------------------------------------------------
  * 2b. Computed Pseudo-Random Permutation of [0, n)
  *
@@ -184,7 +195,7 @@ RFM_INLINE uint64_t rfm_perm_at(const rfm_perm_t *perm, uint64_t x) {
  * 3. 4-Way Unrolled SIMD-Friendly Vector Math Kernels
  * --------------------------------------------------------- */
 
-RFM_INLINE float rfm_dot(int F, const float * RFM_RESTRICT a, const float * RFM_RESTRICT b) {
+RFM_INLINE float rfm_dot(int F, const float *a, const float *b) {
     float s0 = 0.0f, s1 = 0.0f, s2 = 0.0f, s3 = 0.0f;
     int f = 0;
     const int limit16 = F - 15;
@@ -278,6 +289,131 @@ RFM_INLINE void rfm_vec_scale(int F, float keep, float * RFM_RESTRICT y) {
     }
     for (; f < F; f++) {
         y[f] *= keep;
+    }
+}
+
+RFM_INLINE void rfm_vec_mul(int F, const float * RFM_RESTRICT a, const float * RFM_RESTRICT b, float * RFM_RESTRICT out) {
+    int f = 0;
+    for (; f <= F - 4; f += 4) {
+        out[f + 0] = a[f + 0] * b[f + 0];
+        out[f + 1] = a[f + 1] * b[f + 1];
+        out[f + 2] = a[f + 2] * b[f + 2];
+        out[f + 3] = a[f + 3] * b[f + 3];
+    }
+    for (; f < F; f++) {
+        out[f] = a[f] * b[f];
+    }
+}
+
+RFM_INLINE void rfm_vec_mul_axpy(
+    int F,
+    float alpha,
+    const float * RFM_RESTRICT gate,
+    const float * RFM_RESTRICT x,
+    float * RFM_RESTRICT y
+) {
+    int f = 0;
+    for (; f <= F - 4; f += 4) {
+        y[f + 0] += alpha * gate[f + 0] * x[f + 0];
+        y[f + 1] += alpha * gate[f + 1] * x[f + 1];
+        y[f + 2] += alpha * gate[f + 2] * x[f + 2];
+        y[f + 3] += alpha * gate[f + 3] * x[f + 3];
+    }
+    for (; f < F; f++) {
+        y[f] += alpha * gate[f] * x[f];
+    }
+}
+
+RFM_INLINE void rfm_vec_reg_mul_axpy(
+    int F,
+    float keep,
+    float alpha,
+    const float * RFM_RESTRICT gate,
+    const float * RFM_RESTRICT x,
+    float * RFM_RESTRICT y
+) {
+    int f = 0;
+    for (; f <= F - 4; f += 4) {
+        y[f + 0] = y[f + 0] * keep + alpha * gate[f + 0] * x[f + 0];
+        y[f + 1] = y[f + 1] * keep + alpha * gate[f + 1] * x[f + 1];
+        y[f + 2] = y[f + 2] * keep + alpha * gate[f + 2] * x[f + 2];
+        y[f + 3] = y[f + 3] * keep + alpha * gate[f + 3] * x[f + 3];
+    }
+    for (; f < F; f++) {
+        y[f] = y[f] * keep + alpha * gate[f] * x[f];
+    }
+}
+
+RFM_INLINE float rfm_norm2(int F, const float * RFM_RESTRICT x) {
+    return sqrtf(rfm_dot(F, x, x));
+}
+
+RFM_INLINE float rfm_normalize_copy(
+    int F,
+    const float * RFM_RESTRICT src,
+    float * RFM_RESTRICT dst,
+    float eps
+) {
+    const float nrm = sqrtf(rfm_dot(F, src, src));
+    if (nrm <= eps) {
+        memset(dst, 0, (size_t)F * sizeof(float));
+        return 0.0f;
+    }
+    const float inv = 1.0f / nrm;
+    int f = 0;
+    for (; f <= F - 4; f += 4) {
+        dst[f + 0] = src[f + 0] * inv;
+        dst[f + 1] = src[f + 1] * inv;
+        dst[f + 2] = src[f + 2] * inv;
+        dst[f + 3] = src[f + 3] * inv;
+    }
+    for (; f < F; f++) {
+        dst[f] = src[f] * inv;
+    }
+    return inv;
+}
+
+RFM_INLINE float rfm_normalize_inplace(
+    int F,
+    float *x,
+    float eps
+) {
+    const float nrm = sqrtf(rfm_dot(F, x, x));
+    if (nrm <= eps) {
+        memset(x, 0, (size_t)F * sizeof(float));
+        return 0.0f;
+    }
+    const float inv = 1.0f / nrm;
+    int f = 0;
+    for (; f <= F - 4; f += 4) {
+        x[f + 0] *= inv;
+        x[f + 1] *= inv;
+        x[f + 2] *= inv;
+        x[f + 3] *= inv;
+    }
+    for (; f < F; f++) {
+        x[f] *= inv;
+    }
+    return inv;
+}
+
+RFM_INLINE void rfm_cosine_grad_project(
+    int F,
+    float eff_inv_norm,
+    const float * RFM_RESTRICT x_hat,
+    const float * RFM_RESTRICT g_hat,
+    float * RFM_RESTRICT out_gx
+) {
+    const float proj = rfm_dot(F, x_hat, g_hat);
+    int f = 0;
+    for (; f <= F - 4; f += 4) {
+        out_gx[f + 0] = eff_inv_norm * (g_hat[f + 0] - proj * x_hat[f + 0]);
+        out_gx[f + 1] = eff_inv_norm * (g_hat[f + 1] - proj * x_hat[f + 1]);
+        out_gx[f + 2] = eff_inv_norm * (g_hat[f + 2] - proj * x_hat[f + 2]);
+        out_gx[f + 3] = eff_inv_norm * (g_hat[f + 3] - proj * x_hat[f + 3]);
+    }
+    for (; f < F; f++) {
+        out_gx[f] = eff_inv_norm * (g_hat[f] - proj * x_hat[f]);
     }
 }
 
