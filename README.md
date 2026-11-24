@@ -151,3 +151,43 @@ model.similar_items(2997, n_items=10)
 3481      High Fidelity (2000)
 ```
 [Let's get weird...](https://www.youtube.com/watch?v=lIpev8JXJHQ&t=5s)
+
+---
+### Neural-Era Factorization Machine Extensions (v0.5.0)
+
+RankFM `v0.5.0` extends classical Factorization Machines with inductive sequence, field-gating, retrieval, and higher-order polynomial cross-network capabilities while remaining 100% pure Python/Cython/NumPy (zero tree/GBDT or deep-learning framework dependencies) and maintaining full backwards compatibility with `v0.4.0`:
+
+* **Asymmetric SVD++ History Pooling & Causal Sequential Anchor (`use_history`, `use_seq_anchor`, `n_event_types`)**: Encodes users directly from multi-event interaction histories with recency decay, event-type gates, and strictly-prior last-item sequential anchors for fast, inductive cold/unseen-user inference.
+* **Contrastive & Margin Ranking Losses (`loss='cosine_nce'`, `'simplex'`, `'warp'`, `'bpr'`)**: Supports popularity-alias negative sampling with log-Q debiasing (`neg_pop_alpha`, `logq_debias`) and continuous watch-strength margins (`pos_margin_gamma`).
+* **Semantic Field Gates & Adaptive Cold/Warm Blending (`use_field_gates`, `use_freq_gate`)**: Learns FiBiNET-style per-feature importance gates (`gamma_uf`, `gamma_if`) and smooth popularity-moderated cold-item metadata blending.
+* **Native Top-K Orthogonal Sparse Residual & DIN-Lite Target Attention (`sparse_residual_k`, `target_attention_topk`, `n_interests`)**: Multi-threaded Cython top-K retrieval combining multi-interest FM towers, item-item residual transitions, and history-to-candidate target attention, plus MIPS vector export (`export_mips_embeddings()`).
+* **`FactorizedCrossNet` (`from rankfm import FactorizedCrossNet`)**: Tree-free listwise ranking head combining SENet dynamic channel gating, exact 2nd-order Rendle Factorization Machine interactions, low-rank DCN-v2 polynomial cross layers, multi-seed head ensembling, and unsupervised pre-cutoff domain adaptation (`compute_adapted_domain_stats`) trained end-to-end with ListNet + Burges LambdaRank $|\Delta\text{NDCG}|$.
+
+```python
+from rankfm import RankFM, FactorizedCrossNet
+
+model = RankFM(
+    factors=64,
+    loss='warp',
+    use_history=True,
+    use_seq_anchor=True,
+    n_event_types=4,
+    use_field_gates=True,
+    use_freq_gate=True,
+    sparse_residual_k=64,
+    target_attention_topk=20,
+    n_threads=8,
+)
+model.fit(interactions_train, user_features=uf, item_features=if_df, epochs=15)
+
+# Tree-free higher-order polynomial FM + Low-Rank DCN-v2 cross head over candidate slates
+cross_head = FactorizedCrossNet(
+    fm_factors=32,
+    cross_layers=2,
+    cross_rank=20,
+    gate_hidden=16,
+    n_ensemble=2,
+)
+cross_head.fit(X_train_slates, y_train_slates, valid_mask_train)
+```
+
