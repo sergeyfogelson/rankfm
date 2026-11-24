@@ -57,11 +57,11 @@ def test_warp_max_samples_is_capped_at_catalog_size():
 def test_uniform_feature_reg_decays_unused_features_on_any_thread_count():
     """feature_reg='uniform' shrinks a feature that no row uses, single-threaded and multi-threaded alike"""
 
-    interactions = _make_interactions(n_users=500, n_items=60, per_user=10)
-    feature_values = np.zeros((60, 3), dtype=np.float32)
-    feature_values[:, 0] = np.arange(60) % 2
-    feature_values[:, 1] = np.arange(60) % 3 == 0
-    item_features = (np.arange(60), feature_values)  # column 2 is never active
+    interactions = _make_interactions(n_users=500, n_items=160, per_user=10)
+    feature_values = np.zeros((160, 3), dtype=np.float32)
+    feature_values[:, 0] = np.arange(160) % 2
+    feature_values[:, 1] = np.arange(160) % 3 == 0
+    item_features = (np.arange(160), feature_values)  # column 2 is never active
 
     norms = {}
     for n_jobs in (1, 4):
@@ -430,3 +430,83 @@ def test_batched_dense_updates_are_reproducible_and_validated():
         RankFM(dense_updates='batched', feature_reg='uniform')
     with pytest.raises(ValueError):
         RankFM(dense_updates='sometimes')
+
+
+def _clustered_with_item_features(n_users=1500, n_items=240, n_clusters=8, per_user=10, n_feats=160, per_item=12, seed=21):
+    """clustered interactions plus one-hot item features drawn from each cluster's own feature pool"""
+
+    sp = pytest.importorskip("scipy.sparse")
+    rng = np.random.default_rng(seed)
+    u_cluster = rng.integers(0, n_clusters, n_users)
+    i_cluster = np.arange(n_items) % n_clusters
+    users = np.repeat(np.arange(n_users), per_user)
+    in_cluster = rng.integers(0, n_items // n_clusters, len(users)) * n_clusters + u_cluster[users]
+    items = np.where(rng.random(len(users)) < 0.85, in_cluster, rng.integers(0, n_items, len(users)))
+    pool = n_feats // n_clusters
+    cols = (i_cluster[:, None] * pool + rng.integers(0, pool, (n_items, per_item))).ravel()
+    features = sp.csr_matrix((np.ones(n_items * per_item, dtype=np.float32), (np.repeat(np.arange(n_items), per_item), cols)), shape=(n_items, n_feats))
+    features.sum_duplicates()
+    features.data[:] = 1.0
+    return pd.DataFrame({'user_id': users, 'item_id': items}), features, u_cluster, i_cluster
+
+
+@pytest.mark.parametrize("loss", ["warp", "cosine_nce"])
+def test_v050_kernel_learns_with_item_features(loss):
+    """the v0.5 training path must not lose accuracy when items carry many features
+
+    as first written it took gradients from cached item rows that lag behind the feature weights and applied
+    unnormalized steps, and scored far below the classic path on exactly this kind of data"""
+
+    interactions, features, u_cluster, i_cluster = _clustered_with_item_features()
+    item_features = (np.arange(features.shape[0]), features)
+    eval_users = np.arange(0, 1500, 5)
+
+    def in_cluster_precision(model):
+        recs = model.recommend(eval_users, n_items=10, filter_previous=True).to_numpy()
+        return float((i_cluster[recs] == u_cluster[eval_users][:, None]).mean())
+
+    classic = RankFM(factors=16, loss='warp', max_samples=10, learning_rate=0.1)
+    classic.fit(interactions, item_features=item_features, epochs=6, seed=1, n_jobs=1)
+    assert not classic._is_v050_mode
+
+    # a negligible margin switches the v0.5 kernel on without changing the objective in any meaningful way
+    extended = RankFM(factors=16, loss=loss, max_samples=10, learning_rate=0.1, margin=1e-6)
+    with warnings.catch_warnings():
+        warnings.simplefilter('error')
+        extended.fit(interactions, item_features=item_features, epochs=6, seed=1, n_jobs=1)
+    assert extended._is_v050_mode
+
+    reference = in_cluster_precision(classic)
+    assert reference > 0.85
+    assert in_cluster_precision(extended) > reference - 0.1
+    assert max(np.abs(extended.v_i).max(), np.abs(extended.v_if).max()) < 10.0
+
+
+def test_v050_kernel_caps_samples_at_catalog_size():
+    """in the v0.5 path too, [max_samples] beyond (n_items - 1) is capped instead of flipping the WARP update"""
+
+    interactions = _make_interactions(n_users=200, n_items=6, per_user=2, seed=3)
+    capped = RankFM(factors=4, loss='warp', max_samples=5, margin=1e-6).fit(interactions, epochs=8, seed=1, n_jobs=1)
+    beyond = RankFM(factors=4, loss='warp', max_samples=50, margin=1e-6).fit(interactions, epochs=8, seed=1, n_jobs=1)
+    assert capped._is_v050_mode and beyond._is_v050_mode
+    for name in ('w_i', 'v_u', 'v_i'):
+        assert np.array_equal(getattr(capped, name), getattr(beyond, name))
+
+
+def test_v050_mode_keeps_training_rows_in_input_order():
+    """prev_items and margin_signal are aligned to the caller's rows, so the v0.5 path must not reorder them"""
+
+    rng = np.random.default_rng(5)
+    interactions = _make_interactions(n_users=120, n_items=40, per_user=5, seed=9).drop_duplicates()
+    shuffled = interactions.iloc[rng.permutation(len(interactions))].reset_index(drop=True)
+
+    classic = RankFM(factors=4).fit(shuffled, epochs=1, seed=1)
+    assert classic._intx_i is classic._ui_indices                       # classic path may train from the sorted index
+
+    extended = RankFM(factors=4, use_seq_anchor=True)
+    prev = np.full(len(shuffled), -1, dtype=np.int32)
+    extended.fit(shuffled, prev_items=prev, epochs=1, seed=1)
+    assert np.array_equal(extended.interactions[:, 1], extended._item_index.get_indexer(shuffled['item_id']))
+    last_by_user = shuffled.groupby('user_id')['item_id'].last()
+    expected = extended._item_index.get_indexer(last_by_user.to_numpy())
+    assert np.array_equal(extended._train_last_items[extended._user_index.get_indexer(last_by_user.index)], expected)

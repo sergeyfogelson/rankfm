@@ -2015,21 +2015,14 @@ cdef struct RefreshItemsV050Ctx:
     int use_cosine
 
 
-cdef void _refresh_eff_items_v050_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
-    cdef RefreshItemsV050Ctx *ctx = <RefreshItemsV050Ctx *>raw_ctx
-    cdef int32_t m_start = <int32_t>((<int64_t>ctx.I * tid) // n_threads)
-    cdef int32_t m_end = <int32_t>((<int64_t>ctx.I * (tid + 1)) // n_threads)
-    if m_start >= m_end:
-        return
+cdef inline void _refresh_single_item_v050(RefreshItemsV050Ctx *ctx, int32_t m, float *s_vec, float *d_vec) noexcept nogil:
+    """rebuild item [m]'s effective bias and embedding (plus its gate and static-feature rows) from the current weights
+
+    [s_vec] and [d_vec] are caller-provided scratch vectors of F floats. Used for the whole catalog at each block
+    refresh, and for single items inside the training loop so that gradients never come from a stale cache row."""
 
     cdef int F = ctx.F
-    cdef float *s_vec = <float *>rfm_aligned_malloc(<size_t>(2 * F) * sizeof(float))
-    if s_vec == NULL:
-        ctx.failed = 1
-        return
-    cdef float *d_vec = &s_vec[F]
-
-    cdef int32_t m, q, fld, is_dyn
+    cdef int32_t q, fld, is_dyn
     cdef int64_t idx
     cdef int f
     cdef float val, bias, log_n, g_mf, inv_n
@@ -2039,74 +2032,89 @@ cdef void _refresh_eff_items_v050_worker(int tid, int n_threads, void *raw_ctx) 
     cdef float *g_row
     cdef float *s_row
 
-    for m in range(m_start, m_end):
-        bias = ctx.w_i_ptr[m]
-        vi_row = &ctx.v_i_ptr[<int64_t>m * <int64_t>F]
-        v_raw_row = &ctx.v_raw_eff_ptr[<int64_t>m * <int64_t>F]
-        v_out_row = &ctx.v_eff_ptr[<int64_t>m * <int64_t>F]
+    bias = ctx.w_i_ptr[m]
+    vi_row = &ctx.v_i_ptr[<int64_t>m * <int64_t>F]
+    v_raw_row = &ctx.v_raw_eff_ptr[<int64_t>m * <int64_t>F]
+    v_out_row = &ctx.v_eff_ptr[<int64_t>m * <int64_t>F]
 
-        if ctx.x_if_any:
-            rfm_vec_zero(F, s_vec)
-            rfm_vec_zero(F, d_vec)
-            for idx in range(ctx.if_indptr_ptr[m], ctx.if_indptr_ptr[m + 1]):
-                q = ctx.if_indices_ptr[idx]
-                val = ctx.if_data_ptr[idx]
-                bias += val * ctx.w_if_ptr[q]
-                is_dyn = ctx.if_is_dyn_ptr[q] if (ctx.use_freq_gate and ctx.if_is_dyn_ptr != NULL) else 0
-                if ctx.use_field_gates and ctx.if_field_ptr != NULL and ctx.gamma_if_ptr != NULL:
-                    fld = ctx.if_field_ptr[q]
-                    if is_dyn:
-                        rfm_vec_mul_axpy(F, val, &ctx.gamma_if_ptr[<int64_t>fld * <int64_t>F], &ctx.v_if_ptr[<int64_t>q * <int64_t>F], d_vec)
-                    else:
-                        rfm_vec_mul_axpy(F, val, &ctx.gamma_if_ptr[<int64_t>fld * <int64_t>F], &ctx.v_if_ptr[<int64_t>q * <int64_t>F], s_vec)
+    if ctx.x_if_any:
+        rfm_vec_zero(F, s_vec)
+        rfm_vec_zero(F, d_vec)
+        for idx in range(ctx.if_indptr_ptr[m], ctx.if_indptr_ptr[m + 1]):
+            q = ctx.if_indices_ptr[idx]
+            val = ctx.if_data_ptr[idx]
+            bias += val * ctx.w_if_ptr[q]
+            is_dyn = ctx.if_is_dyn_ptr[q] if (ctx.use_freq_gate and ctx.if_is_dyn_ptr != NULL) else 0
+            if ctx.use_field_gates and ctx.if_field_ptr != NULL and ctx.gamma_if_ptr != NULL:
+                fld = ctx.if_field_ptr[q]
+                if is_dyn:
+                    rfm_vec_mul_axpy(F, val, &ctx.gamma_if_ptr[<int64_t>fld * <int64_t>F], &ctx.v_if_ptr[<int64_t>q * <int64_t>F], d_vec)
                 else:
-                    if is_dyn:
-                        rfm_vec_axpy(F, val, &ctx.v_if_ptr[<int64_t>q * <int64_t>F], d_vec)
-                    else:
-                        rfm_vec_axpy(F, val, &ctx.v_if_ptr[<int64_t>q * <int64_t>F], s_vec)
-
-            if ctx.use_freq_gate and ctx.a_gate_ptr != NULL and ctx.b_gate_ptr != NULL and ctx.item_log_freq_ptr != NULL:
-                log_n = ctx.item_log_freq_ptr[m]
-                g_row = &ctx.g_item_ptr[<int64_t>m * <int64_t>F] if ctx.g_item_ptr != NULL else NULL
-                s_row = &ctx.s_item_ptr[<int64_t>m * <int64_t>F] if ctx.s_item_ptr != NULL else NULL
-                for f in range(F):
-                    g_mf = safe_sigmoid_pos(ctx.a_gate_ptr[f] * log_n + ctx.b_gate_ptr[f])
-                    if g_row != NULL:
-                        g_row[f] = g_mf
-                    if s_row != NULL:
-                        s_row[f] = s_vec[f]
-                    v_raw_row[f] = g_mf * vi_row[f] + (1.0 - ctx.freq_gate_static_drop * g_mf) * s_vec[f] + d_vec[f]
+                    rfm_vec_mul_axpy(F, val, &ctx.gamma_if_ptr[<int64_t>fld * <int64_t>F], &ctx.v_if_ptr[<int64_t>q * <int64_t>F], s_vec)
             else:
-                for f in range(F):
-                    v_raw_row[f] = vi_row[f] + s_vec[f] + d_vec[f]
-        else:
-            if ctx.use_freq_gate and ctx.a_gate_ptr != NULL and ctx.b_gate_ptr != NULL and ctx.item_log_freq_ptr != NULL:
-                log_n = ctx.item_log_freq_ptr[m]
-                g_row = &ctx.g_item_ptr[<int64_t>m * <int64_t>F] if ctx.g_item_ptr != NULL else NULL
-                if ctx.s_item_ptr != NULL:
-                    rfm_vec_zero(F, &ctx.s_item_ptr[<int64_t>m * <int64_t>F])
-                for f in range(F):
-                    g_mf = safe_sigmoid_pos(ctx.a_gate_ptr[f] * log_n + ctx.b_gate_ptr[f])
-                    if g_row != NULL:
-                        g_row[f] = g_mf
-                    v_raw_row[f] = g_mf * vi_row[f]
-            else:
-                rfm_vec_copy(F, vi_row, v_raw_row)
+                if is_dyn:
+                    rfm_vec_axpy(F, val, &ctx.v_if_ptr[<int64_t>q * <int64_t>F], d_vec)
+                else:
+                    rfm_vec_axpy(F, val, &ctx.v_if_ptr[<int64_t>q * <int64_t>F], s_vec)
 
-        ctx.b_eff_ptr[m] = bias
-
-        if ctx.use_cosine:
-            inv_n = rfm_normalize_copy(F, v_raw_row, v_out_row, 1e-6)
-            if ctx.inv_norm_eff_ptr != NULL:
-                ctx.inv_norm_eff_ptr[m] = inv_n
-            if ctx.out_scale != 1.0:
-                rfm_vec_scale(F, ctx.out_scale, v_out_row)
+        if ctx.use_freq_gate and ctx.a_gate_ptr != NULL and ctx.b_gate_ptr != NULL and ctx.item_log_freq_ptr != NULL:
+            log_n = ctx.item_log_freq_ptr[m]
+            g_row = &ctx.g_item_ptr[<int64_t>m * <int64_t>F] if ctx.g_item_ptr != NULL else NULL
+            s_row = &ctx.s_item_ptr[<int64_t>m * <int64_t>F] if ctx.s_item_ptr != NULL else NULL
+            for f in range(F):
+                g_mf = safe_sigmoid_pos(ctx.a_gate_ptr[f] * log_n + ctx.b_gate_ptr[f])
+                if g_row != NULL:
+                    g_row[f] = g_mf
+                if s_row != NULL:
+                    s_row[f] = s_vec[f]
+                v_raw_row[f] = g_mf * vi_row[f] + (1.0 - ctx.freq_gate_static_drop * g_mf) * s_vec[f] + d_vec[f]
         else:
-            rfm_vec_copy(F, v_raw_row, v_out_row)
-            if ctx.inv_norm_eff_ptr != NULL:
-                ctx.inv_norm_eff_ptr[m] = 1.0
-            if ctx.out_scale != 1.0:
-                rfm_vec_scale(F, ctx.out_scale, v_out_row)
+            for f in range(F):
+                v_raw_row[f] = vi_row[f] + s_vec[f] + d_vec[f]
+    else:
+        if ctx.use_freq_gate and ctx.a_gate_ptr != NULL and ctx.b_gate_ptr != NULL and ctx.item_log_freq_ptr != NULL:
+            log_n = ctx.item_log_freq_ptr[m]
+            g_row = &ctx.g_item_ptr[<int64_t>m * <int64_t>F] if ctx.g_item_ptr != NULL else NULL
+            if ctx.s_item_ptr != NULL:
+                rfm_vec_zero(F, &ctx.s_item_ptr[<int64_t>m * <int64_t>F])
+            for f in range(F):
+                g_mf = safe_sigmoid_pos(ctx.a_gate_ptr[f] * log_n + ctx.b_gate_ptr[f])
+                if g_row != NULL:
+                    g_row[f] = g_mf
+                v_raw_row[f] = g_mf * vi_row[f]
+        else:
+            rfm_vec_copy(F, vi_row, v_raw_row)
+
+    ctx.b_eff_ptr[m] = bias
+
+    if ctx.use_cosine:
+        inv_n = rfm_normalize_copy(F, v_raw_row, v_out_row, 1e-6)
+        if ctx.inv_norm_eff_ptr != NULL:
+            ctx.inv_norm_eff_ptr[m] = inv_n
+        if ctx.out_scale != 1.0:
+            rfm_vec_scale(F, ctx.out_scale, v_out_row)
+    else:
+        rfm_vec_copy(F, v_raw_row, v_out_row)
+        if ctx.inv_norm_eff_ptr != NULL:
+            ctx.inv_norm_eff_ptr[m] = 1.0
+        if ctx.out_scale != 1.0:
+            rfm_vec_scale(F, ctx.out_scale, v_out_row)
+
+
+cdef void _refresh_eff_items_v050_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil:
+    cdef RefreshItemsV050Ctx *ctx = <RefreshItemsV050Ctx *>raw_ctx
+    cdef int32_t m_start = <int32_t>((<int64_t>ctx.I * tid) // n_threads)
+    cdef int32_t m_end = <int32_t>((<int64_t>ctx.I * (tid + 1)) // n_threads)
+    if m_start >= m_end:
+        return
+
+    cdef float *s_vec = <float *>rfm_aligned_malloc(<size_t>(2 * ctx.F) * sizeof(float))
+    if s_vec == NULL:
+        ctx.failed = 1
+        return
+    cdef int32_t m
+    for m in range(m_start, m_end):
+        _refresh_single_item_v050(ctx, m, s_vec, &s_vec[ctx.F])
 
     rfm_aligned_free(s_vec)
 
@@ -2400,6 +2408,8 @@ cdef void _encode_users_v050_worker(int tid, int n_threads, void *raw_ctx) noexc
 
 
 cdef struct FitV050Ctx:
+    RefreshItemsV050Ctx *refresh        # lets a worker rebuild single item rows exactly (see _refresh_single_item_v050)
+    const float *if_step_scale_ptr      # per-item 1 / (1 + |x_m|^2), or NULL when steps are not normalized
     const int32_t *u_ptr
     const int32_t *i_ptr
     const float *sw_ptr
@@ -2509,8 +2519,13 @@ cdef inline void _update_single_item_v050(
     """apply regularized update to item m (w_i, v_i, optional sparse X_if, and thread-local gate accumulators)"""
 
     cdef int F = ctx.F
-    cdef float reg_a_keep = 1.0 - reg_weight * (1.0 - ctx.reg_a_keep)
-    cdef float reg_b_keep = 1.0 - reg_weight * (1.0 - ctx.reg_b_keep)
+    # An update to item m moves its effective embedding through v_i and through every active feature, so the
+    # movement grows with the item's feature mass. nscale = 1 / (1 + |x_m|^2) cancels that, and it multiplies the
+    # whole update (gradient, bias step and L2 decay) so the regularization strength is left unchanged.
+    cdef float nscale = ctx.if_step_scale_ptr[m] if ctx.if_step_scale_ptr != NULL else 1.0
+    cdef float reg_a_keep = 1.0 - nscale * reg_weight * (1.0 - ctx.reg_a_keep)
+    cdef float reg_b_keep = 1.0 - nscale * reg_weight * (1.0 - ctx.reg_b_keep)
+    bias_step = bias_step * nscale
     cdef float old_w = ctx.w_i_ptr[m]
     cdef float new_w = clamp_f32(old_w * reg_a_keep + bias_step, -25.0, 25.0)
     ctx.w_i_ptr[m] = new_w
@@ -2532,18 +2547,18 @@ cdef inline void _update_single_item_v050(
         log_n = ctx.item_log_freq_ptr[m]
         for f in range(F):
             g_mf = g_row[f]
-            dg_dz = grad_v_raw[f] * g_mf * (1.0 - g_mf) * (vi_row[f] - ctx.freq_gate_static_drop * (s_row[f] if s_row != NULL else 0.0))
+            dg_dz = (nscale * grad_v_raw[f]) * g_mf * (1.0 - g_mf) * (vi_row[f] - ctx.freq_gate_static_drop * (s_row[f] if s_row != NULL else 0.0))
             d_a_gate[f] += dg_dz * log_n
             d_b_gate[f] += dg_dz
 
             old_vf = vi_row[f]
-            new_vf = old_vf * reg_a_keep + g_mf * grad_v_raw[f]
+            new_vf = old_vf * reg_a_keep + g_mf * (nscale * grad_v_raw[f])
             vi_row[f] = new_vf
             v_raw_row[f] += g_mf * (new_vf - old_vf)
     else:
         for f in range(F):
             old_vf = vi_row[f]
-            new_vf = old_vf * reg_a_keep + grad_v_raw[f]
+            new_vf = old_vf * reg_a_keep + (nscale * grad_v_raw[f])
             vi_row[f] = new_vf
             v_raw_row[f] += (new_vf - old_vf)
 
@@ -2564,10 +2579,10 @@ cdef inline void _update_single_item_v050(
 
             if g_row != NULL and not is_dyn:
                 for f in range(F):
-                    tmp_vec[f] = x_val * (1.0 - ctx.freq_gate_static_drop * g_row[f]) * grad_v_raw[f]
+                    tmp_vec[f] = x_val * (1.0 - ctx.freq_gate_static_drop * g_row[f]) * (nscale * grad_v_raw[f])
             else:
                 for f in range(F):
-                    tmp_vec[f] = x_val * grad_v_raw[f]
+                    tmp_vec[f] = x_val * (nscale * grad_v_raw[f])
 
             if ctx.use_field_gates and ctx.if_field_ptr != NULL and ctx.gamma_if_ptr != NULL:
                 fld = ctx.if_field_ptr[q]
@@ -2626,6 +2641,8 @@ cdef void _fit_v050_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil
     cdef float *head_pi = &head_scores[M]
     cdef float *z_neg_buf = &head_pi[M]
     cdef float *route_buf = &z_neg_buf[max_samples]
+    cdef float *ref_s_buf = &route_buf[max_h * M]
+    cdef float *ref_d_buf = &ref_s_buf[F]
 
     cdef int32_t *neg_ids = &ctx.neg_id_base[<size_t>tid * ctx.neg_id_stride]
 
@@ -2726,6 +2743,11 @@ cdef void _fit_v050_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil
                 u_raw_buf, u_out_buf, u_inv_buf
             )
 
+            # With item features the cached rows lag behind the feature weights between block refreshes. A gradient
+            # taken from a lagging row keeps pushing a pair that is already ranked correctly, so the positive item
+            # here, and every negative that receives an update below, is rebuilt from the current weights first.
+            if x_if_any:
+                _refresh_single_item_v050(ctx.refresh, i, ref_s_buf, ref_d_buf)
             rfm_vec_copy(F, &ctx.v_eff_ptr[<int64_t>i * <int64_t>F], i_emb_buf)
 
             # Evaluate positive across M user interest heads
@@ -2790,6 +2812,19 @@ cdef void _fit_v050_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil
 
                 j = min_index
                 pairwise_utility = min_pairwise_utility
+                if x_if_any:
+                    _refresh_single_item_v050(ctx.refresh, j, ref_s_buf, ref_d_buf)
+                    if M == 1:
+                        dot_val = rfm_dot(F, u_out_buf, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F])
+                        ut_uj = ctx.b_eff_ptr[j] + (inv_temp * dot_val if use_cosine else dot_val)
+                    else:
+                        ut_uj = -1e30
+                        for m in range(M):
+                            dot_val = rfm_dot(F, &u_out_buf[<int64_t>m * <int64_t>F], &ctx.v_eff_ptr[<int64_t>j * <int64_t>F])
+                            s_m = ctx.b_eff_ptr[j] + (inv_temp * dot_val if use_cosine else dot_val)
+                            if s_m > ut_uj:
+                                ut_uj = s_m
+                    pairwise_utility = (ut_ui - margin_r) - (ut_uj - (logq_weight * (ctx.log_q_ptr[j] - ctx.log_q_ptr[i]) if logq_weight != 0.0 and ctx.log_q_ptr != NULL else 0.0))
                 if ctx.verbose:
                     local_ll += <double>safe_log_sigmoid(pairwise_utility)
 
@@ -2844,6 +2879,8 @@ cdef void _fit_v050_worker(int tid, int n_threads, void *raw_ctx) noexcept nogil
                         if j != i and (tries >= 8 or u_seen_ptr == NULL or not item_observed(j, u_seen_ptr, n_seen_u)):
                             break
                     neg_ids[k] = j
+                    if x_if_any:
+                        _refresh_single_item_v050(ctx.refresh, j, ref_s_buf, ref_d_buf)
                     if M == 1:
                         dot_val = rfm_dot(F, u_out_buf, &ctx.v_eff_ptr[<int64_t>j * <int64_t>F])
                         ut_uj = ctx.b_eff_ptr[j] + (inv_temp * dot_val if use_cosine else dot_val)
@@ -3260,7 +3297,8 @@ def _fit_v050(
     float head_agg_temperature,
     float freq_gate_static_drop,
     int seed=1492,
-    int n_threads=1
+    int n_threads=1,
+    bint normalize_steps=True
 ):
     """multi-threaded nogil SGD trainer for RankFM v0.5.0"""
 
@@ -3300,6 +3338,15 @@ def _fit_v050(
     if eff_threads > 1 and N // eff_threads < 256:
         eff_threads = max(1, <int>(N // 256))
 
+    # per-item step scale 1 / (1 + |x_m|^2) for normalized updates (see _update_single_item_v050)
+    cdef float[::1] if_step_scale_mv
+    cdef bint scale_item_steps = normalize_steps and x_if_any and if_data.shape[0] > 0
+    if scale_item_steps:
+        if_row_ids = np.repeat(np.arange(I, dtype=np.int64), np.diff(if_indptr_i64))
+        if_values = np.asarray(if_data, dtype=np.float64)
+        if_sq_norm = np.bincount(if_row_ids, weights=if_values * if_values, minlength=I)
+        if_step_scale_mv = np.ascontiguousarray(1.0 / (1.0 + if_sq_norm), dtype=np.float32)
+
     cdef int K_event = max(1, <int>g_event.shape[0])
     cdef int G_uf = max(1, <int>gamma_uf.shape[0])
     cdef int G_if = max(1, <int>gamma_if.shape[0])
@@ -3322,7 +3369,7 @@ def _fit_v050(
     cdef float[::1] uf_fld_scale = uf_fld_scale_arr
     cdef float[::1] if_fld_scale = if_fld_scale_arr
 
-    cdef size_t raw_sc = <size_t>((7 + 3 * M) * F + 4 * M + eff_samples + max_h * M)
+    cdef size_t raw_sc = <size_t>((9 + 3 * M) * F + 4 * M + eff_samples + max_h * M)
     cdef size_t scratch_stride = (raw_sc + 15u) & ~(<size_t>15u)
     cdef size_t neg_id_stride = (<size_t>eff_samples + 15u) & ~(<size_t>15u)
     cdef size_t raw_gg = <size_t>((K_event + 1 + G_uf + G_if + 2 + M) * F)
@@ -3407,6 +3454,8 @@ def _fit_v050(
 
     cdef FitV050Ctx ctx
     memset(&ctx, 0, sizeof(FitV050Ctx))
+    ctx.refresh = &ref_ctx
+    ctx.if_step_scale_ptr = &if_step_scale_mv[0] if scale_item_steps else NULL
     ctx.u_ptr = &u_idx[0]
     ctx.i_ptr = &i_idx[0]
     ctx.sw_ptr = &sw_mv[0] if has_weights else NULL

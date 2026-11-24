@@ -2812,6 +2812,7 @@ class RankFM():
                 self.freq_gate_static_drop,
                 eff_seed,
                 eff_threads,
+                self.normalize_steps,
             )
             self._invalidate_caches()
             if self.sparse_residual_k > 0:
