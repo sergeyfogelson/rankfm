@@ -32,7 +32,7 @@ jobs:
         run: python setup.py build_ext --inplace
       - name: lint
         if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12'
-        run: python -m flake8 --ignore W3,E3,E5,E74 rankfm/
+        run: python -m flake8 --ignore W3,W5,E3,E5,E74 rankfm/
       - name: test
         run: python -m pytest -r Efp tests/
 

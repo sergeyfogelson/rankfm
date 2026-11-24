@@ -1985,6 +1985,7 @@ cdef inline float clamp_f32(float x, float lo, float hi) noexcept nogil:
 
 
 cdef struct RefreshItemsV050Ctx:
+    int failed                  # set by a worker that could not allocate its scratch space
     const float *w_i_ptr
     const float *w_if_ptr
     const float *v_i_ptr
@@ -2024,6 +2025,7 @@ cdef void _refresh_eff_items_v050_worker(int tid, int n_threads, void *raw_ctx) 
     cdef int F = ctx.F
     cdef float *s_vec = <float *>rfm_aligned_malloc(<size_t>(2 * F) * sizeof(float))
     if s_vec == NULL:
+        ctx.failed = 1
         return
     cdef float *d_vec = &s_vec[F]
 
@@ -2286,6 +2288,7 @@ cdef inline void _encode_single_user_v050(
 
 
 cdef struct EncodeUsersV050Ctx:
+    int failed                  # set by a worker that could not allocate its scratch space
     const int32_t *u_v_map_ptr
     const int32_t *u_uf_map_ptr
     const int32_t *u_uh_map_ptr
@@ -2335,6 +2338,7 @@ cdef void _encode_users_v050_worker(int tid, int n_threads, void *raw_ctx) noexc
     cdef size_t buf_floats = <size_t>((1 + 2 * M) * F + 2 * M + max_h * M)
     cdef float *buf = <float *>rfm_aligned_malloc(buf_floats * sizeof(float))
     if buf == NULL:
+        ctx.failed = 1
         return
 
     cdef float *u_base_buf = buf
@@ -3079,6 +3083,8 @@ def _compute_effective_items_v050(
         pool = rfm_pool_create(eff_threads)
         rfm_pool_run(pool, _refresh_eff_items_v050_worker, &ctx)
         rfm_pool_destroy(pool)
+    if ctx.failed:
+        raise MemoryError("failed to allocate RankFM item-cache scratch buffers")
 
     if use_cosine and out_scale != 1.0:
         v_unit = np.asarray(v_eff, dtype=np.float32) * np.float32(1.0 / out_scale)
@@ -3178,6 +3184,8 @@ def _encode_users_v050(
         pool = rfm_pool_create(eff_threads)
         rfm_pool_run(pool, _encode_users_v050_worker, &ctx)
         rfm_pool_destroy(pool)
+    if ctx.failed:
+        raise MemoryError("failed to allocate RankFM user-encoding scratch buffers")
     return out
 
 
@@ -3296,7 +3304,9 @@ def _fit_v050(
     cdef int G_uf = max(1, <int>gamma_uf.shape[0])
     cdef int G_if = max(1, <int>gamma_if.shape[0])
     cdef int max_h = max(1, max_hist_len)
-    cdef int eff_samples = max(1, max_samples)
+    # more samples than there are other items cannot be distinct, and for WARP the multiplier log((I - 1) / sampled)
+    # turns negative past that point, which would flip the update into gradient ascent
+    cdef int eff_samples = max(1, min(max_samples, <int>(I - 1)))
 
     cdef int32_t U_cnt = <int32_t>max(<int64_t>1, <int64_t>uf_indptr_arr.shape[0] - 1)
     uf_fld_scale_arr = np.ones(G_uf, dtype=np.float32)
@@ -3515,6 +3525,8 @@ def _fit_v050(
                     block_len = max(<int64_t>1, b_end - b_start)
 
                     rfm_pool_run(pool, _refresh_eff_items_v050_worker, &ref_ctx)
+                    if ref_ctx.failed:
+                        break
 
                     ctx.block_start = b_start
                     ctx.block_end = b_end
@@ -3624,6 +3636,9 @@ def _fit_v050(
                             rfm_normalize_inplace(F, &ctx.c_proto_ptr[m1 * F], 1e-6)
 
                     b_start = b_end
+
+            if ref_ctx.failed:
+                raise MemoryError("failed to allocate RankFM item-cache scratch buffers")
 
             # same finite and magnitude checks as the classic path, raised explicitly so `python -O` cannot strip them
             large_label, large_value = check_weights(w_i, w_if, v_u, v_i, v_uf, v_if)

@@ -3225,21 +3225,22 @@ class RankFM():
             if n_valid > 0 and n_catalog > 0:
                 chunk_size = max(64, min(4096, (32 * 1024 * 1024) // max(1, n_catalog * 4)))
                 v_i_eff_T = v_i_eff.T
-                for start in range(0, n_valid, chunk_size):
-                    end = min(start + chunk_size, n_valid)
-                    chunk_u = valid_u_idx[start:end]
-                    scores_chunk = np.ascontiguousarray(np.dot(u_emb[chunk_u], v_i_eff_T), dtype=np.float32)
-                    _select_topk_chunk(
-                        scores_chunk,
-                        item_bias,
-                        chunk_u,
-                        ui_indptr,
-                        ui_indices,
-                        n_items,
-                        filter_previous,
-                        out_valid_idx[start:end],
-                        eff_threads
-                    )
+                with _blas_thread_cap():
+                    for start in range(0, n_valid, chunk_size):
+                        end = min(start + chunk_size, n_valid)
+                        chunk_u = valid_u_idx[start:end]
+                        scores_chunk = np.ascontiguousarray(np.dot(u_emb[chunk_u], v_i_eff_T), dtype=np.float32)
+                        _select_topk_chunk(
+                            scores_chunk,
+                            item_bias,
+                            chunk_u,
+                            ui_indptr,
+                            ui_indices,
+                            n_items,
+                            filter_previous,
+                            out_valid_idx[start:end],
+                            eff_threads
+                        )
         else:
             if self._is_v050_mode:
                 u_emb, user_index_obj, ui_indptr, ui_indices, item_bias, v_i_eff, uh_ptr, uh_idx, uh_wt, hist_map = self._prepare_inference_state_v050(
@@ -3304,55 +3305,56 @@ class RankFM():
                 chunk_size = max(32, min(4096, (32 * 1024 * 1024) // max(1, n_catalog * M * 4)))
                 v_i_eff_T = v_i_eff.T
 
-                for start in range(0, n_valid, chunk_size):
-                    end = min(start + chunk_size, n_valid)
-                    B = end - start
-                    chunk_u = valid_u_idx[start:end]
-                    chunk_hist_u = np.ascontiguousarray(hist_map[chunk_u], dtype=np.int32) if hist_map is not None else chunk_u
+                with _blas_thread_cap():
+                    for start in range(0, n_valid, chunk_size):
+                        end = min(start + chunk_size, n_valid)
+                        B = end - start
+                        chunk_u = valid_u_idx[start:end]
+                        chunk_hist_u = np.ascontiguousarray(hist_map[chunk_u], dtype=np.int32) if hist_map is not None else chunk_u
 
-                    u_chunk_2d = u_emb[chunk_u].reshape(B * M, F)
-                    scores_chunk = np.ascontiguousarray(np.dot(u_chunk_2d, v_i_eff_T), dtype=np.float32)
+                        u_chunk_2d = u_emb[chunk_u].reshape(B * M, F)
+                        scores_chunk = np.ascontiguousarray(np.dot(u_chunk_2d, v_i_eff_T), dtype=np.float32)
 
-                    if has_ctx:
-                        p0 = int(ctx_full_ptr[start])
-                        p1 = int(ctx_full_ptr[end])
-                        if p1 > p0:
-                            c_ptr = np.ascontiguousarray(ctx_full_ptr[start:end + 1] - p0, dtype=np.int64)
-                            c_idx = ctx_full_idx[p0:p1]
-                            c_bon = ctx_full_bon[p0:p1]
+                        if has_ctx:
+                            p0 = int(ctx_full_ptr[start])
+                            p1 = int(ctx_full_ptr[end])
+                            if p1 > p0:
+                                c_ptr = np.ascontiguousarray(ctx_full_ptr[start:end + 1] - p0, dtype=np.int64)
+                                c_idx = ctx_full_idx[p0:p1]
+                                c_bon = ctx_full_bon[p0:p1]
+                            else:
+                                c_ptr, c_idx, c_bon = empty_ptr_1, empty_i32, empty_f32
                         else:
                             c_ptr, c_idx, c_bon = empty_ptr_1, empty_i32, empty_f32
-                    else:
-                        c_ptr, c_idx, c_bon = empty_ptr_1, empty_i32, empty_f32
 
-                    _select_topk_v050_chunk(
-                        scores_chunk,
-                        item_bias,
-                        chunk_u,
-                        chunk_hist_u,
-                        ui_indptr,
-                        ui_indices,
-                        uh_ptr,
-                        uh_idx,
-                        uh_wt,
-                        s_ptr,
-                        s_idx,
-                        s_dat,
-                        c_ptr,
-                        c_idx,
-                        c_bon,
-                        p_hist_use,
-                        v_unit_use,
-                        M,
-                        n_items,
-                        filter_previous,
-                        self.head_agg_temperature,
-                        self.sparse_residual_weight,
-                        self.target_attention_topk,
-                        self.target_attention_weight,
-                        out_valid_idx[start:end],
-                        eff_threads,
-                    )
+                        _select_topk_v050_chunk(
+                            scores_chunk,
+                            item_bias,
+                            chunk_u,
+                            chunk_hist_u,
+                            ui_indptr,
+                            ui_indices,
+                            uh_ptr,
+                            uh_idx,
+                            uh_wt,
+                            s_ptr,
+                            s_idx,
+                            s_dat,
+                            c_ptr,
+                            c_idx,
+                            c_bon,
+                            p_hist_use,
+                            v_unit_use,
+                            M,
+                            n_items,
+                            filter_previous,
+                            self.head_agg_temperature,
+                            self.sparse_residual_weight,
+                            self.target_attention_topk,
+                            self.target_attention_weight,
+                            out_valid_idx[start:end],
+                            eff_threads,
+                        )
 
         item_id_vals = self._item_index.to_numpy()
         all_items_valid = (out_valid_idx >= 0).all() if n_valid > 0 else True
