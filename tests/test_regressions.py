@@ -493,6 +493,24 @@ def test_v050_kernel_caps_samples_at_catalog_size():
         assert np.array_equal(getattr(capped, name), getattr(beyond, name))
 
 
+@pytest.mark.parametrize("loss", ["warp", "cosine_nce"])
+@pytest.mark.parametrize("n_jobs", [1, 2])
+def test_v050_kernel_learns_as_a_single_block(loss, n_jobs):
+    """without gates, item features or a frequency gate the v0.5 path trains each epoch as one block
+
+    that configuration rebuilds the item cache once per epoch and relies on each update keeping its own cache row
+    current, so accuracy here shows the cache stays usable between rebuilds, single-threaded and threaded"""
+
+    interactions, _, u_cluster, i_cluster = _clustered_with_item_features()
+    model = RankFM(factors=8, loss=loss, max_samples=10, learning_rate=0.1, margin=1e-6, n_jobs=n_jobs)
+    model.fit(interactions, epochs=30, seed=1)
+    assert model._is_v050_mode
+    eval_users = np.arange(0, 1500, 5)
+    recs = model.recommend(eval_users, n_items=10, filter_previous=True).to_numpy()
+    precision = float((i_cluster[recs] == u_cluster[eval_users][:, None]).mean())
+    assert precision > 0.85, precision
+
+
 def test_v050_mode_keeps_training_rows_in_input_order():
     """prev_items and margin_signal are aligned to the caller's rows, so the v0.5 path must not reorder them"""
 

@@ -28,6 +28,7 @@ This fork starts from the original's commit `c3e9395` and has been modified by S
 * **0.4.1**: reproducible seeding, container-aware thread counts, step normalization for side features, multi-threaded `feature_reg='uniform'`, faster `fit_partial`, input validation that survives `python -O`
 * **0.4.2**: corrected regularization and gradient computation when training with side features, a Dockerfile, and continuous integration on Linux, Windows and macOS
 * **0.4.5**: no fixed limit on interactions per fit, about 8 bytes of memory per interaction instead of 20, and optional batched updates for densely used feature columns (`dense_updates='batched'`)
+* **0.5.0**: a second training path for watch-history and sequence-anchor inputs, contrastive losses (`cosine_nce`, `simplex`), popularity-based negative sampling, field and frequency gates, multi-interest user representations, a sparse co-watch residual and target attention at inference, and the `FactorizedCrossNet` reranking head
 
 The public API of the original (`RankFM.fit`, `fit_partial`, `predict`, `recommend`, `similar_items`, `similar_users`, and the `rankfm.evaluation` functions) is kept, with new optional arguments. Models trained with this fork are not numerically identical to models trained with the original.
 
@@ -77,6 +78,7 @@ pip install git+https://github.com/sergeyfogelson/rankfm.git#egg=rankfm
 * **Learning rate with side features**: every active feature on a row adds to the effective step size, so raw SGD steps diverge once rows carry more than a few features. `normalize_steps=True` (the default) scales each update, gradient and L2 decay together, by the feature mass of the rows it touches. Training with user and/or item features is then stable over at least the same range of `learning_rate` as a model without features. It is not a guarantee, and training warns when weights grow past 1e3. Pass `normalize_steps=False` for unscaled updates.
 * **Item features and speed**: candidate negatives are scored from a cache of effective item embeddings, but the positive item and the chosen negative are recomputed from the current weights before each gradient step. A gradient taken from the cache alone keeps pushing pairs that are already ranked correctly. The recomputation costs roughly 30-45% of training throughput at 20 active features per item, and nothing without item features.
 * **Feature regularization**: `feature_reg='uniform'` works with any number of threads.
+* **The v0.5 training path**: any of the v0.5 options (for example `use_history`, `use_seq_anchor`, `loss='cosine_nce'`, `neg_sampling='popularity'`, `n_interests > 1`) switches training to a separate kernel; without them the classic kernel described above is used unchanged. The v0.5 kernel shares the classic one's safeguards: exact gradients with item features, `normalize_steps` for item updates, the divergence warning, reproducible seeding and the computed shuffle. It pools each user's history on every step, so it is slower: about 1.2M samples/s on one thread and 9M to 11M on 16 with a 25-item history, against 3.7M and 49M for the classic kernel on the same data. Each step writes one history-embedding row per history item, and those shared writes are what limit thread scaling; without history the v0.5 kernel reaches 20M to 34M samples/s on 16 threads. `dense_updates='batched'` and `feature_reg='uniform'` apply to the classic kernel only. Rows passed to `fit()` keep their order in this mode, because `prev_items` and `margin_signal` are aligned to them.
 * **Incremental updates**: `fit_partial()` places new interactions by binary search and reuses spare capacity when users are added, so a small batch costs one block copy of the stored history and one scan of the weights, not a re-sort. Sequential integer user IDs keep constant-time lookups; with arbitrary IDs the ID index is rebuilt whenever a batch adds users.
 * **Input checks**: NaN or infinite feature values and sample weights are rejected before training starts. Sparse feature matrices are copied, never sorted in place or referenced afterwards.
 * **Containers and CI**: the `Dockerfile` builds a Linux image (`docker build --build-arg RANKFM_MARCH=x86-64-v3 -t rankfm .`), and `ci/container_check.py` is an end-to-end check meant to run under a CPU limit (`docker run --rm --cpus=2 -e EXPECT_CPUS=2 rankfm`). GitHub Actions runs the tests on Linux (Python 3.10-3.13), Windows and macOS, and the container check on x86 Linux.
@@ -214,7 +216,7 @@ model = RankFM(
     use_freq_gate=True,
     sparse_residual_k=64,
     target_attention_topk=20,
-    n_threads=8,
+    n_jobs=8,
 )
 model.fit(interactions_train, user_features=uf, item_features=if_df, epochs=15)
 

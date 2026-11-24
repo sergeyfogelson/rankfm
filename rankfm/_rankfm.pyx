@@ -3414,8 +3414,18 @@ def _fit_v050(
     for s_idx in range(1, eff_samples + 1):
         mult_lut[s_idx] = <float>(log(<double>(I - 1) / <double>s_idx) / denom_log_I)
 
+    # Training runs in blocks. At each block boundary the gate and prototype tensors take the gradients the threads
+    # accumulated, and the item cache is rebuilt from the weights. Both cost a thread-pool wake-up per block, and the
+    # rebuild costs O(items) per block, so each is skipped when the configuration gives it nothing to do:
+    # * the cache rows of updated items are kept current by _update_single_item_v050, so the cache can only go stale
+    #   through shared item-feature weights or the frequency gate; without those one rebuild per epoch is enough
+    # * without any gate or prototype state there is nothing to apply at a boundary, so the epoch is a single block
+    cdef bint cache_goes_stale = x_if_any or use_freq_gate
+    cdef bint has_barrier_state = use_event_gates or use_seq_anchor or use_field_gates or use_freq_gate or M > 1
     cdef int64_t sync_interval
-    if use_cosine and N <= 16384:
+    if not cache_goes_stale and not has_barrier_state:
+        sync_interval = max(<int64_t>1, N)
+    elif use_cosine and N <= 16384:
         sync_interval = max(<int64_t>128, N // 4)
     elif N <= 2048:
         sync_interval = max(<int64_t>64, N // 4)
@@ -3573,9 +3583,10 @@ def _fit_v050(
                         b_end = N
                     block_len = max(<int64_t>1, b_end - b_start)
 
-                    rfm_pool_run(pool, _refresh_eff_items_v050_worker, &ref_ctx)
-                    if ref_ctx.failed:
-                        break
+                    if cache_goes_stale or b_start == 0:
+                        rfm_pool_run(pool, _refresh_eff_items_v050_worker, &ref_ctx)
+                        if ref_ctx.failed:
+                            break
 
                     ctx.block_start = b_start
                     ctx.block_end = b_end
