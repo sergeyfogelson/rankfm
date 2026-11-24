@@ -174,9 +174,8 @@ def test_stateful_fit_partial_expands_unseen_users():
     """fit_partial registers unseen users (with freeze_items=True or False) for subsequent standard predict/recommend"""
 
     interactions, user_features, item_features = _make_clustered_dataset()
-    np.random.seed(19)
     model = RankFM(factors=6, loss='warp', max_samples=5, learning_rate=0.1, user_dropout=0.2)
-    model.fit(interactions, user_features=user_features, item_features=item_features, epochs=20)
+    model.fit(interactions, user_features=user_features, item_features=item_features, epochs=20, seed=19)
 
     w_i_before = model.w_i.copy()
     v_i_before = model.v_i.copy()
@@ -193,7 +192,7 @@ def test_stateful_fit_partial_expands_unseen_users():
         (301, 6), (301, 7),
     ], columns=['user_id', 'item_id'])
 
-    model.fit_partial(partial_intx, user_features=partial_uf, epochs=20, freeze_items=True)
+    model.fit_partial(partial_intx, user_features=partial_uf, epochs=20, freeze_items=True, seed=19)
 
     # Item and feature weights must be untouched when freeze_items=True
     np.testing.assert_array_equal(model.w_i, w_i_before)

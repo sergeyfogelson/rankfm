@@ -5,7 +5,7 @@ rankfm model tuning and evaluation functions
 from collections import defaultdict
 import numpy as np
 import pandas as pd
-from rankfm.utils import get_data
+from rankfm.utils import get_data, require
 
 
 def _extract_test_user_items(test_interactions):
@@ -63,7 +63,7 @@ def hit_rate(
 ):
     """evaluate hit-rate (any match) wrt out-of-sample observed interactions"""
 
-    assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
+    require(model.is_fit, "you must fit the model prior to evaluating hold-out metrics")
 
     test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
@@ -101,7 +101,7 @@ def reciprocal_rank(
 ):
     """evaluate reciprocal rank wrt out-of-sample observed interactions"""
 
-    assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
+    require(model.is_fit, "you must fit the model prior to evaluating hold-out metrics")
 
     test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
@@ -139,7 +139,7 @@ def discounted_cumulative_gain(
 ):
     """evaluate discounted cumulative gain wrt out-of-sample observed interactions"""
 
-    assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
+    require(model.is_fit, "you must fit the model prior to evaluating hold-out metrics")
 
     test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
@@ -177,7 +177,7 @@ def precision(
 ):
     """evaluate precision wrt out-of-sample observed interactions"""
 
-    assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
+    require(model.is_fit, "you must fit the model prior to evaluating hold-out metrics")
 
     test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
@@ -214,7 +214,7 @@ def recall(
 ):
     """evaluate recall wrt out-of-sample observed interactions"""
 
-    assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
+    require(model.is_fit, "you must fit the model prior to evaluating hold-out metrics")
 
     test_user_items = _extract_test_user_items(test_interactions)
     test_users = list(test_user_items.keys())
@@ -250,7 +250,7 @@ def diversity(
 ):
     """evaluate the diversity of the model recommendations"""
 
-    assert model.is_fit, "you must fit the model prior to evaluating hold-out metrics"
+    require(model.is_fit, "you must fit the model prior to evaluating hold-out metrics")
 
     if isinstance(test_interactions, pd.DataFrame):
         test_users = pd.unique(test_interactions.iloc[:, 0].to_numpy())

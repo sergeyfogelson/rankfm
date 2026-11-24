@@ -23,6 +23,8 @@ from typing import Any
 
 import numpy as np
 
+from rankfm.utils import require
+
 
 def _soft_saturate(x: np.ndarray, cap: float = 8.0) -> np.ndarray:
     inv_c = np.float32(1.0 / cap)
@@ -149,7 +151,7 @@ class FactorizedCrossNet:
         """Transform raw `(..., P)` features into smooth bounded standardized space."""
         mu = mean_override if mean_override is not None else self.mean_
         istd = inv_std_override if inv_std_override is not None else self.inv_std_
-        assert mu is not None and istd is not None
+        require(mu is not None and istd is not None, "invalid argument or model state")
         orig_shape = X.shape
         X2 = np.asarray(X, dtype=np.float32).reshape(-1, orig_shape[-1])
         Z = (X2 - mu[None, :]) * istd[None, :]
@@ -169,7 +171,7 @@ class FactorizedCrossNet:
         Adapts continuous feature `(mean, inv_std)` to the scoring window's pre-cutoff candidate distribution
         while keeping binary `{0, 1}` indicator columns anchored to their training scale.
         """
-        assert self.mean_ is not None and self.inv_std_ is not None
+        require(self.mean_ is not None and self.inv_std_ is not None, "invalid argument or model state")
         P = int(self.n_features_)
         flat_X = np.asarray(X_unlabeled, dtype=np.float32).reshape(-1, P)
         if valid_mask is not None:
@@ -716,7 +718,7 @@ class FactorizedCrossNet:
         inv_std_override: np.ndarray | None = None,
     ) -> np.ndarray:
         """Predict `(...,)` scores in `float32` for candidate feature matrix `X (..., P)`."""
-        assert self.is_fitted and self.mean_ is not None and self.inv_std_ is not None
+        require(self.is_fitted and self.mean_ is not None and self.inv_std_ is not None, "invalid argument or model state")
         members = self.ensemble_params_ if self.ensemble_params_ else [self.params_]
         inv_m = np.float32(1.0 / float(len(members)))
         orig_shape = X.shape[:-1]
@@ -743,7 +745,7 @@ class FactorizedCrossNet:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize `FactorizedCrossNet` hyperparameters, scalers, and learned factor matrices."""
-        assert self.is_fitted and self.mean_ is not None and self.inv_std_ is not None
+        require(self.is_fitted and self.mean_ is not None and self.inv_std_ is not None, "invalid argument or model state")
         members = self.ensemble_params_ if self.ensemble_params_ else [self.params_]
         return {
             "config": {

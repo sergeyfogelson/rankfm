@@ -2,7 +2,11 @@
 rankfm main modeling class
 """
 
+import contextlib
+import math
 import os
+from collections import namedtuple
+
 import numpy as np
 import pandas as pd
 
@@ -14,12 +18,117 @@ from rankfm._rankfm import (
     _fit_csr,
     _fit_v050,
     _fold_in,
+    _locate_pairs_in_csr,
     _predict,
     _select_topk_chunk,
     _select_topk_v050_chunk,
     dense_to_csr,
 )
-from rankfm.utils import get_data
+from rankfm.utils import get_data, require
+
+try:
+    from threadpoolctl import threadpool_limits
+except ImportError:  # optional: without it the BLAS library keeps its own thread count
+    threadpool_limits = None
+
+
+# pre-extracted feature CSR passed between internal calls so repeated inference batches skip re-extraction
+_FeatureCSR = namedtuple('_FeatureCSR', ['ids', 'indptr', 'indices', 'data', 'n_cols', 'columns'])
+
+
+def _available_cpus():
+    """count the CPUs this process may actually use
+
+    os.cpu_count() reports every core on the host. inside a container (GKE, Cloud Run, Vertex AI) the process is
+    usually restricted to fewer by CPU affinity or a cgroup CPU quota, and starting one thread per host core then
+    oversubscribes the quota and gets throttled by the kernel scheduler.
+    """
+
+    if hasattr(os, 'sched_getaffinity'):
+        cpus = len(os.sched_getaffinity(0))
+    else:
+        cpus = os.cpu_count() or 1
+
+    quota = None
+    try:
+        with open('/sys/fs/cgroup/cpu.max') as f:  # cgroup v2
+            max_us, period_us = f.read().split()
+        if max_us != 'max':
+            quota = int(max_us) / int(period_us)
+    except (OSError, ValueError):
+        try:
+            with open('/sys/fs/cgroup/cpu/cpu.cfs_quota_us') as f:  # cgroup v1
+                max_us = int(f.read())
+            with open('/sys/fs/cgroup/cpu/cpu.cfs_period_us') as f:
+                period_us = int(f.read())
+            if max_us > 0 and period_us > 0:
+                quota = max_us / period_us
+        except (OSError, ValueError):
+            pass
+
+    if quota is not None:
+        cpus = min(cpus, math.ceil(quota))
+    return max(1, cpus)
+
+
+def _blas_thread_cap():
+    """context manager keeping BLAS within the CPUs available to this process
+
+    OpenBLAS and MKL size their thread pools from the host core count, so inside a CPU-limited container
+    the matrix product behind recommend() oversubscribes exactly as an uncapped [n_jobs] would
+    """
+
+    if threadpool_limits is None:
+        return contextlib.nullcontext()
+    return threadpool_limits(limits=_available_cpus(), user_api='blas')
+
+
+def _append_zero_rows(arr, n_extra):
+    """return [arr] followed by [n_extra] zero rows, reusing spare capacity when [arr] is the head of a larger buffer
+
+    growing by reallocation copies the whole table every time, so a stream of small fit_partial() calls that each
+    add a few users would pay for the full user table on every call. spare capacity makes that cost occasional.
+    """
+
+    n_rows = len(arr)
+    base = arr.base
+    reusable = isinstance(base, np.ndarray) and base.ndim == 2 and base.dtype == arr.dtype and base.flags.c_contiguous
+    if reusable:
+        reusable = base.shape[1] == arr.shape[1] and len(base) >= n_rows + n_extra
+    if reusable:
+        reusable = base.__array_interface__['data'][0] == arr.__array_interface__['data'][0]  # [arr] starts the buffer
+    if not reusable:
+        base = np.zeros((n_rows + n_extra + max(1024, n_rows // 4), arr.shape[1]), dtype=arr.dtype)
+        base[:n_rows] = arr
+
+    out = base[:n_rows + n_extra]
+    out[n_rows:] = 0
+    return out
+
+
+def _is_sorted_unique_pairs(u_arr, i_arr, chunk=1 << 24):
+    """True when the (user, item) pairs are strictly increasing, i.e. already sorted by user then item with no repeats
+
+    checked in chunks so the temporaries stay small however many pairs there are
+    """
+
+    n = len(u_arr)
+    for start in range(0, n - 1, chunk):
+        stop = min(start + chunk, n - 1)
+        u_step = np.diff(u_arr[start:stop + 1])
+        increasing = (u_step > 0) | ((u_step == 0) & (np.diff(i_arr[start:stop + 1]) > 0))
+        if not increasing.all():
+            return False
+    return True
+
+
+def _own_int32(arr, inputs):
+    """contiguous int32 version of [arr] that is guaranteed not to share memory with any of the caller's [inputs]"""
+
+    out = np.ascontiguousarray(arr, dtype=np.int32)
+    if any(isinstance(src, np.ndarray) and np.may_share_memory(out, src) for src in inputs):
+        out = out.copy()
+    return out
 
 
 def _is_scipy_sparse(obj):
@@ -180,12 +289,8 @@ def _fast_get_indexer(index_obj, query_arr):
     """O(1) arithmetic indexer for pd.RangeIndex(0, stop, 1), falling back to Index.get_indexer otherwise"""
 
     q = np.asarray(query_arr)
-    if (
-        isinstance(index_obj, pd.RangeIndex)
-        and index_obj.start == 0
-        and index_obj.step == 1
-        and q.dtype.kind in ('i', 'u')
-    ):
+    is_zero_based_range = isinstance(index_obj, pd.RangeIndex) and index_obj.start == 0 and index_obj.step == 1
+    if is_zero_based_range and q.dtype.kind in ('i', 'u'):
         stop = index_obj.stop
         ok = (q >= 0) & (q < stop)
         if ok.all():
@@ -213,6 +318,8 @@ class RankFM():
         user_dropout=0.0,
         n_jobs=1,
         feature_reg='stochastic',
+        normalize_steps=True,
+        dense_updates='lockfree',
         # --- RankFM v0.5.0 Extensions ---
         temperature=0.12,
         neg_sampling='uniform',
@@ -239,36 +346,64 @@ class RankFM():
         target_attention_topk=0,
         target_attention_weight=0.0,
     ):
-        """store hyperparameters and initialize internal model state"""
+        """store hyperparameters and initialize internal model state
 
-        assert isinstance(factors, int) and factors >= 1, "[factors] must be a positive integer"
-        assert isinstance(loss, str) and loss in ('bpr', 'warp', 'cosine_nce', 'simplex'), "[loss] must be in ('bpr', 'warp', 'cosine_nce', 'simplex')"
-        assert isinstance(max_samples, int) and max_samples > 0, "[max_samples] must be a positive integer"
-        assert isinstance(alpha, (int, float)) and float(alpha) > 0.0, "[alpha] must be a positive float"
-        assert isinstance(beta, (int, float)) and float(beta) > 0.0, "[beta] must be a positive float"
-        assert isinstance(sigma, (int, float)) and float(sigma) > 0.0, "[sigma] must be a positive float"
-        assert isinstance(learning_rate, (int, float)) and float(learning_rate) > 0.0, "[learning_rate] must be a positive float"
-        assert isinstance(learning_schedule, str) and learning_schedule in ('constant', 'invscaling'), "[learning_schedule] must be in ('constant', 'invscaling')"
-        assert isinstance(learning_exponent, (int, float)) and float(learning_exponent) > 0.0, "[learning_exponent] must be a positive float"
+        :param factors: latent factor rank
+        :param loss: optimization/loss function to use for training: ['bpr', 'warp']
+        :param max_samples: maximum number of negative samples to draw for WARP loss
+        :param alpha: L2 regularization penalty on [user, item] model weights
+        :param beta: L2 regularization penalty on [user-feature, item-feature] model weights
+        :param sigma: standard deviation to use for random initialization of factor weights
+        :param learning_rate: initial learning rate for gradient step updates
+        :param learning_schedule: schedule for adjusting learning rates by training epoch: ['constant', 'invscaling']
+        :param learning_exponent: exponent applied to epoch number to adjust learning rate: scaling = 1 / pow(epoch + 1, learning_exponent)
+        :param user_dropout: probability in [0.0, 1.0) of masking user-ID factors during training when user_features are present,
+                             encouraging user-feature factors [v_uf] to generalize to unseen cold-start users
+        :param n_jobs: number of C worker threads (1 = single-threaded, -1 = all CPU cores, -2 = all cores minus 1)
+        :param feature_reg: regularization mode for sparse user/item features: ['stochastic', 'uniform']
+        :param normalize_steps: scale each SGD step by the feature mass of the rows it touches, so that adding side features
+                                does not raise the effective learning rate. with False the raw [learning_rate] is applied to
+                                every weight, which diverges once rows carry more than a few active features
+        :param dense_updates: how weights of densely used feature columns (non-zero on at least 1/16 of rows) are updated:
+                              'lockfree' writes them on every step like all other weights, which stops scaling beyond
+                              a few threads because every thread keeps writing the same rows. 'batched' has each thread
+                              collect those updates and apply them once every 64 steps, scaled down when
+                              learning_rate * threads * 64 exceeds a stability limit, which restores scaling across
+                              threads. not available with feature_reg='uniform'
+        :return: None
+        """
+
+        require(isinstance(factors, int) and factors >= 1, "[factors] must be a positive integer")
+        require(isinstance(loss, str) and loss in ('bpr', 'warp', 'cosine_nce', 'simplex'), "[loss] must be in ('bpr', 'warp', 'cosine_nce', 'simplex')")
+        require(isinstance(max_samples, int) and max_samples > 0, "[max_samples] must be a positive integer")
+        require(isinstance(alpha, (int, float)) and float(alpha) > 0.0, "[alpha] must be a positive float")
+        require(isinstance(beta, (int, float)) and float(beta) > 0.0, "[beta] must be a positive float")
+        require(isinstance(sigma, (int, float)) and float(sigma) > 0.0, "[sigma] must be a positive float")
+        require(isinstance(learning_rate, (int, float)) and float(learning_rate) > 0.0, "[learning_rate] must be a positive float")
+        require(isinstance(learning_schedule, str) and learning_schedule in ('constant', 'invscaling'), "[learning_schedule] must be in ('constant', 'invscaling')")
+        require(isinstance(learning_exponent, (int, float)) and float(learning_exponent) > 0.0, "[learning_exponent] must be a positive float")
         max_drop_ok = (use_history or use_seq_anchor or loss in ('cosine_nce', 'simplex'))
         if max_drop_ok:
-            assert isinstance(user_dropout, (int, float)) and 0.0 <= float(user_dropout) <= 1.0, "[user_dropout] must be in [0.0, 1.0]"
+            require(isinstance(user_dropout, (int, float)) and 0.0 <= float(user_dropout) <= 1.0, "[user_dropout] must be in [0.0, 1.0]")
         else:
-            assert isinstance(user_dropout, (int, float)) and 0.0 <= float(user_dropout) < 1.0, "[user_dropout] must be a float in [0.0, 1.0)"
-        assert isinstance(n_jobs, int) and n_jobs != 0, "[n_jobs] must be a non-zero integer (e.g. 1, 4, -1)"
-        assert isinstance(feature_reg, str) and feature_reg in ('stochastic', 'uniform'), "[feature_reg] must be in ('stochastic', 'uniform')"
+            require(isinstance(user_dropout, (int, float)) and 0.0 <= float(user_dropout) < 1.0, "[user_dropout] must be a float in [0.0, 1.0)")
+        require(isinstance(n_jobs, int) and n_jobs != 0, "[n_jobs] must be a non-zero integer (e.g. 1, 4, -1)")
+        require(isinstance(feature_reg, str) and feature_reg in ('stochastic', 'uniform'), "[feature_reg] must be in ('stochastic', 'uniform')")
+        require(isinstance(normalize_steps, bool), "[normalize_steps] must be a boolean value")
+        require(isinstance(dense_updates, str) and dense_updates in ('lockfree', 'batched'), "[dense_updates] must be in ('lockfree', 'batched')")
+        require(not (dense_updates == 'batched' and feature_reg == 'uniform'), "[dense_updates]='batched' cannot be combined with [feature_reg]='uniform'")
 
-        assert isinstance(temperature, (int, float)) and float(temperature) > 0.0, "[temperature] must be positive"
-        assert isinstance(neg_sampling, str) and neg_sampling in ('uniform', 'popularity'), "[neg_sampling] must be in ('uniform', 'popularity')"
-        assert isinstance(neg_pop_exponent, (int, float)) and 0.0 <= float(neg_pop_exponent) <= 2.0, "[neg_pop_exponent] must be in [0.0, 2.0]"
-        assert isinstance(neg_pop_mix, (int, float)) and 0.0 <= float(neg_pop_mix) <= 1.0, "[neg_pop_mix] must be in [0.0, 1.0]"
-        assert isinstance(max_history_len, int) and max_history_len >= 1, "[max_history_len] must be >= 1"
-        assert isinstance(n_event_types, int) and n_event_types >= 1, "[n_event_types] must be >= 1"
-        assert isinstance(n_interests, int) and n_interests >= 1, "[n_interests] must be >= 1"
-        assert isinstance(interest_temperature, (int, float)) and float(interest_temperature) > 0.0, "[interest_temperature] must be positive"
-        assert isinstance(head_agg_temperature, (int, float)) and float(head_agg_temperature) >= 0.0, "[head_agg_temperature] must be >= 0.0"
-        assert isinstance(sparse_residual_k, int) and sparse_residual_k >= 0, "[sparse_residual_k] must be >= 0"
-        assert isinstance(target_attention_topk, int) and target_attention_topk >= 0, "[target_attention_topk] must be >= 0"
+        require(isinstance(temperature, (int, float)) and float(temperature) > 0.0, "[temperature] must be positive")
+        require(isinstance(neg_sampling, str) and neg_sampling in ('uniform', 'popularity'), "[neg_sampling] must be in ('uniform', 'popularity')")
+        require(isinstance(neg_pop_exponent, (int, float)) and 0.0 <= float(neg_pop_exponent) <= 2.0, "[neg_pop_exponent] must be in [0.0, 2.0]")
+        require(isinstance(neg_pop_mix, (int, float)) and 0.0 <= float(neg_pop_mix) <= 1.0, "[neg_pop_mix] must be in [0.0, 1.0]")
+        require(isinstance(max_history_len, int) and max_history_len >= 1, "[max_history_len] must be >= 1")
+        require(isinstance(n_event_types, int) and n_event_types >= 1, "[n_event_types] must be >= 1")
+        require(isinstance(n_interests, int) and n_interests >= 1, "[n_interests] must be >= 1")
+        require(isinstance(interest_temperature, (int, float)) and float(interest_temperature) > 0.0, "[interest_temperature] must be positive")
+        require(isinstance(head_agg_temperature, (int, float)) and float(head_agg_temperature) >= 0.0, "[head_agg_temperature] must be >= 0.0")
+        require(isinstance(sparse_residual_k, int) and sparse_residual_k >= 0, "[sparse_residual_k] must be >= 0")
+        require(isinstance(target_attention_topk, int) and target_attention_topk >= 0, "[target_attention_topk] must be >= 0")
 
         self.factors = int(factors)
         self.loss = loss
@@ -282,6 +417,8 @@ class RankFM():
         self.user_dropout = float(user_dropout)
         self.n_jobs = int(n_jobs)
         self.feature_reg = feature_reg
+        self.normalize_steps = normalize_steps
+        self.dense_updates = dense_updates
 
         self.temperature = float(temperature)
         self.neg_sampling = neg_sampling
@@ -343,10 +480,9 @@ class RankFM():
 
     def _resolve_n_jobs(self, n_jobs=None):
         nj = self.n_jobs if n_jobs is None else int(n_jobs)
-        assert nj != 0, "[n_jobs] must be non-zero"
+        require(nj != 0, "[n_jobs] must be non-zero")
         if nj < 0:
-            cpus = os.cpu_count() or 1
-            return max(1, cpus + 1 + nj)
+            return max(1, _available_cpus() + 1 + nj)
         return nj
 
 
@@ -375,8 +511,10 @@ class RankFM():
         self.user_idx = None
         self.item_idx = None
 
-        # user/item interactions and importance weights
-        self.interactions = None
+        # [user_idx] and [item_idx] of the interactions used by the most recent fit call, and their importance
+        # weights (None means every interaction weighs 1)
+        self._intx_u = None
+        self._intx_i = None
         self.sample_weight = None
 
         # CSR representation of observed items per user
@@ -501,6 +639,18 @@ class RankFM():
 
 
     @property
+    def interactions(self):
+        """(N, 2) int32 array of the [user_idx, item_idx] pairs used by the most recent fit call, built on request
+
+        the pairs are stored as two parallel arrays (the item array doubles as the seen-items index when the
+        input allows it), so this stacked view is a copy and is not kept
+        """
+        if self._intx_u is None:
+            return None
+        return np.column_stack([self._intx_u, self._intx_i])
+
+
+    @property
     def x_uf(self):
         """lazily materialize dense (U, P_uf) float32 user-feature matrix for backwards compatibility"""
         if self._uf_indptr is None:
@@ -579,22 +729,61 @@ class RankFM():
     def _pairs_to_csr(u_arr, i_arr, n_users, n_items):
         """convert (user_idx, item_idx) integer arrays into sorted, deduplicated CSR (indptr, indices) arrays"""
 
+        # indptr is always int64: that is what the C kernels read, so they never need a converted copy
         if n_users == 0:
-            return np.zeros(1, dtype=np.int32), np.zeros(0, dtype=np.int32)
+            return np.zeros(1, dtype=np.int64), np.zeros(0, dtype=np.int32)
         if len(u_arr) == 0 or n_items == 0:
-            return np.zeros(n_users + 1, dtype=np.int32), np.zeros(0, dtype=np.int32)
+            return np.zeros(n_users + 1, dtype=np.int64), np.zeros(0, dtype=np.int32)
 
+        # in-place sort + adjacent compare: several times faster than np.unique, which hashes on NumPy >= 2.3
         codes = u_arr.astype(np.int64) * np.int64(n_items) + i_arr.astype(np.int64)
-        uniq_codes = np.unique(codes)
+        codes.sort()
+        is_first = np.empty(len(codes), dtype=bool)
+        is_first[0] = True
+        np.not_equal(codes[1:], codes[:-1], out=is_first[1:])
+        uniq_codes = codes[is_first]
         uniq_u = (uniq_codes // np.int64(n_items)).astype(np.int32)
         uniq_i = np.ascontiguousarray(uniq_codes % np.int64(n_items), dtype=np.int32)
 
         counts = np.bincount(uniq_u, minlength=n_users)
-        ptr_dtype = np.int64 if len(uniq_i) >= 2_147_483_647 else np.int32
-        indptr = np.empty(n_users + 1, dtype=ptr_dtype)
+        indptr = np.empty(n_users + 1, dtype=np.int64)
         indptr[0] = 0
-        np.cumsum(counts, dtype=ptr_dtype, out=indptr[1:])
+        np.cumsum(counts, dtype=np.int64, out=indptr[1:])
         return indptr, uniq_i
+
+
+    @staticmethod
+    def _merge_pairs_into_csr(indptr, indices, u_arr, i_arr, n_users, n_items):
+        """add (user_idx, item_idx) pairs to an existing sorted, deduplicated CSR, growing it to [n_users] rows
+
+        only the incoming pairs are sorted. each is then placed by a binary search inside its own user's row, and
+        the stored history is touched once, by the block copy that opens the gaps. nothing is re-sorted or re-keyed.
+        """
+
+        if len(indices) == 0:
+            return RankFM._pairs_to_csr(u_arr, i_arr, n_users, n_items)
+
+        out_indptr = np.empty(n_users + 1, dtype=np.int64)
+        out_indptr[:len(indptr)] = indptr
+        out_indptr[len(indptr):] = indptr[-1]
+        if len(u_arr) == 0:
+            return out_indptr, indices
+
+        codes = u_arr.astype(np.int64) * np.int64(n_items) + i_arr.astype(np.int64)
+        codes.sort()
+        is_first = np.empty(len(codes), dtype=bool)
+        is_first[0] = True
+        np.not_equal(codes[1:], codes[:-1], out=is_first[1:])
+        codes = codes[is_first]
+        new_u = np.ascontiguousarray(codes // np.int64(n_items), dtype=np.int32)
+        new_i = np.ascontiguousarray(codes % np.int64(n_items), dtype=np.int32)
+
+        positions, present = _locate_pairs_in_csr(out_indptr, indices, new_u, new_i)
+        unseen = ~present
+        if unseen.any():
+            indices = np.insert(indices, positions[unseen], new_i[unseen])
+            out_indptr[1:] += np.cumsum(np.bincount(new_u[unseen], minlength=n_users))
+        return out_indptr, np.ascontiguousarray(indices, dtype=np.int32)
 
 
     @staticmethod
@@ -637,6 +826,9 @@ class RankFM():
           4. (ids, matrix) tuple where [ids] is a 1D array/Series/Index and [matrix] is scipy.sparse or 2D float ndarray
         """
 
+        if isinstance(features, _FeatureCSR):
+            return tuple(features)
+
         cols_out = None
 
         if _is_scipy_sparse(features):
@@ -662,10 +854,8 @@ class RankFM():
                 mat_sp = None
         else:
             mat_sp = None
-            assert isinstance(features, (np.ndarray, pd.DataFrame)), (
-                "[{}] must be np.ndarray, pd.DataFrame, scipy.sparse matrix, or (ids, matrix) tuple".format(name)
-            )
-            assert features.shape[1] >= 2, "[{}] must contain an ID column plus at least one feature column".format(name)
+            require(isinstance(features, (np.ndarray, pd.DataFrame)), "[{}] must be np.ndarray, pd.DataFrame, scipy.sparse matrix, or (ids, matrix) tuple".format(name))
+            require(features.shape[1] >= 2, "[{}] must contain an ID column plus at least one feature column".format(name))
 
             if isinstance(features, pd.DataFrame):
                 id_col = features.columns[0]
@@ -684,7 +874,7 @@ class RankFM():
         if mat_sp is not None:
             csr = mat_sp.tocsr()
             if not csr.has_sorted_indices:
-                csr.sort_indices()
+                csr = csr.sorted_indices()  # a sorted copy: sort_indices() would reorder the caller's matrix in place
             n_cols = int(csr.shape[1])
             if expected_width is not None and n_cols != expected_width:
                 raise ValueError("[{}] has {} feature columns, expected {}".format(name, n_cols, expected_width))
@@ -694,6 +884,7 @@ class RankFM():
             indptr = np.ascontiguousarray(csr.indptr, dtype=np.int64)
             indices = np.ascontiguousarray(csr.indices, dtype=np.int32)
             data = np.ascontiguousarray(csr.data, dtype=np.float32)
+            require(np.isfinite(data.sum(dtype=np.float64)), "[{}] contains NaN or infinite values".format(name))
 
             if raw_ids.has_duplicates:
                 keep_pos = np.flatnonzero(~raw_ids.duplicated(keep='last'))
@@ -715,6 +906,7 @@ class RankFM():
         if not has_any:
             indices = np.zeros(0, dtype=np.int32)
             data = np.zeros(0, dtype=np.float32)
+        require(np.isfinite(data.sum(dtype=np.float64)), "[{}] contains NaN or infinite values".format(name))
         return raw_ids, indptr, indices, data, n_cols, cols_out
 
 
@@ -722,8 +914,8 @@ class RankFM():
     def _extract_interaction_columns(interactions):
         """extract (user_col_array, item_col_array) without full DataFrame copies"""
 
-        assert isinstance(interactions, (np.ndarray, pd.DataFrame)), "[interactions] must be np.ndarray, pd.DataFrame, or scipy.sparse matrix"
-        assert interactions.shape[1] == 2, "[interactions] should be: [user_id, item_id]"
+        require(isinstance(interactions, (np.ndarray, pd.DataFrame)), "[interactions] must be np.ndarray, pd.DataFrame, or scipy.sparse matrix")
+        require(interactions.shape[1] == 2, "[interactions] should be: [user_id, item_id]")
 
         if isinstance(interactions, pd.DataFrame):
             return interactions.iloc[:, 0].to_numpy(), interactions.iloc[:, 1].to_numpy()
@@ -747,7 +939,7 @@ class RankFM():
         if _is_scipy_sparse(interactions):
             # Zero-Pandas sparse matrix fast path: rows = 0..U-1, cols = 0..I-1, data = sample_weight (unless overridden)
             n_u, n_i = int(interactions.shape[0]), int(interactions.shape[1])
-            assert n_u >= 1 and n_i >= 1, "sparse [interactions] must have positive shape (n_users, n_items)"
+            require(n_u >= 1 and n_i >= 1, "sparse [interactions] must have positive shape (n_users, n_items)")
             self._user_index = pd.RangeIndex(0, n_u)
             self._item_index = pd.RangeIndex(0, n_i)
             self.user_idx = np.arange(n_u, dtype=np.int32)
@@ -757,15 +949,16 @@ class RankFM():
             u_arr = np.ascontiguousarray(coo.row, dtype=np.int32)
             i_arr = np.ascontiguousarray(coo.col, dtype=np.int32)
             if sample_weight is not None:
-                assert isinstance(sample_weight, (np.ndarray, pd.Series)), "[sample_weight] must be np.ndarray or pd.series"
-                assert sample_weight.ndim == 1 and len(sample_weight) == len(u_arr), "[sample_weight] must match sparse nnz"
-                self.sample_weight = np.ascontiguousarray(get_data(sample_weight), dtype=np.float32)
+                require(isinstance(sample_weight, (np.ndarray, pd.Series)), "[sample_weight] must be np.ndarray or pd.series")
+                require(sample_weight.ndim == 1 and len(sample_weight) == len(u_arr), "[sample_weight] must match sparse nnz")
+                self.sample_weight = np.array(get_data(sample_weight), dtype=np.float32)
+            elif len(coo.data) > 0 and coo.data.min() == 1 and coo.data.max() == 1:
+                self.sample_weight = None  # a binary matrix: no per-interaction weights to store
             else:
-                self.sample_weight = np.ascontiguousarray(coo.data, dtype=np.float32)
+                self.sample_weight = np.array(coo.data, dtype=np.float32)
 
-            self._ui_indptr, self._ui_indices = self._pairs_to_csr(u_arr, i_arr, n_u, n_i)
-            self._user_items_cache = None
-            self.interactions = np.ascontiguousarray(np.column_stack([u_arr, i_arr]), dtype=np.int32)
+            caller_arrays = (coo.row, coo.col, getattr(interactions, 'indices', None))
+            self._index_initial_pairs(u_arr, i_arr, n_u, n_i, caller_arrays, keep_input_order=self._is_v050_mode)
         else:
             u_col, i_col = self._extract_interaction_columns(interactions)
             self._user_index, u_mapped = _fast_unique_and_map(u_col)
@@ -774,18 +967,16 @@ class RankFM():
             self.item_idx = np.arange(len(self._item_index), dtype=np.int32)
 
             if sample_weight is not None:
-                assert isinstance(sample_weight, (np.ndarray, pd.Series)), "[sample_weight] must be np.ndarray or pd.series"
-                assert sample_weight.ndim == 1, "[sample_weight] must a vector (ndim=1)"
-                assert len(sample_weight) == len(u_col), "[sample_weight] must have the same length as [interactions]"
-                self.sample_weight = np.ascontiguousarray(get_data(sample_weight), dtype=np.float32)
+                require(isinstance(sample_weight, (np.ndarray, pd.Series)), "[sample_weight] must be np.ndarray or pd.series")
+                require(sample_weight.ndim == 1, "[sample_weight] must a vector (ndim=1)")
+                require(len(sample_weight) == len(u_col), "[sample_weight] must have the same length as [interactions]")
+                self.sample_weight = np.array(get_data(sample_weight), dtype=np.float32)
             else:
-                self.sample_weight = np.ones(len(u_mapped), dtype=np.float32)
+                self.sample_weight = None
 
-            self._ui_indptr, self._ui_indices = self._pairs_to_csr(
-                u_mapped, i_mapped, len(self.user_idx), len(self.item_idx)
+            self._index_initial_pairs(
+                u_mapped, i_mapped, len(self.user_idx), len(self.item_idx), (u_col, i_col), keep_input_order=self._is_v050_mode
             )
-            self._user_items_cache = None
-            self.interactions = np.ascontiguousarray(np.column_stack([u_mapped, i_mapped]), dtype=np.int32)
 
         self._init_features(user_features, item_features, n_threads=n_threads)
         self._init_weights(
@@ -798,7 +989,40 @@ class RankFM():
         )
 
 
-    def _expand_users_for_partial(self, u_col, i_col, freeze_items=False):
+    def _index_initial_pairs(self, u_arr, i_arr, n_users, n_items, caller_arrays, keep_input_order=False):
+        """build the seen-items CSR for a fresh fit and choose the arrays training reads, sharing storage where possible
+
+        three layouts, cheapest first (bytes per interaction, before optional weights):
+          8   pairs already sorted by (user, item) with no repeats: the item column is used as the CSR index as is
+          8   unique pairs in any order and no weights: training reads the sorted index, the input order is dropped
+          12  anything else (repeats, or unsorted pairs with weights): the index plus the pairs in their input order
+        repeats are kept as separate training rows in the last layout, so their effect on training is unchanged.
+
+        [keep_input_order] rules out the second layout. The v0.5 training path needs it: prev_items and margin_signal are
+        aligned row by row with the interactions as given, and a user's "last item" is read off the input order.
+        """
+
+        self._user_items_cache = None
+
+        if _is_sorted_unique_pairs(u_arr, i_arr):
+            indptr = np.zeros(n_users + 1, dtype=np.int64)
+            np.cumsum(np.bincount(u_arr, minlength=n_users), out=indptr[1:])
+            self._ui_indptr = indptr
+            self._ui_indices = _own_int32(i_arr, caller_arrays)
+            self._intx_u = _own_int32(u_arr, caller_arrays)
+            self._intx_i = self._ui_indices
+            return
+
+        self._ui_indptr, self._ui_indices = self._pairs_to_csr(u_arr, i_arr, n_users, n_items)
+        if not keep_input_order and self.sample_weight is None and len(self._ui_indices) == len(u_arr):
+            self._intx_u = np.repeat(np.arange(n_users, dtype=np.int32), np.diff(self._ui_indptr))
+            self._intx_i = self._ui_indices
+        else:
+            self._intx_u = _own_int32(u_arr, caller_arrays)
+            self._intx_i = _own_int32(i_arr, caller_arrays)
+
+
+    def _expand_users_for_partial(self, u_col, i_col, freeze_items=False, seed=1492):
         """append any previously unseen users in interactions to the model's user index and state arrays"""
 
         valid_item_mask = _fast_get_indexer(self._item_index, i_col) >= 0
@@ -809,18 +1033,27 @@ class RankFM():
             return
 
         n_new = len(new_users)
-        self._user_index = pd.Index(np.concatenate([self._user_index.to_numpy(), new_users]))
+        old_index = self._user_index
+        continues_range = isinstance(old_index, pd.RangeIndex) and old_index.start == 0 and old_index.step == 1
+        if continues_range and new_users.dtype.kind in ('i', 'u'):
+            # [new_users] is sorted and unique, so matching endpoints mean it is exactly stop .. stop + n_new - 1
+            continues_range = int(new_users[0]) == old_index.stop and int(new_users[-1]) == old_index.stop + n_new - 1
+        else:
+            continues_range = False
+        if continues_range:
+            # sequential integer IDs stay a RangeIndex: lookups remain arithmetic and nothing is rebuilt
+            self._user_index = pd.RangeIndex(0, old_index.stop + n_new)
+        else:
+            self._user_index = pd.Index(np.concatenate([old_index.to_numpy(), new_users]))
         self._user_id_series = None
         self._user_to_index_series = None
         self.user_idx = np.arange(len(self._user_index), dtype=np.int32)
 
         n_rows_new = n_new * self.n_interests
-        if self.has_uf or freeze_items or self.user_dropout >= 1.0:
-            new_v_u = np.zeros((n_rows_new, self.factors), dtype=np.float32)
-        else:
-            new_v_u = np.random.normal(loc=0, scale=self.sigma, size=(n_rows_new, self.factors)).astype(np.float32)
-
-        self.v_u = np.ascontiguousarray(np.vstack([self.v_u, new_v_u]), dtype=np.float32)
+        self.v_u = _append_zero_rows(self.v_u, n_rows_new)
+        if not (self.has_uf or freeze_items or self.user_dropout >= 1.0):
+            rng = np.random.default_rng(seed)
+            self.v_u[-n_rows_new:] = rng.normal(loc=0, scale=self.sigma, size=(n_rows_new, self.factors))
 
         # Extend CSR user-feature indptr with empty rows in O(n_new) (zero dense matrix allocation!)
         last_ptr = int(self._uf_indptr[-1])
@@ -838,7 +1071,7 @@ class RankFM():
             )
 
 
-    def _init_interactions(self, interactions, sample_weight, freeze_items=False):
+    def _init_interactions(self, interactions, sample_weight, freeze_items=False, seed=1492):
         """map incremental interaction data to internal user/item indexes and update CSR user_items"""
 
         if _is_scipy_sparse(interactions):
@@ -851,12 +1084,12 @@ class RankFM():
             u_col, i_col = self._extract_interaction_columns(interactions)
 
         if sample_weight is not None:
-            assert isinstance(sample_weight, (np.ndarray, pd.Series)), "[sample_weight] must be np.ndarray or pd.series"
-            assert sample_weight.ndim == 1, "[sample_weight] must a vector (ndim=1)"
-            assert len(sample_weight) == len(u_col), "[sample_weight] must have the same length as [interactions]"
+            require(isinstance(sample_weight, (np.ndarray, pd.Series)), "[sample_weight] must be np.ndarray or pd.series")
+            require(sample_weight.ndim == 1, "[sample_weight] must a vector (ndim=1)")
+            require(len(sample_weight) == len(u_col), "[sample_weight] must have the same length as [interactions]")
 
         if self.is_fit:
-            self._expand_users_for_partial(u_col, i_col, freeze_items=freeze_items)
+            self._expand_users_for_partial(u_col, i_col, freeze_items=freeze_items, seed=seed)
 
         u_mapped = _fast_get_indexer(self._user_index, u_col)
         i_mapped = _fast_get_indexer(self._item_index, i_col)
@@ -871,24 +1104,23 @@ class RankFM():
 
         if sample_weight is not None:
             sw_raw = np.asarray(get_data(sample_weight), dtype=np.float32)
-            self.sample_weight = np.ascontiguousarray(sw_raw[valid_mask] if not valid_mask.all() else sw_raw, dtype=np.float32)
+            self.sample_weight = np.array(sw_raw[valid_mask] if not valid_mask.all() else sw_raw, dtype=np.float32)
         else:
-            self.sample_weight = np.ones(len(u_arr), dtype=np.float32)
+            self.sample_weight = None
 
         n_users = len(self.user_idx)
         n_items = len(self.item_idx)
 
         if self.is_fit and self._ui_indptr is not None:
-            old_counts = np.diff(self._ui_indptr)
-            old_u = np.repeat(np.arange(len(old_counts), dtype=np.int32), old_counts)
-            comb_u = np.concatenate([old_u, u_arr])
-            comb_i = np.concatenate([self._ui_indices, i_arr])
-            self._ui_indptr, self._ui_indices = self._pairs_to_csr(comb_u, comb_i, n_users, n_items)
+            self._ui_indptr, self._ui_indices = self._merge_pairs_into_csr(
+                self._ui_indptr, self._ui_indices, u_arr, i_arr, n_users, n_items
+            )
         else:
             self._ui_indptr, self._ui_indices = self._pairs_to_csr(u_arr, i_arr, n_users, n_items)
 
         self._user_items_cache = None
-        self.interactions = np.ascontiguousarray(np.column_stack([u_arr, i_arr]), dtype=np.int32)
+        self._intx_u = np.ascontiguousarray(u_arr, dtype=np.int32)
+        self._intx_i = np.ascontiguousarray(i_arr, dtype=np.int32)
 
 
     def _init_features(self, user_features=None, item_features=None, n_threads=1):
@@ -907,7 +1139,8 @@ class RankFM():
                 self.uf_columns = cols
                 self._n_uf = n_cols
                 if uf_ids.equals(self._user_index):
-                    self._uf_indptr, self._uf_indices, self._uf_data = indptr, indices, data
+                    # copies: these arrays may still be the caller's own sparse matrix buffers
+                    self._uf_indptr, self._uf_indices, self._uf_data = indptr.copy(), indices.copy(), data.copy()
                 else:
                     pos = _fast_get_indexer(uf_ids, self._user_index)
                     if (pos < 0).any():
@@ -935,7 +1168,7 @@ class RankFM():
                 self.if_columns = cols
                 self._n_if = n_cols
                 if if_ids.equals(self._item_index):
-                    self._if_indptr, self._if_indices, self._if_data = indptr, indices, data
+                    self._if_indptr, self._if_indices, self._if_data = indptr.copy(), indices.copy(), data.copy()
                 else:
                     pos = _fast_get_indexer(if_ids, self._item_index)
                     if (pos < 0).any():
@@ -1136,7 +1369,7 @@ class RankFM():
 
         if user_field_ids is not None:
             uf_arr = np.asarray(user_field_ids)
-            assert len(uf_arr) == self._n_uf, "[user_field_ids] length must match user feature width"
+            require(len(uf_arr) == self._n_uf, "[user_field_ids] length must match user feature width")
             uniq_uf, inv_uf = np.unique(uf_arr, return_inverse=True)
             self.uf_field = np.ascontiguousarray(inv_uf, dtype=np.int32)
             n_g_uf = len(uniq_uf)
@@ -1149,7 +1382,7 @@ class RankFM():
 
         if item_field_ids is not None:
             if_arr = np.asarray(item_field_ids)
-            assert len(if_arr) == self._n_if, "[item_field_ids] length must match item feature width"
+            require(len(if_arr) == self._n_if, "[item_field_ids] length must match item feature width")
             uniq_if, inv_if = np.unique(if_arr, return_inverse=True)
             self.if_field = np.ascontiguousarray(inv_if, dtype=np.int32)
             n_g_if = len(uniq_if)
@@ -1162,7 +1395,7 @@ class RankFM():
 
         if item_dynamic_mask is not None:
             dyn_arr = np.asarray(item_dynamic_mask, dtype=np.int32)
-            assert len(dyn_arr) == self._n_if, "[item_dynamic_mask] length must match item feature width"
+            require(len(dyn_arr) == self._n_if, "[item_dynamic_mask] length must match item feature width")
             self.if_is_dyn = np.ascontiguousarray(dyn_arr, dtype=np.int32)
         elif self.use_freq_gate and self.has_if:
             self.if_is_dyn = np.zeros(self._n_if, dtype=np.int32)
@@ -1185,7 +1418,7 @@ class RankFM():
         else:
             self.c_proto = np.zeros((0, F), dtype=np.float32)
 
-        item_counts = np.bincount(self.interactions[:, 1], minlength=n_i).astype(np.float64)
+        item_counts = np.bincount(self._intx_i, minlength=n_i).astype(np.float64)
         self.item_log_freq = np.ascontiguousarray(np.log1p(item_counts), dtype=np.float32)
         self._alias_prob, self._alias_idx, self._log_q = self._build_alias_and_logq(item_counts)
 
@@ -1236,7 +1469,7 @@ class RankFM():
             return u_col, i_col, w_arr, k_arr
 
         if isinstance(user_history, tuple):
-            assert 2 <= len(user_history) <= 4, "[user_history] tuple must be (users, items[, weights[, event_types]])"
+            require(2 <= len(user_history) <= 4, "[user_history] tuple must be (users, items[, weights[, event_types]])")
             u_col = np.asarray(user_history[0])
             i_col = np.asarray(user_history[1])
             w_arr = np.asarray(user_history[2], dtype=np.float32) if len(user_history) >= 3 and user_history[2] is not None else np.ones(len(u_col), dtype=np.float32)
@@ -1244,7 +1477,7 @@ class RankFM():
             return u_col, i_col, w_arr, k_arr
 
         if isinstance(user_history, pd.DataFrame):
-            assert user_history.shape[1] >= 2, "[user_history] DataFrame must have at least [user_id, item_id]"
+            require(user_history.shape[1] >= 2, "[user_history] DataFrame must have at least [user_id, item_id]")
             u_col = user_history.iloc[:, 0].to_numpy()
             i_col = user_history.iloc[:, 1].to_numpy()
             w_arr = user_history.iloc[:, 2].to_numpy(dtype=np.float32) if user_history.shape[1] >= 3 else np.ones(len(u_col), dtype=np.float32)
@@ -1252,7 +1485,7 @@ class RankFM():
             return u_col, i_col, w_arr, k_arr
 
         arr = np.asarray(user_history)
-        assert arr.ndim == 2 and arr.shape[1] >= 2, "[user_history] array must be 2D with >= 2 columns"
+        require(arr.ndim == 2 and arr.shape[1] >= 2, "[user_history] array must be 2D with >= 2 columns")
         u_col = arr[:, 0]
         i_col = arr[:, 1]
         w_arr = np.asarray(arr[:, 2], dtype=np.float32) if arr.shape[1] >= 3 else np.ones(len(u_col), dtype=np.float32)
@@ -1340,17 +1573,24 @@ class RankFM():
         )
 
 
+    def _dense_sample_weight(self):
+        """per-interaction training weights as an array (all ones when the caller gave none)"""
+        if self.sample_weight is not None:
+            return self.sample_weight
+        return np.ones(len(self._intx_u), dtype=np.float32)
+
+
     def _build_history_csr(self, user_history, target_user_index):
         """map raw user_history to target_user_index and self._item_index CSR arrays"""
 
         n_users = len(target_user_index)
         if user_history is None:
-            if target_user_index.equals(self._user_index) and self.interactions is not None:
+            if target_user_index.equals(self._user_index) and self._intx_u is not None:
                 return self._build_history_csr_from_mapped(
-                    self.interactions[:, 0],
-                    self.interactions[:, 1],
-                    self.sample_weight,
-                    np.zeros(len(self.sample_weight), dtype=np.int32),
+                    self._intx_u,
+                    self._intx_i,
+                    self._dense_sample_weight(),
+                    np.zeros(len(self._intx_u), dtype=np.int32),
                     n_users,
                 )
             return (
@@ -1426,7 +1666,7 @@ class RankFM():
             return out
 
         arr_1d = np.asarray(last_items)
-        assert len(arr_1d) == n_users, "[last_items] 1D array length must match unique target users"
+        require(len(arr_1d) == n_users, "[last_items] 1D array length must match unique target users")
         out = np.ascontiguousarray(_fast_get_indexer(self._item_index, arr_1d), dtype=np.int32)
         return out
 
@@ -1635,7 +1875,7 @@ class RankFM():
 
         if cold_start not in ('nan', 'drop', 'estimate'):
             raise ValueError("param [cold_start] must be set to 'nan', 'drop', or 'estimate'")
-        assert isinstance(fold_in_epochs, int) and fold_in_epochs >= 0, "[fold_in_epochs] must be a non-negative integer"
+        require(isinstance(fold_in_epochs, int) and fold_in_epochs >= 0, "[fold_in_epochs] must be a non-negative integer")
 
         item_bias, v_i_eff = self._compute_effective_items(n_threads=n_threads)
 
@@ -1819,7 +2059,7 @@ class RankFM():
                     hist_u_parts.append(u_a)
                     hist_i_parts.append(i_a)
                     if need_fold_in:
-                        fold_pairs = np.ascontiguousarray(np.column_stack([u_a, i_a]), dtype=np.int32)
+                        fold_pairs = (np.ascontiguousarray(u_a, dtype=np.int32), np.ascontiguousarray(i_a, dtype=np.int32))
                         fold_sw = np.ascontiguousarray(sw_arr[val] if not val.all() else sw_arr, dtype=np.float32)
             if uh_raw_tuple is not None:
                 m_u = _fast_get_indexer(est_idx, uh_raw_tuple[0])
@@ -1883,7 +2123,8 @@ class RankFM():
                 n_threads,
             )
             _fold_in(
-                fold_pairs,
+                fold_pairs[0],
+                fold_pairs[1],
                 fold_sw,
                 ui_indptr,
                 ui_indices,
@@ -1959,7 +2200,7 @@ class RankFM():
 
         if cold_start not in ('nan', 'drop', 'estimate'):
             raise ValueError("param [cold_start] must be set to 'nan', 'drop', or 'estimate'")
-        assert isinstance(fold_in_epochs, int) and fold_in_epochs >= 0, "[fold_in_epochs] must be a non-negative integer"
+        require(isinstance(fold_in_epochs, int) and fold_in_epochs >= 0, "[fold_in_epochs] must be a non-negative integer")
 
         item_bias, v_i_eff = self._compute_effective_items(n_threads=n_threads)
 
@@ -1998,9 +2239,9 @@ class RankFM():
             else:
                 intx_u_col, intx_i_col = self._extract_interaction_columns(interactions)
                 if sample_weight is not None:
-                    assert isinstance(sample_weight, (np.ndarray, pd.Series)), "[sample_weight] must be np.ndarray or pd.series"
-                    assert sample_weight.ndim == 1, "[sample_weight] must a vector (ndim=1)"
-                    assert len(sample_weight) == len(intx_u_col), "[sample_weight] must have the same length as [interactions]"
+                    require(isinstance(sample_weight, (np.ndarray, pd.Series)), "[sample_weight] must be np.ndarray or pd.series")
+                    require(sample_weight.ndim == 1, "[sample_weight] must a vector (ndim=1)")
+                    require(len(sample_weight) == len(intx_u_col), "[sample_weight] must have the same length as [interactions]")
                     sw_arr = np.asarray(get_data(sample_weight), dtype=np.float32)
                 else:
                     sw_arr = np.ones(len(intx_u_col), dtype=np.float32)
@@ -2091,7 +2332,7 @@ class RankFM():
                     hist_u_parts.append(u_arr)
                     hist_i_parts.append(i_arr)
                     if fold_in_epochs > 0:
-                        fold_pairs = np.ascontiguousarray(np.column_stack([u_arr, i_arr]), dtype=np.int32)
+                        fold_pairs = (np.ascontiguousarray(u_arr), np.ascontiguousarray(i_arr))
                         fold_sw = np.ascontiguousarray(sw_arr[valid] if not valid.all() else sw_arr, dtype=np.float32)
 
             if hist_u_parts:
@@ -2101,7 +2342,8 @@ class RankFM():
 
             if fold_pairs is not None:
                 _fold_in(
-                    fold_pairs,
+                    fold_pairs[0],
+                    fold_pairs[1],
                     fold_sw,
                     ui_indptr,
                     ui_indices,
@@ -2133,20 +2375,18 @@ class RankFM():
             if vals.ndim == 1:
                 bonuses = vals
             else:
-                assert self.w_ctx is not None and vals.shape[1] == len(self.w_ctx), (
-                    "2D [pairwise_context] features require calling fit_pairwise_context() first with matching width"
-                )
+                require(self.w_ctx is not None and vals.shape[1] == len(self.w_ctx), "2D [pairwise_context] features require calling fit_pairwise_context() first with matching width")
                 bonuses = vals @ self.w_ctx
             return u_col, i_col, np.ascontiguousarray(bonuses, dtype=np.float32)
 
         if isinstance(pairwise_context, pd.DataFrame):
-            assert pairwise_context.shape[1] >= 3, "[pairwise_context] DataFrame must have [user_id, item_id, ...]"
+            require(pairwise_context.shape[1] >= 3, "[pairwise_context] DataFrame must have [user_id, item_id, ...]")
             u_col = pairwise_context.iloc[:, 0].to_numpy()
             i_col = pairwise_context.iloc[:, 1].to_numpy()
             feat_mat = pairwise_context.iloc[:, 2:].to_numpy(dtype=np.float32)
         else:
             arr = np.asarray(pairwise_context)
-            assert arr.ndim == 2 and arr.shape[1] >= 3, "[pairwise_context] array must have >= 3 columns"
+            require(arr.ndim == 2 and arr.shape[1] >= 3, "[pairwise_context] array must have >= 3 columns")
             u_col = arr[:, 0]
             i_col = arr[:, 1]
             feat_mat = np.asarray(arr[:, 2:], dtype=np.float32)
@@ -2279,9 +2519,9 @@ class RankFM():
     ):
         """learn or update model weights using the input data and resuming from the current model state"""
 
-        assert isinstance(epochs, int) and epochs >= 1, "[epochs] must be a positive integer"
-        assert isinstance(verbose, bool), "[verbose] must be a boolean value"
-        assert isinstance(freeze_items, bool), "[freeze_items] must be a boolean value"
+        require(isinstance(epochs, int) and epochs >= 1, "[epochs] must be a positive integer")
+        require(isinstance(verbose, bool), "[verbose] must be a boolean value")
+        require(isinstance(freeze_items, bool), "[freeze_items] must be a boolean value")
 
         if freeze_items and not self.is_fit:
             raise AssertionError("you must fit the model prior to calling fit_partial(..., freeze_items=True)")
@@ -2292,7 +2532,7 @@ class RankFM():
 
         was_fit = self.is_fit
         if was_fit:
-            self._init_interactions(interactions, sample_weight, freeze_items=freeze_items)
+            self._init_interactions(interactions, sample_weight, freeze_items=freeze_items, seed=eff_seed)
             self._init_features(user_features, item_features, n_threads=eff_threads)
         else:
             self._init_all(
@@ -2301,12 +2541,14 @@ class RankFM():
                 item_features,
                 sample_weight,
                 n_threads=eff_threads,
-                seed=seed,
+                seed=eff_seed,
                 user_field_ids=user_field_ids,
                 item_field_ids=item_field_ids,
                 item_dynamic_mask=item_dynamic_mask,
             )
 
+        if self.sample_weight is not None:
+            require(np.isfinite(self.sample_weight.sum(dtype=np.float64)), "[sample_weight] contains NaN or infinite values")
         max_samples = self._max_samples_for_loss()
 
         if not self._is_v050_mode:
@@ -2320,7 +2562,8 @@ class RankFM():
                     u_feat_emb = np.zeros((len(self.user_idx), self.factors), dtype=np.float32)
 
                 _fold_in(
-                    self.interactions,
+                    self._intx_u,
+                    self._intx_i,
                     self.sample_weight,
                     self._ui_indptr,
                     self._ui_indices,
@@ -2340,7 +2583,8 @@ class RankFM():
                 self._cached_train_u_emb = None
             else:
                 _fit_csr(
-                    self.interactions,
+                    self._intx_u,
+                    self._intx_i,
                     self.sample_weight,
                     self._ui_indptr,
                     self._ui_indices,
@@ -2369,7 +2613,9 @@ class RankFM():
                     self.user_dropout,
                     eff_seed,
                     eff_threads,
-                    self.feature_reg == 'uniform'
+                    self.feature_reg == 'uniform',
+                    self.normalize_steps,
+                    self.dense_updates == 'batched'
                 )
                 self._invalidate_caches()
 
@@ -2389,10 +2635,10 @@ class RankFM():
                 # Merge existing history CSR with incremental interactions
                 old_lens = np.diff(self._uh_indptr)
                 old_u = np.repeat(np.arange(len(old_lens), dtype=np.int32), old_lens)
-                comb_u = np.concatenate([old_u, self.interactions[:, 0]])
-                comb_i = np.concatenate([self._uh_indices, self.interactions[:, 1]])
-                comb_w = np.concatenate([self._uh_weights, self.sample_weight])
-                comb_k = np.concatenate([self._uh_kinds, np.zeros(len(self.sample_weight), dtype=np.int32)])
+                comb_u = np.concatenate([old_u, self._intx_u])
+                comb_i = np.concatenate([self._uh_indices, self._intx_i])
+                comb_w = np.concatenate([self._uh_weights, self._dense_sample_weight()])
+                comb_k = np.concatenate([self._uh_kinds, np.zeros(len(self._intx_u), dtype=np.int32)])
                 self._uh_indptr, self._uh_indices, self._uh_weights, self._uh_kinds = self._build_history_csr_from_mapped(
                     comb_u, comb_i, comb_w, comb_k, n_u
                 )
@@ -2405,7 +2651,7 @@ class RankFM():
         if self.use_seq_anchor:
             if prev_items is not None:
                 prev_raw = np.asarray(get_data(prev_items) if isinstance(prev_items, pd.Series) else prev_items)
-                assert len(prev_raw) == len(self.interactions), "[prev_items] length must match [interactions]"
+                require(len(prev_raw) == len(self._intx_u), "[prev_items] length must match [interactions]")
                 prev_arr = np.ascontiguousarray(_fast_get_indexer(self._item_index, prev_raw), dtype=np.int32)
             else:
                 prev_arr = np.zeros(0, dtype=np.int32)
@@ -2414,10 +2660,11 @@ class RankFM():
                 self._train_last_items = self._resolve_last_items_for_users(last_items, self._user_index)
             else:
                 last_map = self._train_last_items if (was_fit and self._train_last_items is not None and len(self._train_last_items) == n_u) else np.full(n_u, -1, dtype=np.int32)
-                if len(self.interactions) > 0:
-                    rev_u, rev_pos = np.unique(self.interactions[::-1, 0], return_index=True)
-                    last_pos = (len(self.interactions) - 1) - rev_pos
-                    last_map[rev_u] = self.interactions[last_pos, 1]
+                if len(self._intx_u) > 0:
+                    # the training rows are in the caller's order in v0.5 mode, so each user's last row is their latest item
+                    rev_u, rev_pos = np.unique(self._intx_u[::-1], return_index=True)
+                    last_pos = (len(self._intx_u) - 1) - rev_pos
+                    last_map[rev_u] = self._intx_i[last_pos]
                 self._train_last_items = np.ascontiguousarray(last_map, dtype=np.int32)
         else:
             prev_arr = np.zeros(0, dtype=np.int32)
@@ -2425,10 +2672,10 @@ class RankFM():
 
         if margin_signal is not None:
             ms_raw = np.asarray(get_data(margin_signal) if isinstance(margin_signal, pd.Series) else margin_signal, dtype=np.float32)
-            assert len(ms_raw) == len(self.interactions), "[margin_signal] length must match [interactions]"
+            require(len(ms_raw) == len(self._intx_u), "[margin_signal] length must match [interactions]")
             margin_sig_arr = np.ascontiguousarray(ms_raw, dtype=np.float32)
         elif self.weight_margin_scale != 0.0:
-            margin_sig_arr = np.ascontiguousarray(np.log1p(np.maximum(self.sample_weight, 0.0)), dtype=np.float32)
+            margin_sig_arr = np.ascontiguousarray(np.log1p(np.maximum(self._dense_sample_weight(), 0.0)), dtype=np.float32)
         else:
             margin_sig_arr = np.zeros(0, dtype=np.float32)
 
@@ -2472,7 +2719,8 @@ class RankFM():
                     eff_threads,
                 )
                 _fold_in(
-                    self.interactions,
+                    self._intx_u,
+                    self._intx_i,
                     self.sample_weight,
                     self._ui_indptr,
                     self._ui_indices,
@@ -2493,7 +2741,8 @@ class RankFM():
         else:
             max_h = max(self.max_history_len, int(np.diff(self._uh_indptr).max()) if len(self._uh_indptr) > 1 else 1)
             _fit_v050(
-                self.interactions,
+                self._intx_u,
+                self._intx_i,
                 self.sample_weight,
                 margin_sig_arr,
                 prev_arr,
@@ -2586,12 +2835,12 @@ class RankFM():
     ):
         """fit L2-regularized Newton-Raphson logistic weights [w_ctx] for explicit (user, item) context features on top of frozen RankFM scores"""
 
-        assert self.is_fit, "you must fit the RankFM model prior to calling fit_pairwise_context()"
+        require(self.is_fit, "you must fit the RankFM model prior to calling fit_pairwise_context()")
         x_ctx = np.asarray(context_features, dtype=np.float64)
         if x_ctx.ndim == 1:
             x_ctx = x_ctx[:, None]
         y = np.asarray(labels, dtype=np.float64).ravel()
-        assert len(x_ctx) == len(y) and len(y) > 0, "[context_features] and [labels] must have matching positive length"
+        require(len(x_ctx) == len(y) and len(y) > 0, "[context_features] and [labels] must have matching positive length")
 
         prev_w_ctx = self.w_ctx
         self.w_ctx = None
@@ -2645,8 +2894,8 @@ class RankFM():
     ):
         """compute effective latent representations for seen and/or unseen users without mutating model state"""
 
-        assert getattr(users, '__iter__', False), "[users] must be an iterable (e.g. list, array, series)"
-        assert self.is_fit, "you must fit the model prior to embedding users"
+        require(getattr(users, '__iter__', False), "[users] must be an iterable (e.g. list, array, series)")
+        require(self.is_fit, "you must fit the model prior to embedding users")
 
         eff_threads = self._resolve_n_jobs(n_jobs)
         users_arr = np.asarray(list(users) if not isinstance(users, (np.ndarray, pd.Series, pd.Index, list)) else users)
@@ -2708,7 +2957,7 @@ class RankFM():
         Returns (user_ids, user_mips, item_ids, item_mips).
         """
 
-        assert self.is_fit, "you must fit the model prior to exporting MIPS embeddings"
+        require(self.is_fit, "you must fit the model prior to exporting MIPS embeddings")
         eff_threads = self._resolve_n_jobs(n_jobs)
         item_bias, v_i_eff = self._compute_effective_items(n_threads=eff_threads)
 
@@ -2769,7 +3018,7 @@ class RankFM():
     ):
         """calculate the predicted pointwise utilities for all (user, item) pairs"""
 
-        assert self.is_fit, "you must fit the model prior to generating predictions"
+        require(self.is_fit, "you must fit the model prior to generating predictions")
         eff_threads = self._resolve_n_jobs(n_jobs)
         u_col, i_col = self._extract_interaction_columns(pairs)
 
@@ -2949,8 +3198,8 @@ class RankFM():
     ):
         """calculate the topN items for each user using batched BLAS SGEMM and parallel nogil C min-heaps"""
 
-        assert getattr(users, '__iter__', False), "[users] must be an iterable (e.g. list, array, series)"
-        assert self.is_fit, "you must fit the model prior to generating recommendations"
+        require(getattr(users, '__iter__', False), "[users] must be an iterable (e.g. list, array, series)")
+        require(self.is_fit, "you must fit the model prior to generating recommendations")
 
         eff_threads = self._resolve_n_jobs(n_jobs)
         users_arr = np.asarray(list(users) if not isinstance(users, (np.ndarray, pd.Series, pd.Index, list)) else users)
@@ -3156,23 +3405,66 @@ class RankFM():
         When as_dataframe=False, yields (batch_user_ids_ndarray, batch_item_ids_ndarray) tuples.
         """
 
-        assert getattr(users, '__iter__', False), "[users] must be an iterable (e.g. list, array, series)"
-        assert isinstance(batch_size, int) and batch_size >= 1, "[batch_size] must be a positive integer"
-        assert self.is_fit, "you must fit the model prior to generating recommendations"
+        require(getattr(users, '__iter__', False), "[users] must be an iterable (e.g. list, array, series)")
+        require(isinstance(batch_size, int) and batch_size >= 1, "[batch_size] must be a positive integer")
+        require(self.is_fit, "you must fit the model prior to generating recommendations")
 
         users_arr = np.asarray(list(users) if not isinstance(users, (np.ndarray, pd.Series, pd.Index, list)) else users)
         total = len(users_arr)
 
+        # Index the side inputs once up front. Handing the raw inputs to recommend() per batch would re-scan
+        # all of them for every batch, which costs O(n_batches * total input size) across the whole stream.
+        if user_features is not None:
+            if not self.has_uf:
+                raise ValueError("model was not fit with [user_features]; cannot use [user_features] at inference")
+            user_features = _FeatureCSR(*self._extract_feature_csr(
+                user_features,
+                expected_columns=self.uf_columns,
+                expected_width=self._n_uf,
+                default_index=pd.Index(pd.unique(users_arr)),
+                n_threads=self._resolve_n_jobs(n_jobs),
+                name='user_features',
+            ))
+
+        intx_u = intx_i = intx_sw = intx_users = intx_indptr = intx_order = None
+        if interactions is not None:
+            if _is_scipy_sparse(interactions):
+                coo = interactions.tocoo(copy=False)
+                intx_u, intx_i = coo.row, coo.col
+                intx_sw = coo.data if sample_weight is None else get_data(sample_weight)
+            else:
+                intx_u, intx_i = self._extract_interaction_columns(interactions)
+                intx_sw = None if sample_weight is None else get_data(sample_weight)
+            if intx_sw is not None:
+                require(len(intx_sw) == len(intx_u), "[sample_weight] must have the same length as [interactions]")
+                intx_sw = np.asarray(intx_sw, dtype=np.float32)
+
+            # group interaction rows by user: [intx_order] lists row positions user by user, [intx_indptr] bounds each user
+            intx_users = pd.Index(pd.unique(intx_u))
+            user_codes = intx_users.get_indexer(intx_u)
+            intx_order = np.argsort(user_codes, kind='stable')
+            intx_indptr = np.zeros(len(intx_users) + 1, dtype=np.int64)
+            np.cumsum(np.bincount(user_codes, minlength=len(intx_users)), out=intx_indptr[1:])
+
         for start in range(0, total, batch_size):
             batch_u = users_arr[start:start + batch_size]
+            batch_intx = None
+            batch_sw = None
+            if interactions is not None:
+                groups = intx_users.get_indexer(pd.unique(batch_u))
+                _, rows = self._gather_csr_rows(intx_indptr, intx_order, groups[groups >= 0])
+                rows = np.sort(rows)
+                batch_intx = pd.DataFrame({'user': intx_u[rows], 'item': intx_i[rows]})
+                batch_sw = None if intx_sw is None else intx_sw[rows]
+
             df_batch = self.recommend(
                 batch_u,
                 n_items=n_items,
                 filter_previous=filter_previous,
                 cold_start=cold_start,
                 user_features=user_features,
-                interactions=interactions,
-                sample_weight=sample_weight,
+                interactions=batch_intx,
+                sample_weight=batch_sw,
                 user_history=user_history,
                 last_items=last_items,
                 pairwise_context=pairwise_context,
@@ -3188,9 +3480,9 @@ class RankFM():
     def similar_items(self, item_id, n_items=10):
         """find the most similar items wrt latent factor space representation"""
 
-        assert self.is_fit, "you must fit the model prior to generating similarities"
+        require(self.is_fit, "you must fit the model prior to generating similarities")
         item_pos = int(_fast_get_indexer(self._item_index, [item_id])[0])
-        assert item_pos >= 0, "you must select an [item_id] present in the training data"
+        require(item_pos >= 0, "you must select an [item_id] present in the training data")
 
         _, lr_all_items = self._compute_effective_items()
         sims = np.dot(lr_all_items, lr_all_items[item_pos])
@@ -3218,7 +3510,7 @@ class RankFM():
     ):
         """find the most similar training users wrt latent factor space representation (supports unseen query users)"""
 
-        assert self.is_fit, "you must fit the model prior to generating similarities"
+        require(self.is_fit, "you must fit the model prior to generating similarities")
 
         user_pos = int(_fast_get_indexer(self._user_index, [user_id])[0])
         in_training = user_pos >= 0
@@ -3241,7 +3533,7 @@ class RankFM():
                 cold_start='nan'
             )
             lr_user = emb_df.iloc[0].to_numpy()
-            assert not np.isnan(lr_user).any(), "user_id={} could not be embedded from supplied features/interactions".format(user_id)
+            require(not np.isnan(lr_user).any(), "user_id={} could not be embedded from supplied features/interactions".format(user_id))
 
         sims = np.dot(lr_all_users, lr_user)
         if user_pos >= 0:

@@ -62,6 +62,15 @@ RFM_INLINE int64_t rfm_atomic_fetch_add_i64(int64_t *ptr, int64_t val) {
 #endif
 }
 
+/* Set *ptr to desired only if it still holds expected; returns 1 when this caller made the change. */
+RFM_INLINE int rfm_atomic_cas_i64(int64_t *ptr, int64_t expected, int64_t desired) {
+#ifdef _WIN32
+    return InterlockedCompareExchange64((volatile LONG64 *)ptr, (LONG64)desired, (LONG64)expected) == (LONG64)expected;
+#else
+    return __atomic_compare_exchange_n(ptr, &expected, desired, 0, __ATOMIC_RELAXED, __ATOMIC_RELAXED);
+#endif
+}
+
 /* ---------------------------------------------------------
  * 2. Thread-Local Lock-Free xoshiro256** PRNG + Lemire Draw
  * --------------------------------------------------------- */
@@ -125,19 +134,61 @@ RFM_INLINE int32_t rfm_alias_draw(
     return (rfm_rng_float01(rng) < prob[col]) ? (int32_t)col : alias[col];
 }
 
-static inline void rfm_shuffle_int32(int32_t *arr, int64_t n, rfm_rng_t *rng) {
-    int64_t i, j;
-    int32_t tmp;
-    for (i = n - 1; i > 0; i--) {
-        if (i < 0x7FFFFFFFLL) {
-            j = (int64_t)rfm_rng_bounded(rng, (uint32_t)(i + 1));
-        } else {
-            j = (int64_t)(rfm_rng_u64(rng) % (uint64_t)(i + 1));
-        }
-        tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
+/* ---------------------------------------------------------
+ * 2b. Computed Pseudo-Random Permutation of [0, n)
+ *
+ * A Feistel network is a bijection on [0, 2^bits) whatever its round function. Re-applying it
+ * until the value lands below n ("cycle walking") restricts it to a bijection on [0, n). Each
+ * epoch can therefore visit every row exactly once in shuffled order without storing the order,
+ * which would cost 4-8 bytes per row and tie the row count to the index width.
+ *
+ * [bits] is the smallest width covering n, so fewer than half the values are walked past. When
+ * [bits] is odd the two halves differ by one bit and trade places every round; four rounds
+ * bring them back to their starting widths.
+ * --------------------------------------------------------- */
+
+typedef struct {
+    uint64_t n;
+    uint64_t keys[4];
+    int left_bits;
+    int right_bits;
+} rfm_perm_t;
+
+static inline void rfm_perm_init(rfm_perm_t *perm, uint64_t n, uint64_t seed) {
+    int bits = 2;
+    while (bits < 63 && (1ULL << bits) < n) {
+        bits++;
     }
+    perm->n = n;
+    perm->left_bits = bits / 2;
+    perm->right_bits = bits - perm->left_bits;
+    uint64_t sm = seed ^ 0x6A09E667F3BCC909ULL;
+    for (int k = 0; k < 4; k++) {
+        perm->keys[k] = rfm_splitmix64(&sm);
+    }
+}
+
+RFM_INLINE uint64_t rfm_perm_at(const rfm_perm_t *perm, uint64_t x) {
+    do {
+        int lb = perm->left_bits;
+        int rb = perm->right_bits;
+        uint64_t left = x >> rb;
+        uint64_t right = x & ((1ULL << rb) - 1ULL);
+        for (int k = 0; k < 4; k++) {
+            uint64_t f = right ^ perm->keys[k];
+            f = (f ^ (f >> 30)) * 0xBF58476D1CE4E5B9ULL;
+            f = (f ^ (f >> 27)) * 0x94D049BB133111EBULL;
+            f = (f ^ (f >> 31)) & ((1ULL << lb) - 1ULL);
+            const uint64_t next = left ^ f;
+            const int swap = lb;
+            left = right;
+            right = next;
+            lb = rb;
+            rb = swap;
+        }
+        x = (left << rb) | right;
+    } while (x >= perm->n);
+    return x;
 }
 
 /* ---------------------------------------------------------
@@ -417,6 +468,7 @@ typedef struct {
     void *ctx;
     int tid;
     int n_threads;
+    int started;
 } rfm_win_arg_t;
 
 static unsigned __stdcall rfm_win_entry(void *raw) {
@@ -454,9 +506,15 @@ static inline void rfm_pool_run(rfm_pool_t *pool, rfm_worker_fn fn, void *ctx) {
         args[t - 1].tid = t;
         args[t - 1].n_threads = nt;
         uintptr_t h = _beginthreadex(NULL, 0, rfm_win_entry, &args[t - 1], 0, NULL);
+        args[t - 1].started = (h != 0);
         if (h != 0) handles[spawned++] = (HANDLE)h;
     }
     fn(0, nt, ctx);
+    /* Workers split the input by thread id, so a thread that failed to start would leave its share
+       unprocessed. Run those shares here on the calling thread instead. */
+    for (int t = 1; t < nt; t++) {
+        if (!args[t - 1].started) fn(t, nt, ctx);
+    }
     if (spawned > 0) {
         WaitForMultipleObjects((DWORD)spawned, handles, TRUE, INFINITE);
         for (int i = 0; i < spawned; i++) CloseHandle(handles[i]);
